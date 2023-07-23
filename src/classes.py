@@ -166,11 +166,11 @@ class Item(Entity):
         pass
 
 class gun(Item):
-    def attack():
+    def attack(self):
         self._grenade_speed = 50
 
 class FB85(Item):
-    def attack():
+    def attack(self):
         pass
 
 class Bullet(Entity):
