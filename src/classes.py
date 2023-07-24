@@ -19,6 +19,7 @@ class Entity():
     def draw(self):
         pass
 
+########################################################
 
 GENDER_MALE   = 0
 GENDER_FEMALE = 1
@@ -64,7 +65,8 @@ class Player(Entity):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
         
-        
+##################################################################
+
 class Enemy(Entity):
     def __init__(self):
         super().__init__()
@@ -81,7 +83,6 @@ class Enemy(Entity):
         if value < 0:
             value = 0
         self._hp = value
-
 
     def think(self):
         super().think()
@@ -102,11 +103,14 @@ class Enemy(Entity):
         #지정된 양만큼의 데미지를 입는다."
         self.hp -= damage
 
-
+#-------------------------------------------------------
 class FB_85(Enemy):    
     def attack(self):
         #불을 발사한다"
         pass
+    def take_damage(self, damage):
+        #지정된 양만큼의 데미지를 입는다.
+        self.hp -= damage
 
 
 class BT_02(Enemy):
@@ -114,6 +118,9 @@ class BT_02(Enemy):
         pass
         #상대를 바람으로 공격한다"
         #상대가 바람에 의해 뒤로 이동한다"
+    def take_damage(self, damage):
+        #지정된 양만큼의 데미지를 입는다.
+        self.hp -= damage
 
 
 class SN_91(Enemy):
@@ -160,11 +167,12 @@ class Boss(Enemy):
         #몹의 공격을 피한다
         pass
         
-    
+#######################################################################333
+
 class Item(Entity):
     def use(self):
         pass
-
+#-----------------------------------------------------------
 class gun(Item):
     def attack(self):
         self._grenade_speed = 50
@@ -174,7 +182,7 @@ class FB85(Item):
         pass
 
 class Bullet(Entity):
-    def __init__(self, damage):
+    def __init__(self, damage,velocity =Vector2(0,0)):
         super().__init__()
         self._damage = damage
         self._velocity = velocity
