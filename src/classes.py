@@ -1,5 +1,6 @@
 from pygame.math import Vector2
 
+
 class Entity():
     def __init__(self):
         self._position = Vector2(0, 0)
