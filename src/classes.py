@@ -15,7 +15,7 @@ class Entity():
 
     def think(self):
         pass
-    
+
     def draw(self):
         pass
 
@@ -53,13 +53,11 @@ class Player(Entity):
         # 플레이어의 모습을 화면에 그린다.
         pass
 
-    
     def _shoot(self):
         pass
     
     def _move(self):
         pass
-
 
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
@@ -177,9 +175,36 @@ class gun(Item):
     def attack(self):
         self._grenade_speed = 50
 
-class FB85(Item):
+class FB85(Item): #칠겹살용 토치
     def attack(self):
         pass
+        #불이 나온다
+
+class BB02(Item):#나이키에어
+    def position(self):
+        pass
+        #신발에서 바람이 나온다 높이가 높아짐?
+
+class SN92(Item): #아디다su
+    def move(self):
+        pass
+        #캐릭터 속도를 높인다.
+
+class SB87(Item): #대청단 감자주머니
+    def __init__(self):
+        super().__init__()
+        self._grenade_speed = 50
+
+class VP33(Item): #지구온난화의 주범
+    def attack(self):
+        #독을 발포한다
+        #가스를 살포한다(enemy의 속도가 늘어진다)
+        pass
+class KS64(Item): #로이드가 입던 옷
+    def position(self):
+        pass
+        #boss의 위치로 순간이동 한다
+        #접촉하면 몬스터의 체력이 깍인다
 
 class Bullet(Entity):
     def __init__(self, damage,velocity =Vector2(0,0)):
