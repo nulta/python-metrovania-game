@@ -62,9 +62,24 @@ class Player(Entity):
     def _shoot(self):
         pass
     
-    def _move(self):
-        pass
+    def _move(self,SPEED):
+        dt=pygame.time.Clock.tick(30)
+        
+        for event in pygame.event .get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_w: #캐릭터 점프
+                    pass
+                if event.key == pygame.K_d: #캐릭터 오른쪽으로
+                    player_to_x += SPEED
+                if event.key == pygame.K_a: #캐릭터 왼쪽으로
+                    player_to_x -= SPEED
 
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_a or event.key == pygame.K_d:
+                    player_to_x = 0
+                
+        player_x_pos += player_to_x*dt
+ 
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
