@@ -1,8 +1,7 @@
 from pygame.math import Vector2
+from constants import *
 import pygame
 import os
-
-path = "C:/User/AYoung/Desktop/game/python-metrovania-game/그림/"
 
 class Entity():
     def __init__(self):
@@ -25,8 +24,6 @@ class Entity():
 
 ########################################################
 
-GENDER_MALE   = 0
-GENDER_FEMALE = 1
 
 class Player(Entity):
     def __init__(self, gender,speed):
@@ -54,11 +51,11 @@ class Player(Entity):
     def draw(self,gender,item): #아이템이 없으면 "item == 0", # male == 0, female == 1
         super().draw()
         if gender == 0 and item == 0:
-            pygame.image.load(os.path.join(path,"player(male,game).png"))
+            pygame.image.load(ASSET_PATH + "sprites/player(male,game).png")
         elif gender ==1 and item == 0:
-            pygame.image.load(os.path.join(path,"player(female,game).png")) 
+            pygame.image.load(ASSET_PATH + "sprites/player(female,game).png")
         elif gender == 0 and item == "gun": #튜토리얼
-            pygame.image.load(os.path.join(path,"player(with gun).png"))
+            pygame.image.load(ASSET_PATH + "sprites/player(with gun).png")
         elif gender == 1 and item == "gun":
             pass
         elif gender == 0 and item == "FB85": #1라운드 끝나면 주는 것, 칠겹살용 토치
