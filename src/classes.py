@@ -1,5 +1,8 @@
 from pygame.math import Vector2
+import pygame
+import os
 
+path = "C:/User/AYoung/Desktop/game/python-metrovania-game/그림/"
 
 class Entity():
     def __init__(self):
@@ -49,10 +52,12 @@ class Player(Entity):
         # 입력 처리, 이동 처리, 기타 등등...
         pass
     
-    def draw(self):
+    def draw(self,GENDER):
         super().draw()
-        # 플레이어의 모습을 화면에 그린다.
-        pass
+        if GENDER == 0:
+            pygame.image.load(os.path.join(path,"player(male,game).png"))
+        elif GENDER ==1:
+            pygame.image.load(os.path.join(path,"player(female,game).png"))
 
     def _shoot(self):
         pass
