@@ -29,12 +29,11 @@ GENDER_MALE   = 0
 GENDER_FEMALE = 1
 
 class Player(Entity):
-    def __init__(self, gender=GENDER_FEMALE):
+    def __init__(self, gender,speed):
         super().__init__()
-        self._hp = 100
+        self._hp = 200
         self._gender = gender
-        self._move_speed = 10
-
+        self._move_speed = speed
 
     @property
     def hp(self):
@@ -52,17 +51,45 @@ class Player(Entity):
         # 입력 처리, 이동 처리, 기타 등등...
         pass
     
-    def draw(self,GENDER):
+    def draw(self,gender,item): #아이템이 없으면 "item == 0", # male == 0, female == 1
         super().draw()
-        if GENDER == 0:
+        if gender == 0 and item == 0:
             pygame.image.load(os.path.join(path,"player(male,game).png"))
-        elif GENDER ==1:
-            pygame.image.load(os.path.join(path,"player(female,game).png"))
+        elif gender ==1 and item == 0:
+            pygame.image.load(os.path.join(path,"player(female,game).png")) 
+        elif gender == 0 and item == "gun": #튜토리얼
+            pygame.image.load(os.path.join(path,"player(with gun).png"))
+        elif gender == 1 and item == "gun":
+            pass
+        elif gender == 0 and item == "FB85": #1라운드 끝나면 주는 것, 칠겹살용 토치
+            pass
+        elif gender == 1 and item == "FB85":
+            pass
+        elif gender == 0 and item == "BB02": #2라운드 끝나명 주는 것, 나이키 에어
+            pass
+        elif gender == 1 and item == "BB02": 
+            pass
+        elif gender == 0 and item == "SN92": #3라운드 끝나명 주는 것, 아디다SU
+            pass
+        elif gender == 1 and item == "SN92":
+            pass
+        elif gender == 0 and item == "SB87": #4라운드 끝나명 주는 것, 대청단감자주머니
+            pass
+        elif gender == 1 and item == "SB87":
+            pass
+        elif gender == 0 and item == "VP33": #5라운드 끝나명 주는 것, 지구온난화의 주범
+            pass
+        elif gender == 1 and item == "VP33":
+            pass
+        elif gender == 0 and item == "KS64": #6라운드 끝나명 주는 것, 로이드가 입던옷(순간이동)
+            pass
+        elif gender == 1 and item == "KS64":
+            pass
 
     def _shoot(self):
         pass
     
-    def _move(self,SPEED):
+    def _move(self,speed):
         dt=pygame.time.Clock.tick(30)
         
         for event in pygame.event .get():
@@ -70,9 +97,9 @@ class Player(Entity):
                 if event.key == pygame.K_w: #캐릭터 점프
                     pass
                 if event.key == pygame.K_d: #캐릭터 오른쪽으로
-                    player_to_x += SPEED
+                    player_to_x += speed
                 if event.key == pygame.K_a: #캐릭터 왼쪽으로
-                    player_to_x -= SPEED
+                    player_to_x -= speed
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a or event.key == pygame.K_d:
@@ -83,7 +110,7 @@ class Player(Entity):
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
-        
+         
 ##################################################################
 
 class Enemy(Entity):
@@ -91,7 +118,6 @@ class Enemy(Entity):
         super().__init__()
         self._hp = 100
         self._move_speed = 10
-
 
     @property
     def hp(self):
@@ -130,6 +156,8 @@ class FB_85(Enemy):
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
+    def draw(self):
+        super().draw()
 
 
 class BT_02(Enemy):
