@@ -4,7 +4,7 @@
 
 # 설정 값
 GAME_WINDOW_NAME = "창 이름"
-ASSET_PATH = "./assets/"
+ASSET_PATH = "./assets"
 
 GAME_WINDOW_SIZE = (800, 610)
 GAME_MAX_FPS = 60

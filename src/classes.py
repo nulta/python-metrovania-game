@@ -1,7 +1,6 @@
 from pygame.math import Vector2
 from constants import *
 import pygame
-import os
 
 class Entity():
     def __init__(self):
@@ -31,6 +30,7 @@ class Player(Entity):
         self._hp = 200
         self._gender = gender
         self._move_speed = speed
+        self._item = None
 
     @property
     def hp(self):
@@ -48,40 +48,21 @@ class Player(Entity):
         # 입력 처리, 이동 처리, 기타 등등...
         pass
     
-    def draw(self,gender,item): #아이템이 없으면 "item == 0", # male == 0, female == 1
+    def draw(self):
         super().draw()
-        if gender == 0 and item == 0:
-            pygame.image.load(ASSET_PATH + "sprites/player(male,game).png")
-        elif gender ==1 and item == 0:
-            pygame.image.load(ASSET_PATH + "sprites/player(female,game).png")
-        elif gender == 0 and item == "gun": #튜토리얼
-            pygame.image.load(ASSET_PATH + "sprites/player(with gun).png")
-        elif gender == 1 and item == "gun":
-            pass
-        elif gender == 0 and item == "FB85": #1라운드 끝나면 주는 것, 칠겹살용 토치
-            pass
-        elif gender == 1 and item == "FB85":
-            pass
-        elif gender == 0 and item == "BB02": #2라운드 끝나명 주는 것, 나이키 에어
-            pass
-        elif gender == 1 and item == "BB02": 
-            pass
-        elif gender == 0 and item == "SN92": #3라운드 끝나명 주는 것, 아디다SU
-            pass
-        elif gender == 1 and item == "SN92":
-            pass
-        elif gender == 0 and item == "SB87": #4라운드 끝나명 주는 것, 대청단감자주머니
-            pass
-        elif gender == 1 and item == "SB87":
-            pass
-        elif gender == 0 and item == "VP33": #5라운드 끝나명 주는 것, 지구온난화의 주범
-            pass
-        elif gender == 1 and item == "VP33":
-            pass
-        elif gender == 0 and item == "KS64": #6라운드 끝나명 주는 것, 로이드가 입던옷(순간이동)
-            pass
-        elif gender == 1 and item == "KS64":
-            pass
+
+        # 가져와야 할 이미지의 이름을 조립한다
+        image_path = ASSET_PATH + "/player"
+        if self._gender == GENDER_MALE:
+            image_path += "/male"
+        else:
+            image_path += "/female"
+
+        image_path += "/" + (self._item or "idle")
+        image_path += ".png"
+
+        # 조립한 이미지 이름대로, 불러온다
+        pygame.image.load(image_path)
 
     def _shoot(self):
         pass
