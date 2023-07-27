@@ -1,6 +1,6 @@
 import random
 import pygame
-from classes import *
+from entities import *
 import globals
 
 class Game():
