@@ -62,12 +62,14 @@ class Player(Entity):
         image_path += ".png"
 
         # 조립한 이미지 이름대로, 불러온다
-        pygame.image.load(image_path)
+        image=pygame.image.load(image_path)
+        self.image.rect()
 
     def _shoot(self):
         pass
     
     def _move(self,speed):
+        player_x_pos=Player.position.x
         dt=pygame.time.Clock.tick(30)
         
         for event in pygame.event .get():
@@ -112,10 +114,15 @@ class Enemy(Entity):
         # AI 처리, 이동 처리, 기타 등등...
         pass
 
-    def draw(self):
+    def draw(self,enemy_name):
         super().draw()
         # 적의 모습을 화면에 그린다.
-        pass
+        image_path = ASSET_PATH + "/enemy/"
+        image_path += enemy_name
+        image_path += ".png"
+        # 조립한 이미지 이름대로, 불러온다
+        self.image=pygame.image.load(image_path)
+        self.image.get_rect()
 
 
     def _attack(self):
@@ -130,12 +137,15 @@ class Enemy(Entity):
 class FB_85(Enemy):    
     def attack(self):
         #불을 발사한다"
-        pass
+        if Player.position> Enemy.position:
+            FB85.velocity = 50
+        elif Player.position<Enemy.position:
+            FB85.velocity = -50
+            
+            
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
-    def draw(self):
-        super().draw()
 
 
 class BT_02(Enemy):
@@ -146,7 +156,6 @@ class BT_02(Enemy):
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
-
 
 class SN_91(Enemy):
     def __init__(self):
@@ -197,22 +206,40 @@ class Boss(Enemy):
 class Item(Entity):
     def use(self):
         pass
+
+    def draw(self,Item_name):
+        super().draw()
+        # 적의 모습을 화면에 그린다.
+        image_path = ASSET_PATH + "/Item/"
+        image_path += Item_name
+        image_path += ".png"
+        # 조립한 이미지 이름대로, 불러온다
+        self.image=pygame.image.load(image_path)
+        self.image.get_rect()
 #-----------------------------------------------------------
 class gun(Item):
     def attack(self):
         self._grenade_speed = 50
 
 class FB85(Item): #칠겹살용 토치
-    def attack(self):
-        pass
+    def __init__(self,damage,velocity =Vector2(0,0)):
+        self._damage = damage
+        self._velocity = velocity
+
         #불이 나온다
 
 class BB02(Item):#나이키에어
+    def __init__(self,damage):
+        self._damage=damage
+
     def position(self):
-        pass
+        Player.position.y += Player.draw.image.rect
         #신발에서 바람이 나온다 높이가 높아짐?
+        #enemy로부터 2칸 안에 있으면 공격
 
 class SN92(Item): #아디다su
+    def __init__(self):
+        Player.position.y += Player.image.rect.y/2
     def move(self):
         pass
         #캐릭터 속도를 높인다.
@@ -227,11 +254,17 @@ class VP33(Item): #지구온난화의 주범
         #독을 발포한다
         #가스를 살포한다(enemy의 속도가 늘어진다)
         pass
+
 class KS64(Item): #로이드가 입던 옷
     def position(self):
         pass
         #boss의 위치로 순간이동 한다
         #접촉하면 몬스터의 체력이 깍인다
+
+class Box(Item):
+    def use(slef):
+        pass
+        #enemy가 캐릭터를 인식하지 못한다
 
 class Bullet(Entity):
     def __init__(self, damage,velocity =Vector2(0,0)):
