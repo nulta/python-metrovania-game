@@ -171,7 +171,7 @@ class SN_91(Enemy):
 class SB_87(Enemy):
     def __init__(self):
         super().__init__()
-        self._grenade_speed = 50  # 수류탄 던지는 속도
+        Grenade._velocity += 50  # 수류탄 던지는 속도
 
 class VP_33(Enemy):
     def attack(self):
@@ -219,13 +219,12 @@ class Item(Entity):
 #-----------------------------------------------------------
 class gun(Item):
     def attack(self):
-        self._grenade_speed = 50
+        Bullet._velocity += 50
 
 class FB85(Item): #칠겹살용 토치
     def __init__(self,damage,velocity =Vector2(0,0)):
         self._damage = damage
         self._velocity = velocity
-
         #불이 나온다
 
 class BB02(Item):#나이키에어
@@ -233,27 +232,38 @@ class BB02(Item):#나이키에어
         self._damage=damage
 
     def position(self):
-        Player.position.y += Player.draw.image.rect
+        Player.position.y += Player.image.rect/2
         #신발에서 바람이 나온다 높이가 높아짐?
         #enemy로부터 2칸 안에 있으면 공격
 
 class SN92(Item): #아디다su
-    def __init__(self):
-        Player.position.y += Player.image.rect.y/2
-    def move(self):
-        pass
+    def __init__(self,add_speed):
+        Player._move_speed += add_speed
         #캐릭터 속도를 높인다.
 
 class SB87(Item): #대청단 감자주머니
     def __init__(self):
         super().__init__()
-        self._grenade_speed = 50
+        Grenade._velocity += 50
 
 class VP33(Item): #지구온난화의 주범
     def attack(self):
+        Poison._velocity += 50
+    def gass(self,speed_reduction,total_time):
+
+        for event in pygame.event .get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_b:
+
+                    Enemy._move_speed -= speed_reduction
+                    start_ticks= pygame.time.get_ticks()
+                    elapsed_time = (pygame.time.get_ticks()- start_ticks)/1000
+                    if total_time - elapsed_time <=0:
+                        Enemy._move_speed += speed_reduction
+
         #독을 발포한다
         #가스를 살포한다(enemy의 속도가 늘어진다)
-        pass
+        
 
 class KS64(Item): #로이드가 입던 옷
     def position(self):
@@ -272,6 +282,11 @@ class Bullet(Entity):
         self._damage = damage
         self._velocity = velocity
 
+class Poison(Entity):
+    def __init__(self, damage,velocity = Vector2(0,0)):
+        super().__init__()
+        self._damage = damage
+        self._velocity = velocity
 
 class Grenade(Entity):
     def __init__(self, damage, velocity = Vector2(0, 0)):
