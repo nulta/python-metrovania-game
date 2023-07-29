@@ -31,3 +31,13 @@ class EntityManager():
     def draw(self):
         # 어카냐
         pass
+
+"""
+# draw 처리를 어떻게 해야 할까
+Solution 1. 모든 Entity가 Surface를 가진다.
+            이 Surface를 draw 시점에서 자동으로 그려 준다.
+            Pro: Con:
+Solution 2. 모든 Entity가 화면에 직접 그린다.
+            draw의 param으로 화면 Surface를 던져 준다.
+Solution 3. draw 함수가 Surface를 반환한다.
+"""
