@@ -34,7 +34,7 @@ class Player(Entity):
         super().draw()
 
         # 가져와야 할 이미지의 이름을 조립한다
-        image_path = ASSET_PATH + "/player"
+        image_path = RESOURCE_PATH + "/player"
         if self._gender == GENDER_MALE:
             image_path += "/male"
         else:

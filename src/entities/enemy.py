@@ -25,7 +25,7 @@ class Enemy(Entity):
     def draw(self,enemy_name):
         super().draw()
         # 적의 모습을 화면에 그린다.
-        image_path = ASSET_PATH + "/enemy/"
+        image_path = RESOURCE_PATH + "/enemy/"
         image_path += enemy_name
         image_path += ".png"
         # 조립한 이미지 이름대로, 불러온다
