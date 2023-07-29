@@ -1,7 +1,7 @@
 import pygame
 from .entity import *
 
-F = MASS*VELOCITY*VELOCITY/2
+F = PLAYER_MASS*PLAYER_VELOCITY*PLAYER_VELOCITY/2
 
 class Player(Entity):
     def __init__(self, gender,speed):
@@ -11,8 +11,8 @@ class Player(Entity):
         self._move_speed = speed
         self._item = None
         self.isJump = 0
-        self.v = VELOCITY
-        self.m = MASS
+        self.v = PLAYER_VELOCITY
+        self.m = PLAYER_MASS
 
     @property
     def hp(self):
@@ -74,7 +74,7 @@ class Player(Entity):
     def jump(self):
         if self.isJump >0:
             if self.isJump ==2:
-                self.v = VELOCITY
+                self.v = PLAYER_VELOCITY
             if self.v >0:
                 F = 0.5*self.m*(self.v*self.v)
             else:
@@ -84,7 +84,7 @@ class Player(Entity):
             if self.image.bottom > GAME_WINDOW_SIZE[1]:
                 self.image.bottom = GAME_WINDOW_SIZE[1]
                 self.isJump =0
-                self.v = VELOCITY
+                self.v = PLAYER_VELOCITY
 
 
 
