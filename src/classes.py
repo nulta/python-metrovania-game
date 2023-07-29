@@ -23,6 +23,7 @@ class Entity():
 
 ########################################################
 
+F = MASS*VELOCITY*VELOCITY/2
 
 class Player(Entity):
     def __init__(self, gender,speed):
@@ -31,6 +32,9 @@ class Player(Entity):
         self._gender = gender
         self._move_speed = speed
         self._item = None
+        self.isJump = 0
+        self.v = VELOCITY
+        self.m = MASS
 
     @property
     def hp(self):
@@ -62,20 +66,21 @@ class Player(Entity):
         image_path += ".png"
 
         # 조립한 이미지 이름대로, 불러온다
-        image=pygame.image.load(image_path)
-        self.image.rect()
+        self.image=pygame.image.load(image_path)
+        self.image=self.image.get_rect()
+        self.image_size = self.image.get_rect().size
+        self.image_width = self.image_size[0] 
+        self.image_height = self.image_size[1] 
 
     def _shoot(self):
         pass
     
     def _move(self,speed):
-        player_x_pos=Player.position.x
-        dt=pygame.time.Clock.tick(30)
+        player_x_pos=self.position.x
+        player_to_x = 0
         
         for event in pygame.event .get():
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w: #캐릭터 점프
-                    pass
                 if event.key == pygame.K_d: #캐릭터 오른쪽으로
                     player_to_x += speed
                 if event.key == pygame.K_a: #캐릭터 왼쪽으로
@@ -84,9 +89,28 @@ class Player(Entity):
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a or event.key == pygame.K_d:
                     player_to_x = 0
-                
+
+        dt=pygame.time.Clock().tick(30)        
         player_x_pos += player_to_x*dt
- 
+
+    def jump(self):
+        if self.isJump >0:
+            if self.isJump ==2:
+                self.v = VELOCITY
+            if self.v >0:
+                F = 0.5*self.m*(self.v*self.v)
+            else:
+                F = 0.5*self.m*(self.v*self.v)*(-1)
+            self.position.y -= round(F)
+            self.v -= 1
+            if self.image.bottom > GAME_WINDOW_SIZE[1]:
+                self.image.bottom = GAME_WINDOW_SIZE[1]
+                self.isJump =0
+                self.v = VELOCITY
+
+
+
+
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
@@ -122,7 +146,9 @@ class Enemy(Entity):
         image_path += ".png"
         # 조립한 이미지 이름대로, 불러온다
         self.image=pygame.image.load(image_path)
-        self.image.get_rect()
+        self.image_size = self.image.get_rect().size
+        self.image_width = self.image_size[0] #아이템 가로크기
+        self.image_height = self.image_size[1]
 
 
     def _attack(self):
@@ -138,9 +164,9 @@ class FB_85(Enemy):
     def attack(self):
         #불을 발사한다"
         if Player.position> Enemy.position:
-            FB85.velocity = 50
+            FB85._velocity = 50
         elif Player.position<Enemy.position:
-            FB85.velocity = -50
+            FB85._velocity = -50
             
             
     def take_damage(self, damage):
@@ -194,7 +220,7 @@ class Boss(Enemy):
         #체력과 속도가 늘어남
         
     def think(self):
-        super().__init()
+        super().think()
         #점프를 추가해야한다
         
     def avoid(self):
@@ -215,7 +241,9 @@ class Item(Entity):
         image_path += ".png"
         # 조립한 이미지 이름대로, 불러온다
         self.image=pygame.image.load(image_path)
-        self.image.get_rect()
+        self.image_size = self.image.get_rect().size
+        self.image_width = self.image_size[0] #아이템 가로크기
+        self.image_height = self.image_size[1]
 #-----------------------------------------------------------
 class gun(Item):
     def attack(self):
@@ -232,7 +260,7 @@ class BB02(Item):#나이키에어
         self._damage=damage
 
     def position(self):
-        Player.position.y += Player.image.rect/2
+        Player.position.y += Player.image_height/2
         #신발에서 바람이 나온다 높이가 높아짐?
         #enemy로부터 2칸 안에 있으면 공격
 
@@ -249,7 +277,7 @@ class SB87(Item): #대청단 감자주머니
 class VP33(Item): #지구온난화의 주범
     def attack(self):
         Poison._velocity += 50
-    def gass(self,speed_reduction,total_time):
+    def gass(self,speed_reduction):
 
         for event in pygame.event .get():
             if event.type == pygame.KEYDOWN:
@@ -258,7 +286,7 @@ class VP33(Item): #지구온난화의 주범
                     Enemy._move_speed -= speed_reduction
                     start_ticks= pygame.time.get_ticks()
                     elapsed_time = (pygame.time.get_ticks()- start_ticks)/1000
-                    if total_time - elapsed_time <=0:
+                    if 3 - elapsed_time <=0:
                         Enemy._move_speed += speed_reduction
 
         #독을 발포한다
@@ -272,7 +300,7 @@ class KS64(Item): #로이드가 입던 옷
         #접촉하면 몬스터의 체력이 깍인다
 
 class Box(Item):
-    def use(slef):
+    def use(self):
         pass
         #enemy가 캐릭터를 인식하지 못한다
 

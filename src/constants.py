@@ -13,3 +13,7 @@ GAME_MAX_FPS = 60
 # GENDER 값
 GENDER_MALE   = 0
 GENDER_FEMALE = 1
+
+#Player 속도, 질량
+VELOCITY = 7
+MASS = 2
