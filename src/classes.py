@@ -1,6 +1,7 @@
 from pygame.math import Vector2
 from constants import *
 import pygame
+import time
 
 class Entity():
     def __init__(self):
@@ -163,10 +164,11 @@ class Enemy(Entity):
 class FB_85(Enemy):    
     def attack(self):
         #불을 발사한다"
-        if Player.position> Enemy.position:
-            FB85._velocity = 50
-        elif Player.position<Enemy.position:
+        width =self.position.x - Player.position.x
+        if width>0:
             FB85._velocity = -50
+        elif width<0:
+            FB85._velocity = 50
             
             
     def take_damage(self, damage):
@@ -175,35 +177,51 @@ class FB_85(Enemy):
 
 
 class BT_02(Enemy):
-    def attack(self):
-        pass
+    def attack(self,damage):
+        width =self.position.x - Player.position.x
+        height = self.position.y -Player.position.y
+        if (width**2- height**2)**(1/2) < self.image_height*(3/2):
+            Player.position.x -= width
+            Player.take_damage(damage)
+
+
         #상대를 바람으로 공격한다"
         #상대가 바람에 의해 뒤로 이동한다"
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
-
+        
 class SN_91(Enemy):
     def __init__(self):
         super().__init__()
         self._move_speed = 20
         #속도가 빠르다"
         
-    def attack(self):
-        pass
-        #공격한다"
-
-
+    def attack(self,damage):
+        width =self.position.x - Player.position.x
+        if abs(width) < self.image_height:
+            Player.take_damage(damage)
+            
 class SB_87(Enemy):
-    def __init__(self):
-        super().__init__()
-        Grenade._velocity += 50  # 수류탄 던지는 속도
+    def attack(self):
+        width =self.position.x - Player.position.x
+        if width>0:
+            Grenade._velocity = -50
+        elif width<0:
+            Grenade._velocity = 50
+    
 
 class VP_33(Enemy):
-    def attack(self):
-        super().attack()
+    def attack(self,damage):
+        begin = time.time()
+        if time.time()-begin <= 2:
+            Player._move_speed -= 2
+            Player.take_damage(damage)
+        elif time.time()-begin > 2:
+            Player._move_speed +=2
+
         #""전방향""으로 독가스를 살포한다
-        pass
+
         
         
 class KS_64(Enemy):
@@ -327,9 +345,18 @@ class Grenade(Entity):
         super().think()
 
 
-    def _explode(self):
+    def _explode(self,damage):
+        width =self.position.x - Player.position.x
+        height = self.position.y -Player.position.y
+        if self.position == Player.position:
+            Player.take_damage(damage) #2차 피해
+
+        elif (width**2- height**2)**(1/2) < Item.image_height:
+            Player.position.x -= width
+
+
         # 폭발 이펙트를 재생한다.
         # 근처에 플레이어가 있는지 확인.
-        #    있다면, 데미지와 넉백을 준다.
+        #   있다면, 데미지와 넉백을 준다.
         # 자기 자신을 삭제한다.
-        pass
+
