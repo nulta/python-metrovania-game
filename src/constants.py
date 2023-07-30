@@ -14,7 +14,7 @@ GAME_MAX_FPS = 60
 GENDER_MALE   = 0
 GENDER_FEMALE = 1
 
-#Player 속도, 질량
+#속도, 질량
 PLAYER_VELOCITY = 7
 PLAYER_MASS = 2
 
