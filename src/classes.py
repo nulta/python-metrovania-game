@@ -24,7 +24,7 @@ class Entity():
 
 ########################################################
 
-F = MASS*VELOCITY*VELOCITY/2
+F = PLAYER_MASS*VELOCITY*VELOCITY/2
 
 class Player(Entity):
     def __init__(self, gender,speed):
@@ -35,7 +35,7 @@ class Player(Entity):
         self._item = None
         self.isJump = 0
         self.v = VELOCITY
-        self.m = MASS
+        self.m = PLAYER_MASS
 
     @property
     def hp(self):
@@ -221,25 +221,46 @@ class VP_33(Enemy):
             Player._move_speed +=2
 
         #""전방향""으로 독가스를 살포한다
-
         
         
 class KS_64(Enemy):
-    def position(self):
-        pass
+    def move_position(self,damage):
+        self.position = Player.position
+        if self.position == Player.position:
+            Player.take_damage(damage)
+
         #player의 위치로 순간이동 한다
         #접촉하면 플레이어의 체력이 깍인다
-        
+
+B_F = BOSS_MASS*VELOCITY**2/2
+
 class Boss(Enemy):
     def __init__(self):
         super().__init__()
         self.hp = 200
         self._move_speed = 15
         #체력과 속도가 늘어남
+        self.isJump = 0
+        self.v = VELOCITY
+        self.m = BOSS_MASS
+
+    def jump(self):
+        if self.isJump >0:
+            if self.isJump ==2:
+                self.v = VELOCITY
+            if self.v >0:
+                F = 0.5*self.m*(self.v*self.v)
+            else:
+                F = 0.5*self.m*(self.v*self.v)*(-1)
+            self.position.y -= round(F)
+            self.v -= 1
+            if self.image.bottom > GAME_WINDOW_SIZE[1]:
+                self.image.bottom = GAME_WINDOW_SIZE[1]
+                self.isJump =0
+                self.v = VELOCITY
         
     def think(self):
         super().think()
-        #점프를 추가해야한다
         
     def avoid(self):
         #몹의 공격을 피한다
@@ -296,7 +317,6 @@ class VP33(Item): #지구온난화의 주범
     def attack(self):
         Poison._velocity += 50
     def gass(self,speed_reduction):
-
         for event in pygame.event .get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_b:

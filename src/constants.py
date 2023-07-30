@@ -16,4 +16,5 @@ GENDER_FEMALE = 1
 
 #Player 속도, 질량
 VELOCITY = 7
-MASS = 2
+PLAYER_MASS = 2
+BOSS_MASS = 4
