@@ -57,7 +57,7 @@ class Player(Entity):
         super().draw()
 
         # 가져와야 할 이미지의 이름을 조립한다
-        image_path = ASSET_PATH + "/player"
+        image_path = RESOURCE_PATH + "/player"
         if self._gender == GENDER_MALE:
             image_path += "/male"
         else:
@@ -142,7 +142,7 @@ class Enemy(Entity):
     def draw(self,enemy_name):
         super().draw()
         # 적의 모습을 화면에 그린다.
-        image_path = ASSET_PATH + "/enemy/"
+        image_path = RESOURCE_PATH + "/enemy/"
         image_path += enemy_name
         image_path += ".png"
         # 조립한 이미지 이름대로, 불러온다
@@ -275,7 +275,7 @@ class Item(Entity):
     def draw(self,Item_name):
         super().draw()
         # 적의 모습을 화면에 그린다.
-        image_path = ASSET_PATH + "/Item/"
+        image_path = RESOURCE_PATH + "/Item/"
         image_path += Item_name
         image_path += ".png"
         # 조립한 이미지 이름대로, 불러온다
