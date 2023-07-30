@@ -24,7 +24,7 @@ class Entity():
 
 ########################################################
 
-F = PLAYER_MASS*VELOCITY*VELOCITY/2
+F = PLAYER_MASS*PLAYER_VELOCITY*PLAYER_VELOCITY/2
 
 class Player(Entity):
     def __init__(self, gender,speed):
@@ -34,7 +34,7 @@ class Player(Entity):
         self._move_speed = speed
         self._item = None
         self.isJump = 0
-        self.v = VELOCITY
+        self.v = PLAYER_VELOCITY
         self.m = PLAYER_MASS
 
     @property
@@ -97,7 +97,7 @@ class Player(Entity):
     def jump(self):
         if self.isJump >0:
             if self.isJump ==2:
-                self.v = VELOCITY
+                self.v = PLAYER_VELOCITY
             if self.v >0:
                 F = 0.5*self.m*(self.v*self.v)
             else:
@@ -107,7 +107,7 @@ class Player(Entity):
             if self.image.bottom > GAME_WINDOW_SIZE[1]:
                 self.image.bottom = GAME_WINDOW_SIZE[1]
                 self.isJump =0
-                self.v = VELOCITY
+                self.v = PLAYER_VELOCITY
 
 
 
@@ -232,7 +232,7 @@ class KS_64(Enemy):
         #player의 위치로 순간이동 한다
         #접촉하면 플레이어의 체력이 깍인다
 
-B_F = BOSS_MASS*VELOCITY**2/2
+B_F = BOSS_MASS*BOSS_VELOCITY**2/2
 
 class Boss(Enemy):
     def __init__(self):
@@ -241,13 +241,13 @@ class Boss(Enemy):
         self._move_speed = 15
         #체력과 속도가 늘어남
         self.isJump = 0
-        self.v = VELOCITY
+        self.v = BOSS_VELOCITY
         self.m = BOSS_MASS
 
     def jump(self):
         if self.isJump >0:
             if self.isJump ==2:
-                self.v = VELOCITY
+                self.v = BOSS_VELOCITY
             if self.v >0:
                 F = 0.5*self.m*(self.v*self.v)
             else:
@@ -257,7 +257,7 @@ class Boss(Enemy):
             if self.image.bottom > GAME_WINDOW_SIZE[1]:
                 self.image.bottom = GAME_WINDOW_SIZE[1]
                 self.isJump =0
-                self.v = VELOCITY
+                self.v = BOSS_VELOCITY
         
     def think(self):
         super().think()

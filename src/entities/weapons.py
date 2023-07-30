@@ -55,13 +55,21 @@ class Grenade(Entity):
         self._velocity = velocity
 
 
-    def update(self):
-        super().update()
+    def think(self):
+        super().think()
 
 
-    def _explode(self):
+    def _explode(self,damage):
+        width =self.position.x - Player.position.x
+        height = self.position.y -Player.position.y
+        if self.position == Player.position:
+            Player.take_damage(damage) #2차 피해
+
+        elif (width**2- height**2)**(1/2) < Item.image_height:
+            Player.position.x -= width
+
+
         # 폭발 이펙트를 재생한다.
         # 근처에 플레이어가 있는지 확인.
-        #    있다면, 데미지와 넉백을 준다.
+        #   있다면, 데미지와 넉백을 준다.
         # 자기 자신을 삭제한다.
-        pass

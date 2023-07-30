@@ -18,7 +18,7 @@ class Game():
             self.update_clock()
             self.update_events()
             self.process_draw()
-            pygame.display.update()
+            pygame.display.flip()
 
         # 종료 연출
         self.exit_fadeout()
