@@ -244,7 +244,7 @@ class Boss(Enemy):
         self.v = BOSS_VELOCITY
         self.m = BOSS_MASS
 
-    def jump(self):
+    def jump(self,damage):
         if self.isJump >0:
             if self.isJump ==2:
                 self.v = BOSS_VELOCITY
@@ -258,7 +258,8 @@ class Boss(Enemy):
                 self.image.bottom = GAME_WINDOW_SIZE[1]
                 self.isJump =0
                 self.v = BOSS_VELOCITY
-        
+        if self.position == Player.position:
+            Player.take_damage(damage)
     def think(self):
         super().think()
         
@@ -332,15 +333,18 @@ class VP33(Item): #지구온난화의 주범
         
 
 class KS64(Item): #로이드가 입던 옷
-    def position(self):
-        pass
+    def position(self,damage):
+        Player.position = Boss.position
+        if Player.position == Boss.position:
+            Boss.take_damage(damage)
         #boss의 위치로 순간이동 한다
         #접촉하면 몬스터의 체력이 깍인다
 
 class Box(Item):
     def use(self):
-        pass
+        ##....... 이거 어케함까..?
         #enemy가 캐릭터를 인식하지 못한다
+        pass
 
 class Bullet(Entity):
     def __init__(self, damage,velocity =Vector2(0,0)):
