@@ -30,6 +30,7 @@ class EntityManager():
     @classmethod
     def draw(self):
         # 어카냐
+        #Player, Enemy, Item 클래스 전부 다 하나씩 있는데 여기 또 해야하는 걸까요오...?
         pass
 
 """
