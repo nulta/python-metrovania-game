@@ -22,8 +22,8 @@ class Enemy(Entity):
         # AI 처리, 이동 처리, 기타 등등...
         pass
 
-    def draw(self,enemy_name):
-        super().draw()
+    def surface(self,enemy_name):
+        super().surface()
         # 적의 모습을 화면에 그린다.
         image_path = RESOURCE_PATH + "/enemy/"
         image_path += enemy_name

@@ -30,8 +30,8 @@ class Player(Entity):
         # 입력 처리, 이동 처리, 기타 등등...
         pass
     
-    def draw(self):
-        super().draw()
+    def surface(self):
+        super().surface()
 
         # 가져와야 할 이미지의 이름을 조립한다
         image_path = RESOURCE_PATH + "/player"
