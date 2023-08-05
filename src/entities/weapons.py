@@ -1,4 +1,5 @@
 from .entity import *
+from .player import *
 
 class Weapon(Entity):
     def use(self):
@@ -65,7 +66,7 @@ class Grenade(Entity):
         if self.position == Player.position:
             Player.take_damage(damage) #2차 피해
 
-        elif (width**2- height**2)**(1/2) < Item.image_height:
+        elif (width**2- height**2)**(1/2) < Weapon.image_height:
             Player.position.x -= width
 
 
