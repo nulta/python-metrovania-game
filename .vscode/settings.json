@@ -9,5 +9,8 @@
         "**/__pycache__": true
     },
     "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportWildcardImportFromLibrary": "none",
+    }
 }

@@ -1,13 +1,13 @@
 import pygame
 import game_globals
-from src.input_manager import *
-from src.resource_loader import ResourceLoader
+from input_manager import *
+from resource_loader import ResourceLoader
 from .entity import *
 
 F = PLAYER_MASS*PLAYER_VELOCITY*PLAYER_VELOCITY/2
 
 class Player(Entity):
-    def __init__(self, gender):
+    def __init__(self, gender: int):
         super().__init__()
         self._hp = 200
         self._gender = gender
@@ -38,7 +38,7 @@ class Player(Entity):
         super().surface()
 
         # 가져와야 할 이미지의 이름을 조립한다
-        image_path = "player"
+        image_path = "sprites/player"
         if self._gender == GENDER_MALE:
             image_path += "/male"
         else:

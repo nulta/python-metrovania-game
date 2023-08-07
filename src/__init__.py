@@ -14,6 +14,7 @@ class Game():
         pygame.display.set_caption(GAME_WINDOW_NAME)
         self.screen = pygame.display.set_mode(GAME_WINDOW_SIZE)
         self.clock = pygame.time.Clock()
+        self.initialize_game()
 
         # 메인 루프
         while not game_globals.exit:
@@ -25,6 +26,12 @@ class Game():
 
         # 종료 연출
         self.exit_fadeout()
+    
+    def initialize_game(self):
+        """게임 상태를 초기화한다."""
+        player = Player(GENDER_FEMALE)
+        EntityManager.push_entity(player)
+        
 
     def update_clock(self):
         """FPS를 유지하고 globals.delta_time을 업데이트한다."""
