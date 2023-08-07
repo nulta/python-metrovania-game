@@ -14,7 +14,7 @@ class Game():
         pygame.display.set_caption(GAME_WINDOW_NAME)
         self.screen = pygame.display.set_mode(GAME_WINDOW_SIZE)
         self.clock = pygame.time.Clock()
-        
+
         # 메인 루프
         while not game_globals.exit:
             self.update_clock()
@@ -42,11 +42,11 @@ class Game():
         for e in events:
             if e.type == pygame.QUIT:
                 game_globals.exit = True
-    
+
     def update_entities(self):
         """모든 Entity들을 업데이트한다."""
         EntityManager.update()
-    
+
     def process_draw(self):
         """게임 화면을 그린다."""
         # 배경을 그린다.

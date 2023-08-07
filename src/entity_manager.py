@@ -15,18 +15,18 @@ class EntityManager():
     def push_entity(cls, ent: Entity):
         cls._ents[cls._last_ent_key] = ent
         cls._last_ent_key += 1
-    
+
     @classmethod
     def update(cls):
         # 유효하지 않은 개체를 전부 삭제한다
         for entid in list(cls._ents):
             if not cls._ents[entid].valid:
                 del cls._ents[entid]
-        
+
         # 모든 개체를 업데이트
         for ent in cls._ents.values():
             ent.update()
-    
+
     @classmethod
     def draw(cls, screen: Surface):
         for ent in cls._ents.values():

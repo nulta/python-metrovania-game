@@ -32,7 +32,7 @@ AXIS_VERTICAL = 1
 
 class InputManager():
     """사용자의 입력을 받고 그 상태를 알려준다."""
-    
+
     # 키에 대응하는 액션의 이름.
     _key_table = {
         K_UP: ACTION_UP,
@@ -60,69 +60,69 @@ class InputManager():
     _RELEASED = 2
 
     @classmethod
-    def update(self):
+    def update(cls):
         # 키 입력 정보를 받아온다.
         keys = pygame.key.get_pressed()
         current_held_actions = set()
-        for key, action in self._key_table.items():
+        for key, action in cls._key_table.items():
             if keys[key]:
                 # 현재 이 키가 눌려 있다.
                 current_held_actions.add(action)
-        
+
         # 이전 프레임과 지금 프레임의 키 입력 정보를 가지고 액션의 입력 정보를 계산한다.
-        for action in self._all_actions:
-            on_prev_frame = action in self._last_held_actions
+        for action in cls._all_actions:
+            on_prev_frame = action in cls._last_held_actions
             on_current_frame = action in current_held_actions
 
             if on_prev_frame and on_current_frame:
                 # 이전 프레임에서도, 지금 프레임에서도 눌려 있다.
-                self._action_status[action] = self._HELD
+                cls._action_status[action] = cls._HELD
             elif not on_prev_frame and on_current_frame:
                 # 지금 프레임에서만 눌려 있다.
-                self._action_status[action] = self._PRESSED
+                cls._action_status[action] = cls._PRESSED
             elif on_prev_frame and not on_current_frame:
                 # 이전 프레임에서만 눌려 있었다.
-                self._action_status[action] = self._RELEASED
+                cls._action_status[action] = cls._RELEASED
             else:
                 # 이전 프레임에서도, 지금 프레임에서도 눌려있지 않다.
-                if action in self._action_status:
-                    del self._action_status[action]
-        
+                if action in cls._action_status:
+                    del cls._action_status[action]
+
         # 클래스 내부 상태를 업데이트한다.
-        self._last_held_actions = current_held_actions
-    
+        cls._last_held_actions = current_held_actions
+
     @classmethod
-    def held(self, action: int):
+    def held(cls, action: int):
         """어떤 버튼이 '지금 눌려있는지'를 판정한다."""
-        print(self._action_status)
-        status = self._action_status.get(action, None)
-        return (status == self._PRESSED) or (status == self._HELD)
-    
+        print(cls._action_status)
+        status = cls._action_status.get(action, None)
+        return (status == cls._PRESSED) or (status == cls._HELD)
+
     @classmethod
-    def pressed(self, action: int):
+    def pressed(cls, action: int):
         """어떤 버튼이 '방금 눌러졌는지'를 판정한다."""
-        status = self._action_status.get(action, None)
-        return status == self._PRESSED
-    
+        status = cls._action_status.get(action, None)
+        return status == cls._PRESSED
+
     @classmethod
-    def released(self, action: int):
+    def released(cls, action: int):
         """어떤 버튼이 '방금 떼어졌는지'를 판정한다."""
-        status = self._action_status.get(action, None)
-        return status == self._RELEASED
-    
+        status = cls._action_status.get(action, None)
+        return status == cls._RELEASED
+
     @classmethod
-    def axis(self, axis: int) -> float:
+    def axis(cls, axis: int) -> float:
         """어떤 이동축의 값을 받아온다.
-        
+
         이동축의 값은 -1 이상 +1 이하의 실수이며, 키보드 또는 조이스틱으로 조작한다.
         """
         # 이 두개 말고 다른 축을 추가할 일이 있을까?
         value = 0.0
         if axis == AXIS_HORIZONTAL:
-            if self.held(ACTION_LEFT): value -= 1.0
-            if self.held(ACTION_RIGHT): value += 1.0
+            if cls.held(ACTION_LEFT): value -= 1.0
+            if cls.held(ACTION_RIGHT): value += 1.0
         elif axis == AXIS_VERTICAL:
-            if self.held(ACTION_DOWN): value -= 1.0
-            if self.held(ACTION_UP): value += 1.0
+            if cls.held(ACTION_DOWN): value -= 1.0
+            if cls.held(ACTION_UP): value += 1.0
 
         return min(max(value, -1.0), 1.0)
