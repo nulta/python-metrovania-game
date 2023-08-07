@@ -26,6 +26,8 @@ class Game():
     def update_clock(self):
         """FPS를 유지하고 globals.delta_time을 업데이트한다."""
         globals.delta_time = self.clock.tick(GAME_MAX_FPS) / 1000
+        globals.frame_count += 1
+        globals.game_time += globals.delta_time
 
     def update_events(self):
         """event를 받아서 처리한다."""

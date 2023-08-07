@@ -7,3 +7,9 @@ delta_time = 0
 
 exit = False
 "이 값이 True가 되면 게임이 종료된다."
+
+frame_count = 0
+"게임이 켜진 이후로부터 지나간 프레임 수."
+
+game_time = 0
+"게임이 켜진 이후로부터 지나간 시간 (초)."
