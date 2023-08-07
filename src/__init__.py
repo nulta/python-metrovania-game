@@ -2,6 +2,7 @@ import random
 import pygame
 from entities import *
 import globals
+from input_manager import *
 
 class Game():
     """메인 게임 클래스. 메인 루프를 관리한다."""
@@ -16,9 +17,9 @@ class Game():
         # 메인 루프
         while not globals.exit:
             self.update_clock()
+            self.update_input()
             self.update_events()
             self.process_draw()
-            pygame.display.flip()
 
         # 종료 연출
         self.exit_fadeout()
@@ -28,6 +29,10 @@ class Game():
         globals.delta_time = self.clock.tick(GAME_MAX_FPS) / 1000
         globals.frame_count += 1
         globals.game_time += globals.delta_time
+
+    def update_input(self):
+        """InputManager를 업데이트한다."""
+        InputManager.update()
 
     def update_events(self):
         """event를 받아서 처리한다."""
@@ -40,6 +45,7 @@ class Game():
         """게임 화면을 그린다."""
         # 임시용.
         self.screen.fill((0, 180, 255))
+        pygame.display.flip()
 
     def exit_fadeout(self):
         """게임 화면을 페이드아웃한다."""
@@ -52,7 +58,7 @@ class Game():
             pygame.event.pump()
             t += self.clock.tick(GAME_MAX_FPS) / 1000
             self.screen.blit(fader, (0, 0))
-            pygame.display.update()
+            pygame.display.flip()
 
 
 if __name__ == "__main__":
