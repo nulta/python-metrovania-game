@@ -9,11 +9,11 @@ class Entity():
         self._pivot = Vector2(0, 0)
 
     @property
-    def position(self):
+    def position(self) -> Vector2:
         return self._position
 
     @position.setter
-    def position(self, value):
+    def position(self, value: Vector2):
         self._position = value
     
     @property
@@ -22,7 +22,7 @@ class Entity():
         return self._valid
     
     @property
-    def pivot(self):
+    def pivot(self) -> Vector2:
         """
             이 엔티티가 가진 surface의 좌표 기준점.
             position과 함께, 이 엔티티가 실제로 화면에 그려질 위치를 결정한다.
@@ -37,16 +37,16 @@ class Entity():
 
     def surface(self) -> Surface:
         """화면에 그릴 surface를 반환한다."""
-        pass
+        return Surface((0, 0))
 
     # 아래는 Class가 기본으로 가질 동작 #
 
-    def signal(self, signal_name: str, *args: any):
+    def signal(self, signal_name: str, *args: object):
         """지정된 임의의 함수를 호출한다. 해당 이름의 함수가 없을 경우, 아무것도 하지 않는다."""
-        attr = getattr(self, signal_name.__class__, None)
+        attr = getattr(self.__class__, signal_name, None)
         if callable(attr):
             try:
-                attr(*args)
+                attr(self, *args)
             except TypeError as e:
                 # 함수의 호출 인자 개수가 다른 경우 TypeError가 난다.
                 # 따라서, TypeError가 난 경우 에러를 무시하고 대신 콘솔에 메세지를 띄워 준다.

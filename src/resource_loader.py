@@ -29,11 +29,10 @@ class ResourceLoader():
 
     @classmethod
     def load_image(self, resource_name: str, no_alpha: bool = False) -> pygame.Surface:
-        """
-            이미지 파일을 불러온다.
-            주의: load_image를 통해 불러온 이미지에 fill() 등을 하지 말 것!
-            필요하다면 불러온 이미지를 copy()한 다음 조작해야 한다.
-            왜냐하면, 그렇게 하지 않을 경우 동일한 모든 이미지에 똑같은 변형이 적용되기 때문이다.
+        """이미지 파일을 불러온다.
+        
+        주의: load_image를 통해 불러온 이미지에 fill() 등을 하지 말 것!
+        필요하다면 불러온 이미지를 copy() 함수로 복사한 다음 조작해야 한다.
         """
         # 같은 리소스를 두 번 로딩하지 않는다
         cache = self._get_cache(resource_name)

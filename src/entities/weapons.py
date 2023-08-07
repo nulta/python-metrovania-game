@@ -56,8 +56,8 @@ class Grenade(Entity):
         self._velocity = velocity
 
 
-    def think(self):
-        super().think()
+    def update(self):
+        super().update()
 
 
     def _explode(self,damage):

@@ -1,8 +1,9 @@
 import random
 import pygame
+import game_globals
 from entities import *
-import globals
 from input_manager import *
+from entity_manager import EntityManager
 
 class Game():
     """메인 게임 클래스. 메인 루프를 관리한다."""
@@ -15,10 +16,11 @@ class Game():
         self.clock = pygame.time.Clock()
         
         # 메인 루프
-        while not globals.exit:
+        while not game_globals.exit:
             self.update_clock()
-            self.update_input()
             self.update_events()
+            self.update_input()
+            self.update_entities()
             self.process_draw()
 
         # 종료 연출
@@ -26,9 +28,9 @@ class Game():
 
     def update_clock(self):
         """FPS를 유지하고 globals.delta_time을 업데이트한다."""
-        globals.delta_time = self.clock.tick(GAME_MAX_FPS) / 1000
-        globals.frame_count += 1
-        globals.game_time += globals.delta_time
+        game_globals.delta_time = self.clock.tick(GAME_MAX_FPS) / 1000
+        game_globals.frame_count += 1
+        game_globals.game_time += game_globals.delta_time
 
     def update_input(self):
         """InputManager를 업데이트한다."""
@@ -39,19 +41,28 @@ class Game():
         events = pygame.event.get()
         for e in events:
             if e.type == pygame.QUIT:
-                globals.exit = True
+                game_globals.exit = True
+    
+    def update_entities(self):
+        """모든 Entity들을 업데이트한다."""
+        EntityManager.update()
     
     def process_draw(self):
         """게임 화면을 그린다."""
-        # 임시용.
+        # 배경을 그린다.
         self.screen.fill((0, 180, 255))
+
+        # 엔티티를 그린다.
+        EntityManager.draw(self.screen)
+
+        # 화면에 띄운다.
         pygame.display.flip()
 
     def exit_fadeout(self):
         """게임 화면을 페이드아웃한다."""
         fader = pygame.Surface(GAME_WINDOW_SIZE)
         fader.fill((0, 0, 0))
-        fader.set_alpha(255 / GAME_MAX_FPS * 9)
+        fader.set_alpha(int(255 / GAME_MAX_FPS * 9))
 
         t = 0
         while t < 0.3:

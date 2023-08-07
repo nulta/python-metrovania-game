@@ -26,6 +26,10 @@ ACTION_RIGHT = 3
 ACTION_JUMP = 4
 ACTION_SHOOT = 5
 
+# AXIS 상수
+AXIS_HORIZONTAL = 0
+AXIS_VERTICAL = 1
+
 class InputManager():
     """사용자의 입력을 받고 그 상태를 알려준다."""
     
@@ -105,3 +109,20 @@ class InputManager():
         """어떤 버튼이 '방금 떼어졌는지'를 판정한다."""
         status = self._action_status.get(action, None)
         return status == self._RELEASED
+    
+    @classmethod
+    def axis(self, axis: int) -> float:
+        """어떤 이동축의 값을 받아온다.
+        
+        이동축의 값은 -1 이상 +1 이하의 실수이며, 키보드 또는 조이스틱으로 조작한다.
+        """
+        # 이 두개 말고 다른 축을 추가할 일이 있을까?
+        value = 0.0
+        if axis == AXIS_HORIZONTAL:
+            if self.held(ACTION_LEFT): value -= 1.0
+            if self.held(ACTION_RIGHT): value += 1.0
+        elif axis == AXIS_VERTICAL:
+            if self.held(ACTION_DOWN): value -= 1.0
+            if self.held(ACTION_UP): value += 1.0
+
+        return min(max(value, -1.0), 1.0)

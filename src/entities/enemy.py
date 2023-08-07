@@ -20,8 +20,8 @@ class Enemy(Entity):
             value = 0
         self._hp = value
 
-    def think(self):
-        super().think()
+    def update(self):
+        super().update()
         # AI 처리, 이동 처리, 기타 등등...
         pass
 
