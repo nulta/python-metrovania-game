@@ -14,6 +14,7 @@ class Game():
         pygame.display.set_caption(GAME_WINDOW_NAME)
         self.screen = pygame.display.set_mode(GAME_WINDOW_SIZE)
         self.clock = pygame.time.Clock()
+        self._font = pygame.font.Font(None, 30)  # 임시용
         self.initialize_game()
 
         # 메인 루프
@@ -30,14 +31,15 @@ class Game():
     def initialize_game(self):
         """게임 상태를 초기화한다."""
         player = Player(GENDER_FEMALE)
+        player.position = Vector2(20, 200)
         EntityManager.push_entity(player)
-        
 
     def update_clock(self):
         """FPS를 유지하고 globals.delta_time을 업데이트한다."""
         game_globals.delta_time = self.clock.tick(GAME_MAX_FPS) / 1000
         game_globals.frame_count += 1
         game_globals.game_time += game_globals.delta_time
+        game_globals.frames_per_second = self.clock.get_fps()
 
     def update_input(self):
         """InputManager를 업데이트한다."""
@@ -61,6 +63,10 @@ class Game():
 
         # 엔티티를 그린다.
         EntityManager.draw(self.screen)
+
+        # DEBUG: FPS 카운터를 그린다.
+        surface = self._font.render(f"FPS: {int(game_globals.frames_per_second)}", True, (255,255,255))
+        self.screen.blit(surface, (0, 0))
 
         # 화면에 띄운다.
         pygame.display.flip()
