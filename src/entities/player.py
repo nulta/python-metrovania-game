@@ -13,7 +13,7 @@ class Player(Entity):
         self._gender = gender
         self._move_speed = PLAYER_MOVE_SPEED
         self._weapon = None
-        self._pivot = Vector2(10, 10)
+        self._pivot = Vector2(15, 15)
 
     @property
     def hp(self):
