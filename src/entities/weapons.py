@@ -1,6 +1,8 @@
 from .entity import *
 from .player import *
 from .enemy import *
+from pygame.math import Vector2
+from constants import *
 
 class Weapon(Entity):
     def use(self):
@@ -21,6 +23,7 @@ class FB85(Weapon): #칠겹살용 토치
 class BB02(Weapon):#나이키에어
     def __init__(self,damage):
         self._damage=damage
+
     def position(self):
         Player.position.y += Player.image_height/2
         #신발에서 바람이 나온다 높이가 높아짐?
@@ -39,6 +42,7 @@ class SB87(Weapon): #대청단 감자주머니
 class VP33(Weapon): #지구온난화의 주범
     def attack(self):
         Poison._velocity += 50
+
     def gass(self,speed_reduction):
         for event in pygame.event .get():
             if event.type == pygame.KEYDOWN:
@@ -50,9 +54,8 @@ class VP33(Weapon): #지구온난화의 주범
                         Enemy._move_speed += speed_reduction
         #독을 발포한다
         #가스를 살포한다(enemy의 속도가 늘어진다)
+
 class KS64(Weapon): #로이드가 입던 옷
-    def position(self):
-        pass
     def position(self,damage):
         Player.position = Boss.position
         if Player.position == Boss.position:
@@ -66,6 +69,11 @@ class Bullet(Entity):
         self._damage = damage
         self._velocity = velocity
 
+class Poison(Entity):
+    def __init__(self, damage,velocity = Vector2(0,0)):
+        super().__init__()
+        self._damage = damage
+        self._velocity = velocity
 
 class Grenade(Entity):
     def __init__(self, damage, velocity = Vector2(0, 0)):
@@ -73,10 +81,8 @@ class Grenade(Entity):
         self._damage = damage
         self._velocity = velocity
 
-
     def update(self):
         super().update()
-
 
     def _explode(self,damage):
         width =self.position.x - Player.position.x

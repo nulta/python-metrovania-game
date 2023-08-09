@@ -3,6 +3,9 @@ from .entity import *
 from .player import *
 from .weapons import *
 import time
+from pygame import Surface
+from pygame.math import Vector2
+from constants import *
 
 class Enemy(Entity):
     def __init__(self):
@@ -47,7 +50,7 @@ class Enemy(Entity):
         self.hp -= damage
 
 #-------------------------------------------------------
-class FB_85(Enemy):    
+class FB_88(Enemy):
     def attack(self):
         #불을 발사한다"
         width =self.position.x - Player.position.x
@@ -56,11 +59,9 @@ class FB_85(Enemy):
         elif width<0:
             FB85._velocity += 50
             
-            
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
-
 
 class BT_02(Enemy):
     def attack(self,damage):
@@ -69,10 +70,9 @@ class BT_02(Enemy):
         if (width**2- height**2)**(1/2) < self.image_height*(3/2):
             Player.position.x -= width
             Player.take_damage(damage)
-
-
         #상대를 바람으로 공격한다"
         #상대가 바람에 의해 뒤로 이동한다"
+
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
@@ -107,14 +107,16 @@ class VP_33(Enemy):
             Player._move_speed +=2
 
         #""전방향""으로 독가스를 살포한다
-
-        
         
 class KS_64(Enemy):
-    def position(self):
-        pass
+    def move_position(self,damage):
+        self.position = Player.position
+        if self.position == Player.position:
+            Player.take_damage(damage)
         #player의 위치로 순간이동 한다
         #접촉하면 플레이어의 체력이 깍인다
+
+B_F = BOSS_MASS*BOSS_VELOCITY**2/2
         
 class Boss(Enemy):
     def __init__(self):
@@ -125,7 +127,7 @@ class Boss(Enemy):
         self.isJump = 0
         self.v = BOSS_VELOCITY
         self.m = BOSS_MASS
-        
+
     def jump(self,damage):
         if self.isJump >0:
             if self.isJump ==2:
@@ -143,8 +145,7 @@ class Boss(Enemy):
 
         if self.position == Player.position:
             Player.take_damage(damage)
-    def think(self):
-        super().think()
+
 
     def avoid(self):
         #몹의 공격을 피한다
