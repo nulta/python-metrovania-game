@@ -25,6 +25,7 @@ ACTION_LEFT = 2
 ACTION_RIGHT = 3
 ACTION_JUMP = 4
 ACTION_SHOOT = 5
+ACTION_CHANGE = 6
 
 # AXIS 상수
 AXIS_HORIZONTAL = 0
@@ -37,11 +38,11 @@ class InputManager():
     _key_table = {
         K_UP: ACTION_UP,
         K_DOWN: ACTION_DOWN,
-        K_LEFT: ACTION_LEFT,
-        K_RIGHT: ACTION_RIGHT,
-        K_SPACE: ACTION_JUMP,
-        K_z: ACTION_JUMP,
-        K_x: ACTION_SHOOT,
+        K_a: ACTION_LEFT,
+        K_d: ACTION_RIGHT,
+        K_w: ACTION_JUMP,
+        K_l: ACTION_CHANGE, #무기바꾸기
+        K_k: ACTION_SHOOT,
     }
 
     # 모든 액션들의 집합.
@@ -116,7 +117,7 @@ class InputManager():
 
         이동축의 값은 -1 이상 +1 이하의 실수이며, 키보드 또는 조이스틱으로 조작한다.
         """
-        # 이 두개 말고 다른 축을 추가할 일이 있을까?
+        # 이 두개 말고 다른 축을 추가할 일이 있을까?---:없을듯함다
         value = 0.0
         if axis == AXIS_HORIZONTAL:
             if cls.held(ACTION_LEFT): value -= 1.0
