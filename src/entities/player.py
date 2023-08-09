@@ -14,9 +14,7 @@ class Player(Entity):
         self._move_speed = PLAYER_MOVE_SPEED
         self._weapon = None
         self._pivot = Vector2(15, 15)
-        self.position.x = self.position[0]
-        self.position.y = self.position[1]
-
+        self.position = Vector2(0, 0)
 
     @property
     def hp(self):
