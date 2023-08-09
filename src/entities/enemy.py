@@ -52,9 +52,9 @@ class FB_85(Enemy):
         #불을 발사한다"
         width =self.position.x - Player.position.x
         if width>0:
-            FB85._velocity = -50
+            FB85._velocity += -50
         elif width<0:
-            FB85._velocity = 50
+            FB85._velocity += 50
             
             
     def take_damage(self, damage):
@@ -122,11 +122,30 @@ class Boss(Enemy):
         self.hp = 200
         self._move_speed = 15
         #체력과 속도가 늘어남
+        self.isJump = 0
+        self.v = BOSS_VELOCITY
+        self.m = BOSS_MASS
         
+    def jump(self,damage):
+        if self.isJump >0:
+            if self.isJump ==2:
+                self.v = BOSS_VELOCITY
+            if self.v >0:
+                F = 0.5*self.m*(self.v*self.v)
+            else:
+                F = 0.5*self.m*(self.v*self.v)*(-1)
+            self.position.y -= round(F)
+            self.v -= 1
+            if self.image.bottom > GAME_WINDOW_SIZE[1]:
+                self.image.bottom = GAME_WINDOW_SIZE[1]
+                self.isJump =0
+                self.v = BOSS_VELOCITY
+
+        if self.position == Player.position:
+            Player.take_damage(damage)
     def think(self):
         super().think()
-        #점프를 추가해야한다
-        
+
     def avoid(self):
         #몹의 공격을 피한다
         pass

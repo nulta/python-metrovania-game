@@ -14,6 +14,9 @@ class Player(Entity):
         self._move_speed = PLAYER_MOVE_SPEED
         self._weapon = None
         self._pivot = Vector2(15, 15)
+        self.position.x = self.position[0]
+        self.position.y = self.position[1]
+
 
     @property
     def hp(self):
@@ -47,7 +50,13 @@ class Player(Entity):
         image_path += "/" + (self._weapon or "idle")
         image_path += ".png"
 
+        self.image=pygame.image.load(image_path)
+        self.image_size = self.image.get_rect().size
+        self.image_width = self.image_size[0] #아이템 가로크기
+        self.image_height = self.image_size[1]
+
         return ResourceLoader.load_image(image_path)
+
 
     def _shoot(self):
         pass
