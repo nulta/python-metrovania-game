@@ -15,6 +15,14 @@ class EntityManager():
     def push_entity(cls, ent: Entity):
         cls._ents[cls._last_ent_key] = ent
         cls._last_ent_key += 1
+    
+    @classmethod
+    def get_player(cls) -> Optional[Player]:
+        # 일단은 O(N) 완전 탐색으로...
+        for ent in cls._ents.values():
+            if isinstance(ent, Player):
+                return ent
+        return None
 
     @classmethod
     def update(cls):
