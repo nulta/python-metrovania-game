@@ -9,16 +9,18 @@ class EntityManager():
 
     @classmethod
     def get_entity(cls, id: int) -> Optional[Entity]:
+        """특정 ID의 Entity를 반환한다."""
         return cls._ents.get(id)
 
     @classmethod
     def push_entity(cls, ent: Entity):
+        """새로운 Entity를 EntityManager에 등록한다."""
         cls._ents[cls._last_ent_key] = ent
         cls._last_ent_key += 1
     
     @classmethod
     def get_player(cls) -> Optional[Player]:
-        # 일단은 O(N) 완전 탐색으로...
+        """Player 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Player):
                 return ent
