@@ -35,10 +35,7 @@ class Enemy(Entity):
         image_path += enemy_name
         image_path += ".png"
         # 조립한 이미지 이름대로, 불러온다
-        self.image=pygame.image.load(image_path)
-        self.image_size = self.image.get_rect().size
-        self.image_width = self.image_size[0] #아이템 가로크기
-        self.image_height = self.image_size[1]
+
 
 
     def _attack(self):
@@ -52,8 +49,12 @@ class Enemy(Entity):
 #-------------------------------------------------------
 class FB_88(Enemy):
     def attack(self):
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+        if not player: return                # None일 경우 return
+
         #불을 발사한다"
-        width =self.position.x - Player.position.x
+        width =self.position.x - player.position.x
         if width>0:
             FB85._velocity += -50
         elif width<0:
@@ -65,11 +66,15 @@ class FB_88(Enemy):
 
 class BT_02(Enemy):
     def attack(self,damage):
-        width =self.position.x - Player.position.x
-        height = self.position.y -Player.position.y
-        if (width**2- height**2)**(1/2) < self.image_height*(3/2):
-            Player.position.x -= width
-            Player.take_damage(damage)
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()  # Player 또는 None
+        if not player: return                # None일 경우 return
+        # 이제부터, player 변수는 None일 수가 없음
+        width =self.position.x - player.position.x
+        height = self.position.y -player.position.y
+        if (width**2- height**2)**(1/2) < 120:
+            player.position.x -= width
+            player.take_damage(damage)
         #상대를 바람으로 공격한다"
         #상대가 바람에 의해 뒤로 이동한다"
 
@@ -84,13 +89,19 @@ class SN_91(Enemy):
         #속도가 빠르다"
         
     def attack(self,damage):
-        width =self.position.x - Player.position.x
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()  # Player 또는 None
+        if not player: return                # None일 경우 return
+        width =self.position.x - player.position.x
         if abs(width) < self.image_height:
-            Player.take_damage(damage)
+            player.take_damage(damage)
             
 class SB_87(Enemy):
     def attack(self):
-        width =self.position.x - Player.position.x
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()  # Player 또는 None
+        if not player: return                # None일 경우 return
+        width =self.position.x - player.position.x
         if width>0:
             Grenade._velocity = -50
         elif width<0:
@@ -99,20 +110,26 @@ class SB_87(Enemy):
 
 class VP_33(Enemy):
     def attack(self,damage):
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()  # Player 또는 None
+        if not player: return                # None일 경우 return
         begin = time.time()
         if time.time()-begin <= 2:
-            Player._move_speed -= 2
-            Player.take_damage(damage)
+            player._move_speed -= 2
+            player.take_damage(damage)
         elif time.time()-begin > 2:
-            Player._move_speed +=2
+            player._move_speed +=2
 
         #""전방향""으로 독가스를 살포한다
         
 class KS_64(Enemy):
     def move_position(self,damage):
-        self.position = Player.position
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+        if not player: return                # None일 경우 return
+        self.position = player.position
         if self.position == Player.position:
-            Player.take_damage(damage)
+            player.take_damage(damage)
         #player의 위치로 순간이동 한다
         #접촉하면 플레이어의 체력이 깍인다
 
@@ -138,13 +155,16 @@ class Boss(Enemy):
                 F = 0.5*self.m*(self.v*self.v)*(-1)
             self.position.y -= round(F)
             self.v -= 1
-            if self.image.bottom > GAME_WINDOW_SIZE[1]:
-                self.image.bottom = GAME_WINDOW_SIZE[1]
+            if self.surface.bottom > GAME_WINDOW_SIZE[1]:
+                self.surface.bottom = GAME_WINDOW_SIZE[1]
                 self.isJump =0
                 self.v = BOSS_VELOCITY
 
         if self.position == Player.position:
-            Player.take_damage(damage)
+            from entity_manager import EntityManager
+            player = EntityManager.get_player()  # Player 또는 None
+            if not player: return                # None일 경우 return
+            player.take_damage(damage)
 
 
     def avoid(self):

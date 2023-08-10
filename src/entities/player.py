@@ -3,6 +3,7 @@ import game_globals
 from input_manager import *
 from resource_loader import ResourceLoader
 from .entity import *
+from pygame.math import Vector2
 
 F = PLAYER_MASS*PLAYER_VELOCITY*PLAYER_VELOCITY/2
 
@@ -14,7 +15,10 @@ class Player(Entity):
         self._move_speed = PLAYER_MOVE_SPEED
         self._weapon = None
         self._pivot = Vector2(15, 15)
-        self.position = Vector2(0, 0)
+        self.isJump = 0
+        self.v = PLAYER_VELOCITY
+        self.m = PLAYER_MASS
+
 
     @property
     def hp(self):
@@ -25,7 +29,7 @@ class Player(Entity):
         if value < 0:
             value = 0
         self._hp = value
-    
+
     def update(self):
         super().update()
 
@@ -55,8 +59,25 @@ class Player(Entity):
         pass
 
     def _jump(self):
-        pass
+        if self.isJump >0:
+            if self.isJump ==2:
+                self.v = PLAYER_VELOCITY
+            if self.v >0:
+                F = 0.5*self.m*(self.v*self.v)
+            else:
+                F = 0.5*self.m*(self.v*self.v)*(-1)
+            self.position.y -= round(F)
+            self.v -= 1
+            if self.surface.bottom > GAME_WINDOW_SIZE[1]:
+                self.surface.bottom = GAME_WINDOW_SIZE[1]
+                self.isJump =0
+                self.v = PLAYER_VELOCITY
 
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
+    def get_x_position(self):
+        return self.position.x
+    def get_y_position(self):
+
+        return self.position.y

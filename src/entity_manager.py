@@ -25,6 +25,22 @@ class EntityManager():
             if isinstance(ent, Player):
                 return ent
         return None
+    
+    @classmethod
+    def get_enemy(cls) -> Optional[Enemy]:
+        """Enemy 개체를 반환한다."""
+        for ent in cls._ents.values():
+            if isinstance(ent, Enemy):
+                return ent
+        return None
+    
+    @classmethod
+    def get_poison(cls) -> Optional[Poison]:
+        """Poison 개체를 반환한다."""
+        for ent in cls._ents.values():
+            if isinstance(ent, Poison):
+                return ent
+        return None
 
     @classmethod
     def update(cls):
