@@ -25,13 +25,19 @@ class BB02(Weapon):#나이키에어
         self._damage=damage
 
     def position(self):
-        Player.position.y += Player.image_height/2
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+        if not player: return                # None일 경우 return
+        player.position.y += 15
         #신발에서 바람이 나온다 높이가 높아짐?
         #enemy로부터 2칸 안에 있으면 공격
 
 class SN92(Weapon): #아디다su
     def __init__(self,add_speed):
-        Player._move_speed += add_speed
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+        if not player: return                # None일 경우 return
+        player._move_speed += add_speed
         #캐릭터 속도를 높인다.
 
 class SB87(Weapon): #대청단 감자주머니
@@ -41,17 +47,20 @@ class SB87(Weapon): #대청단 감자주머니
 
 class VP33(Weapon): #지구온난화의 주범
     def attack(self):
-        Poison._velocity += 50
+        from entity_manager import EntityManager
+        poison = EntityManager.get_poison()  # Poison 또는 None
+        if not poison: return                # None일 경우 return
+        poison._velocity += 50
 
     def gass(self,speed_reduction):
-        for event in pygame.event .get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_b:
-                    Enemy._move_speed -= speed_reduction
-                    start_ticks= pygame.time.get_ticks()
-                    elapsed_time = (pygame.time.get_ticks()- start_ticks)/1000
-                    if 3 - elapsed_time <=0:
-                        Enemy._move_speed += speed_reduction
+        from entity_manager import EntityManager
+        enemy = EntityManager.get_enemy()  # Enemy 또는 None
+        if not enemy: return                # None일 경우 return
+        enemy._move_speed -= speed_reduction
+        start_ticks= pygame.time.get_ticks()
+        elapsed_time = (pygame.time.get_ticks()- start_ticks)/1000
+        if 3 - elapsed_time <=0:
+            enemy._move_speed += speed_reduction
         #독을 발포한다
         #가스를 살포한다(enemy의 속도가 늘어진다)
 
@@ -70,7 +79,7 @@ class Bullet(Entity):
         self._velocity = velocity
 
 class Poison(Entity):
-    def __init__(self, damage,velocity = Vector2(0,0)):
+    def __init__(self, damage,velocity):
         super().__init__()
         self._damage = damage
         self._velocity = velocity
@@ -85,15 +94,16 @@ class Grenade(Entity):
         super().update()
 
     def _explode(self,damage):
-        width =self.position.x - Player.position.x
-        height = self.position.y -Player.position.y
-        if self.position == Player.position:
-            Player.take_damage(damage) #2차 피해
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()  # Player 또는 None
+        if not player: return                # None일 경우 return
+        width =self.position.x - player.position.x
+        height = self.position.y -player.position.y
+        if self.position == player.position:
+            player.take_damage(damage) #2차 피해
 
-        elif (width**2- height**2)**(1/2) < Weapon.image_height:
-            Player.position.x -= width
-
-
+        elif (width**2- height**2)**(1/2) < 120 :
+            player.position.x -= width
         # 폭발 이펙트를 재생한다.
         # 근처에 플레이어가 있는지 확인.
         #   있다면, 데미지와 넉백을 준다.
