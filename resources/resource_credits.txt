@@ -1,0 +1,24 @@
+
+=== 외부 리소스 출처 ===
+
+resources/sounds/music/title.ogg
+    (임시 리소스)
+    곡명: Desert Canyon - Reo
+    출처: https://www.youtube.com/watch?v=dNWZrQQM948
+    사용조건: 상용 이용·개인 이용에 관계없이 BGM으로 사용 가능.
+    사용조건 원문:
+        ▼BGMのご利用について▼
+        ・商用利用・個人利用問わずBGMとしてお使いいただけます。(利用報告は不要です)
+        ・クレジット表記は不要です。
+        ・楽曲の編集や加工はご自由にお願い致します。
+        ・歌詞や歌をつけてのアレンジ・二次創作は大歓迎です。(ただしSNS上で公開する範囲に限ります。音楽配信サービスでのリリースはご遠慮ください。)
+
+resources/fonts/galmuri9.ttf
+    출처: https://github.com/quiple/galmuri
+    저작자: Minseo Lee (itoupluk427@gmail.com)
+    사용조건: OFL (Open Font License)에 따라 자유롭게 사용 가능.
+
+resources/fonts/ibmplexsanskr.ttf
+    출처: https://github.com/ibm/plex
+    저작자: IBM Corp.
+    사용조건: OFL (Open Font License)에 따라 자유롭게 사용 가능.
