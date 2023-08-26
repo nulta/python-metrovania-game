@@ -15,9 +15,11 @@ class EntityManager():
     @classmethod
     def push_entity(cls, ent: Entity):
         """새로운 Entity를 EntityManager에 등록한다."""
-        cls._ents[cls._last_ent_key] = ent
+        id = cls._last_ent_key
         cls._last_ent_key += 1
-    
+        ent._id = id
+        cls._ents[id] = ent
+
     @classmethod
     def get_player(cls) -> Optional[Player]:
         """Player 개체를 반환한다."""
@@ -25,7 +27,7 @@ class EntityManager():
             if isinstance(ent, Player):
                 return ent
         return None
-    
+
     @classmethod
     def get_enemy(cls) -> Optional[Enemy]:
         """Enemy 개체를 반환한다."""
@@ -33,7 +35,7 @@ class EntityManager():
             if isinstance(ent, Enemy):
                 return ent
         return None
-    
+
     @classmethod
     def get_grenade_enemy(cls) -> Optional[Grenade_enemy]:
         """Poison 개체를 반환한다."""
@@ -41,7 +43,7 @@ class EntityManager():
             if isinstance(ent, Grenade_enemy):
                 return ent
         return None
-    
+
     @classmethod
     def get_grenade_player(cls) -> Optional[Grenade_player]:
         """Poison 개체를 반환한다."""
@@ -49,7 +51,7 @@ class EntityManager():
             if isinstance(ent, Grenade_player):
                 return ent
         return None
-    
+
     @classmethod
     def get_poison(cls) -> Optional[Poison]:
         """Poison 개체를 반환한다."""
@@ -57,7 +59,7 @@ class EntityManager():
             if isinstance(ent, Poison):
                 return ent
         return None
-    
+
     @classmethod
     def get_bullet(cls) -> Optional[Bullet]:
         """Poison 개체를 반환한다."""
@@ -65,7 +67,7 @@ class EntityManager():
             if isinstance(ent, Bullet):
                 return ent
         return None
-    
+
     @classmethod
     def get_fire(cls) -> Optional[Fire]:
         """Poison 개체를 반환한다."""
@@ -73,7 +75,7 @@ class EntityManager():
             if isinstance(ent, Fire):
                 return ent
         return None
-    
+
     @classmethod
     def update(cls):
         # 유효하지 않은 개체를 전부 삭제한다
@@ -91,3 +93,11 @@ class EntityManager():
             draw_pos = ent.position - ent.pivot
             ent_surface = ent.surface()
             screen.blit(ent_surface, draw_pos)
+
+    @classmethod
+    def initialize(cls):
+        """EntityManager를 깨끗하게 초기화한다!"""
+        for ent in cls._ents.values():
+            ent.remove()
+        cls._ents = {}
+        cls._last_ent_key = 0

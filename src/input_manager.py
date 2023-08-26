@@ -1,4 +1,5 @@
 from pygame.locals import *
+from constants import *
 import pygame
 
 # InputManager는 키보드 입력을 받아서 예쁘게 정리해주는 일을 한다.
@@ -18,42 +19,27 @@ import pygame
 # 또, (필요하다면) 조작키를 설정을 통해 바꿀 수도 있게 해 준다.
 # 또, (진짜로 필요하다면) 나중에 게임패드 등을 지원하기도 더 편하게 해 준다.
 
-# ACTION 상수
-ACTION_UP = 0
-ACTION_DOWN = 1
-ACTION_LEFT = 2
-ACTION_RIGHT = 3
-ACTION_JUMP = 4
-ACTION_SHOOT = 5
-ACTION_CHANGE = 6
-
-# AXIS 상수
-AXIS_HORIZONTAL = 0
-AXIS_VERTICAL = 1
-
 class InputManager():
     """사용자의 입력을 받고 그 상태를 알려준다."""
 
-    # 키에 대응하는 액션의 이름.
-    _key_table = {
-        K_UP: ACTION_UP,
-        K_DOWN: ACTION_DOWN,
-        K_a: ACTION_LEFT,
-        K_d: ACTION_RIGHT,
-        K_w: ACTION_JUMP,
-        K_l: ACTION_CHANGE, #무기바꾸기
-        K_k: ACTION_SHOOT,
+    # 액션에 대응하는 키의 집합들.
+    _action_table: "dict[int, set[int]]" = {
+        ACTION_UP: {K_w, K_UP},
+        ACTION_DOWN: {K_s, K_DOWN},
+        ACTION_LEFT: {K_a, K_LEFT},
+        ACTION_RIGHT: {K_d, K_RIGHT},
+        ACTION_CHANGE: {K_l},
+        ACTION_JUMP: {K_SPACE},
+        ACTION_SHOOT: {K_k},
+        ACTION_CONFIRM: {K_SPACE, K_RETURN},
+        ACTION_CANCEL: {K_ESCAPE},
     }
-
-    # 모든 액션들의 집합.
-    _all_actions = set(_key_table.values())
 
     # 마지막 프레임에서 눌려있었던 액션들의 집합.
     _last_held_actions = set()
 
-    # 현재 프레임에서 액션들의 pressed/held/released 상태.
-    # 아무것도 아닌 경우, 키가 존재하지 않는다.
-    _action_status: "dict[int, int]" = {}
+    # 현재 프레임에서 액션들의 pressed/held/released/None 상태.
+    _action_status: "dict[int, (int|None)]" = {}
 
     # 이 클래스 내에서만 사용할 상수.
     _PRESSED = 0
@@ -63,39 +49,37 @@ class InputManager():
     @classmethod
     def update(cls):
         # 키 입력 정보를 받아온다.
-        keys = pygame.key.get_pressed()
+        pressed = pygame.key.get_pressed()
         current_held_actions = set()
-        for key, action in cls._key_table.items():
-            if keys[key]:
-                # 현재 이 키가 눌려 있다.
+
+        for action, keys in cls._action_table.items():
+            # 액션의 키가 눌려 있는지 확인한다.
+            if any(pressed[k] for k in keys):
                 current_held_actions.add(action)
 
-        # 이전 프레임과 지금 프레임의 키 입력 정보를 가지고 액션의 입력 정보를 계산한다.
-        for action in cls._all_actions:
-            on_prev_frame = action in cls._last_held_actions
-            on_current_frame = action in current_held_actions
-
-            if on_prev_frame and on_current_frame:
-                # 이전 프레임에서도, 지금 프레임에서도 눌려 있다.
-                cls._action_status[action] = cls._HELD
-            elif not on_prev_frame and on_current_frame:
-                # 지금 프레임에서만 눌려 있다.
-                cls._action_status[action] = cls._PRESSED
-            elif on_prev_frame and not on_current_frame:
-                # 이전 프레임에서만 눌려 있었다.
-                cls._action_status[action] = cls._RELEASED
-            else:
-                # 이전 프레임에서도, 지금 프레임에서도 눌려있지 않다.
-                if action in cls._action_status:
-                    del cls._action_status[action]
+            # 이전 프레임과 지금 프레임의 키 입력 정보를 가지고 액션의 입력 정보를 계산한다.
+            then = action in cls._last_held_actions
+            now = action in current_held_actions
+            cls._action_status[action] = cls._get_action_status(then, now)
 
         # 클래스 내부 상태를 업데이트한다.
         cls._last_held_actions = current_held_actions
+    
+    @classmethod
+    def _get_action_status(cls, then, now):
+        if then and now:
+            return cls._HELD
+        elif not then and now:
+            return cls._PRESSED
+        elif then and not now:
+            return cls._RELEASED
+        else:
+            return None
+
 
     @classmethod
     def held(cls, action: int):
         """어떤 버튼이 '지금 눌려있는지'를 판정한다."""
-        print(cls._action_status)
         status = cls._action_status.get(action, None)
         return (status == cls._PRESSED) or (status == cls._HELD)
 

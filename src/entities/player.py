@@ -1,6 +1,6 @@
 import pygame
 import game_globals
-from input_manager import *
+from input_manager import InputManager
 from resource_loader import ResourceLoader
 from .entity import *
 from pygame.math import Vector2
@@ -8,6 +8,8 @@ from pygame.math import Vector2
 F = PLAYER_MASS*PLAYER_VELOCITY*PLAYER_VELOCITY/2
 
 class Player(Entity):
+    is_player = True
+
     def __init__(self, gender: int):
         super().__init__()
         self._hp = 200
@@ -52,7 +54,7 @@ class Player(Entity):
         image_path += "/" + (self._weapon or "idle")
         image_path += ".png"
 
-        return ResourceLoader.load_image(image_path)
+        return ResourceLoader.load_image_2x(image_path)
 
 
     def _shoot(self):
