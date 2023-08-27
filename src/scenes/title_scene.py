@@ -7,6 +7,7 @@ from constants import *
 from audio import Audio
 from fonts import Fonts
 import math
+import util
 
 class TitleScene(Scene):
     """TitleScene은 게임 타이틀 화면이다."""
@@ -41,23 +42,40 @@ class TitleScene(Scene):
             self.press_button(self._focus_index)
 
     def draw(self, surface: pygame.Surface):
+        anim_progress = self.scene_time / 6
+
         # 배경 그리기
-        surface.fill((0, 100, 170))
-        for i in range(2):
-            block_height = int(max(200, 260 - self._scene_time * 9))
-            surface.fill((0, 140 - i*20, 170), (0, i*block_height, 800, block_height))
+        if True:
+            color_mul = int(util.lerpc(anim_progress, 0.5, 1) * 255)
+            block_height = util.lerpc(anim_progress / 1.5, 260, 200)
+            block_height += int(math.cos(game_globals.game_time * 0.5) * 3)
+
+            surface.fill(pygame.Color(0, 100, 170))
+            for i in range(2):
+                surface.fill(
+                    pygame.Color(0, 140 - i*20, 170),
+                    (0, i*block_height, 800, block_height)
+                )
+            
+            surface.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
 
         # 사람 그리기
         if True:
-            human_y = int(max(210, 420 - self._scene_time * 50)) + 62
-            human_y_offset = int(math.cos(game_globals.game_time * 1.8) * 2)
-            sprite_human = ResourceLoader.load_image_2x("sprites/player/female/idle.png")
-            surface.blit(sprite_human, (330+130, human_y + human_y_offset))
+            color_mul = int(util.lerpc(anim_progress, 0, 0.9) * 255)
+            human_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210)) + 62
+            human_y += int(math.cos(game_globals.game_time * 1.8) * 2)
+
+            sprite_human = ResourceLoader.load_image_2x("sprites/player/female/idle.png").copy()
+            sprite_human.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
+            surface.blit(sprite_human, (330+130, human_y))
 
         # 소품 그리기
         if True:
-            building_y = int(max(210, 420 - self._scene_time * 50))
-            sprite_building = ResourceLoader.load_image_2x("sprites/background/building.png")
+            color_mul = int(util.lerpc(anim_progress, 0, 0.9) * 255)
+            building_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210))
+
+            sprite_building = ResourceLoader.load_image_2x("sprites/background/building.png").copy()
+            sprite_building.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
             surface.blit(sprite_building, (330, building_y))
 
         # 게임 이름 그리기
@@ -72,7 +90,7 @@ class TitleScene(Scene):
         # 메뉴 목록 그리기
         for idx, text in enumerate(self._button_texts):
             font_size = 24
-            y_offset = idx * (font_size + 6) + (math.sin(game_globals.game_time * 2.5 + idx/2) * 5)
+            y_offset = idx * (font_size + 6) + (math.sin(self.scene_time * 2.5 + idx/2) * 5)
             focused = self._focus_index == idx
             color = (0, 220, 255) if focused else (255, 255, 255)
 
