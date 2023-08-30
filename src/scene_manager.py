@@ -1,6 +1,7 @@
 from scenes.scene import Scene
 from pygame import Surface
 from typing import Optional
+from util import classproperty
 import game_globals
 
 class SceneManager():
@@ -14,8 +15,8 @@ class SceneManager():
 
     _scene_stack: "list[Scene]" = []
 
-    @classmethod
-    def _current_scene(cls) -> Optional[Scene]:
+    @classproperty
+    def current_scene(cls) -> Optional[Scene]:
         stack = cls._scene_stack
         if not stack:
             return None
@@ -25,7 +26,7 @@ class SceneManager():
     @classmethod
     def update(cls) -> bool:
         "Scene을 업데이트한다. 업데이트할 Scene이 없을 경우 false를 반환한다."
-        scene = cls._current_scene()
+        scene = cls.current_scene
         if not scene:
             return False
 

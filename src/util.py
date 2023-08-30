@@ -153,3 +153,16 @@ def on_keyframes(t: float, frames: "dict[float, float]", easein=False, easeout=F
     elif easeout:
         t = globals()["easeout"](t)
     return lerp(t, small_v, large_v)
+
+
+if True:
+    from typing import Generic, Callable, TypeVar, Any
+    global classproperty
+    _T = TypeVar("_T")
+
+    class classproperty(Generic[_T]):
+        def __init__(self, f: "Callable[[Any], _T]"):
+            self.f = f
+
+        def __get__(self, obj, cls) -> "_T":
+            return self.f(cls)

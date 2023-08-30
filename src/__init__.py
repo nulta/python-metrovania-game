@@ -29,7 +29,8 @@ class Game():
             self.process_draw()
 
         # 종료 연출
-        self.exit_fadeout()
+        if isinstance(SceneManager.current_scene ,TitleScene):
+            self.exit_fadeout()
 
     def initialize_game(self):
         """게임 상태를 초기화한다."""
