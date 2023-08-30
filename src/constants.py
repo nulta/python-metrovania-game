@@ -5,8 +5,9 @@
 # 설정 값
 GAME_WINDOW_NAME = "게임 이름"
 RESOURCE_PATH = "./resources"
+TILE_SIZE = 30 * 2
 
-GAME_WINDOW_SIZE = (810, 600)  # 30의 배수
+GAME_WINDOW_SIZE = (840, 600)  # 30*2의 배수
 GAME_MAX_FPS = 144
 
 

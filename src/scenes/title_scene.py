@@ -54,7 +54,7 @@ class TitleScene(Scene):
             for i in range(2):
                 surface.fill(
                     pygame.Color(0, 140 - i*20, 170),
-                    (0, i*block_height, 810, block_height)
+                    (0, i*block_height, GAME_WINDOW_SIZE[0], block_height)
                 )
             
             surface.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
