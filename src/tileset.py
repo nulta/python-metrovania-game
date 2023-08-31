@@ -2,6 +2,13 @@ import pygame
 from typing import Sequence
 
 class Tileset:
+    """타일셋 하나를 다루는 클래스.
+    
+    타일셋의 각 타일에는 번호(`tile_idx`)가 붙는다.
+    번호는 0번부터 시작하며, 이미지 파일에서 맨 왼쪽 위 타일이 0번이다.
+    최대 범위를 벗어나는 번호의 타일을 사용해서는 안 된다.
+    """
+
     def __init__(self, tile_size: int, surface: pygame.Surface):
         tileset_w, tileset_h = surface.get_size()
         self._surface = surface
@@ -13,8 +20,9 @@ class Tileset:
 
     def _get_rect(self, tile_idx: int):
         assert tile_idx < len(self), "tile_idx must be less than the len(tileset)"
-        tiles_x = self._tile_dimensions[0]
+        assert 0 <= tile_idx, "tile_idx passed to _get_rect() must not be negative number"
 
+        tiles_x = self._tile_dimensions[0]
         tile_size = self._tile_size
         coord_x = tile_size * (tile_idx % tiles_x)
         coord_y = tile_size * (tile_idx // tiles_x)
@@ -22,11 +30,32 @@ class Tileset:
         return pygame.Rect(coord_x, coord_y, tile_size, tile_size)
 
     def draw_tile(self, surface: pygame.Surface, dest: "tuple[int, int]", tile_idx: int):
+        """타일 하나를 그린다."""
         tile_area = self._get_rect(tile_idx)
         tileset_surface = self._surface
         surface.blit(tileset_surface, dest, tile_area)
 
     def make_tilemap_surface(self, map_data: "Sequence[Sequence[int|None]]"):
+        """2차원 리스트에서 받아온 타일 정보로 그린 Surface를 반환한다.
+        
+        2차원 리스트의 칸 하나하나는 타일 하나하나와 대응된다.
+        리스트의 원소가 int이면, 이는 타일 번호로 해석한다.
+        리스트의 원소가 None이면, 그 칸에는 타일이 없음을 의미한다.
+
+        @example
+        ```
+        _ = None  # 칸이 길어지는 것 방지용
+        tileset.make_tilemap_surface(
+            [
+                [6, _, _, _, _, _],
+                [_, _, _, _, _, _],
+                [_, _, 2, 2, 2, _],
+                [6, _, _, _, _, _],
+                [6, 1, 1, 1, 1, 2],
+            ]
+        )
+        ```
+        """
         size_w = self._tile_size * max(map(len, map_data))
         size_h = self._tile_size * len(map_data)
         surface = pygame.Surface((size_w, size_h), flags=pygame.SRCALPHA)
