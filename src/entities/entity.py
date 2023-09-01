@@ -31,9 +31,9 @@ class Entity():
 
     @property
     def pivot(self) -> Vector2:
-        """
-            이 엔티티가 가진 surface의 좌표 기준점.
-            position과 함께, 이 엔티티가 실제로 화면에 그려질 위치를 결정한다.
+        """이 엔티티가 가진 surface의 좌표 기준점.
+
+        position과 함께, 이 엔티티가 실제로 화면에 그려질 위치를 결정한다.
         """
         return self._pivot
 

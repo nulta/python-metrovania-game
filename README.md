@@ -32,3 +32,27 @@
     - 위치 가지고 엔티티 찾기
 - 특수 타일들? 가시 같은 거
 - 보스전 및 이벤트 연출
+
+### 충돌 판정
+
+    Dynamic Collision - 엔터티 간의 충돌
+    Static Collision - 타일과 엔터티의 충돌 (즉, 발판과 벽과 천장)
+    전자는 PhysicsComponent에서 처리
+    후자는 PhysicsComponent가 주입받은 Map 정보로 처리?
+        반 타일 충돌같은 건? 그러니까 가시 같은 거
+
+충돌 판정시, velocity 가지고 어딘가에 닿을 때까지 Ray-cast?
+닿으면 velocity와 Rect의 교점을 새 velocity 삼고...
+그러면 position을 직접 조작하지 않아도 static 충돌 판정이 되지 않나?
+
+오브젝트의 Rect (히트박스) 받아올 방법은?
+오브젝트에 직접 삽입하는 게 제일 간편하려나?
+
+### 기능
+- Debug draw
+    - 좌표점 그리기
+    - Rect 그리기 (hitbox)
+    - Vector2 그리기, 시점 포함해서
+    - Debug text?
+    - 이거 기반으로 플레이어 movement 미세 조정
+- 
