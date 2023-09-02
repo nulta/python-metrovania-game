@@ -9,6 +9,8 @@ from fonts import Fonts
 import math
 import util
 
+
+
 class TitleScene(Scene):
     """TitleScene은 게임 타이틀 화면이다."""
 
@@ -43,6 +45,7 @@ class TitleScene(Scene):
 
     def draw(self, surface: pygame.Surface):
         anim_progress = self.scene_time / 6
+
 
         # 배경 그리기
         if True:
