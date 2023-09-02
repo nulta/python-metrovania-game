@@ -2,6 +2,7 @@ import random
 import pygame
 import pygame.freetype
 import game_globals
+import debug
 from fonts import Fonts
 from entities import *
 from input_manager import InputManager
@@ -78,6 +79,9 @@ class Game():
             f"FPS: {int(game_globals.frames_per_second)}",
             fgcolor=(255, 255, 255),
         )
+
+        # DEBUG: debug draw를 한다
+        debug._draw(self.screen)
 
         # 화면에 띄운다.
         pygame.display.flip()

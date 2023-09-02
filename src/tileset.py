@@ -19,8 +19,8 @@ class Tileset:
         return self._tile_dimensions[0] * self._tile_dimensions[1]
 
     def _get_rect(self, tile_idx: int):
-        assert tile_idx < len(self), "tile_idx must be less than the len(tileset)"
-        assert 0 <= tile_idx, "tile_idx passed to _get_rect() must not be negative number"
+        assert tile_idx < len(self)
+        assert 0 <= tile_idx
 
         tiles_x = self._tile_dimensions[0]
         tile_size = self._tile_size

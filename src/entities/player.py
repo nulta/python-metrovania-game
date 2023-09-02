@@ -1,5 +1,6 @@
 import pygame
 import game_globals
+import debug
 from pygame.math import Vector2
 from input_manager import InputManager
 from resource_loader import ResourceLoader
@@ -12,14 +13,19 @@ class Player(Entity):
 
     def __init__(self, gender: int):
         super().__init__()
-        self.physics = PhysicsComponent(self)
+        self.physics = PhysicsComponent(self, )
         self._hp = 200
         self._gender = gender
         self._move_speed = PLAYER_MOVE_SPEED
         self._max_jump_power = 600
         self._weapon = None
-        self._pivot = Vector2(15, 15)
+        self._pivot = Vector2(30, 56)
 
+    @property
+    def hitbox(self):
+        offset = pygame.Vector2(-20, -56)
+        size = pygame.Vector2(40, 56)
+        return pygame.Rect(self.position + offset, size)
 
     @property
     def hp(self):
@@ -48,6 +54,8 @@ class Player(Entity):
 
         # 물리 처리
         self.physics.update()
+        debug.rect(self.hitbox)
+        debug.point(self.position)
 
     def surface(self):
         super().surface()

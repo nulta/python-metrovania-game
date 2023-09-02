@@ -36,12 +36,12 @@ class Fonts():
         
         if not name in cls._fonts:
             # Lazy initialization
-            cls._fonts[name] = cls.new(name)
+            cls._fonts[name] = cls._new(name)
 
         return cls._fonts[name]
 
     @classmethod
-    def new(cls, name: "SupportedFonts"):
+    def _new(cls, name: "SupportedFonts"):
         if not name in cls._font_names:
             print(f"Fonts.new(): Got invalid font name '{name}'")
             name = "default"
