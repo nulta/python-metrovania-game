@@ -63,8 +63,10 @@ class Player(Entity):
         image_path += ".png"
 
         return ResourceLoader.load_image_2x(image_path)
-
-"""
+    def take_damage(self, damage):
+        #지정된 양만큼의 데미지를 입는다.
+        self.hp -= damage
+""""
     def _shoot(self):
         pass
 
@@ -83,6 +85,4 @@ class Player(Entity):
                 self.isJump =0
                 self.v = PLAYER_VELOCITY
 """
-    def take_damage(self, damage):
-        #지정된 양만큼의 데미지를 입는다.
-        self.hp -= damage
+
