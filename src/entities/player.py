@@ -62,6 +62,7 @@ class Player(Entity):
 
     def _jump(self):
         if self.isJump >0:
+            self._pivot = Vector2(15, 30)
             if self.isJump ==2:
                 self.v = PLAYER_VELOCITY
             if self.v >0:
@@ -70,10 +71,11 @@ class Player(Entity):
                 F = 0.5*self.m*(self.v*self.v)*(-1)
             self.position.y -= round(F)
             self.v -= 1
-            if self.surface.bottom > GAME_WINDOW_SIZE[1]:
-                self.surface.bottom = GAME_WINDOW_SIZE[1]
+            if self._position.y > GAME_WINDOW_SIZE[1]:
+                self._position.y = GAME_WINDOW_SIZE[1]
                 self.isJump =0
                 self.v = PLAYER_VELOCITY
+        self._pivot = Vector2(15, 15)
 
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
