@@ -26,7 +26,7 @@ class GameScene(Scene):
 
     def draw(self, surface: pygame.Surface):
         # Background
-        surface.fill(pygame.Color(0, 255, 170))
+        surface.fill(pygame.Color(100, 200, 255))
         Fonts.get("debug").render_to(
             surface,
             (700, 20),

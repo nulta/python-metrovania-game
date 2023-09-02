@@ -65,6 +65,10 @@ class Entity():
                 # 따라서, TypeError가 난 경우 에러를 무시하고 대신 콘솔에 메세지를 띄워 준다.
                 print(f"Entity.call(): Got {repr(e)} while calling '{signal_name}' on entity of type '{repr(self.__class__)}'.")
 
+    def get(self, property_name: str):
+        """지정된 임의의 프로퍼티를 받아온다. 해당 이름의 프로퍼티가 없을 경우 None을 반환한다."""
+        return getattr(self.__class__, property_name, None)
+
     def remove(self):
         """이 엔티티를 삭제하도록 요청한다. 실제 삭제는 나중 프레임에서 이루어진다."""
         self._valid = False
