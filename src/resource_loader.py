@@ -1,6 +1,7 @@
 from constants import *
 import pygame
 from os import path
+from tileset import Tileset
 
 class ResourceLoader():
     """
@@ -73,3 +74,10 @@ class ResourceLoader():
 
         cls._cache(cache_name, surface)
         return surface
+
+    @classmethod
+    def load_tileset(cls, tileset_name: str) -> Tileset:
+        image_path = "sprites/tileset/" + tileset_name + ".png"
+        tileset_surface = cls.load_image_2x(image_path)
+        tileset = Tileset(TILE_SIZE, tileset_surface)
+        return tileset
