@@ -67,7 +67,7 @@ class Entity():
 
     def get(self, property_name: str):
         """지정된 임의의 프로퍼티를 받아온다. 해당 이름의 프로퍼티가 없을 경우 None을 반환한다."""
-        return getattr(self.__class__, property_name, None)
+        return getattr(self, property_name, None)
 
     def remove(self):
         """이 엔티티를 삭제하도록 요청한다. 실제 삭제는 나중 프레임에서 이루어진다."""

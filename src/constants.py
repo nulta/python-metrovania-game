@@ -8,7 +8,8 @@ RESOURCE_PATH = "./resources"
 TILE_SIZE = 30 * 2
 
 GAME_WINDOW_SIZE = (840, 600)  # 30*2의 배수
-GAME_MAX_FPS = 144
+# GAME_MAX_FPS = 144
+GAME_MAX_FPS = 60
 
 
 # GENDER 값

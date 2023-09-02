@@ -22,7 +22,7 @@ def _draw(surface: "pygame.Surface"):
         p1 = x[2]
         p2 = x[3]
         pm = ((p1[0] + p2[0]) / 2, (p1[1] + p2[0]) / 2 - 10)
-        pygame.draw.line(surface, color, p1, p2)
+        pygame.draw.line(surface, color, p1, p2, 2)
         Fonts.get("debug").render_to(
             surface,
             pm,
