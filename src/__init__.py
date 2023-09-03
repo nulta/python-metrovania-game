@@ -40,6 +40,7 @@ class Game():
     def update_clock(self):
         """FPS를 유지하고 globals.delta_time을 업데이트한다."""
         game_globals.delta_time = self.clock.tick(GAME_MAX_FPS) / 1000
+        game_globals.delta_time = min(game_globals.delta_time, GAME_MAX_DELTA_TIME)
         game_globals.frame_count += 1
         game_globals.game_time += game_globals.delta_time
         game_globals.frames_per_second = self.clock.get_fps()

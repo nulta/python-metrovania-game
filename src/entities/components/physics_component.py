@@ -194,11 +194,11 @@ class PhysicsComponent:
         diff_x = None
         # 반발 벡터의 길이. 기본값은 무한대.
         repulse_x_len = float("inf")
-        if vel.x < 0:
+        if vel_norm.x < 0:
             # vel 벡터가 왼쪽으로 가고 있다
             # rect의 왼쪽 변과 target의 오른쪽 변에 대해서 X좌표의 차를 계산
             diff_x = target_rect.right - rect_1.left
-        elif vel.x > 0:
+        elif vel_norm.x > 0:
             # vel 벡터가 오른쪽으로 가고 있다
             # rect의 오른쪽 변과 target의 왼쪽 변에 대해서 X좌표의 차를 계산
             diff_x = target_rect.left - rect_1.right
@@ -213,11 +213,11 @@ class PhysicsComponent:
         diff_y = None
         # 반발 벡터의 길이. 기본값은 무한대.
         repulse_y_len = float("inf")
-        if vel.y > 0:
+        if vel_norm.y > 0:
             # vel 벡터가 아래쪽으로 가고 있다
             # rect의 아래쪽 변과 target의 위쪽 변에 대해서 Y좌표의 차를 계산
             diff_y = target_rect.top - rect_1.bottom
-        elif vel.y < 0:
+        elif vel_norm.y < 0:
             # vel 벡터가 위쪽으로 가고 있다
             # rect의 위쪽 변과 target의 아래쪽 변에 대해서 Y좌표의 차를 계산
             diff_y = target_rect.bottom - rect_1.top
