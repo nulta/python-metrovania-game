@@ -7,10 +7,13 @@ from resource_loader import ResourceLoader
 from .entity import Entity
 from constants import *
 from .components.physics_component import PhysicsComponent
+from audio import Audio
+import weapons
+
 
 class Player(Entity):
     is_player = True
-
+    _button = [weapons.gun(), weapons.KS64(), weapons.SB87(),weapons.VP33_poison(),weapons.VP33_gas()]
     def __init__(self, gender: int):
         super().__init__()
         self.physics = PhysicsComponent(self, )
@@ -20,6 +23,7 @@ class Player(Entity):
         self._max_jump_power = 600
         self._weapon = None
         self._pivot = Vector2(30, 56)
+        self._focus_index = 0
 
     @property
     def hitbox(self):
@@ -55,6 +59,16 @@ class Player(Entity):
         self.physics.update()
         debug.draw_rect(self.hitbox)
         # debug.point(self.position)
+        if InputManager.pressed(ACTION_CHANGE_RIGHT):
+            Audio.common.select()
+            self._focus_index += 1
+        elif InputManager.pressed(ACTION_CHANGE_LEFT):
+            Audio.common.select()
+            self._focus_index -= 1
+        self._focus_index %= len(self._button)
+        if InputManager.pressed(ACTION_SHOOT):
+            pass
+
     def surface(self):
         super().surface()
 

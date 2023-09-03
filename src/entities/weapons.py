@@ -3,8 +3,18 @@ from .player import *
 from .enemy import *
 from pygame.math import Vector2
 from constants import *
+import game_globals
+from resource_loader import ResourceLoader
+from input_manager import InputManager
+from constants import *
+from audio import Audio
+from fonts import Fonts
+import util
 
 class Weapon(Entity):
+    def update(self):
+        pass
+
     def use(self):
         pass
 
@@ -59,13 +69,13 @@ class SB87(Weapon): #대청단 감자주머니
         if not grenade: return               # None일 경우 return
         grenade._velocity += 50
 
-class VP33(Weapon): #지구온난화의 주범
+class VP33_poison(Weapon): #지구온난화의 주범
     def attack(self):
         from entity_manager import EntityManager
         poison = EntityManager.get_poison()  # Poison 또는 None
         if not poison: return                # None일 경우 return
         poison._velocity += 50
-
+class VP33_gas(Weapon):
     def gas(self,speed_reduction):
         from entity_manager import EntityManager
         enemy = EntityManager.get_enemy()  # Enemy 또는 None

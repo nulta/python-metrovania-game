@@ -28,9 +28,10 @@ ACTION_LEFT = 2
 ACTION_RIGHT = 3
 ACTION_JUMP = 4
 ACTION_SHOOT = 5
-ACTION_CHANGE = 6  # 무기 바꾸기
-ACTION_CONFIRM = 7 # 확인 키 (메뉴 화면에서)
-ACTION_CANCEL = 8  # 취소 키 (메뉴 화면에서)
+ACTION_CHANGE_RIGHT = 6  # 무기 바꾸기
+ACTION_CHANGE_LEFT = 7  # 무기 바꾸기
+ACTION_CONFIRM = 8 # 확인 키 (메뉴 화면에서)
+ACTION_CANCEL = 9  # 취소 키 (메뉴 화면에서)
 
 # AXIS 상수
 AXIS_HORIZONTAL = 0
