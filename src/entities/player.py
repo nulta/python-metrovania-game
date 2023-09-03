@@ -20,6 +20,8 @@ class Player(Entity):
         self._max_jump_power = 600
         self._weapon = None
         self._pivot = Vector2(30, 56)
+        self._walking = False
+        self._flip = False
 
     @property
     def hitbox(self):
@@ -43,7 +45,16 @@ class Player(Entity):
         # 좌우 이동 처리
         axis = InputManager.axis(AXIS_HORIZONTAL)
         speed = self._move_speed
-        self.physics.velocity.x = axis * speed
+        if axis:
+            self.physics.velocity.x = axis * speed
+            self._walking = True
+            if axis > 0:
+                self._flip = True
+            else:
+                self._flip = False
+        else:
+            self.physics.velocity.x = 0
+            self._walking = False
 
         # 점프 처리
         # TODO: 바닥에 붙어있을 경우에만 점프 가능하게 하기
@@ -53,10 +64,12 @@ class Player(Entity):
 
         # 물리 처리
         self.physics.update()
-        debug.draw_rect(self.hitbox)
-        # debug.point(self.position)
+
     def surface(self):
         super().surface()
+
+        image_offset_y = 0
+        image_flipped = self._flip
 
         # 가져와야 할 이미지의 이름을 조립한다
         image_path = "sprites/player"
@@ -66,30 +79,26 @@ class Player(Entity):
             image_path += "/female"
 
         image_path += "/" + (self._weapon or "idle")
+
+        if self._walking:
+            from scene_manager import SceneManager
+            time = SceneManager.scene_time
+            idx = int(time // 0.25 % 4)
+            if idx == 3: idx = 1
+            if idx == 1:
+                image_offset_y = 2
+            image_path += f"_{idx}"
+        else:
+            image_path += "_1"
+
         image_path += ".png"
 
-        return ResourceLoader.load_image_2x(image_path)
+        surface = ResourceLoader.load_image_2x(image_path)
+        surface = pygame.transform.flip(surface, image_flipped, False)
+        surface.scroll(0, image_offset_y)
+
+        return surface
+
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
-
-""""
-    def _shoot(self):
-        pass
-
-    def _jump(self):
-        if self.isJump >0:
-            if self.isJump ==2:
-                self.v = PLAYER_VELOCITY
-            if self.v >0:
-                F = 0.5*self.m*(self.v*self.v)
-            else:
-                F = 0.5*self.m*(self.v*self.v)*(-1)
-            self.position.y -= round(F)
-            self.v -= 1
-            if self.surface.bottom > GAME_WINDOW_SIZE[1]:
-                self.surface.bottom = GAME_WINDOW_SIZE[1]
-                self.isJump =0
-                self.v = PLAYER_VELOCITY
-"""
-
