@@ -46,7 +46,7 @@ class BB02(Weapon):#나이키에어
     def __init__(self,damage):
         self._damage=damage
 
-    def position(self):
+    def position_y(self):
         from entity_manager import EntityManager
         player = EntityManager.get_player()
         if not player: return                # None일 경우 return
@@ -89,7 +89,7 @@ class VP33_gas(Weapon):
         #가스를 살포한다(enemy의 속도가 늘어진다)
 
 class KS64(Weapon): #로이드가 입던 옷
-    def position(self,damage):
+    def position_x(self,damage):
         from entity_manager import EntityManager
         enemy = EntityManager.get_enemy()  # Enemy 또는 None
         if not enemy: return                # None일 경우 return
