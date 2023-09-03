@@ -26,7 +26,13 @@ class Enemy(Entity):
     def update(self):
         super().update()
         # AI 처리, 이동 처리, 기타 등등...
-        pass
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+        if not player: return  
+        if self.position.x <= player.position.x:
+            self.position.x += 1
+        elif self. position.x>= player.position.x:
+            self.position.x -=1
 
     def surface(self,enemy_name):
         super().surface()
