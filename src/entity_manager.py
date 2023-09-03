@@ -21,7 +21,7 @@ class EntityManager():
         cls._ents[id] = ent
 
     @classmethod
-    def get_player(cls) -> Optional[Player]:
+    def get_player(cls) -> "Optional[Player]":
         """Player 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Player):
@@ -29,7 +29,7 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_enemy(cls) -> Optional[Enemy]:
+    def get_enemy(cls) -> "Optional[Enemy]":
         """Enemy 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Enemy):
@@ -37,7 +37,7 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_grenade_enemy(cls) -> Optional[Grenade_enemy]:
+    def get_grenade_enemy(cls) -> "Optional[Grenade_enemy]":
         """Poison 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Grenade_enemy):
@@ -45,7 +45,7 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_grenade_player(cls) -> Optional[Grenade_player]:
+    def get_grenade_player(cls) -> "Optional[Grenade_player]":
         """Poison 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Grenade_player):
@@ -53,7 +53,7 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_poison(cls) -> Optional[Poison]:
+    def get_poison(cls) -> "Optional[Poison]":
         """Poison 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Poison):
@@ -61,7 +61,7 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_bullet(cls) -> Optional[Bullet]:
+    def get_bullet(cls) -> "Optional[Bullet]":
         """Poison 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Bullet):
@@ -69,7 +69,7 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_fire(cls) -> Optional[Fire]:
+    def get_fire(cls) -> "Optional[Fire]":
         """Poison 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Fire):
