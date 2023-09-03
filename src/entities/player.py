@@ -75,23 +75,5 @@ class Player(Entity):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
 
-""""
-    def _shoot(self):
-        pass
 
-    def _jump(self):
-        if self.isJump >0:
-            if self.isJump ==2:
-                self.v = PLAYER_VELOCITY
-            if self.v >0:
-                F = 0.5*self.m*(self.v*self.v)
-            else:
-                F = 0.5*self.m*(self.v*self.v)*(-1)
-            self.position.y -= round(F)
-            self.v -= 1
-            if self.surface.bottom > GAME_WINDOW_SIZE[1]:
-                self.surface.bottom = GAME_WINDOW_SIZE[1]
-                self.isJump =0
-                self.v = PLAYER_VELOCITY
-"""
 

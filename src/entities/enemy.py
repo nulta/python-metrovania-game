@@ -1,3 +1,4 @@
+import random
 import pygame
 from .entity import *
 from .player import *
@@ -12,6 +13,7 @@ class Enemy(Entity):
         super().__init__()
         self._hp = 100
         self._move_speed = 10
+        self._next_attack = 2  # 초 단위
 
     @property
     def hp(self):
@@ -33,6 +35,12 @@ class Enemy(Entity):
             self.position.x += 1
         elif self. position.x>= player.position.x:
             self.position.x -=1
+        
+        self._next_attack -= game_globals.delta_time
+        if self._next_attack <= 0:
+            self._next_attack = random.randint(1, 3)
+            self.attack()
+        
 
     def surface(self,enemy_name):
         super().surface()
@@ -43,8 +51,10 @@ class Enemy(Entity):
         # 조립한 이미지 이름대로, 불러온다
 
 
+    def attack(self):
+        pass
 
-    def _attack(self):
+    def _attack_motion(self):
         #앞을 보고 공격한다."
         pass
 
@@ -142,8 +152,6 @@ class KS_64(Enemy):
             player.take_damage(damage)
         #player의 위치로 순간이동 한다
         #접촉하면 플레이어의 체력이 깍인다
-
-B_F = BOSS_MASS*BOSS_VELOCITY**2/2
         
 class Boss(Enemy):
     def __init__(self):
@@ -151,26 +159,11 @@ class Boss(Enemy):
         self.hp = 200
         self._move_speed = 15
         #체력과 속도가 늘어남
-        self.isJump = 0
-        self.v = BOSS_VELOCITY
-        self.m = BOSS_MASS
+        self._max_jump_power = 600
+        self.physics = PhysicsComponent(self, )
 
-    def jump(self,damage):
-        if self.isJump >0:
-            self._pivot = Vector2(15, 30)
-            if self.isJump ==2:
-                self.v = BOSS_VELOCITY
-            if self.v >0:
-                F = 0.5*self.m*(self.v*self.v)
-            else:
-                F = 0.5*self.m*(self.v*self.v)*(-1)
-            self.position.y -= round(F)
-            self.v -= 1
-            if self.position.y > GAME_WINDOW_SIZE[1]:
-                self.position.y = GAME_WINDOW_SIZE[1]
-                self.isJump =0
-                self.v = BOSS_VELOCITY
-        self._pivot = Vector2(15, 15)
+    def attack(self,damage):
+        self.physics.velocity.y = -self._max_jump_power
 
         if self.position == Player.position:
             from entity_manager import EntityManager
