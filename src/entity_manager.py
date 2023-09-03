@@ -29,54 +29,6 @@ class EntityManager():
         return None
 
     @classmethod
-    def get_enemy(cls) -> Optional[Enemy]:
-        """Enemy 개체를 반환한다."""
-        for ent in cls._ents.values():
-            if isinstance(ent, Enemy):
-                return ent
-        return None
-
-    @classmethod
-    def get_grenade_enemy(cls) -> Optional[Grenade_enemy]:
-        """Poison 개체를 반환한다."""
-        for ent in cls._ents.values():
-            if isinstance(ent, Grenade_enemy):
-                return ent
-        return None
-
-    @classmethod
-    def get_grenade_player(cls) -> Optional[Grenade_player]:
-        """Poison 개체를 반환한다."""
-        for ent in cls._ents.values():
-            if isinstance(ent, Grenade_player):
-                return ent
-        return None
-
-    @classmethod
-    def get_poison(cls) -> Optional[Poison]:
-        """Poison 개체를 반환한다."""
-        for ent in cls._ents.values():
-            if isinstance(ent, Poison):
-                return ent
-        return None
-
-    @classmethod
-    def get_bullet(cls) -> Optional[Bullet]:
-        """Poison 개체를 반환한다."""
-        for ent in cls._ents.values():
-            if isinstance(ent, Bullet):
-                return ent
-        return None
-
-    @classmethod
-    def get_fire(cls) -> Optional[Fire]:
-        """Poison 개체를 반환한다."""
-        for ent in cls._ents.values():
-            if isinstance(ent, Fire):
-                return ent
-        return None
-
-    @classmethod
     def update(cls):
         # 유효하지 않은 개체를 전부 삭제한다
         for entid in list(cls._ents):
