@@ -2,6 +2,8 @@ from constants import *
 import pygame
 from os import path
 from tileset import Tileset
+from level import LevelData
+import json
 
 class ResourceLoader():
     """
@@ -81,3 +83,32 @@ class ResourceLoader():
         tileset_surface = cls.load_image_2x(image_path)
         tileset = Tileset(TILE_SIZE, tileset_surface)
         return tileset
+
+    @classmethod
+    def load_level_data(cls, level_name: str) -> "LevelData":
+        leveldata = LevelData()
+        file_path = cls.get_resource_path("levels/" + level_name + ".json")
+        data = dict()
+
+        try:
+            with open(file_path, "r") as f:
+                data = json.load(f)
+                assert isinstance(data, dict)
+        except json.JSONDecodeError as e:
+            # TODO - Error handling
+            print(f"JSON Decode Error loading '{level_name}.json'!")
+            print(e)
+            raise
+
+        keys = [
+            "tileset_name",
+            "map_data",
+            "entities",
+            "music",
+            "background_img",
+        ]
+        for k in keys:
+            default = getattr(leveldata, k, None)
+            setattr(leveldata, k, data.get(k, default))
+        
+        return leveldata
