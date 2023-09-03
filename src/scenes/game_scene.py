@@ -62,7 +62,7 @@ class GameScene(Scene):
 
     def on_destroy(self):
         pass
-
+    
     def prepare_tilemap(self):
         tileset = ResourceLoader.load_tileset("generic_1")
         _ = None
