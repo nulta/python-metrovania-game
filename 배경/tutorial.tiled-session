@@ -1,0 +1,85 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "1. tutorial.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 435.9999999999999,
+                "y": 311.3333333333333
+            }
+        },
+        "1_FB85_Boss.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -18,
+                "y": 2.3333333333333144
+            }
+        },
+        "1_FB85_fire.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 64,
+                "y": -283.33333333333337
+            }
+        },
+        "2_BT02_wind.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 47,
+                "y": -634.5
+            }
+        },
+        "3_SN91_Boss.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 90.5,
+                "y": -105.25
+            }
+        },
+        "3_SN91_speed.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4079.333333333333,
+                "y": 276.3333333333333
+            }
+        },
+        "tileset.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/AYoung/Downloads",
+    "map.fixedSize": false,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 30,
+    "map.tileWidth": 30,
+    "openFiles": [
+    ],
+    "project": "tutorial.tiled-project",
+    "recentFiles": [
+        "3_SN91_Boss.tmx",
+        "3_SN91_speed.tmx",
+        "2_BT02_wind.tmx",
+        "tileset.tsx",
+        "1_FB85_Boss.tmx",
+        "1_FB85_fire.tmx",
+        "1. tutorial.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 30,
+        "width": 30
+    }
+}
