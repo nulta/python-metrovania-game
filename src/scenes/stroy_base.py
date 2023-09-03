@@ -11,16 +11,16 @@ import util
 from scene_manager import *
 
 
-class TitleScene(Scene):
-    """TitleScene은 게임 타이틀 화면이다."""
+class Story(Scene):
+    """Story은 이야기가 나올 때 기본적인 틀이다."""
 
-    _music = "  "
     _button_texts = ["건너뛰기", "설정"]
 
-    def __init__(self):
+    def __init__(self,music):
         super().__init__()
 
         # 음악을 재생한다.
+        self._music = f"sounds/music/{music}.ogg"
         music_path = ResourceLoader.get_resource_path(self._music)
         pygame.mixer.music.load(music_path)
         pygame.mixer.music.play(-1)
@@ -66,7 +66,7 @@ class TitleScene(Scene):
             sprite_storyboard.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
             surface.blit(sprite_storyboard, (330, board_y))
            
-    def draw(self,surface: pygame.Surface):
+    def draw_menu(self,surface: pygame.Surface):
         # 메뉴 목록 그리기
         for idx, text in enumerate(self._button_texts):
             font_size = 12
@@ -96,5 +96,25 @@ class TitleScene(Scene):
         elif button_index == 1:
             # 설정
             pass
+
+class intro(Story):
+    _talks = ["건너뛰기",
+               "설정",
+               ]
+
+    def draw(self,surface: pygame.Surface):
+        for idx, talks in enumerate(self._talks):
+            font_size = 12
+            focused = self._focus_index == idx
+            color = (0, 220, 255) if focused else (255, 255, 255)
+
+            Fonts.get("bold").render_to(
+                surface,
+                (780, 30),
+                talks,
+                fgcolor=color,
+                size=font_size,
+            )
+
 
  
