@@ -21,7 +21,7 @@ class EntityManager():
         cls._ents[id] = ent
 
     @classmethod
-    def get_player(cls) -> Optional[Player]:
+    def get_player(cls) -> "Optional[Player]":
         """Player 개체를 반환한다."""
         for ent in cls._ents.values():
             if isinstance(ent, Player):

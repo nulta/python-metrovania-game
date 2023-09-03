@@ -18,12 +18,7 @@ GENDER_MALE   = 0
 GENDER_FEMALE = 1
 
 #속도, 질량
-PLAYER_VELOCITY = 7
 PLAYER_MOVE_SPEED = 300
-PLAYER_MASS = 2
-
-BOSS_VELOCITY = 7
-BOSS_MASS=4
 
 
 # ACTION 상수 (InputManager)
@@ -33,9 +28,10 @@ ACTION_LEFT = 2
 ACTION_RIGHT = 3
 ACTION_JUMP = 4
 ACTION_SHOOT = 5
-ACTION_CHANGE = 6  # 무기 바꾸기
-ACTION_CONFIRM = 7 # 확인 키 (메뉴 화면에서)
-ACTION_CANCEL = 8  # 취소 키 (메뉴 화면에서)
+ACTION_CHANGE_RIGHT = 6  # 무기 바꾸기
+ACTION_CHANGE_LEFT = 7  # 무기 바꾸기
+ACTION_CONFIRM = 8 # 확인 키 (메뉴 화면에서)
+ACTION_CANCEL = 9  # 취소 키 (메뉴 화면에서)
 
 # AXIS 상수
 AXIS_HORIZONTAL = 0
