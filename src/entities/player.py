@@ -68,8 +68,6 @@ class Player(Entity):
 
         # 물리 처리
         self.physics.update()
-        debug.draw_rect(self.hitbox)
-        # debug.point(self.position)
         if InputManager.pressed(ACTION_CHANGE_RIGHT):
             Audio.common.select()
             self._focus_index += 1
