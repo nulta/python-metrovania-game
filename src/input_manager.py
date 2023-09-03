@@ -32,7 +32,7 @@ class InputManager():
         ACTION_JUMP: {K_SPACE},
         ACTION_SHOOT: {K_k},
         ACTION_CONFIRM: {K_SPACE, K_RETURN},
-        ACTION_CANCEL: {K_ESCAPE},
+        ACTION_CANCEL: {K_ESCAPE}
     }
 
     # 마지막 프레임에서 눌려있었던 액션들의 집합.

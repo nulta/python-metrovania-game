@@ -112,9 +112,9 @@ class TitleScene(Scene):
         if button_index == 0:
             # 새 게임
             from scene_manager import SceneManager
-            from .game_scene import GameScene
+            from .story_base import Intro
             SceneManager.clear_scene()
-            SceneManager.push_scene(GameScene(None))
+            SceneManager.push_scene(Intro())
         elif button_index == 1:
             # 설정
             pass
