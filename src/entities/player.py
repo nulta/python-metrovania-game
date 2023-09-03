@@ -43,8 +43,6 @@ class Player(Entity):
         # 좌우 이동 처리
         axis = InputManager.axis(AXIS_HORIZONTAL)
         speed = self._move_speed
-        # move_velocity = Vector2(axis * speed * game_globals.delta_time, 0)
-        # self.position += move_velocity
         self.physics.velocity.x = axis * speed
 
         # 점프 처리
@@ -55,7 +53,7 @@ class Player(Entity):
 
         # 물리 처리
         self.physics.update()
-        debug.rect(self.hitbox)
+        debug.draw_rect(self.hitbox)
         # debug.point(self.position)
     def surface(self):
         super().surface()

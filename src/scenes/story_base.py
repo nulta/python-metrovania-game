@@ -12,7 +12,7 @@ from scene_manager import *
 from .game_scene import *
 from typing import *
 
-class Story(Scene):
+class StoryScene(Scene):
     """Story은 이야기가 나올 때 기본적인 틀이다."""
 
     _button_texts = ["건너뛰기(ESC)", "▽"]
@@ -135,7 +135,7 @@ class Story(Scene):
         pygame.mixer.music.unload()
 
 
-class Intro(Story):
+class StorySceneIntro(StoryScene):
     line = ["ㅡ",
             "러ㅏㄹㄹ",
             "아ㅓ라ㅓ아러ㅏㅇ"
