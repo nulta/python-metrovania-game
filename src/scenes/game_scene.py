@@ -1,5 +1,6 @@
 import pygame
 from resource_loader import ResourceLoader
+import game_globals
 from .scene import Scene
 from entity_manager import EntityManager
 from entities import Player
@@ -40,7 +41,22 @@ class GameScene(Scene):
         )
 
         # Tilemap
-        surface.blit(self._tilemap_surface, (0, 0))
+
+
+        player = EntityManager.get_player()  # Player 또는 None
+        if not player: return     
+        tilemap_x = player.position.x // GAME_WINDOW_SIZE[0] * GAME_WINDOW_SIZE[0]
+        game_globals.camera_offset = (tilemap_x, 0)
+        camera_pos = game_globals.camera_offset
+        surface.blit(self._tilemap_surface, (-camera_pos[0], camera_pos[1]))
+
+        Fonts.get("debug").render_to(
+            surface,
+            (50, 20),
+            f"{tilemap_x}",
+            size=20,
+        )
+
 
         EntityManager.draw(surface)
 
@@ -52,15 +68,17 @@ class GameScene(Scene):
         _ = None
         return tileset.make_tilemap_surface(
             [
-                [6, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [6, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [6, _, 2, 2, _, _, _, _, _, _, _, _, _, _],
-                [6, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [6, _, _, _, 2, 2, _, _, _, _, _, _, _, _],
-                [6, _, _, _, 6, 6, _, 2, 2, _, _, _, _, _],
-                [6, _, _, _, _, _, _, _, _, _, 2, _, _, _],
-                [6, _, _, _, _, _, _, _, _, _, 6, 2, 2, _],
-                [6, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [6, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                [6, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, 2, 2, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, 2, 2, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, 6, 6, _, 2, 2, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, _, _, _, _, _, _, 2, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, _, _, _, _, _, _, 6, 2, 2, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+                [6, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
             ]
         )
+    def camara(self):
+        pass

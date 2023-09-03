@@ -16,3 +16,5 @@ game_time: float = 0.0
 
 frames_per_second: float = 0.0
 "현재 FPS 값. delta_time의 역수보다 정확한 값이다."
+
+camera_offset = (0, 0)

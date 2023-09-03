@@ -55,7 +55,6 @@ class Player(Entity):
         self.physics.update()
         debug.draw_rect(self.hitbox)
         # debug.point(self.position)
-
     def surface(self):
         super().surface()
 
@@ -73,6 +72,7 @@ class Player(Entity):
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
+
 """"
     def _shoot(self):
         pass

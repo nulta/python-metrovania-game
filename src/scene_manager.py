@@ -44,6 +44,7 @@ class SceneManager():
     def draw(cls, surface: Surface):
         # 맨 아래에 있는 씬부터 순서대로 그린다
         for scene in cls._scene_stack:
+        
             if not scene._valid:
                 continue
             scene.draw(surface)
