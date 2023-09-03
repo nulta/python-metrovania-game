@@ -14,7 +14,7 @@ from . import weapons
 class Player(Entity):
     is_player = True
     def __init__(self, gender: int):
-        _button = [weapons.gun(), weapons.KS64(), weapons.SB87(),weapons.VP33_poison(),weapons.VP33_gas()]
+        _button = [weapons.BasicGun()]
         super().__init__()
         self.physics = PhysicsComponent(self, )
         self._hp = 200
