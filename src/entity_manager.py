@@ -89,8 +89,10 @@ class EntityManager():
 
     @classmethod
     def draw(cls, screen: Surface):
+        camera_pos = game_globals.camera_offset
         for ent in cls._ents.values():
             draw_pos = ent.position - ent.pivot
+            draw_pos = (draw_pos[0] - camera_pos[0], draw_pos[1] - camera_pos[1])
             ent_surface = ent.surface()
             screen.blit(ent_surface, draw_pos)
 
