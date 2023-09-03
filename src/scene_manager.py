@@ -23,6 +23,14 @@ class SceneManager():
         else:
             return stack[-1]
 
+    @classproperty
+    def scene_time(cls) -> float:
+        scene = cls.current_scene
+        if scene:
+            return scene.scene_time
+        else:
+            return 0.0
+
     @classmethod
     def update(cls) -> bool:
         "Scene을 업데이트한다. 업데이트할 Scene이 없을 경우 false를 반환한다."

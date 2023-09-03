@@ -68,7 +68,7 @@ class TitleScene(Scene):
             human_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210)) + 62
             human_y += int(math.cos(game_globals.game_time * 1.8) * 2)
 
-            sprite_human = ResourceLoader.load_image_2x("sprites/player/female/idle.png").copy()
+            sprite_human = ResourceLoader.load_image_2x("sprites/player/female/idle_0.png").copy()
             sprite_human.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
             surface.blit(sprite_human, (330+130, human_y))
 

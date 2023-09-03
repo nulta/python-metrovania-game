@@ -68,15 +68,15 @@ class FB_88(Enemy):
         from entity_manager import EntityManager
         player = EntityManager.get_player()
         if not player: return                # None일 경우 return
-        fire = EntityManager.get_fire()
-        if not fire: return   
+        # fire = EntityManager.get_fire()
+        # if not fire: return   
 
-        #불을 발사한다"
-        width =self.position.x - player.position.x
-        if width>0:
-            fire._velocity += -50
-        elif width<0:
-            fire._velocity += 50
+        # #불을 발사한다"
+        # width =self.position.x - player.position.x
+        # if width>0:
+        #     fire._velocity += -50
+        # elif width<0:
+        #     fire._velocity += 50
             
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
@@ -119,13 +119,13 @@ class SB_87(Enemy):
         from entity_manager import EntityManager
         player = EntityManager.get_player()  # Player 또는 None
         if not player: return                # None일 경우 return
-        grenade = EntityManager.get_grenade_enemy()  # Grenade 또는 None
-        if not grenade: return                # None일 경우 return
-        width =self.position.x - player.position.x
-        if width>0:
-            grenade._velocity = -50
-        elif width<0:
-            grenade._velocity = 50
+        # grenade = EntityManager.get_grenade_enemy()  # Grenade 또는 None
+        # if not grenade: return                # None일 경우 return
+        # width =self.position.x - player.position.x
+        # if width>0:
+        #     grenade._velocity = -50
+        # elif width<0:
+        #     grenade._velocity = 50
     
 
 class VP_33(Enemy):
