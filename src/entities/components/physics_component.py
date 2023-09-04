@@ -14,16 +14,13 @@ class PhysicsComponent:
         self._velocity = Vector2(0, 0)   # pixels per second
         self._gravity = Vector2(0, 900)  # pixels per second
 
-        self._static_tilemap = [[False]]
+        self._collision_map = [[False]]
         self._tile_size = TILE_SIZE
 
-        # TODO: 정말로 이 구조가 최선인가? 다른 방법도 생각해보자
-        from scene_manager import SceneManager
-        from scenes.game_scene import GameScene
-        scene = SceneManager.current_scene
-        if isinstance(scene, GameScene):
-            level = scene._level
-            self._static_tilemap = level.get_collision_map()
+        if self.owner._level:
+            self._collision_map = self.owner._level.get_collision_map()
+        else:
+            print("PhysicsComponent: Failed to get collision map - self.owner._level is None!")
 
         # TODO: 맵과 엔티티의 충돌 판정 처리?
         # TODO: 엔티티와 엔티티의 충돌 판정 처리?
@@ -38,7 +35,7 @@ class PhysicsComponent:
     
     @velocity.setter
     def velocity(self, val: "Vector2"):
-        self._velocity = Vector2(int(val.x), int(val.y))
+        self._velocity = Vector2(round(val.x), round(val.y))
 
 
     def update(self):
@@ -52,8 +49,8 @@ class PhysicsComponent:
 
         old_pos = self.owner.position
         new_pos = old_pos + (self.velocity * game_globals.delta_time)
-        new_pos.x = int(new_pos.x)
-        new_pos.y = int(new_pos.y)
+        new_pos.x = round(new_pos.x)
+        new_pos.y = round(new_pos.y)
         
         old_hitbox: "Rect | None" = self.owner.get("hitbox")
         if not old_hitbox:
@@ -94,9 +91,9 @@ class PhysicsComponent:
                 # X 방향으로 옮겨서 충돌을 해결할 때, 옮겨야 할 픽셀 수
                 diff_x = infinite
                 if 0 < delta_pos.x:    # X-->
-                    diff_x = int(new_hitbox.right - rect.left)
+                    diff_x = round(new_hitbox.right - rect.left)
                 elif delta_pos.x < 0:  # <--X
-                    diff_x = int(rect.right - new_hitbox.left)
+                    diff_x = round(rect.right - new_hitbox.left)
 
                 assert diff_x >= 0
                 
@@ -106,9 +103,9 @@ class PhysicsComponent:
                 # Y 방향으로 옮겨서 충돌을 해결할 때, 옮겨야 할 픽셀 수
                 diff_y = infinite
                 if 0 < delta_pos.y:    # Y going down
-                    diff_y = int(new_hitbox.bottom - rect.top)
+                    diff_y = round(new_hitbox.bottom - rect.top)
                 elif delta_pos.y < 0:  # Y going up
-                    diff_y = int(rect.bottom - new_hitbox.top)
+                    diff_y = round(rect.bottom - new_hitbox.top)
                 
                 assert diff_y >= 0
                 # if diff_y < 0:
@@ -173,7 +170,7 @@ class PhysicsComponent:
 
         # Static Tilemap에서 근처에 있는 rect들을 구워낸다
         tile_size = self._tile_size
-        for y, row in enumerate(self._static_tilemap):
+        for y, row in enumerate(self._collision_map):
             for x, tile_exists in enumerate(row):
                 if tile_exists and self._is_nearby_tile(x, y):
                     rects.append(Rect(x * tile_size, y * tile_size, tile_size, tile_size))

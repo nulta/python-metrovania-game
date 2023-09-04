@@ -1,9 +1,12 @@
 from constants import *
+from typing import TYPE_CHECKING
 import pygame
 from os import path
-from tileset import Tileset
-from level import LevelData
 import json
+
+if TYPE_CHECKING:
+    from tileset import Tileset
+    from level import LevelData
 
 class ResourceLoader():
     """
@@ -78,7 +81,8 @@ class ResourceLoader():
         return surface
 
     @classmethod
-    def load_tileset(cls, tileset_name: str) -> Tileset:
+    def load_tileset(cls, tileset_name: str) -> "Tileset":
+        from tileset import Tileset
         image_path = "sprites/tileset/" + tileset_name + ".png"
         tileset_surface = cls.load_image_2x(image_path)
         tileset = Tileset(TILE_SIZE, tileset_surface)
@@ -86,6 +90,7 @@ class ResourceLoader():
 
     @classmethod
     def load_level_data(cls, level_name: str) -> "LevelData":
+        from level import LevelData
         leveldata = LevelData()
         file_path = cls.get_resource_path("levels/" + level_name + ".json")
         data = dict()

@@ -13,8 +13,8 @@ from . import weapons
 
 class Player(Entity):
     is_player = True
+
     def __init__(self):
-        _button = [weapons.BasicGun()]
         super().__init__()
         self.physics = PhysicsComponent(self, )
         self._hp = 200
@@ -76,6 +76,12 @@ class Player(Entity):
             self._focus_index -= 1
         if InputManager.pressed(ACTION_SHOOT):
             pass
+
+        # 카메라 이동
+        camera_size = Vector2(GAME_WINDOW_SIZE)
+        current_screen_idx = Vector2(self.position.x // camera_size.x, 0)
+        current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, 0)
+        game_globals.camera_offset = current_screen_pos
 
     def surface(self):
         super().surface()

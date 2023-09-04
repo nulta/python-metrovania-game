@@ -40,10 +40,12 @@ class EntityManager():
             ent.update()
 
     @classmethod
-    def draw(cls, screen: Surface, camera_pos: "tuple[int, int]"):
+    def draw(cls, screen: Surface, camera_pos: "Vector2"):
         for ent in cls._ents.values():
-            draw_pos = ent.position - ent.pivot
-            draw_pos = (draw_pos[0] - camera_pos[0], draw_pos[1] - camera_pos[1])
+            # 2px 그리드에 정확하게 들어맞도록 위치를 내림한다.
+            draw_pos = ent.position - ent.pivot - camera_pos
+            draw_pos = draw_pos * 2 // 2
+
             ent_surface = ent.surface()
             screen.blit(ent_surface, draw_pos)
 

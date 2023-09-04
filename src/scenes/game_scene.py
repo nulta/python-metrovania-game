@@ -17,11 +17,11 @@ class GameScene(Scene):
 
         # 엔티티 관련 처리
         EntityManager.initialize()
-        player = Player()
-        player.position = pygame.Vector2(200, 200)
+        level.create_entities()
 
-        # 타일맵을 굽자
+        # 타일맵 굽기
         self._tilemap_surface = level.get_tilemap_surface()
+
 
     def update(self):
         EntityManager.update()
@@ -44,7 +44,7 @@ class GameScene(Scene):
         )
 
         # Tilemap
-        surface.blit(self._tilemap_surface, (-camera_pos[0], -camera_pos[1]))
+        surface.blit(self._tilemap_surface, -camera_pos)
 
         EntityManager.draw(surface, camera_pos)
 

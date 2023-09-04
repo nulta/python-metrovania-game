@@ -79,12 +79,11 @@ class Level:
             ent_name = ent_info[0]
             ent_pos = pygame.Vector2(ent_info[1], ent_info[2]) * self._tile_size
             ent_props = 3 in ent_info and ent_info[3] or {}
-            ent = Level._make_entity(ent_name, ent_props)
+            ent = self._make_entity(ent_name, ent_props)
             if ent:
                 ent.position = ent_pos
 
-    @classmethod
-    def _make_entity(cls, entity_name: "str", props: "dict[str, object]" = {}):
+    def _make_entity(self, entity_name: "str", props: "dict[str, object]" = {}):
         """특정 이름을 가진 엔티티를 생성한다. 생성자에 props 딕셔너리를 **kwargs 형태로 제공한다. 
         
         그런 이름의 엔티티가 없다면 None을 반환한다.
@@ -96,10 +95,13 @@ class Level:
             return None
 
         try:
+            # 이게... 맞나?
+            ent_class._level = self  # Dependency Injection
             ent = ent_class(**props)
             return ent
         except TypeError as e:
             print(f"Level.make_entity: Got TypeError while creating entity '{entity_name}' using props:", props)
             print(e)
             return None
-        
+        finally:
+            ent_class._level = None  # 제자리로
