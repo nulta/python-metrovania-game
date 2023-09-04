@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Tuple, Union
 
 if TYPE_CHECKING:
     global _point_like
-    _point_like = Union[Tuple[int | float, int | float], pygame.Vector2]
+    _point_like = Union[Tuple[float, float], pygame.Vector2]
 
 _draws = {
     "line": [],
