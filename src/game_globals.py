@@ -18,3 +18,7 @@ frames_per_second: float = 0.0
 "현재 FPS 값. delta_time의 역수보다 정확한 값이다."
 
 camera_offset = (0, 0)
+"카메라의 위치." #TODO: 제대로 된 카메라 클래스 만들기
+
+player_gender = 1
+"주인공 캐릭터의 성별값."

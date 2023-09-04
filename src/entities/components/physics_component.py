@@ -14,22 +14,17 @@ class PhysicsComponent:
         self._velocity = Vector2(0, 0)   # pixels per second
         self._gravity = Vector2(0, 900)  # pixels per second
 
-        # TODO: 타일맵 어떻게 불러와야 함???
-        _ = None
-        self._static_tilemap = [
-                [_, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [_, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [_, _, 2, 2, _, _, _, _, _, _, _, _, _, _],
-                [_, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [_, _, _, _, 2, 2, _, _, _, _, _, _, _, _],
-                [_, _, _, _, 6, 6, _, 2, 2, _, _, _, _, _],
-                [_, _, _, _, _, _, _, _, _, _, 2, _, _, _],
-                [_, _, _, _, _, _, _, _, _, _, 6, 2, 2, _],
-                [1, _, _, _, _, _, _, _, _, _, _, _, _, _],
-                [6, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-            ]
-        self._static_tilemap = list(map(lambda row: list(map(bool, row)), self._static_tilemap))
+        self._static_tilemap = [[False]]
         self._tile_size = TILE_SIZE
+
+        # TODO: 정말로 이 구조가 최선인가? 다른 방법도 생각해보자
+        from scene_manager import SceneManager
+        from scenes.game_scene import GameScene
+        scene = SceneManager.current_scene
+        if isinstance(scene, GameScene):
+            level = scene._level
+            self._static_tilemap = level.get_collision_map()
+
         # TODO: 맵과 엔티티의 충돌 판정 처리?
         # TODO: 엔티티와 엔티티의 충돌 판정 처리?
 

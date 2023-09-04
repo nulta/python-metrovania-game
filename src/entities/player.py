@@ -13,12 +13,12 @@ from . import weapons
 
 class Player(Entity):
     is_player = True
-    def __init__(self, gender: int):
+    def __init__(self):
         _button = [weapons.BasicGun()]
         super().__init__()
         self.physics = PhysicsComponent(self, )
         self._hp = 200
-        self._gender = gender
+        self._gender = game_globals.player_gender
         self._move_speed = PLAYER_MOVE_SPEED
         self._max_jump_power = 600
         self._weapon = None

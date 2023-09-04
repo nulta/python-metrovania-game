@@ -5,8 +5,10 @@ class Tileset:
     """타일셋 하나를 다루는 클래스.
     
     타일셋의 각 타일에는 번호(`tile_idx`)가 붙는다.
-    번호는 0번부터 시작하며, 이미지 파일에서 맨 왼쪽 위 타일이 0번이다.
+    번호는 1번부터 시작하며, 이미지 파일에서 맨 왼쪽 위 타일이 1번이다.
     최대 범위를 벗어나는 번호의 타일을 사용해서는 안 된다.
+
+    수정: 번호는 1번부터 시작한다. 0번은 "빈 타일"을 나타내는 특수한 값으로 한다.
     """
 
     def __init__(self, tile_size: int, surface: pygame.Surface):
@@ -20,8 +22,9 @@ class Tileset:
 
     def _get_rect(self, tile_idx: int):
         assert tile_idx < len(self)
-        assert 0 <= tile_idx
+        assert 1 <= tile_idx
 
+        tile_idx -= 1
         tiles_x = self._tile_dimensions[0]
         tile_size = self._tile_size
         coord_x = tile_size * (tile_idx % tiles_x)
@@ -31,11 +34,13 @@ class Tileset:
 
     def draw_tile(self, surface: pygame.Surface, dest: "tuple[int, int]", tile_idx: int):
         """타일 하나를 그린다."""
+        if tile_idx == 0:
+            return
         tile_area = self._get_rect(tile_idx)
         tileset_surface = self._surface
         surface.blit(tileset_surface, dest, tile_area)
 
-    def make_tilemap_surface(self, map_data: "Sequence[Sequence[int|None]]"):
+    def make_tilemap_surface(self, map_data: "Sequence[Sequence[int]]"):
         """2차원 리스트에서 받아온 타일 정보로 그린 Surface를 반환한다.
         
         2차원 리스트의 칸 하나하나는 타일 하나하나와 대응된다.
@@ -44,13 +49,12 @@ class Tileset:
 
         @example
         ```
-        _ = None  # 칸이 길어지는 것 방지용
         tileset.make_tilemap_surface(
             [
-                [6, _, _, _, _, _],
-                [_, _, _, _, _, _],
-                [_, _, 2, 2, 2, _],
-                [6, _, _, _, _, _],
+                [6, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 2, 2, 2, 0],
+                [6, 0, 0, 0, 0, 0],
                 [6, 1, 1, 1, 1, 2],
             ]
         )
@@ -64,7 +68,7 @@ class Tileset:
         blits_data = []
         for y, row in enumerate(map_data):
             for x, tile_idx in enumerate(row):
-                if tile_idx is None: continue
+                if tile_idx == 0: continue
                 blits_data.append((
                     self._surface,
                     (x * self._tile_size, y * self._tile_size),

@@ -22,7 +22,7 @@ class StoryScene(Scene):
                   "ESC 키를 누르면 이 장면이 스킵된다"]
     background_image = ""
     character_image = ""
-    next_scene: Scene = None  # type: ignore
+
     def __init__(self):
         super().__init__()
         self.i=0
@@ -37,18 +37,22 @@ class StoryScene(Scene):
     def update(self):
         # 메뉴 이동 처리 (키보드)
         #건너뛰기
-        from scene_manager import SceneManager
         if InputManager.pressed(ACTION_CANCEL):
             Audio.common.select()
-            SceneManager.clear_scene()
-            SceneManager.push_scene(self.next_scene)
+            self.next_scene()
         #다음대사
         elif InputManager.pressed(ACTION_CONFIRM):
             Audio.common.select()
             self.i +=1
             if len(self.line)== self.i:
-                SceneManager.clear_scene()
-                SceneManager.push_scene(self.next_scene)
+                self.next_scene()
+    
+    def next_scene(self):
+        """다음 씬으로 넘어간다.
+        
+        StoryScene을 상속하는 클래스는 반드시 이 함수를 재정의해야 한다.
+        """
+        raise NotImplementedError
 
     def draw(self, surface: "Surface"):
         self.draw_background(surface, self.background_image)
@@ -147,7 +151,16 @@ class StorySceneIntro(StoryScene):
                   "ESC 키를 누르면 이 장면이 스킵된다"]
     background_image = "intro"
     character_image = "fanboy"
-    next_scene: Scene = GameScene(None)  # type: ignore
 
+    def next_scene(self):
+        from scene_manager import SceneManager
+        from resource_loader import ResourceLoader
+
+        # TODO: 이거 정리
+        leveldata = ResourceLoader.load_level_data("1_cargo")
+        level = Level(leveldata)
+        scene = GameScene(level)
+        SceneManager.clear_scene()
+        SceneManager.push_scene(scene)
     
  

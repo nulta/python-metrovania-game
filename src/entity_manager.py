@@ -40,8 +40,7 @@ class EntityManager():
             ent.update()
 
     @classmethod
-    def draw(cls, screen: Surface):
-        camera_pos = game_globals.camera_offset
+    def draw(cls, screen: Surface, camera_pos: "tuple[int, int]"):
         for ent in cls._ents.values():
             draw_pos = ent.position - ent.pivot
             draw_pos = (draw_pos[0] - camera_pos[0], draw_pos[1] - camera_pos[1])
