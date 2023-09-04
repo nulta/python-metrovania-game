@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "tileset.tsx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "1. tutorial.tmx": {
@@ -55,6 +56,54 @@
                 "y": 276.3333333333333
             }
         },
+        "4_SB87_1_2_.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -1056.5,
+                "y": -890.25
+            }
+        },
+        "4_SB87_3.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 974.6666666666665,
+                "y": 674
+            }
+        },
+        "4_SB87_Boss.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 28.5,
+                "y": -6.25
+            }
+        },
+        "5_VP33_Boss.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 968,
+                "y": 577
+            }
+        },
+        "5_VP33_gas.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1337,
+                "y": -120.5
+            }
+        },
+        "6_KS64_navy.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1645.333333333333,
+                "y": 74
+            }
+        },
         "tileset.tsx": {
             "scaleInDock": 1.5,
             "scaleInEditor": 1
@@ -66,16 +115,22 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
+        "tileset.tsx"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "tileset.tsx",
+        "6_KS64_navy.tmx",
+        "5_VP33_Boss.tmx",
+        "5_VP33_gas.tmx",
+        "4_SB87_Boss.tmx",
+        "4_SB87_3.tmx",
+        "4_SB87_1_2_.tmx",
         "3_SN91_Boss.tmx",
         "3_SN91_speed.tmx",
         "2_BT02_wind.tmx",
-        "tileset.tsx",
         "1_FB85_Boss.tmx",
-        "1_FB85_fire.tmx",
-        "1. tutorial.tmx"
+        "1_FB85_fire.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
