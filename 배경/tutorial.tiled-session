@@ -3,11 +3,27 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tileset.tsx",
+    "activeFile": "1_FB85_fire.tmj",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
+        "0_ tutorial.tmj": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 773,
+                "y": 533
+            }
+        },
+        "0_ tutorial.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 160,
+                "y": -493
+            }
+        },
         "1. tutorial.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
@@ -17,43 +33,59 @@
             }
         },
         "1_FB85_Boss.tmx": {
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -18,
-                "y": 2.3333333333333144
+                "x": 456,
+                "y": 351.3333333333333
+            }
+        },
+        "1_FB85_fire.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1201.3333333333333,
+                "y": 247.33333333333331
             }
         },
         "1_FB85_fire.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 64,
-                "y": -283.33333333333337
+                "x": 479.3333333333333,
+                "y": 240
             }
         },
         "2_BT02_wind.tmx": {
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 47,
-                "y": -634.5
+                "x": 810,
+                "y": 1320
             }
         },
         "3_SN91_Boss.tmx": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 90.5,
-                "y": -105.25
+                "x": 585,
+                "y": 464.66666666666663
             }
         },
         "3_SN91_speed.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4079.333333333333,
-                "y": 276.3333333333333
+                "x": 2813.6666666666665,
+                "y": 315.33333333333326
+            }
+        },
+        "4_SB87_1_2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1095,
+                "y": 898
             }
         },
         "4_SB87_1_2_.tmx": {
@@ -109,28 +141,35 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "C:/Users/AYoung/Downloads",
+    "last.exportedFilePath": "C:/Users/AYoung/Desktop/game/python-metrovania-game/배경",
+    "last.imagePath": "C:/Users/AYoung/Desktop/game/python-metrovania-game/resources/sprites/tileset",
     "map.fixedSize": false,
-    "map.lastUsedFormat": "tmx",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "json",
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "tileset.tsx"
+        "tileset.tsx",
+        "3_SN91_speed.tmx",
+        "2_BT02_wind.tmx",
+        "3_SN91_Boss.tmx",
+        "4_SB87_1_2.tmx",
+        "1_FB85_fire.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "tileset.tsx",
-        "6_KS64_navy.tmx",
-        "5_VP33_Boss.tmx",
-        "5_VP33_gas.tmx",
-        "4_SB87_Boss.tmx",
-        "4_SB87_3.tmx",
-        "4_SB87_1_2_.tmx",
-        "3_SN91_Boss.tmx",
         "3_SN91_speed.tmx",
         "2_BT02_wind.tmx",
+        "3_SN91_Boss.tmx",
+        "4_SB87_1_2.tmx",
+        "1_FB85_fire.tmj",
+        "1_FB85_fire.tmx",
         "1_FB85_Boss.tmx",
-        "1_FB85_fire.tmx"
+        "0_ tutorial.tmj",
+        "0_ tutorial.tmx",
+        "6_KS64_navy.tmx",
+        "5_VP33_Boss.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

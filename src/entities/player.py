@@ -79,8 +79,8 @@ class Player(Entity):
 
         # 카메라 이동
         camera_size = Vector2(GAME_WINDOW_SIZE)
-        current_screen_idx = Vector2(self.position.x // camera_size.x, 0)
-        current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, 0)
+        current_screen_idx = Vector2(self.position.x // camera_size.x, self.position.y // camera_size.y)
+        current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, current_screen_idx.y * camera_size.y)
         game_globals.camera_offset = current_screen_pos
 
     def surface(self):
