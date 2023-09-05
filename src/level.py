@@ -56,7 +56,8 @@ class Level:
             self._background.fill((255, 255, 255))
     
     def get_collision_map(self) -> "Sequence[Sequence[bool]]":
-        """이 레벨의 충돌 맵을 받아온다.
+        """
+        이 레벨의 충돌 맵을 받아온다.
         
         충돌 맵은 bool의 2차원 리스트이며, 물리 엔진에서 바닥과의 충돌 판정을 할 때 사용된다.
         충돌 맵에서 각 타일의 값은, 타일이 있는 칸에서는 True이고 타일이 없는 칸에서는 False이다.
@@ -84,7 +85,8 @@ class Level:
                 ent.position = ent_pos
 
     def _make_entity(self, entity_name: "str", props: "dict[str, object]" = {}):
-        """특정 이름을 가진 엔티티를 생성한다. 생성자에 props 딕셔너리를 **kwargs 형태로 제공한다. 
+        """
+        특정 이름을 가진 엔티티를 생성한다. 생성자에 props 딕셔너리를 **kwargs 형태로 제공한다. 
         
         그런 이름의 엔티티가 없다면 None을 반환한다.
         생성자의 인자값 형태가 props과 맞지 않을 경우 None을 반환한다.
