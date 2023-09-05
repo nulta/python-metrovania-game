@@ -8,6 +8,14 @@
         "."
     ],
     "fileStates": {
+        "0_ tutorial.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 933.5,
+                "y": -535.75
+            }
+        },
         "1. tutorial.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
@@ -20,8 +28,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -18,
-                "y": 2.3333333333333144
+                "x": 22,
+                "y": -100.33333333333331
             }
         },
         "1_FB85_fire.tmx": {
@@ -33,11 +41,11 @@
             }
         },
         "2_BT02_wind.tmx": {
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 47,
-                "y": -634.5
+                "x": -415.3333333333333,
+                "y": 1135.6666666666665
             }
         },
         "3_SN91_Boss.tmx": {
@@ -120,6 +128,9 @@
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "tileset.tsx",
+        "1_FB85_Boss.tmx",
+        "2_BT02_wind.tmx",
+        "0_ tutorial.tmx",
         "6_KS64_navy.tmx",
         "5_VP33_Boss.tmx",
         "5_VP33_gas.tmx",
@@ -127,10 +138,7 @@
         "4_SB87_3.tmx",
         "4_SB87_1_2_.tmx",
         "3_SN91_Boss.tmx",
-        "3_SN91_speed.tmx",
-        "2_BT02_wind.tmx",
-        "1_FB85_Boss.tmx",
-        "1_FB85_fire.tmx"
+        "3_SN91_speed.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
