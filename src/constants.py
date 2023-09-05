@@ -7,11 +7,13 @@ GAME_WINDOW_NAME = "게임 이름"
 RESOURCE_PATH = "./resources"
 TILE_SIZE = 30 * 2
 
-GAME_WINDOW_SIZE = (840, 600)  # 30*2의 배수
+GAME_WINDOW_SIZE = (840, 600)  # TILE_SIZE의 배수
 GAME_MAX_FPS = 144
-# GAME_MAX_FPS = 60
 GAME_MAX_DELTA_TIME = 1/20
 
+# 개발자 설정
+DEBUG_MODE = True
+DEBUG_DRAW_HITBOX = True  # Entity들의 히트박스를 화면에 표시한다.
 
 # GENDER 값
 GENDER_MALE   = 0
@@ -47,3 +49,7 @@ from pygame.freetype import (
     STYLE_UNDERLINE as FONT_STYLE_UNDERLINE,
     STYLE_WIDE as FONT_STYLE_WIDE,
 )
+
+assert DEBUG_MODE or (
+    not (DEBUG_DRAW_HITBOX)
+), "DEBUG_* 상수는 DEBUG_MODE가 True일 경우에만 설정할 수 있다."

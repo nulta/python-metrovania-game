@@ -1,6 +1,7 @@
 import pygame
 from fonts import Fonts
 from typing import TYPE_CHECKING, Tuple, Union
+from constants import DEBUG_MODE, DEBUG_DRAW_HITBOX
 
 if TYPE_CHECKING:
     global _point_like
@@ -12,15 +13,21 @@ _draws = {
     "rect": [],
 }
 
-def _draw(surface: "pygame.Surface"):
-    if not __debug__:
+def draw_debug_elements(surface: "pygame.Surface"):
+    if not DEBUG_MODE:
         return
+    
+    if DEBUG_DRAW_HITBOX:
+        from entity_manager import EntityManager
+        from scene_manager import SceneManager
+        from scenes import GameScene
+        if isinstance(SceneManager.current_scene, GameScene):
+            for ent in EntityManager._ents.values():
+                hitbox: "pygame.Rect | None" = ent.get("hitbox")
+                if not hitbox: continue
+                draw_rect(hitbox)
 
-    for x in _draws["line"]:
-        text = x[0]
-        color = x[1]
-        p1 = x[2]
-        p2 = x[3]
+    for text, color, p1, p2 in _draws["line"]:
         pm = ((p1[0] + p2[0]) / 2, (p1[1] + p2[0]) / 2 - 10)
         pygame.draw.line(surface, color, p1, p2, 2)
         Fonts.get("debug").render_to(
@@ -31,10 +38,7 @@ def _draw(surface: "pygame.Surface"):
         )
     _draws["line"].clear()
 
-    for x in _draws["point"]:
-        text = x[0]
-        color = x[1]
-        p1 = x[2]
+    for text, color, p1 in _draws["point"]:
         pm = (p1[0] + 5, p1[1] - 15)
         pygame.draw.circle(surface, (0, 0, 0, 100), p1, 4.0)
         pygame.draw.circle(surface, color, p1, 2.0)
@@ -47,10 +51,7 @@ def _draw(surface: "pygame.Surface"):
         )
     _draws["point"].clear()
 
-    for x in _draws["rect"]:
-        text = x[0]
-        color = x[1]
-        rect: "pygame.Rect" = x[2]
+    for text, color, rect in _draws["rect"]:
         pm = (rect.left, rect.top - 10)
         pygame.draw.rect(surface, color, rect, 2)
         Fonts.get("debug").render_to(

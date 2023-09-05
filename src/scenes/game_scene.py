@@ -14,6 +14,7 @@ class GameScene(Scene):
     def __init__(self, level: Level):
         super().__init__()
         self._level = level
+        self._background = self._level._background
 
         # 엔티티 관련 처리
         EntityManager.initialize()
@@ -30,18 +31,7 @@ class GameScene(Scene):
         camera_pos = game_globals.camera_offset
 
         # Background
-        surface.fill(pygame.Color(100, 200, 255))
-        Fonts.get("debug").render_to(
-            surface,
-            (700, 20),
-            "GameScene",
-            size=20,
-        )
-        Fonts.get("debug").render_to(
-            surface,
-            (600, 40),
-            str(camera_pos),
-        )
+        surface.blit(self._background, (0, 0))
 
         # Tilemap
         surface.blit(self._tilemap_surface, -camera_pos)

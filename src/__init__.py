@@ -7,7 +7,7 @@ from fonts import Fonts
 from entities import *
 from input_manager import InputManager
 from scene_manager import SceneManager
-from scenes.title_scene import TitleScene
+from scenes import TitleScene
 
 class Game():
     """메인 게임 클래스. 메인 루프를 관리한다."""
@@ -73,16 +73,17 @@ class Game():
         # Scene을 그린다.
         SceneManager.draw(self.screen)
 
-        # DEBUG: FPS 카운터를 그린다.
-        Fonts.get("debug").render_to(
-            self.screen,
-            (4, 4),
-            f"FPS: {int(game_globals.frames_per_second)}",
-            fgcolor=(255, 255, 255),
-        )
+        if DEBUG_MODE:
+            # FPS 카운터를 그린다.
+            Fonts.get("debug").render_to(
+                self.screen,
+                (4, 4),
+                f"FPS: {int(game_globals.frames_per_second)}",
+                fgcolor=(255, 255, 255),
+            )
 
-        # DEBUG: debug draw를 한다
-        debug._draw(self.screen)
+            # debug draw를 한다
+            debug.draw_debug_elements(self.screen)
 
         # 화면에 띄운다.
         pygame.display.flip()

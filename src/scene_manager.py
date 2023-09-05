@@ -1,4 +1,4 @@
-from scenes.scene import Scene
+from scenes import Scene
 from pygame import Surface
 from typing import Optional
 from util import classproperty
