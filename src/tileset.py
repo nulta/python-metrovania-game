@@ -24,6 +24,7 @@ class Tileset:
         assert tile_idx < len(self)
         assert 1 <= tile_idx
 
+
         tile_idx -= 1
         tiles_x = self._tile_dimensions[0]
         tile_size = self._tile_size
