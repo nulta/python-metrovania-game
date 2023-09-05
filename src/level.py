@@ -23,7 +23,7 @@ import entities
 class LevelData:
     def __init__(self):
         # 타일셋 이름
-        self.tileset_name: "str" = "generic_1"
+        self.tileset_name: "str" = "generic_0"
 
         # 타일맵
         self.map_data: "Sequence[Sequence[int]]" = [[0]]

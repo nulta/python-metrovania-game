@@ -3,17 +3,25 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tileset.tsx",
+    "activeFile": "3_SN91_Boss.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
-        "0_ tutorial.tmx": {
-            "scale": 2,
+        "0_ tutorial.tmj": {
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 933.5,
-                "y": -535.75
+                "x": 773,
+                "y": 533
+            }
+        },
+        "0_ tutorial.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 160,
+                "y": -493
             }
         },
         "1. tutorial.tmx": {
@@ -25,43 +33,51 @@
             }
         },
         "1_FB85_Boss.tmx": {
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 22,
-                "y": -100.33333333333331
+                "x": 456,
+                "y": 351.3333333333333
             }
         },
         "1_FB85_fire.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 64,
-                "y": -283.33333333333337
+                "x": 61.33333333333337,
+                "y": 155.33333333333337
             }
         },
         "2_BT02_wind.tmx": {
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -415.3333333333333,
-                "y": 1135.6666666666665
+                "x": 810,
+                "y": 1320
             }
         },
         "3_SN91_Boss.tmx": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 90.5,
-                "y": -105.25
+                "x": 946,
+                "y": 468.3333333333333
             }
         },
         "3_SN91_speed.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4439.333333333333,
-                "y": 388.3333333333333
+                "x": 2813.6666666666665,
+                "y": 315.33333333333326
+            }
+        },
+        "4_SB87_1_2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1095,
+                "y": 898
             }
         },
         "4_SB87_1_2_.tmx": {
@@ -117,29 +133,34 @@
             "scaleInEditor": 1
         }
     },
+    "last.exportedFilePath": "C:/Users/AYoung/Desktop/game/python-metrovania-game/배경",
     "last.imagePath": "C:/Users/AYoung/Desktop/game/python-metrovania-game/resources/sprites/tileset",
     "map.fixedSize": false,
-    "map.lastUsedFormat": "tmx",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "json",
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
         "tileset.tsx",
-        "3_SN91_speed.tmx"
+        "3_SN91_speed.tmx",
+        "2_BT02_wind.tmx",
+        "3_SN91_Boss.tmx",
+        "4_SB87_1_2.tmx"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
-        "3_SN91_speed.tmx",
         "tileset.tsx",
-        "1_FB85_Boss.tmx",
+        "3_SN91_speed.tmx",
         "2_BT02_wind.tmx",
+        "4_SB87_1_2.tmx",
+        "3_SN91_Boss.tmx",
+        "1_FB85_fire.tmx",
+        "1_FB85_Boss.tmx",
+        "0_ tutorial.tmj",
         "0_ tutorial.tmx",
         "6_KS64_navy.tmx",
         "5_VP33_Boss.tmx",
-        "5_VP33_gas.tmx",
-        "4_SB87_Boss.tmx",
-        "4_SB87_3.tmx",
-        "4_SB87_1_2_.tmx",
-        "3_SN91_Boss.tmx"
+        "5_VP33_gas.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
