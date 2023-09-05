@@ -16,16 +16,6 @@ _draws = {
 def draw_debug_elements(surface: "pygame.Surface"):
     if not DEBUG_MODE:
         return
-    
-    if DEBUG_DRAW_HITBOX:
-        from entity_manager import EntityManager
-        from scene_manager import SceneManager
-        from scenes import GameScene
-        if isinstance(SceneManager.current_scene, GameScene):
-            for ent in EntityManager._ents.values():
-                hitbox: "pygame.Rect | None" = ent.get("hitbox")
-                if not hitbox: continue
-                draw_rect(hitbox)
 
     for text, color, p1, p2 in _draws["line"]:
         pm = ((p1[0] + p2[0]) / 2, (p1[1] + p2[0]) / 2 - 10)

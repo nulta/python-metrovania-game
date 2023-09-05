@@ -2,7 +2,7 @@ from pygame import Vector2, Rect
 from typing import TYPE_CHECKING, Sequence
 import game_globals
 import debug
-from constants import TILE_SIZE
+from constants import TILE_SIZE, DEBUG_DRAW_HITBOX
 from math import isnan, copysign
 
 if TYPE_CHECKING:
@@ -42,7 +42,11 @@ class PhysicsComponent:
         self._update_gravity()
         self._update_position()
         self._check_stuck()
-    
+
+        if DEBUG_DRAW_HITBOX:
+            hitbox = self.owner.get("hitbox", Rect(0,0,0,0))
+            debug.draw_rect(hitbox)
+
     def _update_position(self):
         if not self.velocity:
             return
@@ -96,9 +100,6 @@ class PhysicsComponent:
                     diff_x = round(rect.right - new_hitbox.left)
 
                 assert diff_x >= 0
-                
-                # if diff_x < 0:
-                #     diff_x = 0
 
                 # Y 방향으로 옮겨서 충돌을 해결할 때, 옮겨야 할 픽셀 수
                 diff_y = infinite
@@ -108,9 +109,6 @@ class PhysicsComponent:
                     diff_y = round(rect.bottom - new_hitbox.top)
                 
                 assert diff_y >= 0
-                # if diff_y < 0:
-                #     diff_y = infinite
-
                 assert min(diff_x, diff_y) != infinite
 
                 # 벡터의 내적
