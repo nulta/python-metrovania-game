@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "3_SN91_Boss.tmx",
+    "activeFile": "1_FB85_fire.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -40,12 +40,20 @@
                 "y": 351.3333333333333
             }
         },
+        "1_FB85_fire.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1201.3333333333333,
+                "y": 247.33333333333331
+            }
+        },
         "1_FB85_fire.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 61.33333333333337,
-                "y": 155.33333333333337
+                "x": 479.3333333333333,
+                "y": 240
             }
         },
         "2_BT02_wind.tmx": {
@@ -60,8 +68,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 946,
-                "y": 468.3333333333333
+                "x": 585,
+                "y": 464.66666666666663
             }
         },
         "3_SN91_speed.tmx": {
@@ -145,22 +153,23 @@
         "3_SN91_speed.tmx",
         "2_BT02_wind.tmx",
         "3_SN91_Boss.tmx",
-        "4_SB87_1_2.tmx"
+        "4_SB87_1_2.tmx",
+        "1_FB85_fire.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "tileset.tsx",
         "3_SN91_speed.tmx",
         "2_BT02_wind.tmx",
-        "4_SB87_1_2.tmx",
         "3_SN91_Boss.tmx",
+        "4_SB87_1_2.tmx",
+        "1_FB85_fire.tmj",
         "1_FB85_fire.tmx",
         "1_FB85_Boss.tmx",
         "0_ tutorial.tmj",
         "0_ tutorial.tmx",
         "6_KS64_navy.tmx",
-        "5_VP33_Boss.tmx",
-        "5_VP33_gas.tmx"
+        "5_VP33_Boss.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
