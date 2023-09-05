@@ -52,6 +52,7 @@ class TitleScene(Scene):
             color_mul = int(util.lerpc(anim_progress, 0.5, 1) * 255)
             block_height = util.lerpc(anim_progress / 1.5, 260, 200)
             block_height += int(math.cos(game_globals.game_time * 0.5) * 3)
+            block_height = block_height // 2 * 2
 
             surface.fill(pygame.Color(0, 100, 170))
             for i in range(2):
@@ -65,8 +66,10 @@ class TitleScene(Scene):
         # 사람 그리기
         if True:
             color_mul = int(util.lerpc(anim_progress, 0, 0.9) * 255)
-            human_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210)) + 62
-            human_y += int(math.cos(game_globals.game_time * 1.8) * 2)
+            human_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210)) + 66
+            human_y = human_y // 2 * 2
+            human_y += int(math.cos(max(game_globals.game_time * 2, 6)) * 3)
+            human_y = human_y // 2 * 2
 
             sprite_human = ResourceLoader.load_image_2x("sprites/player/female/idle_0.png").copy()
             sprite_human.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
@@ -76,6 +79,7 @@ class TitleScene(Scene):
         if True:
             color_mul = int(util.lerpc(anim_progress, 0, 0.9) * 255)
             building_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210))
+            building_y = building_y // 2 * 2
 
             sprite_building = ResourceLoader.load_image_2x("sprites/background/building.png").copy()
             sprite_building.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
