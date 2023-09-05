@@ -1,12 +1,12 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 
-// to export to js:
+// to export tmx to js:
 // for %i in (*.tmx) do tiled --export-map js %~ni.tmx exported/%~ni.js
 
 export {}
 
 const path = "./exported/"
-const path2 = "./json_data/"
+const path2 = "../resources/levels/"
 const fileList = [
     "0_tutorial.js",
     "1_FB85_Boss.js",
@@ -30,6 +30,10 @@ const mapTemplate = Object.freeze({
     "background_img": ""
 })
 
+function getPaddingHeight(h: number) {
+    return 9 - (h + 2) % 10
+}
+
 globalThis.onTileMapLoaded = async (filename: string, filedata) => {
     filename = filename.toLowerCase()
     console.log("Loading file ", filename)
@@ -37,7 +41,9 @@ globalThis.onTileMapLoaded = async (filename: string, filedata) => {
     const {data, height, width} = filedata.layers[0]
     const map = {...mapTemplate}
 
-    const map_data: any[] = []
+    let map_data: number[][] = []
+
+    // Cut by rows
     for (let y=0; y<height; y++) {
         const row: number[] = []
         for (let x=0; x<width; x++) {
@@ -46,10 +52,33 @@ globalThis.onTileMapLoaded = async (filename: string, filedata) => {
         map_data.push(row)
     }
 
+    // Calculate the trailing padding
+    let trailing_rows = 0
+    for (const row of [...map_data].reverse()) {
+        if (row.every((v) => v==0)) {
+            trailing_rows += 1
+        } else {
+            break
+        }
+    }
+
+    // Cut out the trailing padding
+    map_data = map_data.slice(0, -trailing_rows)
+    
+    // Add aligned padding
+    let paddings: number[][] = []
+    for (let i=0; i < getPaddingHeight(map_data.length - trailing_rows); i++) {
+        // Padding
+        paddings.push(Array(width).fill(0))
+    }
+    map_data = [...paddings, ...map_data]
+
     // @ts-ignore
     map.map_data = map_data
     // @ts-ignore
-    map.entities = [["Player", 1, 1]]
+    map.entities = [
+        ["Player", 2, map_data.length]
+    ]
     const json = JSON.stringify(map)
     await Deno.writeTextFile(path2 + filename + ".json", json)
 }
