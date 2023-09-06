@@ -140,9 +140,7 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    lines = ["ㅡ",
-            "러ㅏㄹㄹ",
-            "아ㅓ라ㅓ아러ㅏㅇ"
+    lines = ["asdf"
             ]
     
     _button_texts = ["건너뛰기(ESC)", "▽"]
@@ -157,7 +155,7 @@ class StorySceneIntro(StoryScene):
         from resource_loader import ResourceLoader
 
         # TODO: 이거 정리
-        leveldata = ResourceLoader.load_level_data("2_hotman")
+        leveldata = ResourceLoader.load_level_data("0_tutorial")
         level = Level(leveldata)
         scene = GameScene(level)
         SceneManager.clear_scene()
