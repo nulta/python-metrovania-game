@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "0_tutorial.tmj",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,16 +28,16 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 813.25,
-                "y": 555
+                "x": 1083.5,
+                "y": 557.25
             }
         },
         "0_tutorial.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 263,
-                "y": 564.5
+                "x": 795.5,
+                "y": 555
             }
         },
         "1. tutorial.tmx": {
@@ -52,8 +52,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 584.6666666666666,
-                "y": 496
+                "x": 584,
+                "y": 495.3333333333333
             }
         },
         "1_FB85_Boss.tmx": {
@@ -84,8 +84,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 804,
-                "y": 1310
+                "x": 316,
+                "y": 2635.333333333333
             }
         },
         "2_BT02_wind.tmx": {
@@ -250,23 +250,21 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "0_tutorial.tmj",
-        "0_tutorial.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "2_BT02_wind.tmj",
+        "1_FB85_Boss.tmj",
         "0_tutorial.tmj",
+        "0_tutorial.tmx",
         "entities.tsx",
         "tileset.tsx",
-        "0_tutorial.tmx",
         "4_SB87_Boss.tmj",
         "5_VP33_gas.tmj",
         "5_VP33_Boss.tmj",
         "4_SB87_3.tmj",
         "4_SB87_1_2.tmj",
-        "3_SN91_speed.tmj",
-        "3_SN91_Boss.tmj",
-        "2_BT02_wind.tmj"
+        "3_SN91_speed.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
