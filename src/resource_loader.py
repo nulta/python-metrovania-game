@@ -84,8 +84,20 @@ class ResourceLoader():
     def load_tileset(cls, tileset_name: str) -> "Tileset":
         from tileset import Tileset
         image_path = "sprites/tileset/" + tileset_name + ".png"
+        metadata_path = "sprites/tileset/" + tileset_name + ".json"
+
         tileset_surface = cls.load_image_2x(image_path)
-        tileset = Tileset(TILE_SIZE, tileset_surface)
+        tileset_metadata = None
+        try:
+            # TODO: Cache the json response
+            metadata_path = cls.get_resource_path(metadata_path)
+            with open(metadata_path) as metadata_file:
+                tileset_metadata = json.load(metadata_file)
+        except FileNotFoundError:
+            print(f"Tileset metadata not found: {metadata_path}")
+            pass
+
+        tileset = Tileset(TILE_SIZE, tileset_surface, tileset_metadata)
         return tileset
 
     @classmethod

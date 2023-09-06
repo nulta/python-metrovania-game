@@ -5,6 +5,7 @@ import game_globals
 import debug
 from fonts import Fonts
 from entities import *
+from constants import *
 from input_manager import InputManager
 from scene_manager import SceneManager
 from scenes import TitleScene

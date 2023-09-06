@@ -1,5 +1,6 @@
 from entities import *
 from typing import Optional, Dict
+from pygame import Vector2, Surface
 
 class EntityManager():
     """게임 내의 모든 Entity를 관리한다."""
@@ -40,7 +41,7 @@ class EntityManager():
             ent.update()
 
     @classmethod
-    def draw(cls, screen: Surface, camera_pos: "Vector2"):
+    def draw(cls, screen: "Surface", camera_pos: "Vector2"):
         for ent in cls._ents.values():
             # 2px 그리드에 정확하게 들어맞도록 위치를 내림한다.
             draw_pos = ent.position - ent.pivot - camera_pos

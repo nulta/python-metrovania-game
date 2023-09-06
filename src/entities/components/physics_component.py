@@ -14,7 +14,7 @@ class PhysicsComponent:
         self._velocity = Vector2(0, 0)   # pixels per second
         self._gravity = Vector2(0, 900)  # pixels per second
 
-        self._collision_map = [[False]]
+        self._collision_map = [[]]
         self._tile_size = TILE_SIZE
 
         if self.owner._level:
@@ -171,12 +171,11 @@ class PhysicsComponent:
     def _get_collide_rects(self):
         rects: "list[Rect]" = []
 
-        # Static Tilemap에서 근처에 있는 rect들을 구워낸다
-        tile_size = self._tile_size
+        # Static Tilemap에서 근처에 있는 rect들을 뽑아온다
         for y, row in enumerate(self._collision_map):
-            for x, tile_exists in enumerate(row):
-                if tile_exists and self._is_nearby_tile(x, y):
-                    rects.append(Rect(x * tile_size, y * tile_size, tile_size, tile_size))
+            for x, rect in enumerate(row):
+                if rect and self._is_nearby_tile(x, y):
+                    rects.append(rect)
 
         return rects
 

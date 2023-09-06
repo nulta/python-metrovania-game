@@ -44,8 +44,10 @@ class Level:
         self._tileset = ResourceLoader.load_tileset(level_data.tileset_name)
         self._tile_size = TILE_SIZE
         self._tilemap_surface = None
+        self._collision_map = None
         self._map_data = level_data.map_data
-        self._entities = level_data.entities
+        overlap_entities = self._tileset.get_overlap_entity_list_of_map(self._map_data)
+        self._entities: "Sequence[tuple[str, int, int, dict[str, object] | None]]" = [*level_data.entities, *overlap_entities]
 
         self._music = level_data.music
         if level_data.background_img:
@@ -55,14 +57,28 @@ class Level:
             self._background = pygame.Surface(GAME_WINDOW_SIZE)
             self._background.fill((255, 255, 255))
     
-    def get_collision_map(self) -> "Sequence[Sequence[bool]]":
+    def get_collision_map(self) -> "Sequence[Sequence[pygame.Rect | None]]":
         """
         이 레벨의 충돌 맵을 받아온다.
         
-        충돌 맵은 bool의 2차원 리스트이며, 물리 엔진에서 바닥과의 충돌 판정을 할 때 사용된다.
-        충돌 맵에서 각 타일의 값은, 타일이 있는 칸에서는 True이고 타일이 없는 칸에서는 False이다.
+        충돌 맵은 Rect 또는 None의 2차원 리스트이며, 물리 엔진에서 바닥과의 충돌 판정을 할 때 사용된다.
         """
-        return list(map(lambda row: list(map(bool, row)), self._map_data))
+        # return list(map(lambda row: list(map(bool, row)), self._map_data))
+        if self._collision_map:
+            return self._collision_map
+
+        collision_map: "list[list[pygame.Rect | None]]" = []
+        for y in range(len(self._map_data)):
+            collision_map.append([])
+            for x in range(len(self._map_data[y])):
+                tile_idx = self._map_data[y][x]
+                collision_rect = self._tileset.get_tile_collision_rect(tile_idx)
+                if collision_rect:
+                    collision_rect = collision_rect.move(pygame.Vector2(x, y) * self._tile_size)
+                collision_map[y].append(collision_rect)
+        self._collision_map = collision_map
+        return collision_map
+
     
     def get_tilemap_surface(self) -> "pygame.Surface":
         """이 레벨의 타일맵이 그려진 Surface를 받아온다.

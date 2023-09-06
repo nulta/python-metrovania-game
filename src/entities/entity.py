@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 class Entity():
     is_player = False
+    is_static = False
     _level: "Level | None" = None
 
     def __init__(self):
