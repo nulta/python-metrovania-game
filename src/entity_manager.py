@@ -28,6 +28,10 @@ class EntityManager():
             if isinstance(ent, Player):
                 return ent
         return None
+    
+    @classmethod
+    def get_static_entities(cls) -> "list[Entity]":
+        return list(filter(lambda ent: ent.is_static, cls._ents.values()))
 
     @classmethod
     def update(cls):

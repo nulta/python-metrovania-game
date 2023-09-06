@@ -2,6 +2,7 @@ import pygame
 from fonts import Fonts
 from typing import TYPE_CHECKING, Tuple, Union
 from constants import DEBUG_MODE, DEBUG_DRAW_HITBOX
+import game_globals
 
 if TYPE_CHECKING:
     global _point_like
@@ -52,16 +53,26 @@ def draw_debug_elements(surface: "pygame.Surface"):
         )
     _draws["rect"].clear()
 
-def draw_line(p1: "_point_like", p2: "_point_like", desc="", color=(0,255,255)):
+def draw_line(p1: "_point_like", p2: "_point_like", desc="", color=(0,255,255), on_map=False):
+    if on_map:
+        p1 = (p1[0] - game_globals.camera_offset.x, p1[1] - game_globals.camera_offset.y)
+        p2 = (p2[0] - game_globals.camera_offset.x, p2[1] - game_globals.camera_offset.y)
     _draws["line"].append((desc, color, p1, p2))
 
-def draw_point(p1: "_point_like", desc="", color=(0,255,255)):
+def draw_point(p1: "_point_like", desc="", color=(0,255,255), on_map=False):
+    if on_map:
+        p1 = (p1[0] - game_globals.camera_offset.x, p1[1] - game_globals.camera_offset.y)
     _draws["point"].append((desc, color, p1))
 
-def draw_rect(rect: "pygame.Rect", desc="", color=(0,255,255)):
+def draw_rect(rect: "pygame.Rect", desc="", color=(0,255,255), on_map=False):
+    if on_map:
+        rect = rect.move(-game_globals.camera_offset)
     _draws["rect"].append((desc, color, rect))
 
-def draw_vector(origin: "_point_like", vec: "_point_like", desc="", color=(255, 100, 100)):
+def draw_vector(origin: "_point_like", vec: "_point_like", desc="", color=(255, 100, 100), on_map=False):
+    if on_map:
+        origin = (origin[0] - game_globals.camera_offset.x, origin[1] - game_globals.camera_offset.y)
+        vec = (vec[0] - game_globals.camera_offset.x, vec[1] - game_globals.camera_offset.y)
     dest = pygame.Vector2(origin[0] + vec[0], origin[1] + vec[1])
 
     draw_line(origin, dest, "", color)

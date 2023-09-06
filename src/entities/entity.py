@@ -58,9 +58,8 @@ class Entity():
         if DEBUG_DRAW_HITBOX:
             import debug
             hitbox = self.get("hitbox", Rect(0,0,0,0))
-            hitbox.move_ip(-game_globals.camera_offset)
             color = self.is_static and (0, 128, 255) or (0, 255, 255)
-            debug.draw_rect(hitbox, color=color)
+            debug.draw_rect(hitbox, color=color, on_map=True)
 
     def surface(self) -> Surface:
         """화면에 그릴 surface를 반환한다."""

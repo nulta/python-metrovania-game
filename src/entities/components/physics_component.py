@@ -42,11 +42,11 @@ class PhysicsComponent:
         self._update_gravity()
         self._update_position()
         self._check_stuck()
+        self._check_trigger()
 
         if DEBUG_DRAW_HITBOX:
             for rect in self._get_collide_rects():
-                rect = rect.move(-game_globals.camera_offset)
-                debug.draw_rect(rect, color=(0, 255, 128))
+                debug.draw_rect(rect, color=(0, 255, 128), on_map=True)
 
     def does_point_collide(self, point: "Vector2"):
         """주어진 좌표점이 맵과 겹치는지 여부를 알아낸다.
@@ -56,7 +56,7 @@ class PhysicsComponent:
         """
         assert self.owner.position.distance_to(point) <= (TILE_SIZE * 3)
         if DEBUG_DRAW_HITBOX:
-            debug.draw_point(point, color=(255,0,0))
+            debug.draw_point(point, color=(255,0,0), on_map=True)
         return any(map(lambda rect: rect.collidepoint(point), self._get_collide_rects()))
 
     def _update_position(self):
@@ -173,8 +173,22 @@ class PhysicsComponent:
                 self.owner.position += Vector2(0, -60)
 
     def _check_trigger(self):
-        """나와 겹치는 트리거가 있는지 확인하고, 있다면 발동시킨다."""
-        pass
+        """나와 겹치는 트리거가 있는지 확인하고, 있다면 발동시킨다.
+        
+        참고: `트리거`는 `is_static`이 True이고 `hitbox`와
+        `on_physics_trigger(self, phys: PhysicsComponent)`
+        함수가 정의되어 있는 엔티티를 뜻한다.
+        """
+        owner_hitbox: "Rect|None" = self.owner.get("hitbox", None)
+        if not owner_hitbox: return
+
+        from entity_manager import EntityManager
+        statics = EntityManager.get_static_entities()
+        for ent in statics:
+            trigger_hitbox = ent.get("hitbox", Rect(0,0,0,0))
+            is_in = owner_hitbox.colliderect(trigger_hitbox)
+            if is_in:
+                ent.call("on_physics_trigger", self)
 
     def _update_gravity(self):
         self.velocity += self._gravity * game_globals.delta_time
