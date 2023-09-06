@@ -1,6 +1,6 @@
 from entities import *
 from typing import Optional, Dict
-from pygame import Vector2, Surface
+from pygame import Vector2, Surface, Rect
 
 class EntityManager():
     """게임 내의 모든 Entity를 관리한다."""
@@ -32,6 +32,25 @@ class EntityManager():
     @classmethod
     def get_static_entities(cls) -> "list[Entity]":
         return list(filter(lambda ent: ent.is_static, cls._ents.values()))
+    
+    @classmethod
+    def find_colliding_entities(cls, rect_or_ent: "Rect | Entity"):
+        """주어진 Rect 또는 엔티티와 히트박스가 겹치는 엔티티를 찾는다."""
+        rect = rect_or_ent
+        ent = None
+        if isinstance(rect_or_ent, Entity):
+            rect = rect_or_ent.get("hitbox")
+            ent = rect_or_ent
+            if not rect:
+                return []
+
+        colliding = []
+        for ent in cls._ents.values():
+            hitbox = ent.get("hitbox")
+            if not hitbox: continue
+            if rect.colliderect(hitbox):
+                colliding.append(ent)
+        return colliding
 
     @classmethod
     def update(cls):
