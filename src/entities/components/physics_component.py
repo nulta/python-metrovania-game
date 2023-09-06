@@ -54,7 +54,7 @@ class PhysicsComponent:
         주의: 이 엔티티의 근처에 있는 (반경 3타일 가량) 경우에만 제대로 판단할 수 있다.
         엔티티와 멀리 떨어져 있는 좌표점에 대해서 판단할 경우에는 항상 False를 반환한다.
         """
-        assert self.owner.position.distance_to(point) > (TILE_SIZE * 3)
+        assert self.owner.position.distance_to(point) <= (TILE_SIZE * 3)
         if DEBUG_DRAW_HITBOX:
             debug.draw_point(point, color=(255,0,0))
         return any(map(lambda rect: rect.collidepoint(point), self._get_collide_rects()))
@@ -171,6 +171,10 @@ class PhysicsComponent:
             if rect.colliderect(hitbox):
                 # 끼었다!
                 self.owner.position += Vector2(0, -60)
+
+    def _check_trigger(self):
+        """나와 겹치는 트리거가 있는지 확인하고, 있다면 발동시킨다."""
+        pass
 
     def _update_gravity(self):
         self.velocity += self._gravity * game_globals.delta_time
