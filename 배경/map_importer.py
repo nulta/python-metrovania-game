@@ -3,6 +3,10 @@ import os
 
 FROM_DIR = "./"
 TO_DIR = "../resources/levels/"
+ENTITIES = [
+    "Player",
+]
+ENTITIES_FIRST_GID = 76
 
 
 tmj_files = filter(lambda name: name.endswith(".tmj"), os.listdir(FROM_DIR))
@@ -19,7 +23,7 @@ for filename in tmj_files:
         layer_data_map = layer_data["data"]
 
         map_data: "list[list[int]]" = [([0] * width) for _ in range(height)]
-        ent_data = [["Player", 3, 3], ]
+        ent_data = []
         new_data = {
             "tileset_name": "generic_0",
             "music": "",
@@ -33,7 +37,18 @@ for filename in tmj_files:
                 break
             for x in range(width):
                 idx = width * y + x
-                map_data[y][x] = layer_data_map[idx]
+                tile_id = layer_data_map[idx]
+                if tile_id >= ENTITIES_FIRST_GID:
+                    map_data[y][x] = 0
+                    ent_id = ENTITIES_FIRST_GID - tile_id
+                    if ent_id >= len(ENTITIES):
+                        # ent_id out of range
+                        print(f"On map '{filename}' ({x}, {y}): Tile ID ({ent_id}) out of range!")
+                        continue
+                    ent_type = ENTITIES[ent_id]
+                    ent_data.append([ent_type, x, y])
+                else:
+                    map_data[y][x] = tile_id
         
         new_filename = filename.replace(".tmj", ".json").lower().replace(" ", "")
         with open(TO_DIR + new_filename, "w") as f2:
