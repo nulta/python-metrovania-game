@@ -12,7 +12,7 @@ class PhysicsComponent:
     def __init__(self, owner: "Entity"):
         self._owner = owner
         self._velocity = Vector2(0, 0)   # pixels per second
-        self._gravity = Vector2(0, 900)  # pixels per second
+        self._gravity = Vector2(0, 1200)  # pixels per second
 
         self._collision_map = [[]]
         self._tile_size = TILE_SIZE
