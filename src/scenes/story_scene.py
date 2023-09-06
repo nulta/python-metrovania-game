@@ -157,7 +157,7 @@ class StorySceneIntro(StoryScene):
         from resource_loader import ResourceLoader
 
         # TODO: 이거 정리
-        leveldata = ResourceLoader.load_level_data("2_hotman")
+        leveldata = ResourceLoader.load_level_data("5_speed")
         level = Level(leveldata)
         scene = GameScene(level)
         SceneManager.clear_scene()

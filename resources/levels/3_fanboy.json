@@ -93,7 +93,7 @@
         [62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61]
         ],
     "entities": [
-        ["Player",2,27]
+        ["Player",6,83]
     ],
     "music": "title.ogg",
     "background_img": "intro.png"

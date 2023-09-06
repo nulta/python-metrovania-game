@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "2_BT02_wind.tmj",
+    "activeFile": "4_SB87_3.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -80,19 +80,35 @@
                 "y": 464.66666666666663
             }
         },
-        "3_SN91_speed.tmx": {
-            "scale": 1.5,
+        "3_SN91_speed.tmj": {
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2813.6666666666665,
-                "y": 315.33333333333326
+                "x": 2933,
+                "y": 448
+            }
+        },
+        "3_SN91_speed.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 56,
+                "y": 316.66666666666663
+            }
+        },
+        "4_SB87_1_2.tmj": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1171,
+                "y": 1018
             }
         },
         "4_SB87_1_2.tmx": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2178,
+                "x": 990,
                 "y": 909
             }
         },
@@ -104,12 +120,20 @@
                 "y": -890.25
             }
         },
+        "4_SB87_3.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1465.333333333333,
+                "y": 487.3333333333333
+            }
+        },
         "4_SB87_3.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 974.6666666666665,
-                "y": 674
+                "x": 1007.3333333333333,
+                "y": 480
             }
         },
         "4_SB87_Boss.tmx": {
@@ -158,25 +182,23 @@
     "map.tileWidth": 30,
     "openFiles": [
         "tileset.tsx",
-        "3_SN91_speed.tmx",
-        "2_BT02_wind.tmj",
-        "3_SN91_Boss.tmx",
-        "4_SB87_1_2.tmx"
+        "4_SB87_3.tmj",
+        "4_SB87_1_2.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "tileset.tsx",
-        "3_SN91_speed.tmx",
+        "4_SB87_1_2.tmj",
+        "4_SB87_3.tmj",
+        "4_SB87_3.tmx",
         "4_SB87_1_2.tmx",
         "3_SN91_Boss.tmx",
+        "3_SN91_speed.tmj",
+        "3_SN91_speed.tmx",
         "2_BT02_wind.tmj",
         "2_BT02_wind.tmx",
         "1_FB85_fire.tmj",
-        "1_FB85_fire.tmx",
-        "1_FB85_Boss.tmx",
-        "0_ tutorial.tmj",
-        "0_ tutorial.tmx",
-        "6_KS64_navy.tmx"
+        "1_FB85_fire.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

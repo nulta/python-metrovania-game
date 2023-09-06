@@ -1,0 +1,11 @@
+{
+    "tileset_name": "generic_0",
+    "map_data": [
+        
+    ],
+    "entities": [
+        ["Player",2,10]
+    ],
+    "music": "title.ogg",
+    "background_img": "intro.png"
+}
