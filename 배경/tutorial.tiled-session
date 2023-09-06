@@ -28,16 +28,16 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 790.25,
-                "y": 550.25
+                "x": 813.25,
+                "y": 555
             }
         },
         "0_tutorial.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1371,
-                "y": 559.5
+                "x": 263,
+                "y": 564.5
             }
         },
         "1. tutorial.tmx": {
