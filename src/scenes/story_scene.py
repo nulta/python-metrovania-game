@@ -157,7 +157,7 @@ class StorySceneIntro(StoryScene):
         from resource_loader import ResourceLoader
 
         # TODO: 이거 정리
-        leveldata = ResourceLoader.load_level_data("2_bt02_wind")
+        leveldata = ResourceLoader.load_level_data("6_ks64_navy")
         level = Level(leveldata)
         scene = GameScene(level)
         SceneManager.clear_scene()

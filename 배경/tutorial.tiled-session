@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "4_SB87_3.tmj",
+    "activeFile": "6_KS64_navy.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -100,7 +100,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1171,
+                "x": 1241,
                 "y": 1018
             }
         },
@@ -136,36 +136,68 @@
                 "y": 480
             }
         },
+        "4_SB87_Boss.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 659.3333333333333,
+                "y": 465.33333333333337
+            }
+        },
         "4_SB87_Boss.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 28.5,
-                "y": -6.25
+                "x": 299.5,
+                "y": -3.25
             }
         },
-        "5_VP33_Boss.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 968,
-                "y": 577
-            }
-        },
-        "5_VP33_gas.tmx": {
+        "5_VP33_Boss.tmj": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1337,
-                "y": -120.5
+                "x": 584.5,
+                "y": 390
+            }
+        },
+        "5_VP33_Boss.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.5,
+                "y": 0
+            }
+        },
+        "5_VP33_gas.tmj": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1455,
+                "y": 496
+            }
+        },
+        "5_VP33_gas.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1457,
+                "y": 494
+            }
+        },
+        "6_KS64_navy.tmj": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3316,
+                "y": 206
             }
         },
         "6_KS64_navy.tmx": {
-            "scale": 0.75,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1645.333333333333,
-                "y": 74
+                "x": 1944,
+                "y": 182
             }
         },
         "tileset.tsx": {
@@ -182,23 +214,27 @@
     "map.tileWidth": 30,
     "openFiles": [
         "tileset.tsx",
-        "4_SB87_3.tmj",
-        "4_SB87_1_2.tmj"
+        "4_SB87_1_2.tmj",
+        "4_SB87_Boss.tmj",
+        "5_VP33_Boss.tmj",
+        "5_VP33_gas.tmj",
+        "5_VP33_gas.tmx",
+        "6_KS64_navy.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "tileset.tsx",
         "4_SB87_1_2.tmj",
+        "4_SB87_Boss.tmj",
+        "5_VP33_Boss.tmj",
+        "5_VP33_gas.tmj",
+        "5_VP33_gas.tmx",
+        "6_KS64_navy.tmj",
+        "6_KS64_navy.tmx",
+        "5_VP33_Boss.tmx",
+        "4_SB87_Boss.tmx",
         "4_SB87_3.tmj",
-        "4_SB87_3.tmx",
-        "4_SB87_1_2.tmx",
-        "3_SN91_Boss.tmx",
-        "3_SN91_speed.tmj",
-        "3_SN91_speed.tmx",
-        "2_BT02_wind.tmj",
-        "2_BT02_wind.tmx",
-        "1_FB85_fire.tmj",
-        "1_FB85_fire.tmx"
+        "4_SB87_3.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
