@@ -21,6 +21,7 @@ GENDER_FEMALE = 1
 
 #속도, 질량
 PLAYER_MOVE_SPEED = 300
+PLAYER_MASS = 30
 
 
 # ACTION 상수 (InputManager)

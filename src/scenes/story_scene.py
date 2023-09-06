@@ -19,6 +19,7 @@ class StoryScene(Scene):
     lines = []
     background_image = ""
     character_image = ""
+    next_level = ""
 
     def __init__(self):
         assert self.__class__.next_scene != StoryScene.next_scene, (
@@ -54,6 +55,7 @@ class StoryScene(Scene):
         
         StoryScene을 상속하는 클래스는 **반드시** 이 함수를 재정의해야 한다.
         """
+        
         raise NotImplementedError
 
     def draw(self, surface: "Surface"):
@@ -149,11 +151,11 @@ class StorySceneIntro(StoryScene):
                   "ESC 키를 누르면 이 장면이 스킵된다"]
     background_image = "intro"
     character_image = "fanboy"
-
+    next_level = "0_tutorial"
+    
     def next_scene(self):
         from scene_manager import SceneManager
         from resource_loader import ResourceLoader
-
         # TODO: 이거 정리
         leveldata = ResourceLoader.load_level_data("0_tutorial")
         level = Level(leveldata)
