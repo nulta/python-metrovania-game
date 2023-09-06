@@ -140,9 +140,7 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    lines = ["ㅡ",
-            "러ㅏㄹㄹ",
-            "아ㅓ라ㅓ아러ㅏㅇ"
+    lines = ["asdf"
             ]
     
     _button_texts = ["건너뛰기(ESC)", "▽"]
