@@ -1,7 +1,8 @@
-from pygame import Surface
+from pygame import Surface, Rect
 from pygame.math import Vector2
 from constants import *
 from typing import TYPE_CHECKING, TypeVar, Any
+import game_globals
 
 if TYPE_CHECKING:
     from level import Level
@@ -54,7 +55,12 @@ class Entity():
 
     def update(self):
         """매 프레임마다 실행된다. 자기 자신의 상태를 업데이트한다."""
-        pass
+        if DEBUG_DRAW_HITBOX:
+            import debug
+            hitbox = self.get("hitbox", Rect(0,0,0,0))
+            hitbox.move_ip(-game_globals.camera_offset)
+            color = self.is_static and (0, 128, 255) or (0, 255, 255)
+            debug.draw_rect(hitbox, color=color)
 
     def surface(self) -> Surface:
         """화면에 그릴 surface를 반환한다."""

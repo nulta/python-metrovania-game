@@ -44,10 +44,6 @@ class PhysicsComponent:
         self._check_stuck()
 
         if DEBUG_DRAW_HITBOX:
-            hitbox = self.owner.get("hitbox", Rect(0,0,0,0))
-            hitbox.move_ip(-game_globals.camera_offset)
-            debug.draw_rect(hitbox)
-
             for rect in self._get_collide_rects():
                 rect = rect.move(-game_globals.camera_offset)
                 debug.draw_rect(rect, color=(0, 255, 128))
