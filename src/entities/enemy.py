@@ -40,6 +40,8 @@ class Enemy(Entity):
         if self._next_attack <= 0:
             self._next_attack = random.randint(1, 3)
             self.attack()
+
+        
         
 
     def surface(self,enemy_name):
