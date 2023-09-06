@@ -259,6 +259,7 @@
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "tileset.tsx",
         "0_tutorial.tmx",
         "1_FB85_Boss.tmx",
         "1_FB85_fire.tmx",
@@ -269,8 +270,7 @@
         "4_SB87_3.tmx",
         "5_VP33_Boss.tmx",
         "5_VP33_gas.tmx",
-        "4_SB87_Boss.tmx",
-        "6_KS64_navy.tmx"
+        "4_SB87_Boss.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
