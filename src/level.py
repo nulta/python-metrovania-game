@@ -79,7 +79,7 @@ class Level:
         for ent_info in self._entities:
             ent_name = ent_info[0]
             ent_pos = pygame.Vector2(ent_info[1], ent_info[2]) * self._tile_size
-            ent_props = 3 in ent_info and ent_info[3] or {}
+            ent_props = len(ent_info) > 3 and ent_info[3] or {}
             ent = self._make_entity(ent_name, ent_props)
             if ent:
                 ent.position = ent_pos
