@@ -24,9 +24,9 @@ class StoryScene(Scene):
     player_name = ""
 
     def __init__(self):
-        assert self.__class__.next_scene != StoryScene.next_scene, (
-            "The method 'next_scene()' should must be overriden."
-        )
+       # assert self.__class__.next_scene != StoryScene.next_scene, (
+        #    "The method 'next_scene()' should must be overriden."
+        #)
 
         super().__init__()
         self.line_count=0
@@ -53,12 +53,19 @@ class StoryScene(Scene):
                 self.next_scene()
     
     def next_scene(self):
+        from scene_manager import SceneManager
+        from resource_loader import ResourceLoader
+        leveldata = ResourceLoader.load_level_data(f"{self.next_level}")
+        level = Level(leveldata)
+        scene = GameScene(level)
+        SceneManager.clear_scene()
+        SceneManager.push_scene(scene)
         """다음 씬으로 넘어간다.
         
         StoryScene을 상속하는 클래스는 **반드시** 이 함수를 재정의해야 한다.
         """
         
-        raise NotImplementedError
+        #raise NotImplementedError
 
     def draw(self, surface: "Surface"):
         self.draw_background(surface, self.background_image)
@@ -71,7 +78,7 @@ class StoryScene(Scene):
 
     def draw_background(self, surface: pygame.Surface, scence):
         # 배경 그리기
-        scence_path = ResourceLoader.load_image_2x(f"sprites/background/{scence}.png")
+        scence_path = ResourceLoader.load_image(f"sprites/background/{scence}.png")
         surface.blit(scence_path, (0, 0))
 
     def draw_character(self, surface: pygame.Surface,character):
@@ -160,7 +167,7 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    boss_name = " "
+    boss_name = "테라트루스"
     lines = [
              "그 전쟁은 스스로 신의 자손이라 칭하는 악명높은'\n'북조선의 테러리스트 (보스)가 북조선 정부를 침공하면서였다.",
              f"이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다."
@@ -170,18 +177,9 @@ class StorySceneIntro(StoryScene):
     music_name = ""
     info_texts = ["ENTER 키를 누르면 다음 대사로 넘어간다",
                   "ESC 키를 누르면 이 장면이 스킵된다"]
-    background_image = "intro"
-    character_image = "fanboy"
+    background_image = "war"
+    character_image = ""
     next_level = "0_tutorial"
     
-    def next_scene(self):
-        from scene_manager import SceneManager
-        from resource_loader import ResourceLoader
-        # TODO: 이거 정리
-        leveldata = ResourceLoader.load_level_data("0_tutorial")
-        level = Level(leveldata)
-        scene = GameScene(level)
-        SceneManager.clear_scene()
-        SceneManager.push_scene(scene)
     
  
