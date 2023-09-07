@@ -1,7 +1,7 @@
 {
     "tileset_name": "generic_0",
     "music": "",
-    "background_img": "",
+    "background_img": "storage.png",
     "entities": [
         ["Player",2,7]
     ],
