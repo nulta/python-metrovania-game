@@ -20,15 +20,15 @@ class Player(Entity):
         self._hp = 200
         self._gender = game_globals.player_gender
         self._move_speed = PLAYER_MOVE_SPEED
-        self._jump_power = 100000
+        self._jump_power = 500  # Max velocity when jumping. pixels per second.
         self._weapon = None
         self._pivot = Vector2(30, 56)
         self._walking = False
         self._flip = False
         self._focus_index = 0
         self._jump_timer=0
-        self._max_jump_time=0.15
-        self.Land = True
+        self._max_jump_time=0.2
+        self._jumping = False
 
     @property
     def hitbox(self):
@@ -66,17 +66,19 @@ class Player(Entity):
         # 점프 처리
         # TODO: 계단에서 점프할수 있게 하기
 
-        if self.physics.does_point_collide(self.position):
-            self.Land = True
-            self._jump_timer = 0 
-        else:
-            self.Land = False
+
+        if InputManager.pressed(ACTION_JUMP) and self.is_on_floor():
+            self._jumping = True
+            self._jump_timer = 0
         
-        if InputManager.held(ACTION_JUMP) and self.Land:
+        if InputManager.held(ACTION_JUMP) and self._jumping:
             self._jump_timer += game_globals.delta_time
-            jump_percent = util.remapc(self._jump_timer, (0, self._max_jump_time), (1, 0))
-            jump_accel = jump_percent * self._jump_power
-            self.physics.velocity.y -= jump_accel * game_globals.delta_time 
+            if self._jump_timer < self._max_jump_time:
+                self.physics.velocity.y = min(self.physics.velocity.y, -self._jump_power)
+        else:
+            self._jumping = False
+            if InputManager.released(ACTION_JUMP):
+                print("Held jump button for:", self._jump_timer)
 
 
         # 물리 처리
@@ -133,3 +135,13 @@ class Player(Entity):
     def take_damage(self, damage):
         #지정된 양만큼의 데미지를 입는다.
         self.hp -= damage
+
+    def is_on_floor(self):
+        """바닥에 발을 딛고 있는가?"""
+        down_1px = Vector2(0, 1)
+        check_points = [
+            Vector2(self.hitbox.bottomleft) + down_1px,
+            Vector2(self.hitbox.midbottom) + down_1px,
+            Vector2(self.hitbox.bottomright) + down_1px,
+        ]
+        return any(map(self.physics.does_point_collide, check_points))

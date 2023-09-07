@@ -42,7 +42,11 @@ class Stair(StaticEntity):
         self._to_left = to_left
         self._width = TILE_SIZE
         self._height = TILE_SIZE
+        self._built_rects = False
 
+    def _build_rects(self):
+        if self._built_rects: return
+        self._built_rects = True
         # 계단을 구성하는 두 개의 직사각형
         #   []
         # [][]
@@ -53,7 +57,9 @@ class Stair(StaticEntity):
         else:
             self._higher_rect.move_ip(self._width // 2, 0)
 
+
     def on_physics_trigger(self, phys: "PhysicsComponent"):
+        self._build_rects()
         their_hitbox: "pygame.Rect | None" = phys.owner.get("hitbox")
         if not their_hitbox: return
         higher_rect = self._higher_rect
@@ -76,7 +82,9 @@ class Stair(StaticEntity):
         debug.draw_rect(lower_rect, on_map=True)
     
     def does_point_collide(self, point: "pygame.Vector2"):
+        self._build_rects()
         return self._lower_rect.collidepoint(point) or self._higher_rect.collidepoint(point)
+
 
 
 class Spike(StaticEntity):

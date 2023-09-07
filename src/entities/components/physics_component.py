@@ -138,6 +138,7 @@ class PhysicsComponent:
                     # 이 블럭의 윗자리가 비어있으면 is_stair를 True로 한다.
                     if not self.does_point_collide(Vector2(rect.midtop) + Vector2(0, -2)):
                         is_stair = True
+                        diff_y = round(new_hitbox.bottom - rect.top)
 
                 # 벡터의 내적
                 dot_x = abs(delta_pos.dot((diff_x, 0)))
@@ -149,7 +150,11 @@ class PhysicsComponent:
                 assert not (dot_x == infinite and dot_y == infinite)
 
                 # 더 적게 밀어도 되는 쪽으로 민다.
-                if dot_x < dot_y and not is_stair:
+                if is_stair:
+                    # 계단이라면 반드시 위쪽으로 올린다.
+                    lose_y_vel = True
+                    new_pos.y -= abs(diff_y)
+                elif dot_x < dot_y:
                     # X쪽으로 반작용을 가한다.
                     assert delta_pos.x
                     lose_x_vel = True
