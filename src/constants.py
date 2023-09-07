@@ -2,6 +2,10 @@
 # 상수는 프로그램이 실행되는 동안 "변하지 않는" 변수이다.
 # 상수의 이름은 전부 대문자로 작성한다.
 
+#캐릭터 이름 설정
+BOSS_NAME = "테라트루스"
+PLAYER_NAME = ""
+DOCTOR_NAME = ""
 # 설정 값
 GAME_WINDOW_NAME = "게임 이름"
 RESOURCE_PATH = "./resources"

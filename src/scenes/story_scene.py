@@ -124,7 +124,7 @@ class StoryScene(Scene):
     def draw_line(self, surface: pygame.Surface):
         # 대사 그리기
         text = self.lines[self.line_count]
-        font_size = 25
+        font_size = 23
         color = (255, 255, 255)
         y_offset = 6
         line_changes = text.split('\n')
@@ -146,7 +146,7 @@ class StoryScene(Scene):
                     fgcolor=color,
                     size=font_size,
                     )
-                y_offset += 6+ font_size
+                y_offset += 10+ font_size
 
 
 
@@ -167,10 +167,15 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    boss_name = "테라트루스"
+    boss_name = BOSS_NAME
+    player_name = PLAYER_NAME
+    doctor_name = DOCTOR_NAME
     lines = [
-             "그 전쟁은 스스로 신의 자손이라 칭하는 악명높은'\n'북조선의 테러리스트 (보스)가 북조선 정부를 침공하면서였다.",
-             f"이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다."
+            f" 그 전쟁은 스스로 신의 자손이라 칭하는 악명높은'\n'북조선의 테러리스트 {boss_name}가 북조선 정부를 침공하면서였다.",
+            f" 이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다.",
+            f" 그의 엄청난 기계화 부대와 6명의 간부들을 도저히 이길수 없었다.\n 전 세계는 이제 {boss_name}의 손이 넘어갈 판이다.",
+            f" 한편, 남한의 군사연구자인 {doctor_name}는 조수인 {player_name}은\n 타임머신을 통해 {boss_name}의 세력이 비교적 약한\n 과거로 보내 그를 미리 처치하려 한다. ",
+            f" 이제 세계는 {player_name} 한명에게 달려있다.\n 하지만 {boss_name}도 그 계획을 이미 알아차리고\n {player_name}에 맞설 준비를 하는데..",
              ]
     
     _button_texts = ["건너뛰기(ESC)", "▽"]
