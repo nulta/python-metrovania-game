@@ -20,6 +20,8 @@ class StoryScene(Scene):
     background_image = ""
     character_image = ""
     next_level = ""
+    boss_name = ""
+    player_name = ""
 
     def __init__(self):
         assert self.__class__.next_scene != StoryScene.next_scene, (
@@ -117,15 +119,31 @@ class StoryScene(Scene):
         text = self.lines[self.line_count]
         font_size = 25
         color = (255, 255, 255)
+        y_offset = 6
+        line_changes = text.split('\n')
+        
+        if not line_changes:
+            Fonts.get("default").render_to(
+                surface,
+                (70, 420),
+                text,
+                fgcolor=color,
+                size=font_size,
+            )
+        else:
+            for line in line_changes:
+                Fonts.get("default").render_to(
+                    surface,
+                    (70, 420 + y_offset),
+                    line,
+                    fgcolor=color,
+                    size=font_size,
+                    )
+                y_offset += 6+ font_size
 
-        Fonts.get("default").render_to(
-            surface,
-            (70, 420),
-            text,
-            fgcolor=color,
-            size=font_size,
-        )
 
+
+        
 
     def draw_info(self,surface: pygame.Surface):
         # 안내문 그리기
@@ -142,8 +160,11 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    lines = ["asdf"
-            ]
+    boss_name = " "
+    lines = [
+             "그 전쟁은 스스로 신의 자손이라 칭하는 악명높은'\n'북조선의 테러리스트 (보스)가 북조선 정부를 침공하면서였다.",
+             f"이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다."
+             ]
     
     _button_texts = ["건너뛰기(ESC)", "▽"]
     music_name = ""
