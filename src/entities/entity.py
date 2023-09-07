@@ -55,11 +55,10 @@ class Entity():
 
     def update(self):
         """매 프레임마다 실행된다. 자기 자신의 상태를 업데이트한다."""
-        if DEBUG_DRAW_HITBOX:
+        if DEBUG_DRAW_HITBOX and not self.is_static:
             import debug
             hitbox = self.get("hitbox", Rect(0,0,0,0))
-            color = self.is_static and (0, 128, 255) or (0, 255, 255)
-            debug.draw_rect(hitbox, color=color, on_map=True)
+            debug.draw_rect(hitbox, on_map=True)
 
     def surface(self) -> Surface:
         """화면에 그릴 surface를 반환한다."""
@@ -67,12 +66,12 @@ class Entity():
 
     # 아래는 Class가 기본으로 가질 동작 #
 
-    def call(self, signal_name: str, *args: object):
+    def call(self, signal_name: str, *args: object) -> "None | Any":
         """지정된 임의의 함수를 호출한다. 해당 이름의 함수가 없을 경우, 아무것도 하지 않는다."""
         attr = getattr(self.__class__, signal_name, None)
         if callable(attr):
             try:
-                attr(self, *args)
+                return attr(self, *args)
             except TypeError as e:
                 # 함수의 호출 인자 개수가 다른 경우 TypeError가 난다.
                 # 따라서, TypeError가 난 경우 에러를 무시하고 대신 콘솔에 메세지를 띄워 준다.

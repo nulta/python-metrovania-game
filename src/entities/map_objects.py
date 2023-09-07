@@ -15,6 +15,14 @@ class StaticEntity(Entity):
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         pass
 
+    def does_point_collide(self, point: "pygame.Vector2"):
+        """주어진 좌표점이 이 엔티티와 '충돌'하는지 연산한다.
+        
+        `point`는 이 엔티티의 히트박스에 속하는 좌표점이어야 한다. 그렇지 않다면 항상 False를 반환한다.
+        좌표점이 '충돌'한다는 것은, 이 엔티티에서 해당 점이 벽과 같은 충돌 판정을 가진다는 뜻이다.
+        """
+        return False
+
 class Ladder(StaticEntity):
     pass
 
@@ -35,19 +43,21 @@ class Stair(StaticEntity):
         self._width = TILE_SIZE
         self._height = TILE_SIZE
 
-    def on_physics_trigger(self, phys: "PhysicsComponent"):
-        their_hitbox: "pygame.Rect | None" = phys.owner.get("hitbox")
-        if not their_hitbox: return
-
         # 계단을 구성하는 두 개의 직사각형
         #   []
         # [][]
-        higher_rect = pygame.Rect(self.position, (self._width // 2, self._height))
-        lower_rect = pygame.Rect(self.position, (self._width // 2, self._height // 2)).move(0, self._height // 2)
+        self._higher_rect = pygame.Rect(self.position, (self._width // 2, self._height))
+        self._lower_rect = pygame.Rect(self.position, (self._width // 2, self._height // 2)).move(0, self._height // 2)
         if self._to_left:
-            lower_rect.move_ip(self._width // 2, 0)
+            self._lower_rect.move_ip(self._width // 2, 0)
         else:
-            higher_rect.move_ip(self._width // 2, 0)
+            self._higher_rect.move_ip(self._width // 2, 0)
+
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        their_hitbox: "pygame.Rect | None" = phys.owner.get("hitbox")
+        if not their_hitbox: return
+        higher_rect = self._higher_rect
+        lower_rect = self._lower_rect
         
         # 위치를 높이고 아래 방향으로의 속도를 제거한다
         # 즉, 위쪽으로 수직 항력을 가한다
@@ -64,7 +74,9 @@ class Stair(StaticEntity):
 
         debug.draw_rect(higher_rect, on_map=True)
         debug.draw_rect(lower_rect, on_map=True)
-        
+    
+    def does_point_collide(self, point: "pygame.Vector2"):
+        return self._lower_rect.collidepoint(point) or self._higher_rect.collidepoint(point)
 
 
 class Spike(StaticEntity):

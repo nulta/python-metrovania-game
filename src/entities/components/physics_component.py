@@ -2,7 +2,7 @@ from pygame import Vector2, Rect
 from typing import TYPE_CHECKING, Sequence
 import game_globals
 import debug
-from constants import TILE_SIZE, DEBUG_DRAW_HITBOX
+from constants import TILE_SIZE, DEBUG_DRAW_HITBOX, PHYSICS_GRAVITY, PHYSICS_RESOLUTION_RADIUS
 from math import isnan, copysign
 
 if TYPE_CHECKING:
@@ -12,7 +12,7 @@ class PhysicsComponent:
     def __init__(self, owner: "Entity"):
         self._owner = owner
         self._velocity = Vector2(0, 0)   # pixels per second
-        self._gravity = Vector2(0, 1200)  # pixels per second
+        self._gravity = Vector2(PHYSICS_GRAVITY)  # pixels per second
 
         self._collision_map = [[]]
         self._tile_size = TILE_SIZE
@@ -47,17 +47,26 @@ class PhysicsComponent:
         if DEBUG_DRAW_HITBOX:
             for rect in self._get_collide_rects():
                 debug.draw_rect(rect, color=(0, 255, 128), on_map=True)
+            for ent in self._get_nearby_static_entities():
+                hitbox = ent.get("hitbox")
+                if hitbox: debug.draw_rect(hitbox, color=(100, 255, 128), on_map=True)
 
     def does_point_collide(self, point: "Vector2"):
-        """주어진 좌표점이 맵과 겹치는지 여부를 알아낸다.
+        """주어진 좌표점이 벽(또는 바닥이나 천장)과 겹치는지 여부를 알아낸다.
         
         주의: 이 엔티티의 근처에 있는 (반경 3타일 가량) 경우에만 제대로 판단할 수 있다.
         엔티티와 멀리 떨어져 있는 좌표점에 대해서 판단할 경우에는 항상 False를 반환한다.
         """
-        assert self.owner.position.distance_to(point) <= (TILE_SIZE * 3)
+        assert self.owner.position.distance_to(point) <= PHYSICS_RESOLUTION_RADIUS
         if DEBUG_DRAW_HITBOX:
             debug.draw_point(point, color=(255,0,0), on_map=True)
-        return any(map(lambda rect: rect.collidepoint(point), self._get_collide_rects()))
+        
+        rects = self._get_collide_rects()
+        statics = self._get_nearby_static_entities()
+
+        tile_collisions = map(lambda rect: rect.collidepoint(point), rects)
+        static_ent_collisions = map(lambda ent: ent.call("does_point_collide", point), statics)
+        return any(tile_collisions) or any(static_ent_collisions)
 
     def _update_position(self):
         if not self.velocity:
@@ -182,8 +191,7 @@ class PhysicsComponent:
         owner_hitbox: "Rect|None" = self.owner.get("hitbox", None)
         if not owner_hitbox: return
 
-        from entity_manager import EntityManager
-        statics = EntityManager.get_static_entities()
+        statics = self._get_nearby_static_entities()
         for ent in statics:
             trigger_hitbox = ent.get("hitbox", Rect(0,0,0,0))
             is_in = owner_hitbox.colliderect(trigger_hitbox)
@@ -207,10 +215,21 @@ class PhysicsComponent:
     def _is_nearby_tile(self, tile_x, tile_y):
         my_pos = self.owner.position
         tile_size = self._tile_size
-        distance_max_sqr = (tile_size * 3) ** 2
+        distance_max_sqr = PHYSICS_RESOLUTION_RADIUS ** 2
         tile_pos = (tile_x * tile_size + (tile_size / 2), tile_y * tile_size + (tile_size / 2))
         distance_sqr = my_pos.distance_squared_to(tile_pos)
         if distance_sqr <= distance_max_sqr:
             return True
         else:
             return False
+        
+    def _get_nearby_static_entities(self):
+        from entity_manager import EntityManager
+        statics = EntityManager.get_static_entities()
+
+        my_pos = self.owner.position
+        max_distance_sqr = PHYSICS_RESOLUTION_RADIUS ** 2
+        return list(filter(
+            lambda ent: ent.position.distance_squared_to(my_pos) <= max_distance_sqr,
+            statics
+        ))

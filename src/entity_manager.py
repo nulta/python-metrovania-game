@@ -36,20 +36,24 @@ class EntityManager():
     @classmethod
     def find_colliding_entities(cls, rect_or_ent: "Rect | Entity"):
         """주어진 Rect 또는 엔티티와 히트박스가 겹치는 엔티티를 찾는다."""
-        rect = rect_or_ent
+        rect = None
         ent = None
         if isinstance(rect_or_ent, Entity):
-            rect = rect_or_ent.get("hitbox")
+            rect: "Rect | None" = rect_or_ent.get("hitbox")
             ent = rect_or_ent
             if not rect:
                 return []
+        else:
+            rect = rect_or_ent
+            ent = None
 
         colliding = []
-        for ent in cls._ents.values():
-            hitbox = ent.get("hitbox")
+        for find_ent in cls._ents.values():
+            hitbox = find_ent.get("hitbox")
             if not hitbox: continue
-            if rect.colliderect(hitbox):
-                colliding.append(ent)
+            if find_ent == ent: continue
+            if not rect.colliderect(hitbox): continue
+            colliding.append(ent)
         return colliding
 
     @classmethod
