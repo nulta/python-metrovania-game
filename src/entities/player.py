@@ -20,7 +20,7 @@ class Player(Entity):
         self._hp = 200
         self._gender = game_globals.player_gender
         self._move_speed = PLAYER_MOVE_SPEED
-        self._jump_power = 11000
+        self._jump_power = 100000
         self._weapon = None
         self._pivot = Vector2(30, 56)
         self._walking = False
@@ -28,6 +28,7 @@ class Player(Entity):
         self._focus_index = 0
         self._jump_timer=0
         self._max_jump_time=0.15
+        self.Land = True
 
     @property
     def hitbox(self):
@@ -63,15 +64,20 @@ class Player(Entity):
             self._walking = False
 
         # 점프 처리
-        # TODO: 바닥에 붙어있을 경우에만 점프 가능하게 하기
-        # TODO: 약한점프 강한점프 구분하게 하기 (누르는 시간에 따라서)
-        if InputManager.held(ACTION_JUMP):
+        # TODO: 계단에서 점프할수 있게 하기
+
+        if self.physics.does_point_collide(self.position):
+            self.Land = True
+            self._jump_timer = 0 
+        else:
+            self.Land = False
+        
+        if InputManager.held(ACTION_JUMP) and self.Land:
             self._jump_timer += game_globals.delta_time
             jump_percent = util.remapc(self._jump_timer, (0, self._max_jump_time), (1, 0))
             jump_accel = jump_percent * self._jump_power
-            self.physics.velocity.y -= jump_accel * game_globals.delta_time
-        else:
-            self._jump_timer = 0
+            self.physics.velocity.y -= jump_accel * game_globals.delta_time 
+
 
         # 물리 처리
         self.physics.update()
