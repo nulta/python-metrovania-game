@@ -2,7 +2,7 @@ from pygame import Vector2, Rect
 from typing import TYPE_CHECKING, Sequence
 import game_globals
 import debug
-from constants import TILE_SIZE, DEBUG_DRAW_HITBOX, PHYSICS_GRAVITY, PHYSICS_RESOLUTION_RADIUS
+from constants import TILE_SIZE, DEBUG_DRAW_HITBOX, PHYSICS_GRAVITY, PHYSICS_RESOLUTION_RADIUS, PHYSICS_STAIR_HEIGHT
 from math import isnan, copysign
 
 if TYPE_CHECKING:
@@ -112,6 +112,7 @@ class PhysicsComponent:
                 # 충돌한다면, 충돌 해결
                 collided = True
                 infinite = float("inf")  # 무한대
+                is_stair = False         # 오를 수 있는 반블럭인가?
 
                 # X 방향으로 옮겨서 충돌을 해결할 때, 옮겨야 할 픽셀 수
                 diff_x = infinite
@@ -132,6 +133,12 @@ class PhysicsComponent:
                 assert diff_y >= 0
                 assert min(diff_x, diff_y) != infinite
 
+                # 옆에서 접근하고 있고, 0.5타일짜리 높이 단차만 있는가?
+                if delta_pos.x != 0 and 0 <= new_hitbox.bottom - rect.top <= PHYSICS_STAIR_HEIGHT:
+                    # 이 블럭의 윗자리가 비어있으면 is_stair를 True로 한다.
+                    if not self.does_point_collide(Vector2(rect.midtop) + Vector2(0, -2)):
+                        is_stair = True
+
                 # 벡터의 내적
                 dot_x = abs(delta_pos.dot((diff_x, 0)))
                 dot_y = abs(delta_pos.dot((0, diff_y)))
@@ -142,7 +149,7 @@ class PhysicsComponent:
                 assert not (dot_x == infinite and dot_y == infinite)
 
                 # 더 적게 밀어도 되는 쪽으로 민다.
-                if dot_x < dot_y:
+                if dot_x < dot_y and not is_stair:
                     # X쪽으로 반작용을 가한다.
                     assert delta_pos.x
                     lose_x_vel = True
@@ -150,6 +157,7 @@ class PhysicsComponent:
                     new_pos.x -= copysign(diff_x, delta_pos.x)
                 else:
                     # Y쪽으로 반작용을 가한다.
+                    # is_stair일 경우 반드시 이렇게 된다.
                     lose_y_vel = True
                     diff_y = min(abs(diff_y), abs(delta_pos.y))  # 작용력보다 수직 항력이 더 크면 안 된다
                     new_pos.y -= copysign(diff_y, delta_pos.y)
