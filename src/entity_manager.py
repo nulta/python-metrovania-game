@@ -34,7 +34,7 @@ class EntityManager():
         return list(filter(lambda ent: ent.is_static, cls._ents.values()))
     
     @classmethod
-    def find_colliding_entities(cls, rect_or_ent: "Rect | Entity"):
+    def find_colliding_entities(cls, rect_or_ent: "Rect | Entity") -> "list[Entity]":
         """주어진 Rect 또는 엔티티와 히트박스가 겹치는 엔티티를 찾는다."""
         rect = None
         ent = None
@@ -53,7 +53,7 @@ class EntityManager():
             if not hitbox: continue
             if find_ent == ent: continue
             if not rect.colliderect(hitbox): continue
-            colliding.append(ent)
+            colliding.append(find_ent)
         return colliding
 
     @classmethod

@@ -10,6 +10,7 @@ if TYPE_CHECKING:
 
 class Entity():
     is_player = False
+    is_enemy = False
     is_static = False
     _level: "Level | None" = None
 
@@ -31,7 +32,7 @@ class Entity():
 
     @position.setter
     def position(self, value: Vector2):
-        self._position = value
+        self._position = Vector2(round(value.x), round(value.y))
 
     @property
     def valid(self):

@@ -17,6 +17,9 @@ class PhysicsComponent:
         self._collision_map = [[]]
         self._tile_size = TILE_SIZE
 
+        self.no_clip = False
+        self.no_gravity = False
+
         if self.owner._level:
             self._collision_map = self.owner._level.get_collision_map()
         else:
@@ -39,10 +42,15 @@ class PhysicsComponent:
 
 
     def update(self):
-        self._update_gravity()
-        self._update_position()
-        self._check_stuck()
-        self._check_trigger()
+        if not self.no_gravity:
+            self._update_gravity()
+        
+        if self.no_clip:
+            self.owner.position += self.velocity * game_globals.delta_time
+        else:
+            self._update_position()
+            self._check_stuck()
+            self._check_trigger()
 
         if DEBUG_DRAW_HITBOX:
             for rect in self._get_collide_rects():
@@ -76,7 +84,7 @@ class PhysicsComponent:
         new_pos = old_pos + (self.velocity * game_globals.delta_time)
         new_pos.x = round(new_pos.x)
         new_pos.y = round(new_pos.y)
-        
+
         old_hitbox: "Rect | None" = self.owner.get("hitbox")
         if not old_hitbox:
             return
