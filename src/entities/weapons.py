@@ -1,3 +1,4 @@
+from audio import Audio
 from .bullet import Bullet, BulletInfo
 from pygame import Vector2
 from pygame import Rect
@@ -70,10 +71,9 @@ class BasicGun(Weapon):
     _bullet_speed = 600
 
     def _fire_bullet(self):
-        print(repr(self), "Fire!")
         bullet = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
         bullet.position = self.position
 
     def on_shoot(self):
         self._fire_bullet()
-        # TODO: 소리 재생
+        Audio.play("gun_1")
