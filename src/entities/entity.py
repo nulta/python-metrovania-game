@@ -12,6 +12,7 @@ class Entity():
     is_player = False
     is_enemy = False
     is_static = False
+    always_update = False  # 화면 밖에서도 update()되게 한다.
 
     def __init__(self):
         from entity_manager import EntityManager
@@ -62,6 +63,10 @@ class Entity():
     def surface(self) -> Surface:
         """화면에 그릴 surface를 반환한다."""
         return Surface((0, 0))
+    
+    def on_suspend(self):
+        """엔티티가 화면 밖으로 나가는 등 일시 정지되기 직전에 호출된다."""
+        pass
 
     # 아래는 Class가 기본으로 가질 동작 #
 

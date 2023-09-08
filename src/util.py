@@ -166,3 +166,37 @@ if True:
 
         def __get__(self, obj, cls) -> "_T":
             return self.f(cls)
+
+
+def approach_linear(current: "float", target: "float", vel: "float"):
+    """target 값과 current 값의 차를 vel만큼 줄인 값을 반환한다.
+    
+    @example `approach_linear(105, 0, 50) == 55`
+    @example `approach_linear(55, 0, 50) == 5`
+    @example `approach_linear(5, 0, 50) == 0`
+    """
+    assert vel >= 0
+    if current > target:
+        return max(current - vel, target)
+    elif current < target:
+        return min(current + vel, target)
+    else:
+        return target
+
+
+assert approach_linear(100, 50, 1000) == 50
+assert approach_linear(100, 50, 10) == 90
+assert approach_linear(-100, 50, 10) == -90
+assert approach_linear(-100, 50, 1000) == 50
+
+
+def approach_easeout(current: "float", target: "float", vel: "float", epsilon = 0.1):
+    """approach_linear와 비슷하지만 가까워질수록 vel이 줄어든다."""
+    dist = abs(current - target)
+    if dist < epsilon:
+        return target
+
+    if dist < vel * 2:
+        vel *= remap(dist, (0, vel * 2), (0, 1))**2
+    
+    return approach_linear(current, target, vel)

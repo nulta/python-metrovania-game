@@ -24,6 +24,10 @@ class Player(Entity):
         self._move_speed = PLAYER_MOVE_SPEED        # 이동 속도
         self._jump_power = 500                      # 점프 시의 최대 수직 속력 (px/s).
         self._max_jump_time = 0.2                   # 긴 점프의 최대 유지 시간
+        self._max_damage_knockback = 3000           # 데미지 넉백의 최대 속력 (데미지 비례)
+        self._damage_knockback_y_multiplier = 1.5   # 데미지 넉백에서 Y방향 속력에 곱해질 수
+        self._x_velocity_decrease_midair = 600     # 초당 x방향 속력의 감소량 (공중에 떴을 때)
+        self._x_velocity_decrease_floor = 6000      # 초당 x방향 속력의 감소량 (땅 위에서)
 
         self._weapon = weapons.BasicGun(False)
         self._hp = self._max_hp
@@ -57,20 +61,43 @@ class Player(Entity):
 
         # 좌우 이동 처리
         axis = InputManager.axis(AXIS_HORIZONTAL)
-        speed = self._move_speed
+        vel_x = self.physics.velocity.x
+
+        # # X 속도의 최대 변화량
+        # x_dec = self._x_velocity_decrease_midair * dt
+        # if self.is_on_floor():
+        #     x_dec = self._x_velocity_decrease_floor * dt
+
+        # # 목표 X 속도
+        # desired_vel_x = self._move_speed * axis
+        # self.physics.velocity.x = util.approach_linear(vel_x, desired_vel_x, x_dec)
+
+        # X 속도의 최대 변화량
+        x_dec = self._x_velocity_decrease_midair * dt
+        if self.is_on_floor():
+            x_dec = self._x_velocity_decrease_floor * dt
+        
         if axis:
-            self.physics.velocity.x = axis * speed
+            x_dec *= 3
+
+        # 목표 X 속도
+        desired_vel_x = self._move_speed * axis
+        self.physics.velocity.x = util.approach_easeout(vel_x, desired_vel_x, x_dec)
+
+        # 애니메이션 및 상태 처리
+        if axis:
             self._walking = True
             if axis > 0:
                 self._flip = True
             else:
                 self._flip = False
         else:
-            self.physics.velocity.x = 0
             self._walking = False
+
 
         # 점프 처리
         if InputManager.pressed(ACTION_JUMP) and self.is_on_floor():
+            Audio.play("jump_1")
             self._jumping = True
             self._jump_timer = 0
 
@@ -89,12 +116,12 @@ class Player(Entity):
             self._weapon.position = Vector2(self.hitbox.center)
             self._weapon.direction = Vector2(1 if self._flip else -1, 0)
             if InputManager.pressed(ACTION_SHOOT):
-                self._shoot_timer = self._weapon.shoot_cooldown
+                self._shoot_timer = self._weapon.shoot_cooldown + 0.01
                 self._weapon.shoot()
             elif InputManager.held(ACTION_SHOOT):
                 self._shoot_timer -= dt
-                if self._shoot_timer <= 0:
-                    self._shoot_timer = self._weapon.shoot_cooldown
+                if self._shoot_timer < 0:
+                    self._shoot_timer = self._weapon.shoot_cooldown + 0.01
                     self._weapon.shoot()
             else:
                 self._shoot_timer = 0
@@ -147,7 +174,7 @@ class Player(Entity):
 
         return surface
 
-    def take_damage(self, damage: "int"):
+    def take_damage(self, damage: "int", origin: "Vector2 | None" = None):
         """지정된 양만큼의 데미지를 입는다."""
 
         # 무적 상태일 때는 데미지를 받지 않는다.
@@ -157,7 +184,17 @@ class Player(Entity):
         # 데미지를 입은 뒤에는 일시적으로 무적이 된다.
         self._invincible_timer = self._damage_taking_delay
         self.hp -= damage
+        Audio.play("hurt_2")
         print(str(self), "HP ->", self.hp)
+
+        # origin이 있다면 넉백을 받는다.
+        if origin:
+            knockback_direction = (self.position - origin).normalize()
+            knockback_power = self._max_damage_knockback * util.clamp(damage / self._max_hp, 0, 5)
+            knockback = knockback_direction * knockback_power
+            knockback.y *= self._damage_knockback_y_multiplier
+            print(knockback)
+            self.physics.velocity += knockback
 
     def is_on_floor(self):
         """바닥에 발을 딛고 있는가?"""

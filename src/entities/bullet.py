@@ -43,7 +43,6 @@ class Bullet(Entity):
         hit_wall = self.physics.does_point_collide(Vector2(self.hitbox.center))
         self._remaining_time -= game_globals.delta_time
         if self._remaining_time <= 0 or hit_wall:
-            print("Rect", repr(self._info.rect))
             return self.remove()
 
         # 닿는 물체가 있는지 확인

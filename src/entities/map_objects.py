@@ -1,8 +1,9 @@
 from entities.components.physics_component import PhysicsComponent
 from .entity import Entity
 import pygame
+from pygame import Rect,Vector2
 from .components.physics_component import PhysicsComponent
-from constants import TILE_SIZE
+from constants import TILE_SIZE, PHYSICS_STAIR_HEIGHT
 import debug
 
 class StaticEntity(Entity):
@@ -10,13 +11,13 @@ class StaticEntity(Entity):
 
     @property
     def hitbox(self):
-        size = pygame.Vector2(60, 60)
-        return pygame.Rect(self.position, size)
+        size = Vector2(60, 60)
+        return Rect(self.position, size)
     
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         pass
 
-    def does_point_collide(self, point: "pygame.Vector2"):
+    def does_point_collide(self, point: "Vector2"):
         """주어진 좌표점이 이 엔티티와 '충돌'하는지 연산한다.
         
         `point`는 이 엔티티의 히트박스에 속하는 좌표점이어야 한다. 그렇지 않다면 항상 False를 반환한다.
@@ -45,54 +46,78 @@ class Stair(StaticEntity):
         self._height = TILE_SIZE
         self._built_rects = False
 
+    
+    @property
+    def hitbox(self):
+        self._build_rects()
+        return self._higher_rect
+
     def _build_rects(self):
         if self._built_rects: return
         self._built_rects = True
-        # 계단을 구성하는 두 개의 직사각형
+        # 계단을 구성하는 두 개의 직사각형 중 위쪽 부분
         #   []
         # [][]
-        self._higher_rect = pygame.Rect(self.position, (self._width // 2, self._height))
-        self._lower_rect = pygame.Rect(self.position, (self._width // 2, self._height // 2)).move(0, self._height // 2)
-        if self._to_left:
-            self._lower_rect.move_ip(self._width // 2, 0)
-        else:
-            self._higher_rect.move_ip(self._width // 2, 0)
-
+        self._higher_rect = Rect(self.position, (self._width // 2 - 2, self._height // 2))
+        if not self._to_left:
+            self._higher_rect.move_ip(self._width // 2 + 2, 0)
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         self._build_rects()
-        their_hitbox: "pygame.Rect | None" = phys.owner.get("hitbox")
+        their_hitbox: "Rect | None" = phys.owner.get("hitbox")
         if not their_hitbox: return
         higher_rect = self._higher_rect
-        lower_rect = self._lower_rect
         
         # 위치를 높이고 아래 방향으로의 속도를 제거한다
         # 즉, 위쪽으로 수직 항력을 가한다
         if their_hitbox.colliderect(higher_rect):
-            # 계단의 높은 지점을 즈려밟고 있다
-            phys.owner.position.y = min(phys.owner.position.y, higher_rect.top)
-            phys.velocity.y = min(0, phys.velocity.y)
-            debug.draw_point(higher_rect.center, on_map=True)
-        elif their_hitbox.colliderect(lower_rect):
-            # 계단의 낮은 지점을 즈려밟고 있다
-            phys.owner.position.y = min(phys.owner.position.y, lower_rect.top)
-            phys.velocity.y = min(0, phys.velocity.y)
-            debug.draw_point(lower_rect.center, on_map=True)
+            if their_hitbox.bottom - higher_rect.top <= PHYSICS_STAIR_HEIGHT:
+                phys.owner.position.y = min(phys.owner.position.y, higher_rect.top)
+                phys.velocity.y = min(0, phys.velocity.y)
+                debug.draw_point(higher_rect.center, on_map=True)
 
         debug.draw_rect(higher_rect, on_map=True)
-        debug.draw_rect(lower_rect, on_map=True)
     
-    def does_point_collide(self, point: "pygame.Vector2"):
+    def does_point_collide(self, point: "Vector2"):
         self._build_rects()
-        return self._lower_rect.collidepoint(point) or self._higher_rect.collidepoint(point)
+        return self._higher_rect.collidepoint(point)
 
 
 
 class Spike(StaticEntity):
     _damage = 50
 
+    def __init__(self, direction: "int" = 2):
+        """direction 인수는 가시가 박힌 방향이다.
+        
+        방향은 숫자로 나타내는데, 키보드의 숫자 패드 모양에서 따온다.
+        ```
+        789
+        456
+        123
+        ```
+
+        따라서, direction이 8이면 천장에 박힌 가시, 2면 바닥에 박힌 가시,
+        4면 왼쪽벽에 박힌 가시, 6이면 오른쪽벽에 박힌 가시이다.
+        """
+        super().__init__()
+
+        if direction == 8:
+            self._hitbox = Rect(0, 0, 60, 35)
+        elif direction == 4:
+            self._hitbox = Rect(0, 0, 35, 60)
+        elif direction == 6:
+            self._hitbox = Rect(25, 0, 35, 60)
+        else:
+            assert direction == 2, "direction must be one of [2,4,6,8]"
+            self._hitbox = Rect(0, 25, 60, 35)
+
+    @property
+    def hitbox(self):
+        return self._hitbox.move(self.position)
+
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.owner.call("take_damage", self._damage)
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
 class BoostTile(StaticEntity):
     def __init__(self, boost: float=1):
