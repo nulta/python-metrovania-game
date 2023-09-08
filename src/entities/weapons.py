@@ -58,7 +58,7 @@ class Weapon:
         self._last_shoot_time = SceneManager.scene_time
 
 class BasicGun(Weapon):
-    shoot_cooldown = 0.25
+    shoot_cooldown = 0.1
     player_graphic = None
 
     _bullet_info = BulletInfo()

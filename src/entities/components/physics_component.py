@@ -17,6 +17,8 @@ class PhysicsComponent:
         self._gravity = Vector2(PHYSICS_GRAVITY)  # pixels per second
 
         self._collision_map = [[]]
+        self._collision_map_height = 0
+        self._collision_map_width = 0
         self._tile_size = TILE_SIZE
 
         self.no_clip = False
@@ -25,6 +27,12 @@ class PhysicsComponent:
         level = EntityManager.current_level
         if level:
             self._collision_map = level.get_collision_map()
+            self._collision_map_height = len(self._collision_map)
+            if len(self._collision_map) >= 1:
+                # Length of first list
+                # NOTE: It only works if the collision map is a 2-dim matrix
+                #       without a single hole
+                self._collision_map_width = len(self._collision_map[0])
         else:
             print("PhysicsComponent: Failed to get collision map - EntityManager.current_level is None!")
 
@@ -225,16 +233,28 @@ class PhysicsComponent:
     def _update_gravity(self):
         self.velocity += self._gravity * game_globals.delta_time
 
-    def _get_collide_rects(self):
-        rects: "list[Rect]" = []
+    def _get_collide_rects(self) -> "list[Rect]":
+        collision_map: "Sequence[Sequence[Rect | None]]" = self._collision_map
+        if not collision_map: return []
 
         # Static Tilemap에서 근처에 있는 rect들을 뽑아온다
-        for y, row in enumerate(self._collision_map):
-            for x, rect in enumerate(row):
-                if rect and self._is_nearby_tile(x, y):
-                    rects.append(rect)
+        self_tile_x = int(self.owner.position.x // self._tile_size)
+        self_tile_y = int(self.owner.position.y // self._tile_size)
+        threshold_tiles = int(PHYSICS_RESOLUTION_RADIUS // self._tile_size)
 
-        return rects
+        x_range_1 = max(0, self_tile_x - threshold_tiles)
+        x_range_2 = max(0, self_tile_x + threshold_tiles + 1)
+
+        y_range_1 = max(0, self_tile_y - threshold_tiles)
+        y_range_2 = max(0, self_tile_y + threshold_tiles + 2)
+
+        collide_rects: "list[Rect]" = []
+        for row in collision_map[y_range_1:y_range_2]:
+            for cell in row[x_range_1:x_range_2]:
+                if cell:
+                    collide_rects.append(cell)
+
+        return collide_rects
 
     def _is_nearby_tile(self, tile_x, tile_y):
         tile_size = self._tile_size

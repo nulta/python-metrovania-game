@@ -32,6 +32,7 @@ class Bullet(Entity):
         return self._info.rect.move(self.position - self.pivot)
     
     def update(self):
+        pass
         super().update()
         from entity_manager import EntityManager
 
