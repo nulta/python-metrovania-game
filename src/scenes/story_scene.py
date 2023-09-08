@@ -78,18 +78,18 @@ class StoryScene(Scene):
 
     def draw_background(self, surface: pygame.Surface, scence):
         # 배경 그리기
-        scence_path = ResourceLoader.load_image(f"sprites/background/{scence}.png")
+        scence_path = ResourceLoader.load_image(f"background/{scence}.png")
         surface.blit(scence_path, (0, 0))
 
     def draw_character(self, surface: pygame.Surface,character):
         if not character: return
 
         # 사람 그리기
-        character_path = ResourceLoader.load_image_2x(f"sprites/story_character/{character}.png")
+        character_path = ResourceLoader.load_image_2x(f"story_character/{character}.png")
         surface.blit(character_path, (550, 200))
 
     def draw_stroyboard(self, surface: pygame.Surface):
-        storyboard_path = ResourceLoader.load_image("sprites/background/storyboard.png")
+        storyboard_path = ResourceLoader.load_image("background/storyboard.png")
         surface.blit(storyboard_path, (0, 0))
 
     def draw_skip(self, surface: pygame.Surface):

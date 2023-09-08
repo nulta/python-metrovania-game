@@ -66,7 +66,7 @@ class BasicGun(Weapon):
     _bullet_info.damage = 5
     _bullet_info.lifetime = 2
     _bullet_info.rect = Rect(0, 0, 20, 20)
-    # _bullet_info.surface = ResourceLoader.load_image_2x("?")
+    _bullet_info.sprite = "item/bullet.png"
     
     _bullet_speed = 600
 

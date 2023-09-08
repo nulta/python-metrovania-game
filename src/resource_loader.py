@@ -47,6 +47,8 @@ class ResourceLoader():
         주의: load_image를 통해 불러온 이미지에 fill() 등을 하지 말 것!
         필요하다면 불러온 이미지를 copy() 함수로 복사한 다음 조작해야 한다.
         """
+        resource_name = "sprites/" + resource_name
+
         # 같은 리소스를 두 번 로딩하지 않는다
         cache = cls._get_cache(resource_name)
         if cache: return cache
@@ -83,7 +85,7 @@ class ResourceLoader():
     @classmethod
     def load_tileset(cls, tileset_name: str) -> "Tileset":
         from tileset import Tileset
-        image_path = "sprites/tileset/" + tileset_name + ".png"
+        image_path = "tileset/" + tileset_name + ".png"
         metadata_path = "sprites/tileset/" + tileset_name + ".json"
 
         tileset_surface = cls.load_image_2x(image_path)

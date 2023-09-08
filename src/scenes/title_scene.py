@@ -71,7 +71,7 @@ class TitleScene(Scene):
             human_y += int(math.cos(max(game_globals.game_time * 2, 6)) * 3)
             human_y = human_y // 2 * 2
 
-            sprite_human = ResourceLoader.load_image_2x("sprites/player/female/idle_0.png").copy()
+            sprite_human = ResourceLoader.load_image_2x("player/female/idle_0.png").copy()
             sprite_human.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
             surface.blit(sprite_human, (330+130, human_y))
 
@@ -81,7 +81,7 @@ class TitleScene(Scene):
             building_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210))
             building_y = building_y // 2 * 2
 
-            sprite_building = ResourceLoader.load_image_2x("sprites/background/building.png").copy()
+            sprite_building = ResourceLoader.load_image_2x("background/building.png").copy()
             sprite_building.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
             surface.blit(sprite_building, (330, building_y))
 
