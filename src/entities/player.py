@@ -113,8 +113,9 @@ class Player(Entity):
 
         # 무기 처리
         if self._weapon:
-            self._weapon.position = Vector2(self.hitbox.center)
-            self._weapon.direction = Vector2(1 if self._flip else -1, 0)
+            direction = Vector2(1 if self._flip else -1, 0)
+            self._weapon.position = Vector2(self.hitbox.center) + direction * 20
+            self._weapon.direction = direction
             if InputManager.pressed(ACTION_SHOOT):
                 self._shoot_timer = self._weapon.shoot_cooldown + 0.01
                 self._weapon.shoot()
@@ -143,7 +144,7 @@ class Player(Entity):
         image_flipped = self._flip
 
         # 가져와야 할 이미지의 이름을 조립한다
-        image_path = "sprites/player"
+        image_path = "player"
         if self._gender == GENDER_MALE:
             image_path += "/male"
         else:

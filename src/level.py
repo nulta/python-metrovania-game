@@ -51,7 +51,7 @@ class Level:
 
         self._music = level_data.music
         if level_data.background_img:
-            image_path = "sprites/background/" + level_data.background_img
+            image_path = "background/" + level_data.background_img
             self._background = ResourceLoader.load_image(image_path)
         else:
             self._background = pygame.Surface(GAME_WINDOW_SIZE)

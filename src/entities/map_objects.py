@@ -3,7 +3,7 @@ from .entity import Entity
 import pygame
 from pygame import Rect,Vector2
 from .components.physics_component import PhysicsComponent
-from constants import TILE_SIZE, PHYSICS_STAIR_HEIGHT
+from constants import TILE_SIZE, PHYSICS_STAIR_HEIGHT, DEBUG_DRAW_HITBOX
 import debug
 
 class StaticEntity(Entity):
@@ -74,9 +74,9 @@ class Stair(StaticEntity):
             if their_hitbox.bottom - higher_rect.top <= PHYSICS_STAIR_HEIGHT:
                 phys.owner.position.y = min(phys.owner.position.y, higher_rect.top)
                 phys.velocity.y = min(0, phys.velocity.y)
-                debug.draw_point(higher_rect.center, on_map=True)
 
-        debug.draw_rect(higher_rect, on_map=True)
+        if DEBUG_DRAW_HITBOX:
+            debug.draw_rect(higher_rect, on_map=True)
     
     def does_point_collide(self, point: "Vector2"):
         self._build_rects()

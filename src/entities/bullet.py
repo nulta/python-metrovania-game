@@ -6,10 +6,19 @@ from pygame import Vector2, Rect, Surface
 
 class BulletInfo:
     def __init__(self):
-        self.surface: "Surface" = Surface((0,0))
+        # self.surface: "Surface" = Surface((0,0))
         self.rect: "Rect" = Rect(0,0,0,0)
         self.lifetime: "float" = 3.0
         self.damage: "int" = 1
+        self.sprite: "str | None" = None
+
+    @property
+    def surface(self):
+        from resource_loader import ResourceLoader
+        if self.sprite:
+            return ResourceLoader.load_image_2x(self.sprite)
+        else:
+            return Surface((0,0))
 
 
 class Bullet(Entity):
