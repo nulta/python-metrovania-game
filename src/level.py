@@ -113,13 +113,9 @@ class Level:
             return None
 
         try:
-            # 이게... 맞나?
-            ent_class._level = self  # Dependency Injection
             ent = ent_class(**props)
             return ent
         except TypeError as e:
             print(f"Level.make_entity: Got TypeError while creating entity '{entity_name}' using props:", props)
             print(e)
             return None
-        finally:
-            ent_class._level = None  # 제자리로

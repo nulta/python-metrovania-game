@@ -17,7 +17,7 @@ class GameScene(Scene):
         self._background = self._level._background
 
         # 엔티티 관련 처리
-        EntityManager.initialize()
+        EntityManager.initialize(current_level=self._level)
         level.create_entities()
 
         # 타일맵 굽기

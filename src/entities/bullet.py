@@ -1,3 +1,4 @@
+from pygame.math import Vector2
 import game_globals
 from .entity import Entity
 from .components.physics_component import PhysicsComponent
@@ -23,20 +24,28 @@ class Bullet(Entity):
         self._info = bullet_info
         self._is_enemy_bullet = isEnemy
         self._remaining_time = bullet_info.lifetime
+        self._pivot = Vector2(bullet_info.surface.get_size()) // 2
 
 
     @property
     def hitbox(self) -> "Rect":
-        return self._info.rect.move(self.position)
+        return self._info.rect.move(self.position - self.pivot)
     
     def update(self):
+        super().update()
         from entity_manager import EntityManager
+
+        # 물리 처리
+        self.physics.update()
         
+        # 탄 제거 체크
         hit_wall = self.physics.does_point_collide(Vector2(self.hitbox.center))
         self._remaining_time -= game_globals.delta_time
         if self._remaining_time <= 0 or hit_wall:
+            print("Rect", repr(self._info.rect))
             return self.remove()
 
+        # 닿는 물체가 있는지 확인
         for ent in EntityManager.find_colliding_entities(self):
             if self._is_enemy_bullet:
                 if not ent.is_player: continue

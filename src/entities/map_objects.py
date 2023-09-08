@@ -1,3 +1,4 @@
+from entities.components.physics_component import PhysicsComponent
 from .entity import Entity
 import pygame
 from .components.physics_component import PhysicsComponent
@@ -88,7 +89,10 @@ class Stair(StaticEntity):
 
 
 class Spike(StaticEntity):
-    pass
+    _damage = 50
+
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage)
 
 class BoostTile(StaticEntity):
     def __init__(self, boost: float=1):

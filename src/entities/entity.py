@@ -12,7 +12,6 @@ class Entity():
     is_player = False
     is_enemy = False
     is_static = False
-    _level: "Level | None" = None
 
     def __init__(self):
         from entity_manager import EntityManager
@@ -20,7 +19,6 @@ class Entity():
         self._position = Vector2(0, 0)
         self._valid = True
         self._pivot = Vector2(0, 0)
-        self._level = self.__class__._level
 
         # 생성될 때 자동으로 EntityManager에 등록된다.
         # self._id도 이 때 할당된다.

@@ -1,12 +1,17 @@
 from entities import *
-from typing import Optional, Dict
+from typing import Optional, Dict, TYPE_CHECKING
 from pygame import Vector2, Surface, Rect
+from util import classproperty
+
+if TYPE_CHECKING:
+    from level import Level
 
 class EntityManager():
     """게임 내의 모든 Entity를 관리한다."""
 
     _ents: Dict[int, Entity] = {}
     _last_ent_key = 0
+    _current_level: "Level | None" = None
 
     @classmethod
     def get_entity(cls, id: int) -> Optional[Entity]:
@@ -64,7 +69,7 @@ class EntityManager():
                 del cls._ents[entid]
 
         # 모든 개체를 업데이트
-        for ent in cls._ents.values():
+        for ent in list(cls._ents.values()):
             ent.update()
 
     @classmethod
@@ -78,9 +83,17 @@ class EntityManager():
             screen.blit(ent_surface, draw_pos)
 
     @classmethod
-    def initialize(cls):
+    def initialize(cls, current_level: "Level | None" = None):
         """EntityManager를 깨끗하게 초기화한다!"""
         for ent in cls._ents.values():
             ent.remove()
+        cls._current_level = current_level
         cls._ents = {}
         cls._last_ent_key = 0
+
+    @classproperty
+    def current_level(cls) -> "Level | None":
+        """현재 활성 레벨을 받아온다."""
+        # 진짜로 이게 최선인가?
+        return cls._current_level
+    

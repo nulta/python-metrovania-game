@@ -10,6 +10,8 @@ if TYPE_CHECKING:
 
 class PhysicsComponent:
     def __init__(self, owner: "Entity"):
+        from entity_manager import EntityManager
+
         self._owner = owner
         self._velocity = Vector2(0, 0)   # pixels per second
         self._gravity = Vector2(PHYSICS_GRAVITY)  # pixels per second
@@ -20,10 +22,11 @@ class PhysicsComponent:
         self.no_clip = False
         self.no_gravity = False
 
-        if self.owner._level:
-            self._collision_map = self.owner._level.get_collision_map()
+        level = EntityManager.current_level
+        if level:
+            self._collision_map = level.get_collision_map()
         else:
-            print("PhysicsComponent: Failed to get collision map - self.owner._level is None!")
+            print("PhysicsComponent: Failed to get collision map - EntityManager.current_level is None!")
 
         # TODO: 맵과 엔티티의 충돌 판정 처리?
         # TODO: 엔티티와 엔티티의 충돌 판정 처리?
@@ -65,7 +68,7 @@ class PhysicsComponent:
         주의: 이 엔티티의 근처에 있는 (반경 3타일 가량) 경우에만 제대로 판단할 수 있다.
         엔티티와 멀리 떨어져 있는 좌표점에 대해서 판단할 경우에는 항상 False를 반환한다.
         """
-        assert self.owner.position.distance_to(point) <= PHYSICS_RESOLUTION_RADIUS
+        assert self.owner.position.distance_squared_to(point) <= PHYSICS_RESOLUTION_RADIUS**2
         if DEBUG_DRAW_HITBOX:
             debug.draw_point(point, color=(255,0,0), on_map=True)
         
@@ -234,15 +237,11 @@ class PhysicsComponent:
         return rects
 
     def _is_nearby_tile(self, tile_x, tile_y):
-        my_pos = self.owner.position
         tile_size = self._tile_size
-        distance_max_sqr = PHYSICS_RESOLUTION_RADIUS ** 2
-        tile_pos = (tile_x * tile_size + (tile_size / 2), tile_y * tile_size + (tile_size / 2))
-        distance_sqr = my_pos.distance_squared_to(tile_pos)
-        if distance_sqr <= distance_max_sqr:
-            return True
-        else:
-            return False
+        tile_x = tile_x * tile_size + tile_size/2
+        tile_y = tile_y * tile_size + tile_size/2
+        threshold = PHYSICS_RESOLUTION_RADIUS
+        return abs(tile_x - self.owner.position.x) <= threshold and abs(tile_y - self.owner.position.y) <= threshold
         
     def _get_nearby_static_entities(self):
         from entity_manager import EntityManager
