@@ -182,7 +182,7 @@ class StorySceneIntro(StoryScene):
     music_name = ""
     info_texts = ["ENTER 키를 누르면 다음 대사로 넘어간다",
                   "ESC 키를 누르면 이 장면이 스킵된다"]
-    background_image = "war"
+    background_image = "war2"
     character_image = ""
     next_level = "0_tutorial"
     

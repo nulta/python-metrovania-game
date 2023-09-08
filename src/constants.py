@@ -6,6 +6,7 @@
 BOSS_NAME = "테라트루스"
 PLAYER_NAME = ""
 DOCTOR_NAME = ""
+
 # 설정 값
 GAME_WINDOW_NAME = "게임 이름"
 RESOURCE_PATH = "./resources"
