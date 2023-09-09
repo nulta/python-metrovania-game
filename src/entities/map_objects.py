@@ -215,6 +215,15 @@ class Electric_ball(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         phys.owner.call("take_damage", self._damage, self.hitbox.center)
+class Electric_box(StaticEntity):
+    _damage=50
+    def surface(self):
+        chip_idx = int((SceneManager.scene_time * 5) % 2)
+        image_path = f"item/electric_box_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
 class MovingBoard(StaticEntity):
     def surface(self):
