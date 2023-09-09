@@ -7,6 +7,8 @@ from constants import TILE_SIZE, PHYSICS_STAIR_HEIGHT, DEBUG_DRAW_HITBOX
 import debug
 from resource_loader import ResourceLoader
 from .player import *
+from scene_manager import SceneManager
+
 
 class StaticEntity(Entity):
     is_static = True
@@ -155,3 +157,17 @@ class HpAdd(StaticEntity):
         if phys.owner.is_player:
             phys.owner.call("gain_hp", self.AddHp)
             self.remove()
+
+class Fire(StaticEntity):
+    _damage = 10
+    def __init__(self):
+        super().__init__()
+    def surface(self):
+                # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = SceneManager.scene_time%3
+        image_path = f"fire_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+    
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
