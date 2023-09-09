@@ -51,19 +51,18 @@ class ChooseScene(Scene):
         self.draw_background(surface)
         self.draw_storyboard(surface)
         self.draw_title(surface)
-     #   self.draw_button(surface)
+        self.draw_arrow(surface)
         self.draw_character(surface)
         self.draw_info(surface)
 
-#(화살표 y위치 40)
-  #  def draw_button(self,surface: pygame.Surface):
-  #      if self._focus_index == 1 or self._focus_index == 0:
-  #         self.position_x= 210
-  #      else:
-  #          self.position_x= 210 
-#
-  #      storyboard_path = ResourceLoader.load_image(f"story_board/male/player.png")
-  #      surface.blit(storyboard_path, (self.position_x, 40))
+    def draw_arrow(self,surface: pygame.Surface):
+        if self._focus_index == 1 or self._focus_index == 0:
+           self.position_x= 320
+        else:
+            self.position_x= 590
+
+        storyboard_path = ResourceLoader.load_image_2x(f"background/arrow.png")
+        surface.blit(storyboard_path, (self.position_x, 50))
            
 
     def draw_storyboard(self, surface: pygame.Surface):
@@ -96,17 +95,16 @@ class ChooseScene(Scene):
 
     def draw_background(self, surface: pygame.Surface):
         # 배경 그리기
-        #self._background.fill((255, 255, 255))
         scence_path = ResourceLoader.load_image("background/black.png")
         surface.blit(scence_path, (0, 0))
 
     def draw_character(self, surface: pygame.Surface):
         # 사람 그리기
-        male_path = ResourceLoader.load_image_5x("player/male/idle_1.png")
-        female_path = ResourceLoader.load_image_5x("player/female/idle_1.png")
+        male_path = ResourceLoader.load_image_5x("player/male/choose.png")
+        female_path = ResourceLoader.load_image_5x("player/female/choose.png")
 
-        surface.blit(male_path, (220,150))
-        surface.blit(female_path, (530, 150))
+        surface.blit(male_path, (280,150))
+        surface.blit(female_path, (550, 150))
 
 
     def press_charcter(self, button_index):

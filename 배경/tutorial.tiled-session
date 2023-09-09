@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "1_FB85_Boss.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -49,11 +49,11 @@
             }
         },
         "1_FB85_Boss.tmj": {
-            "scale": 0.5,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 765,
-                "y": 489
+                "x": 334.75,
+                "y": 106.75
             }
         },
         "1_FB85_Boss.tmx": {
@@ -65,11 +65,11 @@
             }
         },
         "1_FB85_fire.tmj": {
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 863.1666666666666,
-                "y": 707.5
+                "x": 615,
+                "y": 704.3333333333333
             }
         },
         "1_FB85_fire.tmx": {
@@ -274,9 +274,13 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
+        "1_FB85_fire.tmj",
+        "1_FB85_Boss.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "1_FB85_fire.tmj",
+        "1_FB85_Boss.tmj",
         "4_SB87_grenade.tmj",
         "3_SN91_Boss.tmj",
         "3_SN91_speed.tmj",
@@ -286,9 +290,7 @@
         "5_VP33_gas.tmj",
         "4_SB87_Boss.tmj",
         "2_BT02_wind.tmj",
-        "1_FB85_Boss.tmj",
-        "0_tutorial.tmj",
-        "1_FB85_fire.tmj"
+        "0_tutorial.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

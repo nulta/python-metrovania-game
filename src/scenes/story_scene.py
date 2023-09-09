@@ -61,24 +61,25 @@ class StoryScene(Scene):
         scene = GameScene(level)
         SceneManager.clear_scene()
         SceneManager.push_scene(scene)
-        """다음 씬으로 넘어간다.
-        
-        StoryScene을 상속하는 클래스는 **반드시** 이 함수를 재정의해야 한다.
-        """
-        
-        #raise NotImplementedError
 
     def draw(self, surface: "Surface"):
         self.draw_background(surface, self.background_image)
+        self.draw_box(surface)
         self.draw_info(surface)
         self.draw_skip(surface)
         self.draw_storyboard(surface,self.storyboard_image)
         self.draw_line(surface,self.storyboard_image)
         self.draw_next(surface)
 
+
     def draw_background(self, surface: pygame.Surface, scence):
         # 배경 그리기
         scence_path = ResourceLoader.load_image(f"background/{scence}.png")
+        surface.blit(scence_path, (0, 0))
+
+    def draw_box(self, surface: pygame.Surface):
+        # 박스 그리기
+        scence_path = ResourceLoader.load_image(f"background/story_box.png")
         surface.blit(scence_path, (0, 0))
 
     def draw_storyboard(self, surface: pygame.Surface,character):
@@ -157,11 +158,6 @@ class StoryScene(Scene):
                     size=font_size,
                     )
                 y_offset += 10+ font_size
-                
-
-
-
-        
 
     def draw_info(self,surface: pygame.Surface):
         # 안내문 그리기
