@@ -83,6 +83,24 @@ class ResourceLoader():
         return surface
 
     @classmethod
+    def load_image_3x(cls, resource_name: str, no_alpha: bool = False) -> pygame.Surface:
+        """이미지 파일을 3배로 확대해서 불러온다.
+
+        주의: load_image를 통해 불러온 이미지에 fill() 등을 하지 말 것!
+        필요하다면 불러온 이미지를 copy() 함수로 복사한 다음 조작해야 한다.
+        """
+        # 같은 리소스를 두 번 로딩하지 않는다
+        cache_name = resource_name + "$3x"
+        cache = cls._get_cache(cache_name)
+        if cache: return cache
+
+        surface = cls.load_image(resource_name, no_alpha)
+        w, h = surface.get_size()
+        surface = pygame.transform.scale(surface, (w*3, h*3))
+
+        cls._cache(cache_name, surface)
+        return surface
+    @classmethod
     def load_tileset(cls, tileset_name: str) -> "Tileset":
         from tileset import Tileset
         image_path = "tileset/" + tileset_name + ".png"
