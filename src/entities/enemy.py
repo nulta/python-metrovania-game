@@ -4,6 +4,7 @@ from .entity import *
 from .player import *
 from .weapons import *
 import time
+import math
 from pygame import Surface
 from pygame.math import Vector2
 from constants import *
@@ -28,13 +29,76 @@ class Enemy(CharacterBase):
         # self._x_velocity_dec_moving_mul = 3.0       # 이동 키를 누르고 있을 때, 초당 x방향 속력 감소량의 배수
         self._weapon = BasicGun(True)
         # self._hp = self._max_hp
+        
+        self._floor_check_distance = 30  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
+        self._ai_ignore_distance = 600   # 플레이어가 이 거리보다 멀다면 보지 못한다
+        self._ai_minimum_distance = 200   # 플레이어가 이 거리보다 가깝다면 뒤로 뺀다
 
 
     def update(self):
-        self._move_command.move_axis = 1  # TODO
+        self._update_command()
         super().update()
 
+    def _update_command(self):
+        """현재 시점에서 AI의 MoveCommand를 업데이트한다."""
+        command = self._move_command
+        command.reset()
 
+        player_dist = self._get_distance_to_player()
+        to_player_axis = self._get_axis_to_player()
+
+        # 플레이어를 찾을 수 있는가?
+        if player_dist >= self._ai_ignore_distance:
+            return
+
+        # 좀 뒤로 이동해야 하는가?
+        if player_dist <= self._ai_minimum_distance:
+            command.move_axis = -to_player_axis
+        
+        # 이동할 방향이 안전한가?
+        if not self._is_okay_to_go(command.move_axis):
+            command.move_axis = 0.0
+
+        # 이동하지 않고 있는가?
+        if command.move_axis == 0:
+            # 플레이어 쪽을 바라보고 총을 쏜다.
+            command.move_axis = to_player_axis * 0.05
+            command.shoot = True
+
+
+    def _get_distance_to_player(self):
+        """플레이어와의 거리를 받아온다. 플레이어가 없다면 무한대를 반환한다."""
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+
+        if not player:
+            return float("inf")
+        else:
+            return self.position.distance_to(player.position)
+        
+    def _get_axis_to_player(self):
+        """플레이어 쪽으로 향하는 axis를 받아온다. 플레이어가 없거나 위치가 일치한다면 0을 반환한다."""
+        from entity_manager import EntityManager
+        player = EntityManager.get_player()
+
+        if not player:
+            return 0.0
+        else:
+            diff = player.position.x - self.position.x
+            if diff == 0:
+                return 0.0
+            else:
+                return math.copysign(1.0, diff)
+
+    def _is_okay_to_go(self, axis: "float"):
+        """이 앞 axis쪽 방향에 벽과 낭떠러지가 없는지 체크한다."""
+        collides = self.physics.does_point_collide
+        distance = self._floor_check_distance
+
+        # to_wall = self.hitbox.center + Vector2(axis * distance, 0)
+        to_floor_1 = self.hitbox.midbottom + Vector2(axis * distance, 1)
+        to_floor_2 = self.hitbox.midbottom + Vector2(axis * distance, 31)
+        return (collides(to_floor_1) or collides(to_floor_2))
 
 class FireEnemy(Enemy):
 
