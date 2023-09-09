@@ -8,7 +8,7 @@ ENTITIES = [
     "GasEnemy","GrenadeEnemy","Fire","Wind","HpAdd",
     "Electric_ball","Smoke","MovingBoard","Electric_box","Portal_1",
     "PoisonSmoke","Portal_2","Portal_3","Portal_4","Portal_5",
-    "Portal_6","ShortCut","Door","Monster","BlinkBox",
+    "Portal_6","ShortCut","Door","BasicEnemy","BlinkBox",
     "Portal_7","Portal_8","Portal_9","Portal_10","ShootingBall",
     "Line","Elevator","Gun","Line","Line",
     "","","","","BossDoor"
@@ -38,11 +38,15 @@ for filename in tmj_files:
         next = ""
         background = ""
         music = ""
+
         for prop in properties:
             name = prop["name"]
-            value = prop["value"]
+            value: "str" = prop["value"]
             if name == "next":
                 next = value
+                if next and next[0].isnumeric():
+                    # 숫자로 시작한다면 소문자로 바꿔주자... 맵 이름이니까...
+                    next = next.lower()
             if name == "background":
                 background = value
             if name == "music":

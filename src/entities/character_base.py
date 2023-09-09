@@ -45,6 +45,7 @@ class CharacterBase(Entity):
         self._invincible_timer = 0  # 무적 타이머. 0보다 큰 값이면 무적 상태임을 뜻한다.
         self._shoot_timer = 0       # 무기 발사 타이머. 발사 키를 "꾹 누르고 있을 때의" 연사 처리용.
         self._move_command = MoveCommand()
+        self._on_ladder = 0
 
 
     @property
@@ -71,6 +72,14 @@ class CharacterBase(Entity):
     @property
     def dead(self):
         return self.hp <= 0
+
+    @property
+    def on_ladder(self):
+        return self._on_ladder
+    
+    @on_ladder.setter
+    def on_ladder(self, val: "int"):
+        self._on_ladder = max(0, val)
 
 
     def update_movement(self):
@@ -128,6 +137,10 @@ class CharacterBase(Entity):
         """위로 점프한다. 도약했다면 True를 반환한다."""
         dt = game_globals.delta_time
 
+        if self.on_ladder:
+            self.physics.velocity.y = -self._jump_power // 2
+            return False
+
         if self.is_on_floor() and not self._jumping:
             # Audio.play("jump_1")
             self._jumping = True
@@ -154,6 +167,9 @@ class CharacterBase(Entity):
         
         # 무적 상태 처리
         self._invincible_timer = max(0, self._invincible_timer - dt)
+        
+        # 사다리 리셋 (2틱 뒤에)
+        self.on_ladder = max(0, self.on_ladder - 1)
 
     def surface(self):
         if not self._sprite_name:
