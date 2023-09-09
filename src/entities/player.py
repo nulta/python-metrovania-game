@@ -46,7 +46,7 @@ class Player(CharacterBase):
 
         # 카메라 이동
         camera_size = Vector2(GAME_WINDOW_SIZE)
-        current_screen_idx = Vector2(self.position.x // camera_size.x, self.position.y // camera_size.y)
+        current_screen_idx = Vector2(self.position.x // camera_size.x, (self.position.y+1) // camera_size.y)
         current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, current_screen_idx.y * camera_size.y)
         game_globals.camera_offset = current_screen_pos
 
@@ -80,3 +80,10 @@ class Player(CharacterBase):
         if jumped:
             Audio.play("jump_1")
         return jumped
+
+    def _on_die(self):
+        from scene_manager import SceneManager
+        from scenes.gameover_scene import GameOverScene
+        super()._on_die()
+
+        SceneManager.push_scene(GameOverScene())

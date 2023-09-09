@@ -140,10 +140,9 @@ class Door(StaticEntity):
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         if not phys.owner.is_player: return
 
-        from scene_manager import SceneManager
-        from scenes import GameScene
-        scene = SceneManager.current_scene
-        assert isinstance(scene, GameScene)
+        from entity_manager import EntityManager
+        scene = EntityManager.game_scene
+        assert scene
         scene.victory()
 
 class BossDoor(Door):

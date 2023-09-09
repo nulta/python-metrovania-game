@@ -55,10 +55,16 @@ class Entity():
 
     def update(self):
         """매 프레임마다 실행된다. 자기 자신의 상태를 업데이트한다."""
+        from entity_manager import EntityManager
+        level = EntityManager.current_level
+
         if DEBUG_DRAW_HITBOX and not self.is_static:
             import debug
             hitbox = self.get("hitbox", Rect(0,0,0,0))
             debug.draw_rect(hitbox, on_map=True)
+        
+        if level and self.position.y > level.death_barrier:
+            self.kill()
 
     def surface(self) -> Surface:
         """화면에 그릴 surface를 반환한다."""
@@ -88,3 +94,7 @@ class Entity():
     def remove(self):
         """이 엔티티를 삭제하도록 요청한다. 실제 삭제는 나중 프레임에서 이루어진다."""
         self._valid = False
+
+    def kill(self):
+        """비 인간형 엔티티는 삭제하고, 인간형 엔티티는 죽인다."""
+        self.remove()
