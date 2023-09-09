@@ -4,7 +4,14 @@ import os
 FROM_DIR = "./"
 TO_DIR = "../resources/levels/"
 ENTITIES = [
-    "Player","FireEnemy",""
+    "Player","FireEnemy","WindEnemy","SpeedEnemy","NavyEnemy",
+    "GasEnemy","GrenadeEnemy","Fire","Wind","Hp",
+    "Electric_ball","Smoke","MovingBoard","Electric_box","Portal_1",
+    "PoisonSmoke","Portal_2","Portal_3","Portal_4","Portal_5",
+    "Portal_6","ShortCut","Door","Monster","BlinkBox",
+    "Portal_7","Portal_8","Portal_9","Portal_10","ShootingBall",
+    "Line","Elevator","Gun","Line","Line",
+    "","","","","BossDoor"
 ]
 ENTITIES_FIRST_GID = 76
 
