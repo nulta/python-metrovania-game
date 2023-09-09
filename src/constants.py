@@ -3,7 +3,7 @@
 # 상수의 이름은 전부 대문자로 작성한다.
 
 #캐릭터 이름 설정
-BOSS_NAME = "테라트루스"
+BOSS_NAME = "암흑대마왕"
 PLAYER_NAME = ""
 DOCTOR_NAME = ""
 

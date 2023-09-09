@@ -4,7 +4,7 @@ import os
 FROM_DIR = "./"
 TO_DIR = "../resources/levels/"
 ENTITIES = [
-    "Player",""
+    "Player","Fire_Enemy","Wind_Enemy",""
 ]
 ENTITIES_FIRST_GID = 76
 
@@ -49,7 +49,7 @@ for filename in tmj_files:
                     ent_data.append([ent_type, x, y])
                 else:
                     map_data[y][x] = tile_id
-        
+
         new_filename = filename.replace(".tmj", ".json").lower().replace(" ", "")
         with open(TO_DIR + new_filename, "w") as f2:
             json_str = json.dumps(new_data, indent=4)

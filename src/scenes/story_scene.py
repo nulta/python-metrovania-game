@@ -22,6 +22,7 @@ class StoryScene(Scene):
     next_level = ""
     boss_name = ""
     player_name = ""
+    
 
     def __init__(self):
        # assert self.__class__.next_scene != StoryScene.next_scene, (
@@ -69,10 +70,10 @@ class StoryScene(Scene):
 
     def draw(self, surface: "Surface"):
         self.draw_background(surface, self.background_image)
-        self.draw_character(surface,self.character_image)
         self.draw_info(surface)
         self.draw_skip(surface)
         self.draw_stroyboard(surface)
+        self.draw_character(surface,self.character_image)
         self.draw_line(surface)
         self.draw_next(surface)
 
@@ -86,7 +87,7 @@ class StoryScene(Scene):
 
         # 사람 그리기
         character_path = ResourceLoader.load_image_2x(f"story_character/{character}.png")
-        surface.blit(character_path, (550, 200))
+        surface.blit(character_path, (150, 400))
 
     def draw_stroyboard(self, surface: pygame.Surface):
         storyboard_path = ResourceLoader.load_image("background/storyboard.png")
@@ -124,15 +125,15 @@ class StoryScene(Scene):
     def draw_line(self, surface: pygame.Surface):
         # 대사 그리기
         text = self.lines[self.line_count]
-        font_size = 23
-        color = (255, 255, 255)
+        font_size = 18
+        color = (0, 0, 0)
         y_offset = 6
         line_changes = text.split('\n')
         
         if not line_changes:
             Fonts.get("default").render_to(
                 surface,
-                (70, 420),
+                (320, 400),
                 text,
                 fgcolor=color,
                 size=font_size,
@@ -141,7 +142,7 @@ class StoryScene(Scene):
             for line in line_changes:
                 Fonts.get("default").render_to(
                     surface,
-                    (70, 420 + y_offset),
+                    (320, 400 + y_offset),
                     line,
                     fgcolor=color,
                     size=font_size,
@@ -154,10 +155,18 @@ class StoryScene(Scene):
 
     def draw_info(self,surface: pygame.Surface):
         # 안내문 그리기
+                  
         Fonts.get("bold").render_to(
             surface,
             (300, 555),
-            "ENTER를 눌러 진행합니다",
+            "ENTER 키를 누르면 다음 대사로 넘어간다",
+            fgcolor=(255, 255, 255),
+            size=15,
+        )
+        Fonts.get("bold").render_to(
+            surface,
+            (320, 575),
+            "ESC 키를 누르면 이 장면이 스킵된다",
             fgcolor=(255, 255, 255),
             size=15,
         )
@@ -171,17 +180,15 @@ class StorySceneIntro(StoryScene):
     player_name = PLAYER_NAME
     doctor_name = DOCTOR_NAME
     lines = [
-            f" 그 전쟁은 스스로 신의 자손이라 칭하는 악명높은'\n'북조선의 테러리스트 {boss_name}가 북조선 정부를 침공하면서였다.",
+            f" 그 전쟁은 스스로 신의 자손이라 칭하는 악명높은\n북조선의 테러리스트 {boss_name}가 북조선 정부를\n 침공하면서였다.",
             f" 이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다.",
-            f" 그의 엄청난 기계화 부대와 6명의 간부들을 도저히 이길수 없었다.\n 전 세계는 이제 {boss_name}의 손이 넘어갈 판이다.",
+            f" 그의 엄청난 기계화 부대와 6명의 간부들을 도저히\n 이길수 없었다. \n전 세계는 이제 {boss_name}의 손이 넘어갈 판이다.",
             f" 한편, 남한의 군사연구자인 {doctor_name}는 조수인 {player_name}은\n 타임머신을 통해 {boss_name}의 세력이 비교적 약한\n 과거로 보내 그를 미리 처치하려 한다. ",
             f" 이제 세계는 {player_name} 한명에게 달려있다.\n 하지만 {boss_name}도 그 계획을 이미 알아차리고\n {player_name}에 맞설 준비를 하는데..",
              ]
     
-    _button_texts = ["건너뛰기(ESC)", "▽"]
     music_name = ""
-    info_texts = ["ENTER 키를 누르면 다음 대사로 넘어간다",
-                  "ESC 키를 누르면 이 장면이 스킵된다"]
+    
     background_image = "war2"
     character_image = ""
     next_level = "0_tutorial"
