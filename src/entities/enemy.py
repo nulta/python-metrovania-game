@@ -100,8 +100,12 @@ class Enemy(CharacterBase):
         to_floor_2 = self.hitbox.midbottom + Vector2(axis * distance, 31)
         return not collides(to_wall) and (collides(to_floor_1) or collides(to_floor_2))
 
+<<<<<<< HEAD
 class BasicEnemy(Enemy):
 
+=======
+class FireEnemy(Enemy):
+>>>>>>> 7fa1e7b3fc7ef42e57fce73e4cdbe2c4cf413e20
     def __init__(self):
         super().__init__()
         self._sprite_name = "enemy/fire"

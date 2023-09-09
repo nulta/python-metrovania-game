@@ -77,6 +77,12 @@
  "nextlayerid":2,
  "nextobjectid":1,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"next",
+         "type":"string",
+         "value":"4_SB87_Boss"
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
  "tileheight":30,
