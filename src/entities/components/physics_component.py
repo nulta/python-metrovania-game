@@ -152,8 +152,10 @@ class PhysicsComponent:
                 assert diff_y >= 0
                 assert min(diff_x, diff_y) != infinite
 
-                # 옆에서 접근하고 있고, 0.5타일짜리 높이 단차만 있는가?
-                if delta_pos.x != 0 and 0 <= new_hitbox.bottom - rect.top <= PHYSICS_STAIR_HEIGHT:
+                # 옆에서 접근하고 있고, 아래로 떨어지고 있지 않고, 0.5타일짜리 높이 단차만 있는가?
+                approaching_side = delta_pos.x != 0
+                stair_displacement = 0 <= new_hitbox.bottom - rect.top <= PHYSICS_STAIR_HEIGHT
+                if approaching_side and stair_displacement and delta_pos.y < 1:
                     # 이 블럭의 윗자리가 비어있으면 is_stair를 True로 한다.
                     if not self.does_point_collide(Vector2(rect.midtop) + Vector2(0, -2)):
                         is_stair = True

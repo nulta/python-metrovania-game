@@ -28,7 +28,11 @@ class StaticEntity(Entity):
         return False
 
 class Ladder(StaticEntity):
-    pass
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        ent = phys.owner
+        if not ent.is_player: return
+        assert isinstance(ent, Player)
+        ent.on_ladder = 2
 
 class Stair(StaticEntity):
     """계단. 닿는 물리력 있는 물체를 위로 올린다.
@@ -128,7 +132,19 @@ class BoostTile(StaticEntity):
 class Door(StaticEntity):
     def __init__(self):
         super().__init__()
-        
+
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        if not phys.owner.is_player: return
+
+        from scene_manager import SceneManager
+        from scenes import GameScene
+        scene = SceneManager.current_scene
+        assert isinstance(scene, GameScene)
+        scene.victory()
+
+class BossDoor(Door):
+    pass
+
 class HpAdd(StaticEntity):
     AddHp = 100
 
