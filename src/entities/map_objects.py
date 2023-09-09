@@ -163,9 +163,9 @@ class HpAdd(StaticEntity):
 class Fire(StaticEntity):
     _damage = 10
     def surface(self):
-                # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = SceneManager.scene_time%3
-        image_path = f"fire_{chip_idx}.png"
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int((SceneManager.scene_time * 5) % 3)
+        image_path = f"item/fire_{chip_idx}.png"
 
         return ResourceLoader.load_image_2x(image_path).copy()
     
@@ -175,8 +175,8 @@ class Fire(StaticEntity):
 class Wind(StaticEntity):
     def surface(self):
                 # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = SceneManager.scene_time%3
-        image_path = f"wind_{chip_idx}.png"
+        chip_idx = int(SceneManager.scene_time%3)
+        image_path = f"item/wind_{chip_idx}.png"
 
         return ResourceLoader.load_image_2x(image_path).copy()
 
