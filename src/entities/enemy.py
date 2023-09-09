@@ -101,7 +101,6 @@ class Enemy(CharacterBase):
         return (collides(to_floor_1) or collides(to_floor_2))
 
 class FireEnemy(Enemy):
-
     def __init__(self):
         super().__init__()
         self._sprite_name = "enemy/fire"

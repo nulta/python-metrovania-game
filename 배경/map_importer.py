@@ -5,7 +5,7 @@ FROM_DIR = "./"
 TO_DIR = "../resources/levels/"
 ENTITIES = [
     "Player","FireEnemy","WindEnemy","SpeedEnemy","NavyEnemy",
-    "GasEnemy","GrenadeEnemy","Fire","Wind","Hp",
+    "GasEnemy","GrenadeEnemy","Fire","Wind","HpAdd",
     "Electric_ball","Smoke","MovingBoard","Electric_box","Portal_1",
     "PoisonSmoke","Portal_2","Portal_3","Portal_4","Portal_5",
     "Portal_6","ShortCut","Door","Monster","BlinkBox",
@@ -47,7 +47,7 @@ for filename in tmj_files:
                 tile_id = layer_data_map[idx]
                 if tile_id >= ENTITIES_FIRST_GID:
                     map_data[y][x] = 0
-                    ent_id = ENTITIES_FIRST_GID - tile_id
+                    ent_id = tile_id - ENTITIES_FIRST_GID
                     if ent_id >= len(ENTITIES):
                         # ent_id out of range
                         print(f"On map '{filename}' ({x}, {y}): Tile ID ({ent_id}) out of range!")

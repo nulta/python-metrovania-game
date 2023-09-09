@@ -60,6 +60,7 @@ class CharacterBase(Entity):
     @hp.setter
     def hp(self, value):
         self._hp = max(0, round(value))
+        self._hp = util.clamp(value, 0, 200)
         if self.dead:
             self._on_die()
 

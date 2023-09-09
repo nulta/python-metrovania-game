@@ -5,6 +5,8 @@ from pygame import Rect,Vector2
 from .components.physics_component import PhysicsComponent
 from constants import TILE_SIZE, PHYSICS_STAIR_HEIGHT, DEBUG_DRAW_HITBOX
 import debug
+from resource_loader import ResourceLoader
+from .player import *
 
 class StaticEntity(Entity):
     is_static = True
@@ -67,9 +69,9 @@ class Stair(StaticEntity):
         their_hitbox: "Rect | None" = phys.owner.get("hitbox")
         if not their_hitbox: return
         higher_rect = self._higher_rect
-        
         # 위치를 높이고 아래 방향으로의 속도를 제거한다
         # 즉, 위쪽으로 수직 항력을 가한다
+
         if their_hitbox.colliderect(higher_rect):
             if their_hitbox.bottom - higher_rect.top <= PHYSICS_STAIR_HEIGHT:
                 phys.owner.position.y = min(phys.owner.position.y, higher_rect.top)
@@ -122,3 +124,14 @@ class BoostTile(StaticEntity):
     def __init__(self, boost: float=1):
         super().__init__()
         self._boost = boost
+
+class HpAdd(StaticEntity):
+    AddHp = 100
+
+    def surface(self):
+        return ResourceLoader.load_image("item/life.png")
+    
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        if phys.owner.is_player:
+            phys.owner.call("gain_hp", self.AddHp)
+            self.remove()
