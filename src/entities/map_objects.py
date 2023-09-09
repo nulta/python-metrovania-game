@@ -164,7 +164,7 @@ class Fire(StaticEntity):
     _damage = 10
     def surface(self):
     # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = int((SceneManager.scene_time * 5) % 3)
+        chip_idx = int((SceneManager.scene_time * 7) % 3)
         image_path = f"item/fire_{chip_idx}.png"
 
         return ResourceLoader.load_image_2x(image_path).copy()
@@ -174,12 +174,34 @@ class Fire(StaticEntity):
 
 class Wind(StaticEntity):
     def surface(self):
-                # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = int(SceneManager.scene_time%3)
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int(SceneManager.scene_time*7%2)
         image_path = f"item/wind_{chip_idx}.png"
 
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         phys.velocity.y -= 10* game_globals.delta_time
+
+class Smoke(StaticEntity):
+    def surface(self):
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int((SceneManager.scene_time * 5) % 2)
+        image_path = f"item/smoke_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
     
+class PoisonSmoke(StaticEntity):
+    _damage = 10
+    _slower = 10
+    def surface(self):
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int((SceneManager.scene_time * 5) % 2)
+        image_path = f"item/poison_smoke_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
+        if phys.owner.is_player:
+            phys.owner.call("slow_speed", self._slower)
+        phys.velocity.x -= 10* game_globals.delta_time
