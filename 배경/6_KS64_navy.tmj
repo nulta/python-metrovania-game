@@ -48,6 +48,12 @@
  "nextlayerid":2,
  "nextobjectid":1,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"next",
+         "type":"string",
+         "value":"6_KS64_Boss"
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
  "tileheight":30,
