@@ -5,6 +5,7 @@ from util import classproperty
 
 if TYPE_CHECKING:
     from level import Level
+    from scenes.game_scene import GameScene
 
 class EntityManager():
     """게임 내의 모든 Entity를 관리한다."""
@@ -83,11 +84,12 @@ class EntityManager():
             screen.blit(ent_surface, draw_pos)
 
     @classmethod
-    def initialize(cls, current_level: "Level | None" = None):
+    def initialize(cls, current_level: "Level | None" = None, game_scene: "GameScene | None" = None):
         """EntityManager를 깨끗하게 초기화한다!"""
         for ent in cls._ents.values():
             ent.remove()
         cls._current_level = current_level
+        cls._game_scene = game_scene
         cls._ents = {}
         cls._last_ent_key = 0
 
@@ -96,4 +98,9 @@ class EntityManager():
         """현재 활성 레벨을 받아온다."""
         # 진짜로 이게 최선인가?
         return cls._current_level
-    
+
+    @classproperty
+    def game_scene(cls) -> "GameScene | None":
+        """현재 활성 레벨을 받아온다."""
+        # 진짜로 이게 최선인가?
+        return cls._game_scene

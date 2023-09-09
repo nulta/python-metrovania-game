@@ -60,7 +60,6 @@ class CharacterBase(Entity):
 
     @hp.setter
     def hp(self, value):
-        self._hp = max(0, round(value))
         self._hp = util.clamp(value, 0, 200)
         if self.dead:
             self._on_die()
@@ -203,7 +202,6 @@ class CharacterBase(Entity):
 
         return surface
 
-
     def take_damage(self, damage: "int", origin: "Vector2 | None" = None) -> bool:
         """지정된 양만큼의 데미지를 입는다. 데미지를 입었다면 True를 반환한다."""
 
@@ -226,9 +224,12 @@ class CharacterBase(Entity):
         
         return True
 
+    def kill(self):
+        self.hp = 0
 
     def _on_die(self):
         """캐릭터의 HP가 0이 되었을 때 호출된다."""
+        print(self.__class__.__name__, "dead X_X")
         self.remove()
 
     def is_on_floor(self):

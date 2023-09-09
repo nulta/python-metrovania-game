@@ -132,3 +132,8 @@ class Level:
     @property
     def next_scene_name(self):
         return self._next_scene
+
+    @property
+    def death_barrier(self):
+        """엔티티가 낙사하는 것으로 판정되는 Y 좌표를 구한다."""
+        return len(self._map_data) * self._tile_size

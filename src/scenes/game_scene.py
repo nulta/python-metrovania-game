@@ -15,13 +15,17 @@ class GameScene(Scene):
         super().__init__()
         self._level = level
         self._background = self._level._background
-
-        # 엔티티 관련 처리
-        EntityManager.initialize(current_level=self._level)
-        level.create_entities()
-
-        # 타일맵 굽기
         self._tilemap_surface = level.get_tilemap_surface()
+
+        self.initialize_level()
+    
+    def initialize_level(self):
+        """스테이지를 깨끗하게 초기화한다!"""
+        self._scene_time = 0.0
+
+        # 엔티티 초기화
+        EntityManager.initialize(self._level, self)
+        self._level.create_entities()
 
 
     def update(self):
