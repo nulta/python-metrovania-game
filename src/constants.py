@@ -18,7 +18,7 @@ GAME_MAX_DELTA_TIME = 1/20
 
 # 개발자 설정
 DEBUG_MODE = True
-DEBUG_DRAW_HITBOX = False  # Entity들의 히트박스를 화면에 표시한다.
+DEBUG_DRAW_HITBOX = True  # Entity들의 히트박스를 화면에 표시한다.
 
 # GENDER 값
 GENDER_MALE   = 0

@@ -57,9 +57,9 @@ class CharacterBase(Entity):
 
     @hp.setter
     def hp(self, value):
-        if value < 0:
-            value = 0
-        self._hp = value
+        self._hp = max(0, round(value))
+        if self.dead:
+            self._on_die()
 
     @property
     def direction(self):
@@ -154,7 +154,9 @@ class CharacterBase(Entity):
 
     def surface(self):
         if not self._sprite_name:
-            return Surface((60, 60)).fill((255, 0, 255))
+            surface = Surface((60, 60))
+            surface.fill((255, 0, 255))
+            return surface
 
         from scene_manager import SceneManager
         scene_time = SceneManager.scene_time
@@ -165,7 +167,7 @@ class CharacterBase(Entity):
         # 가져와야 할 이미지의 이름을 조립한다
         chip_idx = int((self._walking_timer // 0.25 + 1) % 4)
         if chip_idx == 3: chip_idx = 1
-        if not self._walking_timer and chip_idx == 1: image_offset_y = 2
+        if self._walking_timer and chip_idx == 1: image_offset_y = 2
 
         image_path = f"{self._sprite_name}_{chip_idx}.png"
 

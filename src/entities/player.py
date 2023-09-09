@@ -30,6 +30,7 @@ class Player(CharacterBase):
         # self._x_velocity_dec_floor = 6000           # 초당 x방향 속력의 감소량 (땅 위에서)
         # self._x_velocity_dec_moving_mul = 3.0       # 이동 키를 누르고 있을 때, 초당 x방향 속력 감소량의 배수
         self._weapon = weapons.BasicGun(False)
+        self._hp = self._max_hp
 
 
     def update(self):
