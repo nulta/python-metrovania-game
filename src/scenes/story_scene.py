@@ -169,7 +169,7 @@ class StoryScene(Scene):
         Fonts.get("bold").render_to(
             surface,
             (300, 555),
-            "ENTER 키를 누르면 다음 대사로 넘어간다",
+            "ENTER or Space 키를 누르면 다음 대사로 넘어간다",
             fgcolor=(255, 255, 255),
             size=15,
         )
@@ -200,7 +200,7 @@ class StorySceneIntro(StoryScene):
     music_name = ""
     
     background_image = "war2"
-    storyboard_image = "fanboy"
+    storyboard_image = ""
     next_level = "0_tutorial"
     
     

@@ -47,40 +47,66 @@ class ChooseScene(Scene):
             Audio.common.confirm()
             self.press_charcter(self._focus_index)
 
-    def draw_button(self,surface: pygame.Surface):
-        if self._focus_index == 1:
-            button1_color= self.select_color
-            button2_color = self.color
-        elif self._focus_index == 2:
-            button1_color= self.color
-            button2_color = self.select_color
-        else:
-            button1_color= self.color
-            button2_color= self.color
-
-        pygame.draw.rect(surface, button1_color,[110,150,255,300])
-        pygame.draw.rect(surface, button2_color,[500,150,255,300])            
-
-
     def draw(self, surface: "Surface"):
         self.draw_background(surface)
+        self.draw_storyboard(surface)
         self.draw_title(surface)
-        self.draw_button(surface)
+     #   self.draw_button(surface)
         self.draw_character(surface)
         self.draw_info(surface)
 
+#(화살표 y위치 40)
+  #  def draw_button(self,surface: pygame.Surface):
+  #      if self._focus_index == 1 or self._focus_index == 0:
+  #         self.position_x= 210
+  #      else:
+  #          self.position_x= 210 
+#
+  #      storyboard_path = ResourceLoader.load_image(f"story_board/male/player.png")
+  #      surface.blit(storyboard_path, (self.position_x, 40))
+           
+
+    def draw_storyboard(self, surface: pygame.Surface):
+        # 사람 그리기
+        font_size = 18
+        color = (0, 0, 0)
+        if self._focus_index == 0:
+            text = "캐릭터를 선택하세요"
+            self.position_x = 110
+            storyboard_path = ResourceLoader.load_image(f"story_board/blank.png")
+
+        elif self._focus_index == 1:
+            text = "A"
+            self.position_x = 330
+            storyboard_path = ResourceLoader.load_image(f"story_board/male/player.png")
+
+        else:
+            text = "B"
+            self.position_x = 330
+            storyboard_path = ResourceLoader.load_image(f"story_board/female/player.png")
+
+        surface.blit(storyboard_path, (0, 0))
+        Fonts.get("default").render_to(
+        surface,
+        (self.position_x, 400),
+        text,
+        fgcolor=color,
+        size=font_size,
+        )
+
     def draw_background(self, surface: pygame.Surface):
         # 배경 그리기
-        scence_path = ResourceLoader.load_image("background/intro.png")
+        #self._background.fill((255, 255, 255))
+        scence_path = ResourceLoader.load_image("background/black.png")
         surface.blit(scence_path, (0, 0))
 
     def draw_character(self, surface: pygame.Surface):
         # 사람 그리기
-        male_path = ResourceLoader.load_image_2x("player/male/idle_1.png")
-        female_path = ResourceLoader.load_image_2x("player/female/idle_1.png")
+        male_path = ResourceLoader.load_image_5x("player/male/idle_1.png")
+        female_path = ResourceLoader.load_image_5x("player/female/idle_1.png")
 
-        surface.blit(male_path, (140,200))
-        surface.blit(female_path, (530, 200))
+        surface.blit(male_path, (220,150))
+        surface.blit(female_path, (530, 150))
 
 
     def press_charcter(self, button_index):
@@ -103,7 +129,7 @@ class ChooseScene(Scene):
         # 부제..? 그리기
         Fonts.get("bold").render_to(
             surface,
-            (330, 60),
+            (50, 60),
             "캐릭터 선택",
             fgcolor=(255, 255, 255),
             size=45,
@@ -113,7 +139,7 @@ class ChooseScene(Scene):
         Fonts.get("bold").render_to(
             surface,
             (350, 555),
-            "ENTER를 눌러 선택합니다",
+            "ENTER or Space를 눌러 선택합니다",
             fgcolor=(255, 255, 255),
             size=15,
         )
