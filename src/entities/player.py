@@ -63,15 +63,6 @@ class Player(Entity):
         axis = InputManager.axis(AXIS_HORIZONTAL)
         vel_x = self.physics.velocity.x
 
-        # # X 속도의 최대 변화량
-        # x_dec = self._x_velocity_decrease_midair * dt
-        # if self.is_on_floor():
-        #     x_dec = self._x_velocity_decrease_floor * dt
-
-        # # 목표 X 속도
-        # desired_vel_x = self._move_speed * axis
-        # self.physics.velocity.x = util.approach_linear(vel_x, desired_vel_x, x_dec)
-
         # X 속도의 최대 변화량
         x_dec = self._x_velocity_decrease_midair * dt
         if self.is_on_floor():
