@@ -204,3 +204,13 @@ class PoisonSmoke(StaticEntity):
         if phys.owner.is_player:
             phys.owner.call("slow_speed", self._slower)
         phys.velocity.x -= 10* game_globals.delta_time
+class Electric_ball(StaticEntity):
+    _damage=50
+    def surface(self):
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int((SceneManager.scene_time * 5) % 2)
+        image_path = f"item/electric_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
