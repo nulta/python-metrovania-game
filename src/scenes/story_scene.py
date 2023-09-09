@@ -22,6 +22,7 @@ class StoryScene(Scene):
     next_level = ""
     boss_name = ""
     player_name = ""
+    
 
     def __init__(self):
        # assert self.__class__.next_scene != StoryScene.next_scene, (
@@ -154,10 +155,18 @@ class StoryScene(Scene):
 
     def draw_info(self,surface: pygame.Surface):
         # 안내문 그리기
+                  
         Fonts.get("bold").render_to(
             surface,
             (300, 555),
-            "ENTER를 눌러 진행합니다",
+            "ENTER 키를 누르면 다음 대사로 넘어간다",
+            fgcolor=(255, 255, 255),
+            size=15,
+        )
+        Fonts.get("bold").render_to(
+            surface,
+            (320, 575),
+            "ESC 키를 누르면 이 장면이 스킵된다",
             fgcolor=(255, 255, 255),
             size=15,
         )
@@ -178,12 +187,10 @@ class StorySceneIntro(StoryScene):
             f" 이제 세계는 {player_name} 한명에게 달려있다.\n 하지만 {boss_name}도 그 계획을 이미 알아차리고\n {player_name}에 맞설 준비를 하는데..",
              ]
     
-    _button_texts = ["건너뛰기(ESC)", "▽"]
     music_name = ""
-    info_texts = ["ENTER 키를 누르면 다음 대사로 넘어간다",
-                  "ESC 키를 누르면 이 장면이 스킵된다"]
+    
     background_image = "war2"
-    character_image = "speed"
+    character_image = ""
     next_level = "0_tutorial"
     
     
