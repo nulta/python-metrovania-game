@@ -83,8 +83,8 @@ class BasicGun(Weapon):
 class PoorGun(BasicGun):
     # 잡몹이 들 기본 무기.
 
-    shoot_cooldown = 1.2
-    _bullet_speed = 800
+    shoot_cooldown = 0.7
+    _bullet_speed = 1200
 
     _bullet_info = BulletInfo()
     _bullet_info.damage = 50

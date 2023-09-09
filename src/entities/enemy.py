@@ -31,7 +31,7 @@ class Enemy(CharacterBase):
         # self._hp = self._max_hp
         
         self._floor_check_distance = 30  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
-        self._ai_ignore_distance = 600   # 플레이어가 이 거리보다 멀다면 보지 못한다
+        self._ai_ignore_distance = 500   # 플레이어가 이 거리보다 멀다면 보지 못한다
         self._ai_minimum_distance = 200   # 플레이어가 이 거리보다 가깝다면 뒤로 뺀다
 
 
@@ -95,16 +95,17 @@ class Enemy(CharacterBase):
         collides = self.physics.does_point_collide
         distance = self._floor_check_distance
 
-        # to_wall = self.hitbox.center + Vector2(axis * distance, 0)
+        to_wall = self.hitbox.midtop + Vector2(axis * distance, 0)
         to_floor_1 = self.hitbox.midbottom + Vector2(axis * distance, 1)
         to_floor_2 = self.hitbox.midbottom + Vector2(axis * distance, 31)
-        return (collides(to_floor_1) or collides(to_floor_2))
+        return not collides(to_wall) and (collides(to_floor_1) or collides(to_floor_2))
 
-class FireEnemy(Enemy):
+class BasicEnemy(Enemy):
+
     def __init__(self):
         super().__init__()
         self._sprite_name = "enemy/fire"
-        self._weapon = BasicGun(True)
+        self._weapon = PoorGun(True)
 
 
     def update(self):

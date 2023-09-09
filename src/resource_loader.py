@@ -143,6 +143,7 @@ class ResourceLoader():
             "entities",
             "music",
             "background_img",
+            "next_scene",
         ]
         for k in keys:
             default = getattr(leveldata, k, None)

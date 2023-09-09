@@ -127,6 +127,10 @@ class BoostTile(StaticEntity):
         super().__init__()
         self._boost = boost
 
+class Door(StaticEntity):
+    def __init__(self):
+        super().__init__()
+        
 class HpAdd(StaticEntity):
     AddHp = 100
 
