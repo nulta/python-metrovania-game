@@ -236,16 +236,16 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 292.75,
-                "y": -59.25
+                "x": 349.25,
+                "y": 156.25
             }
         },
         "6_KS64_navy.tmj": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2389,
-                "y": 291
+                "x": 1725,
+                "y": 481
             }
         },
         "6_KS64_navy.tmx": {
@@ -274,12 +274,13 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "6_KS64_Boss.tmj"
+        "6_KS64_Boss.tmj",
+        "6_KS64_navy.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
-        "6_KS64_Boss.tmj",
         "6_KS64_navy.tmj",
+        "6_KS64_Boss.tmj",
         "5_VP33_gas.tmj",
         "5_VP33_Boss.tmj",
         "4_SB87_grenade.tmj",
