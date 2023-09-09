@@ -2,6 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "next_scene": "1_fb85_boss",
     "entities": [
         ["Fire",2,8],
         ["Fire",3,8],
@@ -34,8 +35,8 @@
         ["Fire",30,8],
         ["Fire",31,8],
         ["Fire",32,8],
-        ["Monster",34,8],
-        ["Monster",35,8],
+        ["BasicEnemy",34,8],
+        ["BasicEnemy",35,8],
         ["BossDoor",38,8],
         ["Fire",2,10],
         ["Fire",3,10],
@@ -70,8 +71,7 @@
         ["Fire",31,18],
         ["Fire",32,18],
         ["HpAdd",12,19],
-        ["Monster",29,24],
-        ["Monster",30,24],
+        ["BasicEnemy",30,24],
         ["Player",2,27],
         ["ShootingBall",11,28],
         ["ShootingBall",14,28]

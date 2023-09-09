@@ -2,6 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "next_scene": "2_bt02_wind",
     "entities": [
         ["Player",4,11],
         ["FireEnemy",17,11],

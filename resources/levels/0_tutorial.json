@@ -2,8 +2,9 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "next_scene": "1_fb85_fire",
     "entities": [
-        ["Monster",48,4],
+        ["BasicEnemy",48,4],
         ["Door",51,4],
         ["Gun",8,5],
         ["Player",2,7],

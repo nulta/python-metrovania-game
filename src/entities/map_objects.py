@@ -8,6 +8,8 @@ import debug
 from resource_loader import ResourceLoader
 from .player import *
 from scene_manager import SceneManager
+import game_globals
+
 
 
 class StaticEntity(Entity):
@@ -170,14 +172,14 @@ class Fire(StaticEntity):
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
-#class Wind(StaticEntity):
-#    def surface(self):
-#                # 가져와야 할 이미지의 이름을 조립한다
-#        chip_idx = SceneManager.scene_time%3
-#        image_path = f"wind_{chip_idx}.png"
-#
-#        return ResourceLoader.load_image_2x(image_path).copy()
-#
-#    def on_physics_trigger(self, phys: "PhysicsComponent"):
-#        phys.velocity.y -= 1* delta_time
+class Wind(StaticEntity):
+    def surface(self):
+                # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = SceneManager.scene_time%3
+        image_path = f"wind_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.velocity.y -= 10* game_globals.delta_time
     

@@ -2,6 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "next_scene": "6_ks64_navy",
     "entities": [
         ["Player",7,8],
         ["GasEnemy",20,8]
