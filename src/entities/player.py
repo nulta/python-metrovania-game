@@ -50,7 +50,6 @@ class Player(CharacterBase):
         current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, current_screen_idx.y * camera_size.y)
         game_globals.camera_offset = current_screen_pos
 
-
     def surface(self):
         weapon_name = "idle"
         if self._weapon and self._weapon.player_graphic:
