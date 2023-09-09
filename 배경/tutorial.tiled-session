@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "0_tutorial.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -25,11 +25,11 @@
             }
         },
         "0_tutorial.tmj": {
-            "scale": 4,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 804.375,
-                "y": 555.375
+                "x": 223.83333333333331,
+                "y": 189.16666666666666
             }
         },
         "0_tutorial.tmx": {
@@ -274,9 +274,11 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
+        "0_tutorial.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "0_tutorial.tmj",
         "6_KS64_Boss.tmj",
         "6_KS64_navy.tmj",
         "5_VP33_gas.tmj",
@@ -287,7 +289,6 @@
         "3_SN91_Boss.tmj",
         "2_BT02_wind.tmj",
         "1_FB85_fire.tmj",
-        "0_tutorial.tmj",
         "1_FB85_Boss.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

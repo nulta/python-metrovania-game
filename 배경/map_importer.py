@@ -4,7 +4,7 @@ import os
 FROM_DIR = "./"
 TO_DIR = "../resources/levels/"
 ENTITIES = [
-    "Player","Fire_Enemy","Wind_Enemy",""
+    "Player","FireEnemy",""
 ]
 ENTITIES_FIRST_GID = 76
 

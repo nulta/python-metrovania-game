@@ -76,8 +76,8 @@ class ChooseScene(Scene):
 
     def draw_character(self, surface: pygame.Surface):
         # 사람 그리기
-        male_path = ResourceLoader.load_image_2x(f"story_character/male/player.png")
-        female_path = ResourceLoader.load_image_2x(f"story_character/female/player.png")
+        male_path = ResourceLoader.load_image_2x("player/male/idle_1.png")
+        female_path = ResourceLoader.load_image_2x("player/female/idle_1.png")
 
         surface.blit(male_path, (140,200))
         surface.blit(female_path, (530, 200))

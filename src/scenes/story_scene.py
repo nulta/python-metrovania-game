@@ -18,7 +18,7 @@ class StoryScene(Scene):
     music_name = ""
     lines = []
     background_image = ""
-    character_image = ""
+    storyboard_image = ""
     next_level = ""
     boss_name = ""
     player_name = ""
@@ -72,9 +72,8 @@ class StoryScene(Scene):
         self.draw_background(surface, self.background_image)
         self.draw_info(surface)
         self.draw_skip(surface)
-        self.draw_stroyboard(surface)
-        self.draw_character(surface,self.character_image)
-        self.draw_line(surface)
+        self.draw_storyboard(surface,self.storyboard_image)
+        self.draw_line(surface,self.storyboard_image)
         self.draw_next(surface)
 
     def draw_background(self, surface: pygame.Surface, scence):
@@ -82,16 +81,21 @@ class StoryScene(Scene):
         scence_path = ResourceLoader.load_image(f"background/{scence}.png")
         surface.blit(scence_path, (0, 0))
 
-    def draw_character(self, surface: pygame.Surface,character):
-        if not character: return
-
+    def draw_storyboard(self, surface: pygame.Surface,character):
         # 사람 그리기
-        character_path = ResourceLoader.load_image_2x(f"story_character/{character}.png")
-        surface.blit(character_path, (150, 400))
+        if not character:
+            storyboard_path = ResourceLoader.load_image(f"story_board/blank.png")
+            surface.blit(storyboard_path, (0, 0))
 
-    def draw_stroyboard(self, surface: pygame.Surface):
-        storyboard_path = ResourceLoader.load_image("background/storyboard.png")
-        surface.blit(storyboard_path, (0, 0))
+        elif character =="player":
+            gender = game_globals.player_gender
+            storyboard_path = ResourceLoader.load_image(f"story_board/{gender}/player.png")
+            surface.blit(storyboard_path, (0, 0))
+
+        else:
+    
+            storyboard_path = ResourceLoader.load_image(f"story_board/{character}.png")
+            surface.blit(storyboard_path, (0, 0))
 
     def draw_skip(self, surface: pygame.Surface):
         # 건너뛰기 그리기
@@ -113,7 +117,7 @@ class StoryScene(Scene):
         # 다음대사 버튼 그리기
         text = "▼"
         font_size = 15
-        color = (255, 255, 255)
+        color = (0, 103, 163)
         Fonts.get("bold").render_to(
             surface,
             (740, 400 + int(math.sin(self.scene_time*3)*6)),
@@ -122,18 +126,23 @@ class StoryScene(Scene):
             size=font_size,
         )
 
-    def draw_line(self, surface: pygame.Surface):
+    def draw_line(self, surface: pygame.Surface,character):
         # 대사 그리기
         text = self.lines[self.line_count]
         font_size = 18
         color = (0, 0, 0)
         y_offset = 6
         line_changes = text.split('\n')
-        
+        if not character:
+            self.position_x = 110
+        else:
+            self.position_x = 330
+            
+
         if not line_changes:
             Fonts.get("default").render_to(
                 surface,
-                (320, 400),
+                (self.position_x, 400),
                 text,
                 fgcolor=color,
                 size=font_size,
@@ -142,12 +151,13 @@ class StoryScene(Scene):
             for line in line_changes:
                 Fonts.get("default").render_to(
                     surface,
-                    (320, 400 + y_offset),
+                    (self.position_x, 400 + y_offset),
                     line,
                     fgcolor=color,
                     size=font_size,
                     )
                 y_offset += 10+ font_size
+                
 
 
 
@@ -180,17 +190,17 @@ class StorySceneIntro(StoryScene):
     player_name = PLAYER_NAME
     doctor_name = DOCTOR_NAME
     lines = [
-            f" 그 전쟁은 스스로 신의 자손이라 칭하는 악명높은\n북조선의 테러리스트 {boss_name}가 북조선 정부를\n 침공하면서였다.",
+            f" 그 전쟁은 스스로 신의 자손이라 칭하는 악명높은 북조선의 테러리스트 {boss_name}가\n 북조선 정부를 침공하면서였다.",
             f" 이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다.",
-            f" 그의 엄청난 기계화 부대와 6명의 간부들을 도저히\n 이길수 없었다. \n전 세계는 이제 {boss_name}의 손이 넘어갈 판이다.",
-            f" 한편, 남한의 군사연구자인 {doctor_name}는 조수인 {player_name}은\n 타임머신을 통해 {boss_name}의 세력이 비교적 약한\n 과거로 보내 그를 미리 처치하려 한다. ",
-            f" 이제 세계는 {player_name} 한명에게 달려있다.\n 하지만 {boss_name}도 그 계획을 이미 알아차리고\n {player_name}에 맞설 준비를 하는데..",
+            f" 그의 엄청난 기계화 부대와 6명의 간부들을 도저히 이길수 없었다. \n전 세계는 이제 {boss_name}의 손이 넘어갈 판이다.",
+            f" 한편, 남한의 군사연구자인 {doctor_name}는 조수인 {player_name}은 타임머신을 통해 {boss_name}의 세력이\n 비교적 약한 과거로 보내 그를 미리 처치하려 한다. ",
+            f" 이제 세계는 {player_name} 한명에게 달려있다.\n 하지만 {boss_name}도 그 계획을 이미 알아차리고 {player_name}에 맞설 준비를 하는데..",
              ]
     
     music_name = ""
     
     background_image = "war2"
-    character_image = ""
+    storyboard_image = "fanboy"
     next_level = "0_tutorial"
     
     
