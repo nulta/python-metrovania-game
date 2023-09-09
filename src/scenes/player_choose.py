@@ -22,12 +22,7 @@ class ChooseScene(Scene):
     color = (128,128,128)
     select_color = (255, 255, 255)
     def __init__(self):
-       # assert self.__class__.next_scene != StoryScene.next_scene, (
-        #    "The method 'next_scene()' should must be overriden."
-        #)
-
         super().__init__()
-
 
         # 음악을 재생한다.
         if self.music_name:
@@ -35,7 +30,7 @@ class ChooseScene(Scene):
             music_path = ResourceLoader.get_resource_path(music)
             pygame.mixer.music.load(music_path)
             pygame.mixer.music.play(-1)
-            
+
         self._focus_index = 0
 
     def update(self):
@@ -103,9 +98,6 @@ class ChooseScene(Scene):
             from .story_scene import StorySceneIntro
             SceneManager.clear_scene()
             SceneManager.push_scene(StorySceneIntro())
-        else:
-            # 게임 종료
-            game_globals.exit = True
 
     def draw_title(self,surface: pygame.Surface):
         # 부제..? 그리기

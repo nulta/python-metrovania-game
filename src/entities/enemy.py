@@ -15,7 +15,7 @@ class Enemy(CharacterBase):
     def __init__(self):
         super().__init__()
 
-        self._sprite = "fire"                       # sprites/enemy/{???}_1.png\
+        self._sprite_name = ""                             # sprites/enemy/{???}_1.png\
         # self._max_hp = 100                          # 최대 체력
         # self._damage_taking_delay = 1.0             # 데미지를 입은 뒤의 일시적 무적 시간(초)
         # self._move_speed = PLAYER_MOVE_SPEED        # 이동 속도
@@ -27,19 +27,23 @@ class Enemy(CharacterBase):
         # self._x_velocity_dec_floor = 6000           # 초당 x방향 속력의 감소량 (땅 위에서)
         # self._x_velocity_dec_moving_mul = 3.0       # 이동 키를 누르고 있을 때, 초당 x방향 속력 감소량의 배수
         self._weapon = BasicGun(True)
-
         # self._hp = self._max_hp
-        # self._pivot = Vector2(30, 56)
-        # self._walking_timer = 0.0
-        # self._flip = False
-        # self._jump_timer = 0
-        # self._jumping = False
-        # self._invincible_timer = 0  # 무적 타이머. 0보다 큰 값이면 무적 상태임을 뜻한다.
-        # self._shoot_timer = 0       # 무기 발사 타이머. 발사 키를 "꾹 누르고 있을 때의" 연사 처리용.
-        # self._move_command = MoveCommand()
 
 
     def update(self):
         self._move_command.move_axis = 1  # TODO
+        super().update()
+
+
+
+class FireEnemy(Enemy):
+
+    def __init__(self):
+        super().__init__()
+        self._sprite_name = "enemy/fire"
+        self._weapon = BasicGun(True)
+
+
+    def update(self):
         super().update()
 

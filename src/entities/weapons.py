@@ -63,7 +63,7 @@ class BasicGun(Weapon):
     player_graphic = None
 
     _bullet_info = BulletInfo()
-    _bullet_info.damage = 5
+    _bullet_info.damage = 50
     _bullet_info.lifetime = 2
     _bullet_info.rect = Rect(0, 0, 20, 20)
     _bullet_info.sprite = "item/bullet.png"
