@@ -59,16 +59,39 @@ class Weapon:
         self._last_shoot_time = SceneManager.scene_time
 
 class BasicGun(Weapon):
-    shoot_cooldown = 0.1
     player_graphic = None
+
+    shoot_cooldown = 0.3
+    _bullet_speed = 600
 
     _bullet_info = BulletInfo()
     _bullet_info.damage = 50
-    _bullet_info.lifetime = 2
+    _bullet_info.lifetime = 1000 / _bullet_speed  # 1000px를 가는 데 걸리는 시간만큼
     _bullet_info.rect = Rect(0, 0, 20, 20)
     _bullet_info.sprite = "item/bullet.png"
     
-    _bullet_speed = 600
+
+    def _fire_bullet(self):
+        bullet = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet.position = self.position
+
+    def on_shoot(self):
+        self._fire_bullet()
+        Audio.play("gun_1")
+
+
+class PoorGun(BasicGun):
+    # 잡몹이 들 기본 무기.
+
+    shoot_cooldown = 1.2
+    _bullet_speed = 800
+
+    _bullet_info = BulletInfo()
+    _bullet_info.damage = 50
+    _bullet_info.lifetime = 1000 / _bullet_speed
+    _bullet_info.rect = Rect(0, 0, 20, 20)
+    _bullet_info.sprite = "item/bullet.png"
+    
 
     def _fire_bullet(self):
         bullet = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)

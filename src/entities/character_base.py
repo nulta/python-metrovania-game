@@ -9,10 +9,12 @@ from constants import *
 class MoveCommand():
     """CharacterBase가 매 틱 처리할 이동 명령."""
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.move_axis = 0.0  # 이동축. -1: 왼쪽, 0:정지, 1: 오른쪽.
         self.jump = False   # 점프
         self.shoot = False  # 총 발사
-
 
 class CharacterBase(Entity):
     """Player와 Enemy의 기반 클래스."""
