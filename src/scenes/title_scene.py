@@ -8,6 +8,7 @@ from audio import Audio
 from fonts import Fonts
 import math
 import util
+from pygame import Surface, Vector2
 
 
 
@@ -44,70 +45,71 @@ class TitleScene(Scene):
             self.press_button(self._focus_index)
 
     def draw(self, surface: pygame.Surface):
-        anim_progress = self.scene_time / 6
+        t = util.clamp(self.scene_time / 8, 0, 3)
+        t1 = util.easeinout(t)
+
+        cloud_offset = math.sin(self.scene_time / 3) * 30
+
+        self.draw_parallax(surface, "background/intro/sky.png", 1.0, t1)
+        self.draw_parallax(surface, "background/intro/stardust.png", 0.8, t1, True)
+        self.draw_parallax(surface, "background/intro/cloud.png", 1.3, t1, True, cloud_offset)
+        self.draw_parallax(surface, "background/intro/building1.png", 1.5, t1)
+        self.draw_parallax(surface, "background/intro/building2.png", 2.3, t1)
+        self.draw_parallax(surface, "background/intro/building3.png", 3.0, t1)
+
+        t2 = util.easeout(t - 1.0)
+
+        frame = ResourceLoader.load_image("background/intro/frame.png").copy()
+        frame.set_alpha(round(t2 * 255))
+        surface.blit(frame, (0, 0))
+
+        t3 = util.clamp(t*2 - 3.0, 0, 1)
+        t31 = util.remap(t3, (0, 0.1), (0,1))
+        t32 = util.remap(t3, (0.05, 0.15), (0,1))
+        t33 = util.remap(t3, (0.1, 0.2), (0,1))
+        t34 = util.remap(t3, (0.15, 0.25), (0,1))
+
+        if t31:
+            img = ResourceLoader.load_image("background/intro/title.png")
+            if t31 != 1:
+                img = img.copy()
+                img.set_alpha(round(t31 * 255))
+            surface.blit(img, (0, 0))
+
+        if t32:
+            img = ResourceLoader.load_image("background/intro/text_start.png").copy()
+            if t32 != 1:
+                img = img.copy()
+                img.set_alpha(round(t32 * 255))
+            surface.blit(img, (0, 0))
+
+        if t33:
+            img = ResourceLoader.load_image("background/intro/text_options.png").copy()
+            if t33 != 1:
+                img = img.copy()
+                img.set_alpha(round(t33 * 255))
+            surface.blit(img, (0, 0))
+
+        if t34:
+            img = ResourceLoader.load_image("background/intro/text_quit.png").copy()
+            if t34 != 1:
+                img = img.copy()
+                img.set_alpha(round(t34 * 255))
+            surface.blit(img, (0, 0))
 
 
-        # 배경 그리기
-        if True:
-            color_mul = int(util.lerpc(anim_progress, 0.5, 1) * 255)
-            block_height = util.lerpc(anim_progress / 1.5, 260, 200)
-            block_height += int(math.cos(game_globals.game_time * 0.5) * 3)
-            block_height = block_height // 2 * 2
+    
+    def draw_parallax(self, surface: "Surface", image_name: "str", parallax_mul: "float",
+                      t: "float", to_end=False, y_offset=0.0):
+        image = ResourceLoader.load_image(image_name)
+        initial_offset = -Vector2(0, 1490 - 600)
+        offset = initial_offset - Vector2(0, t * initial_offset.y * parallax_mul)
+        offset += Vector2(0, y_offset)
+        if to_end:
+            offset += Vector2(0, initial_offset.y * parallax_mul - initial_offset.y)
 
-            surface.fill(pygame.Color(0, 100, 170))
-            for i in range(2):
-                surface.fill(
-                    pygame.Color(0, 140 - i*20, 170),
-                    (0, i*block_height, GAME_WINDOW_SIZE[0], block_height)
-                )
-            
-            surface.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
+        surface.blit(image, offset)
 
-        # 사람 그리기
-        if True:
-            color_mul = int(util.lerpc(anim_progress, 0, 0.9) * 255)
-            human_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210)) + 66
-            human_y = human_y // 2 * 2
-            human_y += int(math.cos(max(game_globals.game_time * 2, 6)) * 3)
-            human_y = human_y // 2 * 2
-
-            sprite_human = ResourceLoader.load_image_2x("player/female/idle_0.png").copy()
-            sprite_human.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
-            surface.blit(sprite_human, (330+130, human_y))
-
-        # 소품 그리기
-        if True:
-            color_mul = int(util.lerpc(anim_progress, 0, 0.9) * 255)
-            building_y = int(util.lerpc(util.easeout(anim_progress / 1.5), 500, 210))
-            building_y = building_y // 2 * 2
-
-            sprite_building = ResourceLoader.load_image_2x("background/building.png").copy()
-            sprite_building.fill((color_mul,) * 3, special_flags=pygame.BLEND_MULT)
-            surface.blit(sprite_building, (330, building_y))
-
-        # 게임 이름 그리기
-        Fonts.get("bold").render_to(
-            surface,
-            (25, 160),
-            "플랫포머 게임(가제)",
-            fgcolor=(255, 255, 255),
-            size=50,
-        )
-
-        # 메뉴 목록 그리기
-        for idx, text in enumerate(self._button_texts):
-            font_size = 24
-            y_offset = idx * (font_size + 6) + (math.sin(self.scene_time * 2.5 + idx/2) * 5)
-            focused = self._focus_index == idx
-            color = (0, 220, 255) if focused else (255, 255, 255)
-
-            Fonts.get("bold").render_to(
-                surface,
-                (30, 460 + y_offset),
-                text,
-                fgcolor=color,
-                size=font_size,
-            )
 
     def on_destroy(self):
         pygame.mixer.music.unload()

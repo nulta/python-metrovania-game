@@ -17,6 +17,14 @@ class GameScene(Scene):
         self._background = self._level._background
         self._tilemap_surface = level.get_tilemap_surface()
 
+        # 음악 재생
+        if self._level.music:
+            music_path = ResourceLoader.get_resource_path(self._level.music)
+            print(music_path)
+            pygame.mixer.music.load(music_path)
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(1.0)
+
         self.initialize_level()
     
     def initialize_level(self):

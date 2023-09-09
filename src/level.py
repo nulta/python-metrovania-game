@@ -127,7 +127,10 @@ class Level:
 
     @property
     def music(self):
-        return self._music
+        if self._music:
+            return "sounds/music/" + self._music + ".ogg"
+        else:
+            return None
     
     @property
     def next_scene_name(self):

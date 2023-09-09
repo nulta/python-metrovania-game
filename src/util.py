@@ -101,7 +101,7 @@ def easeinout(t: float) -> float:
     """
     t = clamp(t, 0, 1)
     if t < 0.5: return (16 * t ** 5)
-    else: return (1 - (1-t) ** 5)
+    else: return (1 - (-2*t+2) ** 5 / 2)
 
 
 def on_keyframes(t: float, frames: "dict[float, float]", easein=False, easeout=False) -> float:

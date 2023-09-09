@@ -16,8 +16,6 @@ class GameOverScene(Scene):
     단독으로 사용하지 말고 다른 씬의 위에 올리도록 하자.
     """
 
-    _music = "sounds/music/title.ogg"
-
     def __init__(self):
         super().__init__()
         from entity_manager import EntityManager
@@ -27,9 +25,7 @@ class GameOverScene(Scene):
         self._prev_scene = prev_scene
 
         # 음악을 재생한다.
-        music_path = ResourceLoader.get_resource_path(self._music)
-        pygame.mixer.music.load(music_path)
-        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.5)
 
     def update(self):
         # Enter 키
@@ -64,7 +60,7 @@ class GameOverScene(Scene):
         )
 
     def on_destroy(self):
-        pygame.mixer.music.unload()
+        pygame.mixer.music.set_volume(1.0)
 
     def retry(self):
         self.remove()

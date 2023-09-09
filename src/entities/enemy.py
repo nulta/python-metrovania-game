@@ -62,7 +62,8 @@ class Enemy(CharacterBase):
         # 이동하지 않고 있는가?
         if command.move_axis == 0:
             # 플레이어 쪽을 바라보고 총을 쏜다.
-            command.move_axis = to_player_axis * 0.05
+            if self.direction.x != to_player_axis:
+                command.move_axis = to_player_axis * 0.05
             command.shoot = True
 
 

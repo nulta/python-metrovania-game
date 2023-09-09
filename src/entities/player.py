@@ -19,7 +19,7 @@ class Player(CharacterBase):
         super().__init__()
         self._gender = game_globals.player_gender
 
-        self._max_hp = 200                          # 최대 체력
+        self._max_hp = 100                          # 최대 체력
         self._damage_taking_delay = 2.0             # 데미지를 입은 뒤의 일시적 무적 시간(초)
         # self._move_speed = PLAYER_MOVE_SPEED        # 이동 속도
         # self._jump_power = 500                      # 점프 시의 최대 수직 속력 (px/s).
@@ -46,7 +46,7 @@ class Player(CharacterBase):
 
         # 카메라 이동
         camera_size = Vector2(GAME_WINDOW_SIZE)
-        current_screen_idx = Vector2(self.position.x // camera_size.x, (self.position.y+1) // camera_size.y)
+        current_screen_idx = Vector2(self.position.x // camera_size.x, (self.position.y-2) // camera_size.y)
         current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, current_screen_idx.y * camera_size.y)
         game_globals.camera_offset = current_screen_pos
 

@@ -1,6 +1,6 @@
 {
     "tileset_name": "generic_0",
-    "music": "",
+    "music": "stage1",
     "background_img": "",
     "next_scene": "1_fb85_fire",
     "entities": [
