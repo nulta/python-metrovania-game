@@ -56,7 +56,9 @@ class ChooseScene(Scene):
         self.draw_info(surface)
 
     def draw_arrow(self,surface: pygame.Surface):
-        if self._focus_index == 1 or self._focus_index == 0:
+        if self._focus_index == 0:
+            self.position_x= 100000
+        elif self._focus_index == 1:
            self.position_x= 320
         else:
             self.position_x= 590

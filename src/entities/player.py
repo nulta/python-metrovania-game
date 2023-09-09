@@ -50,7 +50,6 @@ class Player(CharacterBase):
         current_screen_pos = Vector2(current_screen_idx.x * camera_size.x, current_screen_idx.y * camera_size.y)
         game_globals.camera_offset = current_screen_pos
 
-
     def surface(self):
         weapon_name = "idle"
         if self._weapon and self._weapon.player_graphic:
@@ -72,6 +71,8 @@ class Player(CharacterBase):
     def gain_hp(self, gain: "int"):
         """player의 hp가 추가된다"""
         self.hp += gain
+    def slow_speed(self,slow:"int"):
+        self._move_speed -=slow
 
     def jump(self, long_jump=False):
         jumped = super().jump(long_jump)
