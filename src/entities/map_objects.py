@@ -83,7 +83,6 @@ class Stair(StaticEntity):
         return self._higher_rect.collidepoint(point)
 
 
-
 class Spike(StaticEntity):
     _damage = 50
 

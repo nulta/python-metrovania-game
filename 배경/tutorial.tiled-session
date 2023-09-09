@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "5_VP33_Boss.tmj",
+    "activeFile": "6_KS64_Boss.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,8 +28,8 @@
             "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1483,
-                "y": 191.625
+                "x": 804.375,
+                "y": 555.375
             }
         },
         "0_tutorial.tmx": {
@@ -49,11 +49,11 @@
             }
         },
         "1_FB85_Boss.tmj": {
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 243.33333333333337,
-                "y": 382.3333333333333
+                "x": 583,
+                "y": 493
             }
         },
         "1_FB85_Boss.tmx": {
@@ -68,8 +68,8 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1019.6666666666665,
-                "y": 330.5
+                "x": 614.1666666666667,
+                "y": 704.5
             }
         },
         "1_FB85_fire.tmx": {
@@ -81,11 +81,11 @@
             }
         },
         "2_BT02_wind.tmj": {
-            "scale": 3,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 399.33333333333326,
-                "y": 176.5
+                "x": 809.25,
+                "y": 1349.25
             }
         },
         "2_BT02_wind.tmx": {
@@ -97,11 +97,11 @@
             }
         },
         "3_SN91_Boss.tmj": {
-            "scale": 8,
+            "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 156.875,
-                "y": 257.9375
+                "x": 584.625,
+                "y": 464.625
             }
         },
         "3_SN91_Boss.tmx": {
@@ -116,8 +116,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 5438,
-                "y": 576.75
+                "x": 2864.25,
+                "y": 449.25
             }
         },
         "3_SN91_speed.tmx": {
@@ -132,8 +132,8 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 406.66666666666663,
-                "y": 366.16666666666663
+                "x": 421.66666666666663,
+                "y": 821.5
             }
         },
         "4_SB87_1_2.tmx": {
@@ -172,8 +172,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 385.33333333333337,
-                "y": 348.3333333333333
+                "x": 541,
+                "y": 506.3333333333333
             }
         },
         "4_SB87_Boss.tmx": {
@@ -184,12 +184,20 @@
                 "y": 54
             }
         },
+        "4_SB87_grenade.tmj": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1169.5,
+                "y": 1016.5
+            }
+        },
         "5_VP33_Boss.tmj": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 582,
-                "y": 388.5
+                "x": 583.5,
+                "y": 389.5
             }
         },
         "5_VP33_Boss.tmx": {
@@ -201,11 +209,11 @@
             }
         },
         "5_VP33_gas.tmj": {
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 335,
-                "y": 522.25
+                "x": 1457.5,
+                "y": 492.5
             }
         },
         "5_VP33_gas.tmx": {
@@ -216,12 +224,28 @@
                 "y": 316.3333333333333
             }
         },
-        "6_KS64_navy.tmj": {
+        "5_ks64_navy.tmj": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 205,
-                "y": 408.75
+                "x": 2729,
+                "y": -25.75
+            }
+        },
+        "6_KS64_Boss.tmj": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 349.25,
+                "y": 156.25
+            }
+        },
+        "6_KS64_navy.tmj": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1725,
+                "y": 481
             }
         },
         "6_KS64_navy.tmx": {
@@ -250,23 +274,23 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "5_VP33_Boss.tmj",
-        "5_VP33_gas.tmj"
+        "6_KS64_Boss.tmj",
+        "6_KS64_navy.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "6_KS64_navy.tmj",
+        "6_KS64_Boss.tmj",
         "5_VP33_gas.tmj",
         "5_VP33_Boss.tmj",
+        "4_SB87_grenade.tmj",
         "4_SB87_Boss.tmj",
-        "3_SN91_Boss.tmj",
         "3_SN91_speed.tmj",
-        "4_SB87_1_2.tmj",
+        "3_SN91_Boss.tmj",
         "2_BT02_wind.tmj",
-        "1_FB85_Boss.tmj",
         "1_FB85_fire.tmj",
         "0_tutorial.tmj",
-        "4_SB87_3.tmj",
-        "0_tutorial.tmx"
+        "1_FB85_Boss.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
