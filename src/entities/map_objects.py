@@ -9,7 +9,7 @@ from resource_loader import ResourceLoader
 from .player import *
 from scene_manager import SceneManager
 import game_globals
-
+from .weapons import*
 
 
 class StaticEntity(Entity):
@@ -235,11 +235,11 @@ class MovingBoard(StaticEntity):
             self.position.x += 10* game_globals.delta_time
         elif game_globals.delta_time%12 >=6:
             self.position.x -= 10* game_globals.delta_time
-#class Gun(StaticEntity):
-#    def surface(self):
-#        return ResourceLoader.load_image("item/gun.png")
-#    
-#    def on_physics_trigger(self, phys: "PhysicsComponent"):
-#        if phys.owner.is_player:
-#            phys.owner.call("", "gun")
-#            self.remove()
+class Gun(StaticEntity):
+    def surface(self):
+        return ResourceLoader.load_image("item/gun.png")
+    
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        if phys.owner.is_player:
+#캐릭터 surface바껴야함
+            self.remove()
