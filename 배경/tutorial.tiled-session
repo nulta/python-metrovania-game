@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "6_KS64_Boss.tmj",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
@@ -209,11 +209,11 @@
             }
         },
         "5_VP33_gas.tmj": {
-            "scale": 1,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1457.5,
-                "y": 492.5
+                "x": 2260.1666666666665,
+                "y": 401.5
             }
         },
         "5_VP33_gas.tmx": {
@@ -236,16 +236,16 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 349.25,
-                "y": 156.25
+                "x": 348.75,
+                "y": 155.75
             }
         },
         "6_KS64_navy.tmj": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1725,
-                "y": 481
+                "x": 1723,
+                "y": 479
             }
         },
         "6_KS64_navy.tmx": {
@@ -274,13 +274,11 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "6_KS64_Boss.tmj",
-        "6_KS64_navy.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
-        "6_KS64_navy.tmj",
         "6_KS64_Boss.tmj",
+        "6_KS64_navy.tmj",
         "5_VP33_gas.tmj",
         "5_VP33_Boss.tmj",
         "4_SB87_grenade.tmj",
