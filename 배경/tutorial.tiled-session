@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "1_FB85_Boss.tmj",
+    "activeFile": "0_tutorial.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -25,11 +25,11 @@
             }
         },
         "0_tutorial.tmj": {
-            "scale": 3,
+            "scale": 11,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 795.1666666666666,
-                "y": 554.8333333333333
+                "x": 197.40909090909093,
+                "y": 115.04545454545455
             }
         },
         "0_tutorial.tmx": {
@@ -52,8 +52,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 334.75,
-                "y": 106.75
+                "x": 584.75,
+                "y": 494.75
             }
         },
         "1_FB85_Boss.tmx": {
@@ -260,8 +260,11 @@
             "scaleInDock": 2,
             "scaleInEditor": 1
         },
+        "generic_0___2.tsx": {
+            "scaleInDock": 3
+        },
         "tileset.tsx": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 3,
             "scaleInEditor": 1
         }
     },
@@ -275,12 +278,14 @@
     "map.tileWidth": 30,
     "openFiles": [
         "1_FB85_fire.tmj",
-        "1_FB85_Boss.tmj"
+        "1_FB85_Boss.tmj",
+        "0_tutorial.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "1_FB85_fire.tmj",
         "1_FB85_Boss.tmj",
+        "0_tutorial.tmj",
         "4_SB87_grenade.tmj",
         "3_SN91_Boss.tmj",
         "3_SN91_speed.tmj",
@@ -289,8 +294,7 @@
         "5_VP33_Boss.tmj",
         "5_VP33_gas.tmj",
         "4_SB87_Boss.tmj",
-        "2_BT02_wind.tmj",
-        "0_tutorial.tmj"
+        "2_BT02_wind.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

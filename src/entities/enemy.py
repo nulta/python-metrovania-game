@@ -104,7 +104,7 @@ class BasicEnemy(Enemy):
 
     def __init__(self):
         super().__init__()
-        self._sprite_name = "enemy/fire"
+        self._sprite_name = "enemy/monster"
         self._weapon = PoorGun(True)
 
 

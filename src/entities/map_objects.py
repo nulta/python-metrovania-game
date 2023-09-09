@@ -204,6 +204,7 @@ class PoisonSmoke(StaticEntity):
         if phys.owner.is_player:
             phys.owner.call("slow_speed", self._slower)
         phys.velocity.x -= 10* game_globals.delta_time
+
 class Electric_ball(StaticEntity):
     _damage=50
     def surface(self):
@@ -214,3 +215,14 @@ class Electric_ball(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         phys.owner.call("take_damage", self._damage, self.hitbox.center)
+
+class MovingBoard(StaticEntity):
+    def surface(self):
+        image_path = f"item/moving_side.png"
+        return ResourceLoader.load_image_2x(image_path).copy()
+    
+    def update(self):
+        if game_globals.delta_time%12 <6:
+            self.position.x += 10* game_globals.delta_time
+        elif game_globals.delta_time%12 >=6:
+            self.position.x -= 10* game_globals.delta_time
