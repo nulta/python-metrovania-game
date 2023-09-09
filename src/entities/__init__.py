@@ -1,5 +1,5 @@
 from .entity import Entity
-from .enemy import Enemy, FireEnemy
+from .enemy import Enemy, BasicEnemy
 from .player import Player
 from .weapons import Weapon, BasicGun
 from .bullet import Bullet

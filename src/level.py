@@ -37,6 +37,9 @@ class LevelData:
         # 배경 이미지 이름
         self.background_img: "str | None" = None
 
+        # 다음 씬 또는 다음 맵의 이름
+        self.next_scene: "str | None" = None
+
 
 class Level:
     def __init__(self, level_data: "LevelData"):
@@ -50,6 +53,8 @@ class Level:
         self._entities: "Sequence[tuple[str, int, int, dict[str, object] | None]]" = [*level_data.entities, *overlap_entities]
 
         self._music = level_data.music
+        self._next_scene = level_data.next_scene
+
         if level_data.background_img:
             image_path = "background/" + level_data.background_img
             self._background = ResourceLoader.load_image(image_path)
@@ -119,3 +124,11 @@ class Level:
             print(f"Level.make_entity: Got TypeError while creating entity '{entity_name}' using props:", props)
             print(e)
             return None
+
+    @property
+    def music(self):
+        return self._music
+    
+    @property
+    def next_scene_name(self):
+        return self._next_scene

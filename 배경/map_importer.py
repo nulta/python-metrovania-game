@@ -22,19 +22,43 @@ for filename in tmj_files:
     print("Processing file:", filename)
     with open(filename, "r") as f:
         content = f.read().replace(",]", "]")
-        original_data = json.loads(content)
+        original_data: "dict" = json.loads(content)
 
         layer_data = original_data["layers"][0]
         width = layer_data["width"]
         height = layer_data["height"]
         layer_data_map = layer_data["data"]
 
+        properties = original_data.get("properties", None)
+        if properties is None:
+            print(f"ERROR: '{filename}' 맵에 Custom Property가 없음!!!")
+            print(f"ERROR: 이 맵은 스킵합니다...")
+            continue
+
+        next = ""
+        background = ""
+        music = ""
+        for prop in properties:
+            name = prop["name"]
+            value = prop["value"]
+            if name == "next":
+                next = value
+            if name == "background":
+                background = value
+            if name == "music":
+                music = value
+
+        print("next =", next)
+        print("background =", background)
+        print("music =", music)
+
         map_data: "list[list[int]]" = [([0] * width) for _ in range(height)]
         ent_data = []
         new_data = {
             "tileset_name": "generic_0",
-            "music": "",
-            "background_img": "",
+            "music": music,
+            "background_img": background,
+            "next_scene": next,
             "entities": ent_data,
             "map_data": map_data,
         }
@@ -63,3 +87,4 @@ for filename in tmj_files:
             json_str = json_str.replace("\n" + "    " * 3, "")
             json_str = json_str.replace("\n" + "        ]", "]")
             f2.write(json_str)
+    print("")

@@ -62,5 +62,28 @@ class GameScene(Scene):
     def on_destroy(self):
         pass
     
-    def camara(self):
-        pass
+    def victory(self):
+        """맵을 클리어한다. 잠시 뒤에 다음 씬으로 이동한다."""
+        from scene_manager import SceneManager
+        from resource_loader import ResourceLoader
+        assert self._level.next_scene_name
+        
+        # 전부 소문자라면 스테이지 이름, 아니라면 씬 이름.
+        next_name = self._level.next_scene_name
+        if next_name.lower() == next_name:
+            # 소문자 -> 스테이지 이름 -> GameScene
+            SceneManager.clear_scene()
+            leveldata = ResourceLoader.load_level_data(next_name)
+            level = Level(leveldata)
+            scene = GameScene(level)
+            SceneManager.push_scene(scene)
+        else:
+            # 대문자 포함 -> 
+            from . import story_scene
+            scene = getattr(story_scene, next_name)
+            assert issubclass(scene, Scene)
+
+            SceneManager.clear_scene()
+            SceneManager.push_scene(scene())
+
+            
