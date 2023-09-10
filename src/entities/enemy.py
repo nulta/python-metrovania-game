@@ -17,8 +17,8 @@ class Enemy(CharacterBase):
         super().__init__()
 
         self._sprite_name = ""                             # sprites/enemy/{???}_1.png\
-        # self._max_hp = 100                          # 최대 체력
-        # self._damage_taking_delay = 1.0             # 데미지를 입은 뒤의 일시적 무적 시간(초)
+        self._max_hp = 100                          # 최대 체력
+        self._damage_taking_delay = 0.5             # 데미지를 입은 뒤의 일시적 무적 시간(초)
         # self._move_speed = PLAYER_MOVE_SPEED        # 이동 속도
         # self._jump_power = 500                      # 점프 시의 최대 수직 속력 (px/s).
         # self._max_jump_time = 0.2                   # 긴 점프의 최대 유지 시간
@@ -28,7 +28,7 @@ class Enemy(CharacterBase):
         # self._x_velocity_dec_floor = 6000           # 초당 x방향 속력의 감소량 (땅 위에서)
         # self._x_velocity_dec_moving_mul = 3.0       # 이동 키를 누르고 있을 때, 초당 x방향 속력 감소량의 배수
         self._weapon = BasicGun(True)
-        # self._hp = self._max_hp
+        self._hp = self._max_hp
         
         self._floor_check_distance = 30  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
         self._ai_ignore_distance = 500   # 플레이어가 이 거리보다 멀다면 보지 못한다

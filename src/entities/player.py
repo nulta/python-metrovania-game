@@ -71,6 +71,7 @@ class Player(CharacterBase):
     def gain_hp(self, gain: "int"):
         """player의 hp가 추가된다"""
         self.hp += gain
+
     def slow_speed(self,slow:"int"):
         self._move_speed -=slow
 
