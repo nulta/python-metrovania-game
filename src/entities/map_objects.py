@@ -226,15 +226,26 @@ class Electric_box(StaticEntity):
         phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
 class MovingBoard(StaticEntity):
+    @property
+    def hitbox(self):
+        return Rect(self.position, (120, 20))
+
     def surface(self):
         image_path = f"item/moving_side.png"
         return ResourceLoader.load_image_2x(image_path).copy()
-    
+
     def update(self):
         if game_globals.delta_time%4<2:
             self.position.x += 20* game_globals.delta_time
         elif game_globals.delta_time%12 >=2:
             self.position.x -= 20* game_globals.delta_time
+
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.position.y = min(phys.owner.position.y, self.hitbox.top)
+        phys.velocity.y = min(0, phys.velocity.y)
+    
+    def does_point_collide(self, point: "Vector2"):
+        return self.hitbox.collidepoint(point)
 
 class Gun(StaticEntity):
     def surface(self):
