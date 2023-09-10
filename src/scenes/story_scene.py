@@ -270,17 +270,6 @@ class Chapter_4(StoryScene):
 
     lines = [
     ("grenade", "용케 여기까지 왔군. . 하지만 나를 쓰러뜨리긴 어려울거다"),
-    ("player","덤벼라..!")
-    ]
-
-
-class Chapter_5(StoryScene):
-    music_name = ""
-    background_image = "story_box"
-    next_level = "6_ks64_navy"
-
-    lines = [
-    ("navylady", "그녀석은 우리중 최약체였지.. "),
     ("player","그동안은 적당히였던건가.. 꽤나 고전하겠는걸?")
     ]
 
