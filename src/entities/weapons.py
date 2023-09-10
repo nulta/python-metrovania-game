@@ -1,10 +1,11 @@
 from audio import Audio
-from .bullet import Bullet, WindBullet, BulletInfo
+from .bullet import Bullet, WindBullet, BulletInfo, GrenadeEntity
 from pygame import Vector2
 from pygame import Rect
 from constants import *
 from typing import final
 from resource_loader import ResourceLoader
+import random
 
 class Weapon:
     shoot_cooldown = 0
@@ -78,7 +79,7 @@ class BasicGun(Weapon):
 
     def on_shoot(self):
         self._fire_bullet()
-        Audio.play("gun_1")
+        Audio.play("gun_2")
 
 class FireBossGun(BasicGun):
     shoot_cooldown = 1.2
@@ -111,7 +112,7 @@ class WindBossGun1(BasicGun):
 
     def on_shoot(self):
         self._fire_bullet()
-        Audio.play("gun_1")
+        Audio.play("wind_1")
 
 
 class WindBossGun2(BasicGun):
@@ -134,29 +135,21 @@ class WindBossGun2(BasicGun):
 
     def on_shoot(self):
         self._fire_bullet()
-        Audio.play("gun_1")
+        Audio.play("wind_2")
 
 class GrenadeBossGun(BasicGun):
     shoot_cooldown = 3
-    _bullet_speed = 400
-
-    _bullet_info = BulletInfo()
-    _bullet_info.damage = 50
-    _bullet_info.lifetime = 1000 / _bullet_speed
-    _bullet_info.rect = Rect(0, 0, 30, 30)
-    _bullet_info.sprite = "item/electric_0.png"
 
     def _fire_bullet(self):
-        bullet1 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet2 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet3 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet1.position = self.position + Vector2(0, -30)
-        bullet2.position = self.position + Vector2(0, -180)
-        bullet3.position = self.position + Vector2(0, -240)
+        rand_dir = Vector2(random.random()*2-1, random.random()*2-1).normalize()
+        nade_vel = rand_dir * random.randint(600, 1800)
+        nade = GrenadeEntity()
+        nade.position = self.position
+        nade.physics.velocity = nade_vel
 
     def on_shoot(self):
         self._fire_bullet()
-        Audio.play("gun_1")
+        Audio.play("throw")
 
 
 class PoorGun(BasicGun):
@@ -173,4 +166,4 @@ class PoorGun(BasicGun):
 
     def on_shoot(self):
         self._fire_bullet()
-        Audio.play("gun_1")
+        Audio.play("gun_3")
