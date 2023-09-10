@@ -65,11 +65,11 @@
             }
         },
         "1_FB85_fire.tmj": {
-            "scale": 1.5,
+            "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 603.6666666666666,
-                "y": 519
+                "x": 813.875,
+                "y": 389.875
             }
         },
         "1_FB85_fire.tmx": {
