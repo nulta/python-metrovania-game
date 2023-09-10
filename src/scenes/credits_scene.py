@@ -65,38 +65,11 @@ class CreditsScene(Scene):
         })
 
         t31 = util.remapc(t3, (0, 0.25), (0,1))
-        t32 = util.remapc(t3, (0.25, 0.5), (0,1))
-        t33 = util.remapc(t3, (0.5, 0.75), (0,1))
-        t34 = util.remapc(t3, (0.75, 1.0), (0,1))
 
         if t31:
             img = ResourceLoader.load_image("background/intro/title.png")
             if t31 != 1:
                 img.set_alpha(round(t31 * 255))
-            surface.blit(img, (0, 0))
-
-        if t32:
-            img = ResourceLoader.load_image("background/intro/text_start.png")
-            if t32 != 1:
-                img.set_alpha(round(t32 * 255))
-            elif self._focus_index != 0:
-                img.set_alpha(70)
-            surface.blit(img, (0, 0))
-
-        if t33:
-            img = ResourceLoader.load_image("background/intro/text_options.png")
-            if t33 != 1:
-                img.set_alpha(round(t33 * 255))
-            elif self._focus_index != 1:
-                img.set_alpha(70)
-            surface.blit(img, (0, 0))
-
-        if t34:
-            img = ResourceLoader.load_image("background/intro/text_quit.png")
-            if t34 != 1:
-                img.set_alpha(round(t34 * 255))
-            elif self._focus_index != 2:
-                img.set_alpha(70)
             surface.blit(img, (0, 0))
 
 

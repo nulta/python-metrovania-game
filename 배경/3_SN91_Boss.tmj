@@ -52,6 +52,16 @@
          "name":"next",
          "type":"string",
          "value":"Chapter_4"
+        },
+        {
+         "name":"background",
+         "type":"string",
+         "value":"stage_3"
+        },
+        {
+         "name":"foreground",
+         "type":"string",
+         "value":"stage3"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

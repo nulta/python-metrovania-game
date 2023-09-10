@@ -3,7 +3,7 @@
     "music": "",
     "background_img": "",
     "foreground_img": "",
-    "next_scene": "Before_gun",
+    "next_scene": "1_fb85_fire",
     "entities": [
         ["BasicEnemy",48,4],
         ["Door",51,4],

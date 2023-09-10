@@ -51,6 +51,16 @@
          "name":"next",
          "type":"string",
          "value":"3_SN91_Boss"
+        },
+        {
+         "name":"background",
+         "type":"string",
+         "value":"stage_3"
+        },
+        {
+         "name":"foreground",
+         "type":"string",
+         "value":"stage3"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
