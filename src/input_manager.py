@@ -37,6 +37,7 @@ class InputManager():
         ACTION_CANCEL: {K_ESCAPE},
         ACTION_DEBUG_RESTART: {K_F5},
         ACTION_DEBUG_WIN: {K_F6},
+        ACTION_RELOAD_MAP: {K_r},
     }
 
     # 마지막 프레임에서 눌려있었던 액션들의 집합.

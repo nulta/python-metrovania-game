@@ -1,4 +1,5 @@
 from entities import *
+from entities.enemy import Boss
 from typing import Optional, Dict, TYPE_CHECKING
 from pygame import Vector2, Surface, Rect
 from util import classproperty
@@ -36,10 +37,10 @@ class EntityManager():
         return None
     
     @classmethod
-    def get_boss(cls) -> "Optional[Enemy]":
-        """Player 개체를 반환한다."""
+    def get_boss(cls) -> "Optional[Boss]":
+        """보스 개체를 반환한다."""
         for ent in cls._ents.values():
-            if isinstance(ent, Enemy) and ent.get("is_boss", False):
+            if isinstance(ent, Boss) and ent.get("is_boss", False):
                 return ent
         return None
     

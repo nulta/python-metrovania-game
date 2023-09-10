@@ -121,7 +121,7 @@ class Spike(StaticEntity):
         if direction == 8:
             self._hitbox = Rect(0, 9, 60, 20)
         elif direction == 4:
-            self._hitbox = Rect(1, 0, 20, 60)
+            self._hitbox = Rect(9, 0, 20, 60)
         elif direction == 6:
             self._hitbox = Rect(31, 0, 20, 60)
         else:
@@ -140,6 +140,14 @@ class BoostTile(StaticEntity):
     def __init__(self, boost: float = 1):
         super().__init__()
         self._boost = boost
+
+    @property
+    def hitbox(self):
+        return Rect(0, 20, 60, 20).move(self.position)
+
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.velocity.x += self._boost * 100
+        phys.velocity.x = util.clamp(phys.velocity.x, -1000, 1000)
 
 
 class Door(StaticEntity):
@@ -197,7 +205,7 @@ class Wind(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.velocity.y -= 1300 * game_globals.delta_time
+        phys.velocity.y -= 600 * game_globals.delta_time
         phys.velocity.y = util.clamp(phys.velocity.y, -600, 0)
 
 
@@ -264,7 +272,7 @@ class Fire_time1(StaticEntity):
 
     def update(self):
         super().update()
-        self._active = SceneManager.scene_time % 4 < 1.25
+        self._active = SceneManager.scene_time % 4 < 2
 
     def surface(self):
         if not self._active:
@@ -289,7 +297,7 @@ class Fire_time2(StaticEntity):
 
     def update(self):
         super().update()
-        self._active = SceneManager.scene_time % 4 >= 1.25
+        self._active = SceneManager.scene_time % 4 >= 2
 
     def surface(self):
         if not self._active:
