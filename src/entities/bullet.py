@@ -79,3 +79,41 @@ class WindBullet(Bullet):
         if phys:
             phys.velocity.x += self.physics.velocity.x
             phys.velocity.y = -50
+
+
+class GrenadeEntity(Entity):
+    def __init__(self):
+        super().__init__()
+        self.physics = PhysicsComponent(self)
+        self._boom_timer = 2
+
+    @property
+    def hitbox(self):
+        return Rect(self.position, (30, 30))
+
+    def update(self):
+        super().update()
+        self.physics.update()
+        if self.physics.velocity.magnitude_squared() <= 10:
+            self._boom_timer -= game_globals.delta_time
+        if self._boom_timer <= 0:
+            self.explode()
+    
+    def explode(self):
+        pass
+
+class ExplosionEntity(Entity):
+    def __init__(self):
+        super().__init__()
+        self._lifetime = 1
+
+    @property
+    def hitbox(self):
+        return Rect(self.position, (120, 120)).move(-60, -60)
+
+    # def update(self):
+    #     from entity_manager import EntityManager
+    #     super().update()
+
+    #     EntityManager.
+

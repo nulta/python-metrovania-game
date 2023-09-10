@@ -1,4 +1,4 @@
 @echo off
-python src/__init__.py
+python main.py
 
 if ERRORLEVEL 1 pause

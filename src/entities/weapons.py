@@ -136,6 +136,28 @@ class WindBossGun2(BasicGun):
         self._fire_bullet()
         Audio.play("gun_1")
 
+class GrenadeBossGun(BasicGun):
+    shoot_cooldown = 3
+    _bullet_speed = 400
+
+    _bullet_info = BulletInfo()
+    _bullet_info.damage = 50
+    _bullet_info.lifetime = 1000 / _bullet_speed
+    _bullet_info.rect = Rect(0, 0, 30, 30)
+    _bullet_info.sprite = "item/electric_0.png"
+
+    def _fire_bullet(self):
+        bullet1 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet2 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet3 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet1.position = self.position + Vector2(0, -30)
+        bullet2.position = self.position + Vector2(0, -180)
+        bullet3.position = self.position + Vector2(0, -240)
+
+    def on_shoot(self):
+        self._fire_bullet()
+        Audio.play("gun_1")
+
 
 class PoorGun(BasicGun):
     # 잡몹이 들 기본 무기.
