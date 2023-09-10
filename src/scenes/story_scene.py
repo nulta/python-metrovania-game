@@ -134,9 +134,9 @@ class StoryScene(Scene):
 
         name_text = self.name_table[self.lines[self.line_count][0]]
         name_font_size = 20
-        Fonts.get("bold").render_to(
+        Fonts.get("debug").render_to(
             surface,
-            (310, 343),
+            (300, 343),
             name_text,
             fgcolor=color,
             size=name_font_size,
