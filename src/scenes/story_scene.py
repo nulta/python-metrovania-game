@@ -20,8 +20,7 @@ class StoryScene(Scene):
     background_image = ""
     storyboard_image = ""
     next_level = ""
-    boss_name = ""
-    player_name = ""
+
     
 
     def __init__(self):
@@ -67,8 +66,7 @@ class StoryScene(Scene):
         self.draw_box(surface)
         self.draw_info(surface)
         self.draw_skip(surface)
-        self.draw_storyboard(surface,self.storyboard_image)
-        self.draw_line(surface,self.storyboard_image)
+        self.draw_line(surface)
         self.draw_next(surface)
 
 
@@ -82,21 +80,7 @@ class StoryScene(Scene):
         scence_path = ResourceLoader.load_image(f"background/story_box.png")
         surface.blit(scence_path, (0, 0))
 
-    def draw_storyboard(self, surface: pygame.Surface,character):
-        # 사람 그리기
-        if not character:
-            storyboard_path = ResourceLoader.load_image(f"story_board/blank.png")
-            surface.blit(storyboard_path, (0, 0))
 
-        elif character =="player":
-            gender = game_globals.player_gender
-            storyboard_path = ResourceLoader.load_image(f"story_board/{gender}/player.png")
-            surface.blit(storyboard_path, (0, 0))
-
-        else:
-    
-            storyboard_path = ResourceLoader.load_image(f"story_board/{character}.png")
-            surface.blit(storyboard_path, (0, 0))
 
     def draw_skip(self, surface: pygame.Surface):
         # 건너뛰기 그리기
@@ -127,17 +111,32 @@ class StoryScene(Scene):
             size=font_size,
         )
 
-    def draw_line(self, surface: pygame.Surface,character):
+
+            
+    def draw_line(self, surface: pygame.Surface):
         # 대사 그리기
-        text = self.lines[self.line_count]
+        text = self.lines[self.line_count][1]
         font_size = 18
         color = (0, 0, 0)
         y_offset = 6
         line_changes = text.split('\n')
-        if not character:
+        if self.lines[self.line_count][0]=="blank":
             self.position_x = 110
+            self.storyboard_path = ResourceLoader.load_image("story_board/blank.png")
+
+        elif self.lines[self.line_count][0] =="player":
+            self.position_x = 330
+            gender = game_globals.player_gender
+            if gender ==0:
+                self.storyboard_path = ResourceLoader.load_image("story_board/male/player.png")
+            elif gender ==1:
+                self.storyboard_path = ResourceLoader.load_image("story_board/female/player.png")     
+
         else:
             self.position_x = 330
+            self.storyboard_path = ResourceLoader.load_image(f"story_board/{self.lines[self.line_count][0]}.png")
+        surface.blit(self.storyboard_path, (0, 0))
+
             
 
         if not line_changes:
@@ -182,22 +181,34 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    boss_name = BOSS_NAME
-    player_name = PLAYER_NAME
-    doctor_name = DOCTOR_NAME
-    lines = [
-            f" 그 전쟁은 스스로 신의 자손이라 칭하는 악명높은 북조선의 테러리스트 {boss_name}가\n 북조선 정부를 침공하면서였다.",
-            f" 이미 {boss_name}는 한반도를 중심으로 세력을 넓히고 있다.\n 세계 여러 나라가 그에게 덤볐음에도 속수무책이었다.",
-            f" 그의 엄청난 기계화 부대와 6명의 간부들을 도저히 이길수 없었다. \n전 세계는 이제 {boss_name}의 손이 넘어갈 판이다.",
-            f" 한편, 남한의 군사연구자인 {doctor_name}는 조수인 {player_name}은 타임머신을 통해 {boss_name}의 세력이\n 비교적 약한 과거로 보내 그를 미리 처치하려 한다. ",
-            f" 이제 세계는 {player_name} 한명에게 달려있다.\n 하지만 {boss_name}도 그 계획을 이미 알아차리고 {player_name}에 맞설 준비를 하는데..",
-             ]
-    
     music_name = ""
-    
     background_image = "war2"
     storyboard_image = ""
     next_level = "0_tutorial"
+
+    lines = [
+    ("blank","20xx년.세상은 한 사람에 의해 멸망했다."),
+    ("blank","이름도 알려지지 않은 그 사람은 어디에서도 보지 못한 최첨단 무기와\n 생체 병기들을 이용해서 인간 문명을 공격."),
+    ("blank","그 결과 인류는 20%도 채 남지 않게 되었다."),
+    ("blank","몇 안되는 인간들은 살기 위해 모였다."),
+    ("blank","그들은 수 년간의 고통을 견뎌내며\n'어비스' 이라 불리는 인류의 마지막 쉘터를 구축하게 되었다..."),
+    ("blank","어비스는 인간들의 협동심과 하나 된 마음 아래 빠르게 안정을 찾게 되었고,\n 사건의 흑막인 '그 사람'의 공격은 이후로는 더 발생하지 않았다."),
+    ("blank","그렇게 인류는 다시 평화를 찾게 된 것이다..."),
+        ("player","할아버지..."),
+        ("parksan","왜 그러냐, 지안아?"),
+        ("player","이게 다 뭐예요... 저희 집 지하실에 이런 장소가 있었어요?\n 할아버지가 만든 거예요?"),
+        ("parksan","당연하지. 언제 또 그것들이 우리를 죽이러 올지 모르니까\n 대비를 하는거야."),
+        ("player","언제적 일인데 그게. 이상한 옷이나 입으라고 하고..."),
+        ("parksan","투정은 됐다."),
+        ("parksan","이곳은 너의 훈련을 위해 만든 곳이야.\n그 옷도 너만을 위해서 만들었고."),
+        ("parksan","오늘은 침공 시 대피 훈련을 할 거다.\n할아버지가 매일 뭐라고 했었지?"),
+        ("player","빨리 움직여서 안전한 곳으로 가라고요."),
+        ("parksan","그래.\n 이 곳에는 실제 침공 현장과 같은 함정이 준비되어 있단다.\n 그것들을 피해서 안전한 곳으로 도착해 보거라."),
+        ("player","네.. 빨리 끝내고 놀러 갈거예요."),
+        ("parksan","그래. 할 건 끝내고 놀아라. 다 너를 위해서 하는 말이야."),
+            ]
+    
+    
     
     
  
