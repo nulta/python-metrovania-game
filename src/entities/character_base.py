@@ -69,6 +69,13 @@ class CharacterBase(Entity):
         """바라보는 방향의 벡터. 항상 길이가 1인 단위벡터이다."""
         return Vector2(1 if self._flip else -1, 0)
     
+    @direction.setter
+    def direction(self, val: "Vector2"):
+        if val.x > 0:
+            self._flip = True
+        else:
+            self._flip = False
+    
     @property
     def dead(self):
         return self.hp <= 0
