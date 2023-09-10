@@ -57,12 +57,17 @@
  "orientation":"orthogonal",
  "properties":[
         {
+         "name":"music",
+         "type":"string",
+         "value":"tsuki"
+        }, 
+        {
          "name":"next",
          "type":"string",
          "value":"1_fb85_fire"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.10.0",
  "tileheight":30,
  "tilesets":[
         {

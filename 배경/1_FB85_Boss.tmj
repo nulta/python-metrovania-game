@@ -56,18 +56,22 @@
          "value":"stage_1"
         }, 
         {
-         "name":"next",
-         "type":"string",
-         "value":"Chapter_2"
-        },
-        {
          "name":"foreground",
          "type":"string",
          "value":"stage1"
-        }
-        ],
+        }, 
+        {
+         "name":"music",
+         "type":"string",
+         "value":"electron_energy"
+        }, 
+        {
+         "name":"next",
+         "type":"string",
+         "value":"Chapter_2"
+        }],
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.10.0",
  "tileheight":30,
  "tilesets":[
         {

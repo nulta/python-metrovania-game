@@ -113,17 +113,22 @@
          "value":"stage_2"
         }, 
         {
-         "name":"next",
-         "type":"string",
-         "value":"2_BT02_Boss"
-        },
-        {
          "name":"foreground",
          "type":"string",
          "value":"stage2"
+        }, 
+        {
+         "name":"music",
+         "type":"string",
+         "value":"asogotachino"
+        }, 
+        {
+         "name":"next",
+         "type":"string",
+         "value":"2_BT02_Boss"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.10.0",
  "tileheight":30,
  "tilesets":[
         {
