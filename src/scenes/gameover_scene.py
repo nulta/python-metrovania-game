@@ -40,11 +40,11 @@ class GameOverScene(Scene):
     def draw(self, surface: pygame.Surface):
         canvas = Surface(surface.get_size(), flags=pygame.SRCALPHA)
 
-        canvas.fill((0, 0, 0, 128), pygame.Rect(100-5, 160-5, 120+5, 50+5))
-        canvas.fill((0, 0, 0, 100), pygame.Rect(100-5, 210-5, 120+5, 50+5))
+        canvas.fill((0, 0, 0, 128), pygame.Rect(367-5, 160-5, 100+5, 50+5))
+        canvas.fill((0, 0, 0, 100), pygame.Rect(337-5, 210-5, 160+5, 25+5))
         Fonts.get("bold").render_to(
             canvas,
-            (100, 160),
+            (367, 160),
             "X_X",
             fgcolor=(255, 255, 255),
             size=50
@@ -52,9 +52,9 @@ class GameOverScene(Scene):
 
         Fonts.get("bold").render_to(
             canvas,
-            (100, 210),
+            (337, 210),
             "R 키를 눌러 재시작",
-            fgcolor=(200, 200, 200),
+            fgcolor=(220, 220, 220),
             size=20,
         )
 
