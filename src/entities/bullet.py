@@ -100,20 +100,35 @@ class GrenadeEntity(Entity):
             self.explode()
     
     def explode(self):
-        pass
+        boom = ExplosionEntity()
+        boom.position = Vector2(self.hitbox.midbottom)
+        self.remove()
 
 class ExplosionEntity(Entity):
+
+    _damage = 64
+
     def __init__(self):
         super().__init__()
         self._lifetime = 1
 
     @property
     def hitbox(self):
-        return Rect(self.position, (120, 120)).move(-60, -60)
+        return Rect(self.position, (120, 120)).move(-60, -120)
+    
+    @property
+    def pivot(self):
+        return Vector2(60, 120)
 
-    # def update(self):
-    #     from entity_manager import EntityManager
-    #     super().update()
+    def update(self):
+        from entity_manager import EntityManager
+        super().update()
 
-    #     EntityManager.
+        ply = EntityManager.get_player()
+        if ply and self.hitbox.colliderect(ply.hitbox):
+            ply.take_damage(self._damage, Vector2(self.hitbox.midbottom))
+        
+        self._lifetime -= game_globals.delta_time
+        if self._lifetime <= 0:
+            self.remove()
 
