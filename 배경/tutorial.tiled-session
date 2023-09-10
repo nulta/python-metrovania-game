@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "1_FB85_fire.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -52,8 +52,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 279.75,
-                "y": 229.75
+                "x": 95.75,
+                "y": 206.75
             }
         },
         "1_FB85_Boss.tmx": {
@@ -65,11 +65,11 @@
             }
         },
         "1_FB85_fire.tmj": {
-            "scale": 1.5,
+            "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 762.3333333333333,
-                "y": 575
+                "x": 813.875,
+                "y": 389.875
             }
         },
         "1_FB85_fire.tmx": {
@@ -80,12 +80,20 @@
                 "y": 236.66666666666663
             }
         },
-        "2_BT02_wind.tmj": {
+        "2_BT02_Boss.tmj": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 327.25,
-                "y": 523.75
+                "x": 689.75,
+                "y": 299.75
+            }
+        },
+        "2_BT02_wind.tmj": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 471.1666666666667,
+                "y": 303.16666666666663
             }
         },
         "2_BT02_wind.tmx": {
@@ -100,8 +108,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 371.75,
-                "y": 164.75
+                "x": 746.25,
+                "y": 169.75
             }
         },
         "3_SN91_Boss.tmx": {
@@ -277,21 +285,23 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
+        "2_BT02_Boss.tmj",
+        "1_FB85_fire.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "2_BT02_Boss.tmj",
         "1_FB85_fire.tmj",
+        "1_FB85_Boss.tmj",
+        "3_SN91_Boss.tmj",
+        "2_BT02_wind.tmj",
         "4_SB87_Boss.tmj",
         "3_SN91_speed.tmj",
         "6_KS64_Boss.tmj",
-        "3_SN91_Boss.tmj",
-        "1_FB85_Boss.tmj",
         "0_tutorial.tmj",
         "6_KS64_navy.tmj",
         "4_SB87_grenade.tmj",
-        "2_BT02_wind.tmj",
-        "5_VP33_Boss.tmj",
-        "5_VP33_gas.tmj"
+        "5_VP33_Boss.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
