@@ -20,6 +20,7 @@ class StoryScene(Scene):
     background_image = ""
     storyboard_image = ""
     next_level = ""
+    story_scene=""
 
     name_table ={
         "blank":"","player": "지안","fanboy":"서큘레이터",
@@ -51,11 +52,17 @@ class StoryScene(Scene):
     def next_scene(self):
         from scene_manager import SceneManager
         from resource_loader import ResourceLoader
-        leveldata = ResourceLoader.load_level_data(f"{self.next_level}")
-        level = Level(leveldata)
-        scene = GameScene(level)
-        SceneManager.clear_scene()
-        SceneManager.push_scene(scene)
+        if not self.next_level:
+            scene = globals()[self.story_scene]
+            assert issubclass(scene, StoryScene)
+            SceneManager.clear_scene()
+            SceneManager.push_scene(scene())
+        else:
+            leveldata = ResourceLoader.load_level_data(f"{self.next_level}")
+            level = Level(leveldata)
+            scene = GameScene(level)
+            SceneManager.clear_scene()
+            SceneManager.push_scene(scene)
 
     def draw(self, surface: "Surface"):
         self.draw_background(surface, self.background_image)
@@ -189,14 +196,21 @@ class StoryScene(Scene):
 
 class StorySceneIntro(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
-    next_level = "0_tutorial"
-
+    background_image = "boom"
+    story_scene = "StorySceneIntro_1"
     lines = [
     ("blank","20xx년.\n세상은 한 사람에 의해 멸망했다."),
     ("blank","이름도 알려지지 않은 그 사람은 어디에서도 보지 못한\n최첨단 무기와 생체 병기들을 이용해서 인간 문명을 공격."),
-    ("blank","그 결과 인류는 20%도 채 남지 않게 되었다."),
+    ("blank","그 결과 인류는 20%도 채 남지 않게 되었다.")
+    ]            
+
+
+class StorySceneIntro_1(StoryScene):
+    music_name = ""
+    background_image = "intro"
+    next_level = "0_tutorial"
+
+    lines = [
     ("player","나는 그 사건 이후로 태어났다."),
     ("player","인간으로서 기본적으로 누려야 할\n인권, 행복, 가족 따위는 없었다."),
     ("player","나는 그래서 이 사건의 근원인 그 사람을 없애고 싶다."),
@@ -206,8 +220,7 @@ class StorySceneIntro(StoryScene):
 
 class Before_gun(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = "1_fb85_fire"
 
     lines = [
@@ -220,8 +233,7 @@ class Before_gun(StoryScene):
 
 class Chapter_1(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = "1_fb85_boss"
 
     lines = [
@@ -233,8 +245,7 @@ class Chapter_1(StoryScene):
 
 class Chapter_2(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = "2_bt02_wind"
 
     lines = [
@@ -244,8 +255,7 @@ class Chapter_2(StoryScene):
 
 class Chapter_3(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = "3_sn91_speed"
 
     lines = [
@@ -255,8 +265,7 @@ class Chapter_3(StoryScene):
 
 class Chapter_4(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = "4_sb87_grenade"
 
     lines = [
@@ -267,8 +276,7 @@ class Chapter_4(StoryScene):
 
 class Chapter_5(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = "6_ks64_navy"
 
     lines = [
@@ -278,8 +286,7 @@ class Chapter_5(StoryScene):
 
 class Ending(StoryScene):
     music_name = ""
-    background_image = "war2"
-    storyboard_image = ""
+    background_image = ""
     next_level = ""
 
     lines = [
