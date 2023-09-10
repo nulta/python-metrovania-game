@@ -149,7 +149,7 @@ class BossDoor(Door):
     pass
 
 class HpAdd(StaticEntity):
-    AddHp = 100
+    AddHp = 50
 
     def surface(self):
         return ResourceLoader.load_image("item/life.png")

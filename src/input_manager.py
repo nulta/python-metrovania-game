@@ -24,6 +24,7 @@ class InputManager():
 
     # 액션에 대응하는 키의 집합들.
     _action_table: "dict[int, set[int]]" = {
+        ACTION_ANY: set(),
         ACTION_UP: {K_w, K_UP},
         ACTION_DOWN: {K_s, K_DOWN},
         ACTION_LEFT: {K_a, K_LEFT},
@@ -54,6 +55,9 @@ class InputManager():
         pressed = pygame.key.get_pressed()
         current_held_actions = set()
 
+        if any(pressed):
+            current_held_actions.add(ACTION_ANY)
+
         for action, keys in cls._action_table.items():
             # 액션의 키가 눌려 있는지 확인한다.
             if any(pressed[k] for k in keys):
@@ -74,6 +78,7 @@ class InputManager():
                 from scenes import TitleScene
                 print("DEBUG/RESTARTED!!!")
                 game_globals.game_time = 0
+                cls._action_status[ACTION_ANY] = None
                 SceneManager.clear_scene()
                 SceneManager.push_scene(TitleScene())
     

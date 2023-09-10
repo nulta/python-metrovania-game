@@ -41,14 +41,18 @@ class ChooseScene(Scene):
     def draw(self, surface: "Surface"):
         self.draw_background(surface)
         self.draw_storyboard(surface)
-        self.draw_title(surface)
+        # self.draw_title(surface)
         self.draw_arrow(surface)
         self.draw_character(surface)
+
+        scence_path = ResourceLoader.load_image("background/intro/frame.png")
+        surface.blit(scence_path, (0, 0))
+
         self.draw_info(surface)
 
     def draw_arrow(self,surface: pygame.Surface):
         if self._focus_index == 0:
-            self.position_x= 100000
+            return
         elif self._focus_index == 1:
            self.position_x= 320
         else:
@@ -88,7 +92,7 @@ class ChooseScene(Scene):
 
     def draw_background(self, surface: pygame.Surface):
         # 배경 그리기
-        scence_path = ResourceLoader.load_image("background/black.png")
+        scence_path = ResourceLoader.load_image("background/intro/sky.png")
         surface.blit(scence_path, (0, 0))
 
     def draw_character(self, surface: pygame.Surface):
@@ -104,27 +108,14 @@ class ChooseScene(Scene):
         if button_index == 1:
             #남자
             game_globals.player_gender=GENDER_MALE
-            from scene_manager import SceneManager
-            from .story_scene import StorySceneIntro
-            SceneManager.clear_scene()
-            SceneManager.push_scene(StorySceneIntro())
         elif button_index == 2:
             # 여자
             game_globals.player_gender=GENDER_FEMALE
-            from scene_manager import SceneManager
-            from .story_scene import StorySceneIntro
-            SceneManager.clear_scene()
-            SceneManager.push_scene(StorySceneIntro())
+        from scene_manager import SceneManager
+        from .story_scene import StorySceneIntro
+        SceneManager.clear_scene()
+        SceneManager.push_scene(StorySceneIntro())
 
-    def draw_title(self,surface: pygame.Surface):
-        # 부제..? 그리기
-        Fonts.get("bold").render_to(
-            surface,
-            (50, 60),
-            "캐릭터 선택",
-            fgcolor=(255, 255, 255),
-            size=45,
-        )
     def draw_info(self,surface: pygame.Surface):
         # 안내문 그리기
         Fonts.get("bold").render_to(

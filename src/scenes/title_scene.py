@@ -15,7 +15,6 @@ class TitleScene(Scene):
     """TitleScene은 게임 타이틀 화면이다."""
 
     _music = "title"
-    _button_texts = ["새 게임", "설정", "게임 종료"]
 
     def __init__(self):
         super().__init__()
@@ -27,6 +26,12 @@ class TitleScene(Scene):
         self._focus_index = 0
 
     def update(self):
+        # 아직 버튼이 보여지지 않은 상황에서 아무 키를 누르면, 인트로 시퀸스를 스킵
+        if self.scene_time < 7.9:
+            if InputManager.pressed(ACTION_ANY):
+                self._scene_time = 7.9
+                return
+
         # 메뉴 이동 처리 (키보드)
         if InputManager.pressed(ACTION_UP):
             Audio.common.select()
@@ -34,7 +39,7 @@ class TitleScene(Scene):
         elif InputManager.pressed(ACTION_DOWN):
             Audio.common.select()
             self._focus_index += 1
-        self._focus_index %= len(self._button_texts)
+        self._focus_index %= 3
 
         # 메뉴 입력 처리 (키보드)
         if InputManager.pressed(ACTION_CONFIRM):
@@ -67,14 +72,17 @@ class TitleScene(Scene):
         surface.blit(frame, (0, 0))
 
         t3 = util.on_keyframes(self.scene_time, {
-            7.5: 0,
-            8.5: 1,
+            7.9: 0,
+            8.0: 0.25,
+            8.1: 0.5,
+            8.2: 0.75,
+            8.3: 1,
         })
 
-        t31 = util.remap(t3, (0, 0.25), (0,1))
-        t32 = util.remap(t3, (0.25, 0.5), (0,1))
-        t33 = util.remap(t3, (0.5, 0.75), (0,1))
-        t34 = util.remap(t3, (0.75, 1.0), (0,1))
+        t31 = util.remapc(t3, (0, 0.25), (0,1))
+        t32 = util.remapc(t3, (0.25, 0.5), (0,1))
+        t33 = util.remapc(t3, (0.5, 0.75), (0,1))
+        t34 = util.remapc(t3, (0.75, 1.0), (0,1))
 
         if t31:
             img = ResourceLoader.load_image("background/intro/title.png")
@@ -86,18 +94,24 @@ class TitleScene(Scene):
             img = ResourceLoader.load_image("background/intro/text_start.png")
             if t32 != 1:
                 img.set_alpha(round(t32 * 255))
+            elif self._focus_index != 0:
+                img.set_alpha(70)
             surface.blit(img, (0, 0))
 
         if t33:
             img = ResourceLoader.load_image("background/intro/text_options.png")
             if t33 != 1:
                 img.set_alpha(round(t33 * 255))
+            elif self._focus_index != 1:
+                img.set_alpha(70)
             surface.blit(img, (0, 0))
 
         if t34:
             img = ResourceLoader.load_image("background/intro/text_quit.png")
             if t34 != 1:
                 img.set_alpha(round(t34 * 255))
+            elif self._focus_index != 2:
+                img.set_alpha(70)
             surface.blit(img, (0, 0))
 
 
