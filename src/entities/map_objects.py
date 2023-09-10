@@ -283,10 +283,10 @@ class MovingBoard(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def update(self):
-        if game_globals.game_time % 10 > 5:
-            self.position.x += 55 * game_globals.delta_time
-        elif game_globals.game_time % 10 <= 5:
+        if game_globals.game_time % 10 >= 5:
             self.position.x -= 55 * game_globals.delta_time
+        elif game_globals.game_time % 10 <= 5:
+            self.position.x += 55 * game_globals.delta_time
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         phys.owner.position.y = min(phys.owner.position.y, self.hitbox.top)

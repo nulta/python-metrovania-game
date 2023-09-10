@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "2_BT02_wind.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -81,11 +81,11 @@
             }
         },
         "2_BT02_wind.tmj": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 327.25,
-                "y": 523.75
+                "x": 258.3333333333333,
+                "y": 669.6666666666667
             }
         },
         "2_BT02_wind.tmx": {
@@ -277,9 +277,11 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
+        "2_BT02_wind.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
+        "2_BT02_wind.tmj",
         "1_FB85_fire.tmj",
         "4_SB87_Boss.tmj",
         "3_SN91_speed.tmj",
@@ -289,7 +291,6 @@
         "0_tutorial.tmj",
         "6_KS64_navy.tmj",
         "4_SB87_grenade.tmj",
-        "2_BT02_wind.tmj",
         "5_VP33_Boss.tmj",
         "5_VP33_gas.tmj"
     ],
