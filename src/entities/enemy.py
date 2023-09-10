@@ -495,7 +495,7 @@ class SpeedEnemy(Boss):
         self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
 
 
-class GrenadeEnemy(Boss):
+class GrenadeEnemy(BasicEnemy):
     pass
 
     # def pattern_throw_grenade(self: "Boss", command: "MoveCommand"):
