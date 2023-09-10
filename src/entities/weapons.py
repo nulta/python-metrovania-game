@@ -81,8 +81,8 @@ class BasicGun(Weapon):
         Audio.play("gun_1")
 
 class FireBossGun(BasicGun):
-    shoot_cooldown = 1
-    _bullet_speed = 500
+    shoot_cooldown = 1.2
+    _bullet_speed = 300
 
     _bullet_info = BulletInfo()
     _bullet_info.damage = 50

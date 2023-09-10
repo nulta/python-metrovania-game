@@ -112,14 +112,14 @@ class Spike(StaticEntity):
         super().__init__()
 
         if direction == 8:
-            self._hitbox = Rect(0, 0, 60, 35)
+            self._hitbox = Rect(0, 9, 60, 20)
         elif direction == 4:
-            self._hitbox = Rect(0, 0, 35, 60)
+            self._hitbox = Rect(1, 0, 20, 60)
         elif direction == 6:
-            self._hitbox = Rect(25, 0, 35, 60)
+            self._hitbox = Rect(31, 0, 20, 60)
         else:
             assert direction == 2, "direction must be one of [2,4,6,8]"
-            self._hitbox = Rect(0, 25, 60, 35)
+            self._hitbox = Rect(0, 31, 60, 20)
 
     @property
     def hitbox(self):
