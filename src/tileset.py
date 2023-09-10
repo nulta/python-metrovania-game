@@ -38,7 +38,7 @@ class Tileset:
 
 
     def __len__(self):
-        return self._tile_dimensions[0] * self._tile_dimensions[1]
+        return self._tile_dimensions[0] * self._tile_dimensions[1] + 1
 
     def _get_rect(self, tile_idx: int):
         assert tile_idx < len(self)
