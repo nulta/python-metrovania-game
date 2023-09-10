@@ -225,9 +225,9 @@ class Chapter_1(StoryScene):
     next_level = "1_fb85_boss"
 
     lines = [
-    ("hotboy", "네놈은 누구지?"),
+    ("hotman", "네놈은 누구지?"),
     ("player","퓨처리스트의 수하인가?\n네 수장을 죽이러 왔다."),
-    ("hotboy","그렇게는 못두지. 결투다..!")
+    ("hotman","그렇게는 못두지. 결투다..!")
     ]
 
 
