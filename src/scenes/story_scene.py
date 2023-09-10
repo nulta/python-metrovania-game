@@ -22,7 +22,9 @@ class StoryScene(Scene):
     next_level = ""
 
     name_table ={
-        "blank":"","player": "지안","fanboy":"서큘레이터","gas":"B.W","hotman":"파에톤","navylady":"안티라이트","parksan":"박사","speed":"제트네스"
+        "blank":"","player": "지안","fanboy":"서큘레이터",
+        "grenade":"B.W","hotman":"파에톤","navylady":"안티라이트",
+        "parksan":"박사","speed":"제트네스","futurelist":""
     }
 
     def __init__(self):
@@ -199,7 +201,7 @@ class StorySceneIntro(StoryScene):
     ("player","인간으로서 기본적으로 누려야 할\n인권, 행복, 가족 따위는 없었다."),
     ("player","나는 그래서 이 사건의 근원인 그 사람을 없애고 싶다."),
     ("player","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
-    ("player","나의 목표는 그것뿐이다"),
+    ("player","나의 목표는 그것뿐이다")
     ]
 
 class Before_gun(StoryScene):
@@ -209,18 +211,85 @@ class Before_gun(StoryScene):
     next_level = "0_tutorial"
 
     lines = [
-    ("blank","20xx년.\n세상은 한 사람에 의해 멸망했다."),
-    ("blank","이름도 알려지지 않은 그 사람은 어디에서도 보지 못한\n최첨단 무기와 생체 병기들을 이용해서 인간 문명을 공격."),
-    ("blank","그 결과 인류는 20%도 채 남지 않게 되었다."),
-    ("player","나는 그 사건 이후로 태어났다."),
-    ("player","인간으로서 기본적으로 누려야 할\n인권, 행복, 가족 따위는 없었다."),
-    ("player","나는 그래서 이 사건의 근원인 그 사람을 없애고 싶다."),
-    ("player","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
-    ("player","나의 목표는 그것뿐이다"),
+    ("parksan","내가 도움을 주마"),
+    ("player","?"),
+    ("parksan","내게 타임머신이 있다.\n이걸타고 과거로 가 놈을 해치우도록 해라"),
+    ("player","누구신진 모르겠지만 감사합니다."),
+    ("parksan","이것도 가지고 가도록해라.")
     ]
-    
-#제네시스: 네놈은 누구지?
-#지안: 퓨처리스트의 수하인가?  네 수장을 죽이러 왔다.
-#제네시스: 그렇게는 못두지. 결투다..!
-    
- 
+
+class Chapter_1(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("hotboy", "네놈은 누구지?"),
+    ("player","퓨처리스트의 수하인가?\n네 수장을 죽이러 왔다."),
+    ("hotboy","그렇게는 못두지. 결투다..!")
+    ]
+
+
+class Chapter_2(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("fanboy", "제네시스를 쓰러트리다니 제법이군 이번엔 내가 상대해주마."),
+    ("player","덤벼라..!"),
+    ]
+
+class Chapter_3(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("speed", "더이상 보스에게 가도록 두지 않겠다..!"),
+    ("player","흥 어림없지")
+    ]
+
+class Chapter_4(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("grenade", "용케 여기까지 왔군. . 하지만 나를 쓰러뜨리긴 어려울거다"),
+    ("player","덤벼라..!")
+    ]
+
+
+class Chapter_5(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("navylady", "그녀석은 우리중 최약체였지.. "),
+    ("player","그동안은 적당히였던건가.. 꽤나 고전하겠는걸?")
+    ]
+
+class Ending(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("player","당신이 퓨처리스트..?"),
+    ("futurrlist", "........."),
+    ("blank", "나는 그의 머리에 총을 겨눴다. 선택의 순간이었다.\n 인류의 최대악의 씨앗을 자를 것인가.\n 어린아이를 죽이는 비인도적인 일을 저지를것인가."),
+    ("blank", "인류의 적이 영영 사라지는 순간이었다."),
+    ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다.\n 문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다. "),
+    ("blank", "인류는 자유를 되찾게되었다."),
+    ("blank", "문명은 더없을 번영을 이루었고 사람들은 자유와 행복 속에서 살아가게되었다.")
+
+
+    ]
