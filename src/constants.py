@@ -40,6 +40,7 @@ ACTION_CHANGE_LEFT = 7  # 무기 바꾸기
 ACTION_CONFIRM = 8 # 확인 키 (메뉴 화면에서)
 ACTION_CANCEL = 9  # 취소 키 (메뉴 화면에서)
 ACTION_DEBUG_RESTART = 10  # 디버그용 게임 리스타트 키
+ACTION_DEBUG_WIN = 11  # 디버그용 다음스테이지 키
 ACTION_ANY = 255  # 아무 키!!
 
 # AXIS 상수

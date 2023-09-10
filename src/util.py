@@ -1,7 +1,7 @@
 # 이 파일에는 각종 도움이 되는 함수를 모아놓는다.
 # 주로, math 패키지에는 없는 유용한 수학 함수가 많다.
 
-def clamp(x: float, mini: float, maxi: float) -> float:
+def clamp(x: float, mini: float=0, maxi: float=1) -> float:
     """실수 x가 닫힌구간 [mini, maxi] 내에 속하게 만든다.
     
     `최댓값 = (mini와 maxi 중 더 작은 값)`, `최솟값 = (mini와 maxi 중 더 큰 값)`일 때,

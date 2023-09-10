@@ -80,6 +80,19 @@ class BasicGun(Weapon):
         self._fire_bullet()
         Audio.play("gun_1")
 
+class FireBossGun(BasicGun):
+    shoot_cooldown = 1
+    _bullet_speed = 500
+
+    _bullet_info = BulletInfo()
+    _bullet_info.damage = 50
+    _bullet_info.lifetime = 1000 / _bullet_speed  # 1000px를 가는 데 걸리는 시간만큼
+    _bullet_info.rect = Rect(0, 0, 20, 20)
+    _bullet_info.sprite = "item/firebullet.png"
+
+    def on_shoot(self):
+        self._fire_bullet()
+        Audio.play("gun_1")
 
 class PoorGun(BasicGun):
     # 잡몹이 들 기본 무기.
@@ -92,11 +105,6 @@ class PoorGun(BasicGun):
     _bullet_info.lifetime = 1000 / _bullet_speed
     _bullet_info.rect = Rect(0, 0, 20, 20)
     _bullet_info.sprite = "item/bullet.png"
-    
-
-    def _fire_bullet(self):
-        bullet = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet.position = self.position
 
     def on_shoot(self):
         self._fire_bullet()

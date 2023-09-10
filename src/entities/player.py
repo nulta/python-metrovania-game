@@ -19,7 +19,7 @@ class Player(CharacterBase):
         super().__init__()
         self._gender = game_globals.player_gender
 
-        self._max_hp = 100                          # 최대 체력
+        self._max_hp = 200                          # 최대 체력
         self._damage_taking_delay = 2.0             # 데미지를 입은 뒤의 일시적 무적 시간(초)
         # self._move_speed = PLAYER_MOVE_SPEED        # 이동 속도
         # self._jump_power = 500                      # 점프 시의 최대 수직 속력 (px/s).

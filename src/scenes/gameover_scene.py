@@ -37,17 +37,12 @@ class GameOverScene(Scene):
 
 
     def draw(self, surface: pygame.Surface):
-        t = math.radians(self.scene_time * 360)
-        dx = math.cos(t) * 50
-        dy = math.sin(t) * 50
-
         Fonts.get("bold").render_to(
             surface,
-            (100 + dx, 160 + dy),
-            "GAME OVER",
+            (100, 160),
+            "YOU DIED",
             fgcolor=(230, 230, 230),
-            size=50,
-            rotation=round(self.scene_time * 360)
+            size=50
         )
 
         Fonts.get("bold").render_to(
