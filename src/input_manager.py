@@ -32,7 +32,7 @@ class InputManager():
         ACTION_CHANGE_RIGHT: {K_KP_PERIOD},   
         ACTION_CHANGE_LEFT: {K_COMMA},
         ACTION_JUMP: {K_SPACE},
-        ACTION_SHOOT: {K_k,K_r},
+        ACTION_SHOOT: {K_k,K_f},
         ACTION_CONFIRM: {K_SPACE, K_RETURN},
         ACTION_CANCEL: {K_ESCAPE},
         ACTION_DEBUG_RESTART: {K_F5},
