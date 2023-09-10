@@ -11,7 +11,7 @@ ENTITIES = [
     "Portal_6","ShortCut","Door","BasicEnemy","BlinkBox",
     "Portal_7","Portal_8","Portal_9","Portal_10","ShootingBall",
     "Line","Elevator","Gun","Line","Line",
-    "","","","","BossDoor"
+    "","fire_time1","fire_time2","frie","BossDoor"
 ]
 ENTITIES_FIRST_GID = 76
 
