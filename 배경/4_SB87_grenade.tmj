@@ -82,6 +82,16 @@
          "name":"next",
          "type":"string",
          "value":"4_SB87_Boss"
+        },
+        {
+         "name":"background",
+         "type":"string",
+         "value":"stage_4"
+        },
+        {
+         "name":"foreground",
+         "type":"string",
+         "value":"stage4"
         }],
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

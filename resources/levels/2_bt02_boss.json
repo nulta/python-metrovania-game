@@ -1,8 +1,8 @@
 {
     "tileset_name": "generic_0",
     "music": "",
-    "background_img": "stage2",
-    "foreground_img": "",
+    "background_img": "stage_2",
+    "foreground_img": "stage2",
     "next_scene": "Chapter_3",
     "entities": [
         ["Player",3,8],

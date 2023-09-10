@@ -53,10 +53,16 @@ class StoryScene(Scene):
         from scene_manager import SceneManager
         from resource_loader import ResourceLoader
         if not self.next_level:
-            scene = globals()[self.story_scene]
-            assert issubclass(scene, StoryScene)
-            SceneManager.clear_scene()
-            SceneManager.push_scene(scene())
+            if not self.story_scene:
+                from scene_manager import SceneManager
+                from .credits_scene import CreditsScene
+                SceneManager.clear_scene()
+                SceneManager.push_scene(CreditsScene())
+            else:
+                scene = globals()[self.story_scene]
+                assert issubclass(scene, StoryScene)
+                SceneManager.clear_scene()
+                SceneManager.push_scene(scene())
         else:
             leveldata = ResourceLoader.load_level_data(f"{self.next_level}")
             level = Level(leveldata)
@@ -208,7 +214,7 @@ class StorySceneIntro(StoryScene):
 class StorySceneIntro_1(StoryScene):
     music_name = ""
     background_image = "intro"
-    next_level = "0_tutorial"
+    story_scene = "Black"
 
     lines = [
     ("player","나는 그 사건 이후로 태어났다."),
@@ -217,23 +223,35 @@ class StorySceneIntro_1(StoryScene):
     ("player","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
     ("player","나의 목표는 그것뿐이다")
     ]
+class Black(StoryScene):
+    music_name = ""
+    background_image = "black"
+    story_scene = "Before_gun"
+
+    lines = [
+    ("blank","..."),
+    ("blank",".......")
+
+    ]
 
 class Before_gun(StoryScene):
     music_name = ""
     background_image = "story_box"
-    next_level = "1_fb85_fire"
+    next_level = "0_tutorial"
 
     lines = [
     ("parksan","내가 도움을 주마"),
     ("player","?"),
     ("parksan","내게 타임머신이 있다.\n이걸타고 과거로 가 놈을 해치우도록 해라"),
-    ("player","누구신진 모르겠지만 감사합니다."),
-    ("parksan","이것도 가지고 가도록해라.")
+    ("parksan","나도 놈에게 가족을 잃었다.\n비록 이 타임머신을 개발하느라 늙어서 싸울 순 없지만..\n 이렇게라도 힘이 되고 싶구나.   "),
+    ("parksan","이것도 가지고 가도록해라."),
+     ("player","감사합니다"),
+
     ]
 
 class Chapter_1(StoryScene):
     music_name = ""
-    background_image = "stage1"
+    background_image = "stage_1"
     next_level = "1_fb85_boss"
 
     lines = [
@@ -245,7 +263,7 @@ class Chapter_1(StoryScene):
 
 class Chapter_2(StoryScene):
     music_name = ""
-    background_image = "stage2"
+    background_image = "stage_2"
     next_level = "2_bt02_wind"
 
     lines = [
@@ -255,7 +273,7 @@ class Chapter_2(StoryScene):
 
 class Chapter_3(StoryScene):
     music_name = ""
-    background_image = "story_box"
+    background_image = "stage_3"
     next_level = "3_sn91_speed"
 
     lines = [
@@ -265,7 +283,7 @@ class Chapter_3(StoryScene):
 
 class Chapter_4(StoryScene):
     music_name = ""
-    background_image = "story_box"
+    background_image = "stage_4"
     next_level = "4_sb87_grenade"
 
     lines = [
@@ -276,8 +294,6 @@ class Chapter_4(StoryScene):
 class Ending(StoryScene):
     music_name = ""
     background_image = "story_box"
-    story_scene = "CreditsScene"
-
     lines = [
     ("player","당신이 퓨처리스트..?"),
     ("blank", "........."),

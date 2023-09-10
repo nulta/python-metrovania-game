@@ -1,8 +1,8 @@
 {
     "tileset_name": "generic_0",
     "music": "",
-    "background_img": "",
-    "foreground_img": "",
+    "background_img": "stage_3",
+    "foreground_img": "stage3",
     "next_scene": "3_sn91_boss",
     "entities": [
         ["BasicEnemy",156,8],
