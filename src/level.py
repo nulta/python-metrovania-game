@@ -61,7 +61,7 @@ class Level:
             self._background = ResourceLoader.load_image(image_path)
         else:
             self._background = pygame.Surface(GAME_WINDOW_SIZE)
-            self._background.fill((255, 255, 255))
+            self._background.fill((105, 105, 105))
 
         if level_data.foreground_img:
             image_path = "foreground/" + level_data.foreground_img + ".png"

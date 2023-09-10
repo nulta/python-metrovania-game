@@ -8,6 +8,7 @@ from audio import Audio
 from fonts import Fonts
 import math
 import util
+from pygame import Surface, Rect, Vector2
 
 
 class GameOverScene(Scene):
@@ -37,8 +38,12 @@ class GameOverScene(Scene):
 
 
     def draw(self, surface: pygame.Surface):
+        canvas = Surface(surface.get_size(), flags=pygame.SRCALPHA)
+
+        canvas.fill((0, 0, 0, 128), pygame.Rect(100-5, 160-5, 120+5, 50+5))
+        canvas.fill((0, 0, 0, 100), pygame.Rect(100-5, 210-5, 120+5, 50+5))
         Fonts.get("bold").render_to(
-            surface,
+            canvas,
             (100, 160),
             "X_X",
             fgcolor=(255, 255, 255),
@@ -46,12 +51,14 @@ class GameOverScene(Scene):
         )
 
         Fonts.get("bold").render_to(
-            surface,
-            (100, 220),
+            canvas,
+            (100, 210),
             "R 키를 눌러 재시작",
             fgcolor=(200, 200, 200),
             size=20,
         )
+
+        surface.blit(canvas, (0,0))
 
     def on_destroy(self):
         Audio.music_set_volume(1.0)
