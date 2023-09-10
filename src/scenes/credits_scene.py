@@ -23,13 +23,13 @@ class CreditsScene(Scene):
         Audio.music_set(self._music)
 
         # 메뉴창 UI와 관련된 변수들.
-
     def update(self):
-        # 아직 버튼이 보여지지 않은 상황에서 아무 키를 누르면, 인트로 시퀸스를 스킵
-        if self.scene_time < 7.9:
-            if InputManager.pressed(ACTION_ANY):
-                self._scene_time = 7.9
-                return
+        pass
+
+    def draw_background(self, surface: pygame.Surface, scence):
+        # 배경 그리기
+        scence_path = ResourceLoader.load_image(f"background/black.png")
+        surface.blit(scence_path, (0, 0))
 
     def draw(self, surface: pygame.Surface):
         t1 = util.on_keyframes(self.scene_time, {
@@ -86,21 +86,7 @@ class CreditsScene(Scene):
 
         surface.blit(image, offset)
 
-
     def on_destroy(self):
         # 음악은 다음 씬과 이어진다.
         pass
 
-    def press_button(self, button_index):
-        if button_index == 0:
-            # 새 게임
-            from scene_manager import SceneManager
-            from .player_choose import ChooseScene
-            SceneManager.clear_scene()
-            SceneManager.push_scene(ChooseScene())
-        elif button_index == 1:
-            # 설정
-            pass
-        else:
-            # 게임 종료
-            game_globals.exit = True
