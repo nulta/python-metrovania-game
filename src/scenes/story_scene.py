@@ -208,7 +208,7 @@ class Before_gun(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = "1_fb85_fire"
 
     lines = [
     ("parksan","내가 도움을 주마"),
@@ -222,7 +222,7 @@ class Chapter_1(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = "1_fb85_boss"
 
     lines = [
     ("hotboy", "네놈은 누구지?"),
@@ -235,10 +235,10 @@ class Chapter_2(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = "2_bt02_wind"
 
     lines = [
-    ("fanboy", "제네시스를 쓰러트리다니 제법이군 이번엔 내가 상대해주마."),
+    ("fanboy", "파에톤를 쓰러트리다니 제법이군 이번엔 내가 상대해주마."),
     ("player","덤벼라..!"),
     ]
 
@@ -246,7 +246,7 @@ class Chapter_3(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = "3_sn91_speed"
 
     lines = [
     ("speed", "더이상 보스에게 가도록 두지 않겠다..!"),
@@ -257,7 +257,7 @@ class Chapter_4(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = "4_sb87_grenade"
 
     lines = [
     ("grenade", "용케 여기까지 왔군. . 하지만 나를 쓰러뜨리긴 어려울거다"),
@@ -269,7 +269,7 @@ class Chapter_5(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = "6_ks64_navy"
 
     lines = [
     ("navylady", "그녀석은 우리중 최약체였지.. "),
@@ -280,7 +280,7 @@ class Ending(StoryScene):
     music_name = ""
     background_image = "war2"
     storyboard_image = ""
-    next_level = "0_tutorial"
+    next_level = ""
 
     lines = [
     ("player","당신이 퓨처리스트..?"),

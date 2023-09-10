@@ -2,7 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
-    "next_scene": "4_sb87_grenade",
+    "next_scene": "Chapter4",
     "entities": [
         ["Player",19,7],
         ["SpeedEnemy",3,8]

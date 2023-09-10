@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "0_tutorial.tmj",
+    "activeFile": "4_SB87_grenade.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,8 +28,8 @@
             "scale": 11,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 197.40909090909093,
-                "y": 115.04545454545455
+                "x": 795.5,
+                "y": 555.5
             }
         },
         "0_tutorial.tmx": {
@@ -188,8 +188,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1823.5,
-                "y": 1025.5
+                "x": 896.5,
+                "y": 797.5
             }
         },
         "5_VP33_Boss.tmj": {
@@ -279,7 +279,8 @@
     "openFiles": [
         "1_FB85_fire.tmj",
         "1_FB85_Boss.tmj",
-        "0_tutorial.tmj"
+        "0_tutorial.tmj",
+        "4_SB87_grenade.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [

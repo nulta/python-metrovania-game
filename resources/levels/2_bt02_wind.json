@@ -2,7 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
-    "next_scene": "3_sn91_wind",
+    "next_scene": "Chapter_3",
     "entities": [
         ["Wind",3,5],
         ["Wind",4,5],
