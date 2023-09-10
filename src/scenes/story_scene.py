@@ -273,9 +273,9 @@ class Chapter_1(StoryScene):
     next_level = "1_fb85_boss"
 
     lines = [
-    ("hotman", "네놈은 누구지?"),
-    ("player","퓨처리스트의 수하인가?\n네 수장을 죽이러 왔다."),
-    ("hotman","그렇게는 못두지. 결투다..!")
+    ("hotman","여기까지 무슨 일이지?"),
+    ("player","저리 비켜. 퓨쳐리스트를 처리하러 왔다."),
+    ("hotman","퓨쳐리스트 님을 처리한다고? 어림없지.\n절대 이 앞을 지나지 못할 것이다.")
     ]
 
 
@@ -303,7 +303,7 @@ class Chapter_3(StoryScene):
 
     lines = [
     ("speed", "더이상 보스에게 가도록 두지 않겠다..!"),
-    ("player","흥 어림없지")
+    ("player","더 이상 나를 가로막지 마라.")
     ]
 
 class Chapter_4(StoryScene):
@@ -316,8 +316,8 @@ class Chapter_4(StoryScene):
     next_level = "4_sb87_grenade"
 
     lines = [
-    ("grenade", "용케 여기까지 왔군. . 하지만 나를 쓰러뜨리긴 어려울거다"),
-    ("player","그동안은 적당히였던건가.. 꽤나 고전하겠는걸?")
+    ("grenade", "용케 여기까지 왔군. .  절대 더이상 못갈 것이다!"),
+    ("player","마지막이라... 꽤나 강하겠군")
     ]
 class Ending(StoryScene):
     music_name = "tsuki"

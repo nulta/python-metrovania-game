@@ -39,7 +39,7 @@ class TitleScene(Scene):
         elif InputManager.pressed(ACTION_DOWN):
             Audio.common.select()
             self._focus_index += 1
-        self._focus_index %= 3
+        self._focus_index %= 2
 
         # 메뉴 입력 처리 (키보드)
         if InputManager.pressed(ACTION_CONFIRM):
@@ -82,7 +82,6 @@ class TitleScene(Scene):
         t31 = util.remapc(t3, (0, 0.25), (0,1))
         t32 = util.remapc(t3, (0.25, 0.5), (0,1))
         t33 = util.remapc(t3, (0.5, 0.75), (0,1))
-        t34 = util.remapc(t3, (0.75, 1.0), (0,1))
 
         if t31:
             img = ResourceLoader.load_image("background/intro/title.png")
@@ -99,20 +98,13 @@ class TitleScene(Scene):
             surface.blit(img, (0, 0))
 
         if t33:
-            img = ResourceLoader.load_image("background/intro/text_options.png")
+            img = ResourceLoader.load_image("background/intro/text_quit.png")
             if t33 != 1:
                 img.set_alpha(round(t33 * 255))
             elif self._focus_index != 1:
                 img.set_alpha(70)
             surface.blit(img, (0, 0))
 
-        if t34:
-            img = ResourceLoader.load_image("background/intro/text_quit.png")
-            if t34 != 1:
-                img.set_alpha(round(t34 * 255))
-            elif self._focus_index != 2:
-                img.set_alpha(70)
-            surface.blit(img, (0, 0))
 
 
     
