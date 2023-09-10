@@ -210,10 +210,11 @@ class Boss(Enemy):
 
     def set_pattern(self, pattern_idx: "int"):
         assert pattern_idx < len(self.patterns)
-        print(self.__class__.__name__, f"Switch Boss Pattern {self._pattern_idx} -> {pattern_idx}")
 
         old_pattern_index = self._pattern_idx
         if old_pattern_index != pattern_idx:
+            if DEBUG_MODE:
+                print(self.__class__.__name__, f"Switch Boss Pattern {self._pattern_idx} -> {pattern_idx}")
             self._pattern_idx = pattern_idx
             self._pattern_timer = self.current_pattern.time
             self.current_pattern.on_start(self)
