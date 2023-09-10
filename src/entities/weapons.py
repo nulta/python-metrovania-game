@@ -71,7 +71,7 @@ class BasicGun(Weapon):
     _bullet_info.lifetime = 1000 / _bullet_speed  # 1000px를 가는 데 걸리는 시간만큼
     _bullet_info.rect = Rect(0, 0, 20, 20)
     _bullet_info.sprite = "item/bullet.png"
-    
+
 
     def _fire_bullet(self):
         bullet = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
@@ -160,7 +160,7 @@ class WindBossGun3(BasicGun):
 
 
 class GrenadeBossGun(BasicGun):
-    shoot_cooldown = 3
+    shoot_cooldown = 0.2
 
     def _fire_bullet(self):
         rand_dir = Vector2(random.random()*2-1, random.random()*2-1).normalize()

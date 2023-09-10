@@ -1,6 +1,6 @@
 {
     "tileset_name": "generic_0",
-    "music": "",
+    "music": "may_not",
     "background_img": "stage_1",
     "foreground_img": "stage1",
     "next_scene": "Chapter_1",

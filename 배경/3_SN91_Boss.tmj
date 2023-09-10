@@ -49,22 +49,27 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"next",
-         "type":"string",
-         "value":"Chapter_4"
-        },
-        {
          "name":"background",
          "type":"string",
          "value":"stage_3"
-        },
+        }, 
         {
          "name":"foreground",
          "type":"string",
          "value":"stage3"
+        }, 
+        {
+         "name":"music",
+         "type":"string",
+         "value":"rapid_dance"
+        }, 
+        {
+         "name":"next",
+         "type":"string",
+         "value":"Chapter_4"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.10.0",
  "tileheight":30,
  "tilesets":[
         {

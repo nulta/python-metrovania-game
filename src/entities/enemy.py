@@ -219,6 +219,9 @@ class Boss(Enemy):
         self.set_pattern(next)
 
     def set_pattern(self, pattern_idx: "int"):
+        if pattern_idx < 0:
+            pattern_idx += len(self.patterns)
+
         assert pattern_idx < len(self.patterns)
 
         old_pattern_index = self._pattern_idx
@@ -484,61 +487,83 @@ class SpeedEnemy(Boss):
         super().__init__()
 
         self._sprite_name = "enemy/speed"
-        self._max_hp = 1400
+        self._max_hp = 1000
         self._damage_taking_delay = 1.5
         self._move_speed = 800
         self._jump_power = 800
-        self._x_velocity_dec_floor = 6000
+        self._x_velocity_dec_floor = 8000
         self._x_velocity_dec_moving_mul = 3.0
         self._hp = self._max_hp
 
         self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
 
 
-class GrenadeEnemy(BasicEnemy):
-    pass
+class GrenadeEnemy(Boss):
 
-    # def pattern_throw_grenade(self: "Boss", command: "MoveCommand"):
-    #     if self._is_okay_to_go(-3):
-    #         command.move_axis = -3
-    #     elif not self._is_falling():
-    #         self.next_pattern()
-    #         return
+    patterns = [
+        BossPattern(
+            pattern_move_right,
+            timeout=10,
+        ),
+        BossPattern(
+            pattern_do_nothing,
+            timeout=1,
+        ),
+        BossPattern(
+            pattern_jump,
+            timeout=0.01,
+        ),
+        BossPattern(
+            pattern_shoot,
+            timeout=1.5,
+        ),
+        BossPattern(
+            pattern_do_nothing,
+            timeout=1,
+        ),
+        BossPattern(
+            pattern_firedash,
+            timeout=4,
+        ),
+        BossPattern(
+            pattern_move_left,
+            timeout=10,
+        ),
+        BossPattern(
+            pattern_shoot,
+            timeout=1,
+        ),
+        BossPattern(
+            pattern_move_right,
+            timeout=0.5,
+        ),
+        BossPattern(
+            pattern_do_nothing,
+            timeout=0.1,
+        ),
+        BossPattern(
+            pattern_jump,
+            timeout=0.01,
+        ),
+        BossPattern(
+            pattern_shoot,
+            timeout=3,
+            next=0,
+        ),
+    ]
 
+    def __init__(self):
+        super().__init__()
 
-    # patterns = [
-    #     # 0
-    #     # BossPattern(
-    #     #     pattern_move_right,
-    #     #     timeout=10,
-    #     # ),
-    #     # # 1
-    #     # BossPattern(
-    #     #     pattern_jump,
-    #     #     timeout=0.1,
-    #     # ),
-    #     # # 2
-    #     # BossPattern(
-    #     #     pattern_move_left_quick,
-    #     #     timeout=10,
-    #     # ),
-    #     # # 3
-    #     # BossPattern(
-    #     #     pattern_do_nothing,
-    #     #     timeout=2,
-    #     # ),
-    # ]
+        self._sprite_name = "enemy/grenade"
+        self._max_hp = 1400
+        self._damage_taking_delay = 1.5
+        self._move_speed = 700
+        self._jump_power = 800
+        self._x_velocity_dec_floor = 6000
+        self._x_velocity_dec_moving_mul = 3.0
+        self._hp = self._max_hp
 
-    # def __init__(self):
-    #     super().__init__()
+        self._weapon = GrenadeBossGun(True)
 
-    #     self._sprite_name = "enemy/speed"
-    #     self._max_hp = 1400
-    #     self._damage_taking_delay = 1.5
-    #     self._move_speed = 800
-    #     self._jump_power = 800
-    #     self._x_velocity_dec_floor = 6000
-    #     self._x_velocity_dec_moving_mul = 3.0
-    #     self._hp = self._max_hp
-
-    #     self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
+        self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)

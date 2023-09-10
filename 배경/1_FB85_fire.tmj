@@ -75,12 +75,17 @@
          "value":"stage1"
         }, 
         {
+         "name":"music",
+         "type":"string",
+         "value":"may_not"
+        }, 
+        {
          "name":"next",
          "type":"string",
          "value":"Chapter_1"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.10.0",
  "tileheight":30,
  "tilesets":[
         {
