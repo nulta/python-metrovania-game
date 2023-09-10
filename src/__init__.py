@@ -10,7 +10,7 @@ from input_manager import InputManager
 from scene_manager import SceneManager
 from scenes import TitleScene
 from audio import Audio
-
+import os
 class Game():
     """메인 게임 클래스. 메인 루프를 관리한다."""
 
@@ -113,4 +113,9 @@ class Game():
 
 
 if __name__ == "__main__":
+    print("[!] 경로 문제로 게임이 제대로 실행되지 않을 경우, 상위 디렉터리의 main.py를 실행해 주세요.")
+    init_path = os.path.dirname(os.path.abspath(__file__))
+    main_path = os.path.abspath(os.path.join(init_path, ".."))
+    os.chdir(main_path)
+
     Game()

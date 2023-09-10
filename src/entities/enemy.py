@@ -266,6 +266,11 @@ def pattern_firedash(self: "Boss", command: "MoveCommand"):
         self._flip = not self._flip
     command.move_axis = self.direction.x
 
+def pattern_jump(self: "Boss", command: "MoveCommand"):
+    command.jump = True
+
+def pattern_do_nothing(self: "Boss", command: "MoveCommand"):
+    pass
 
 # Boss
 
@@ -417,6 +422,102 @@ class WindEnemy(Boss):
         self._weapon_blower = WindBossGun1(True)
         self._weapon_tornado = WindBossGun2(True)
         self._weapon = self._weapon_blower
+        self._hp = self._max_hp
+
+        self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
+
+
+class SpeedEnemy(Boss):
+
+    def pattern_move_left_quick(self: "Boss", command: "MoveCommand"):
+        if self._is_okay_to_go(-3):
+            command.move_axis = -3
+        elif not self._is_falling():
+            self.next_pattern()
+            return
+
+
+    patterns = [
+        # 0
+        BossPattern(
+            pattern_move_right,
+            timeout=10,
+        ),
+        # 1
+        BossPattern(
+            pattern_jump,
+            timeout=0.1,
+        ),
+        # 2
+        BossPattern(
+            pattern_move_left_quick,
+            timeout=10,
+        ),
+        # 3
+        BossPattern(
+            pattern_do_nothing,
+            timeout=2,
+        ),
+    ]
+
+    def __init__(self):
+        super().__init__()
+
+        self._sprite_name = "enemy/speed"
+        self._max_hp = 1400
+        self._damage_taking_delay = 1.5
+        self._move_speed = 800
+        self._jump_power = 800
+        self._x_velocity_dec_floor = 6000
+        self._x_velocity_dec_moving_mul = 3.0
+        self._hp = self._max_hp
+
+        self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
+
+
+class GrenadeEnemy(Boss):
+
+    def pattern_throw_grenade(self: "Boss", command: "MoveCommand"):
+        if self._is_okay_to_go(-3):
+            command.move_axis = -3
+        elif not self._is_falling():
+            self.next_pattern()
+            return
+
+
+    patterns = [
+        # 0
+        # BossPattern(
+        #     pattern_move_right,
+        #     timeout=10,
+        # ),
+        # # 1
+        # BossPattern(
+        #     pattern_jump,
+        #     timeout=0.1,
+        # ),
+        # # 2
+        # BossPattern(
+        #     pattern_move_left_quick,
+        #     timeout=10,
+        # ),
+        # # 3
+        # BossPattern(
+        #     pattern_do_nothing,
+        #     timeout=2,
+        # ),
+    ]
+
+    def __init__(self):
+        super().__init__()
+
+        self._sprite_name = "enemy/speed"
+        self._max_hp = 1400
+        self._damage_taking_delay = 1.5
+        self._move_speed = 800
+        self._jump_power = 800
+        self._x_velocity_dec_floor = 6000
+        self._x_velocity_dec_moving_mul = 3.0
         self._hp = self._max_hp
 
         self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
