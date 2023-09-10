@@ -251,7 +251,7 @@ class Black(StoryScene):
 
 class Before_gun(StoryScene):
     music_name = ""
-    background_image = "story_box"
+    background_image = "parksan"
     next_level = "0_tutorial"
 
     lines = [
@@ -266,7 +266,10 @@ class Before_gun(StoryScene):
 
 class Chapter_1(StoryScene):
     music_name = ""
-    background_image = f"{game_globals.player_gender}/stage_1_boss"
+    if game_globals.player_gender == GENDER_MALE:
+        background_image = "male/stage_1_boss"
+    else:
+        background_image = "female/stage_1_boss"
     next_level = "1_fb85_boss"
 
     lines = [
@@ -278,7 +281,10 @@ class Chapter_1(StoryScene):
 
 class Chapter_2(StoryScene):
     music_name = ""
-    background_image = f"{game_globals.player_gender}/stage_2_boss"
+    if game_globals.player_gender == GENDER_MALE:
+        background_image = "male/stage_2_boss"
+    else:
+        background_image = "female/stage_2_boss"
     next_level = "2_bt02_wind"
 
     lines = [
@@ -287,8 +293,12 @@ class Chapter_2(StoryScene):
     ]
 
 class Chapter_3(StoryScene):
+    if game_globals.player_gender == GENDER_MALE:
+        background_image = "male/stage_3_boss"
+    else:
+        background_image = "female/stage_3_boss"
+
     music_name = ""
-    background_image = f"{game_globals.player_gender}/stage_3_boss"
     next_level = "3_sn91_speed"
 
     lines = [
@@ -297,8 +307,12 @@ class Chapter_3(StoryScene):
     ]
 
 class Chapter_4(StoryScene):
+    if game_globals.player_gender == GENDER_MALE:
+        background_image = "male/stage_4_boss"
+        
+    else:
+        background_image = "female/stage_4_boss"
     music_name = ""
-    background_image = f"{game_globals.player_gender}/stage_4_boss"
     next_level = "4_sb87_grenade"
 
     lines = [
@@ -307,17 +321,29 @@ class Chapter_4(StoryScene):
     ]
 class Ending(StoryScene):
     music_name = ""
-    background_image = "story_box"
-    story_scene = "Ending_Choose"
+    background_image = "find"
+    story_scene = "Ending_1"
     lines = [
     ("player","당신이 퓨처리스트..?"),
+    ]
+class Ending_1(StoryScene):
+    music_name = ""
+    background_image = "find_question"
+    story_scene = "Ending_2"
+    lines = [
     ("blank", "........."),
+    ]
+class Ending_2(StoryScene):
+    music_name = ""
+    background_image = "find_gun"
+    story_scene = "Ending_Choose"
+    lines = [
     ("blank", "인류의 적이 영영 사라지는 순간이었다.\n나는 그의 머리에 총을 겨눴다."),
     ("blank"," 선택의 순간이었다.\n인류의 최대악의 씨앗을 자를 것인가.\n 어린아이를 죽이는 비인도적인 일을 저지를것인가."),
     ]
 class Ending_Choose(StoryScene):
     music_name = ""
-    background_image = "story_box"
+    background_image = "gun"
     lines = [
      ("blank", "  "),
     ]
@@ -417,7 +443,7 @@ class Ending_Shoot(StoryScene):
     ]
 class Ending_No_Shoot(StoryScene):
     music_name = ""
-    background_image = "story_box"
+    background_image = "happy_ending"
     lines = [
      ("blank", "나는 과거에 남아 그를 교화하기로 했다.\n 그에게 불교경전을 읽어주었고 그는 자비와 인에 대해 깨우치고 있는중이다.")]
     

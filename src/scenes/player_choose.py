@@ -114,6 +114,11 @@ class ChooseScene(Scene):
         elif button_index == 2:
             # 여자
             game_globals.player_gender=GENDER_FEMALE
+        else:
+            from scene_manager import SceneManager
+            from .player_choose import ChooseScene
+            SceneManager.clear_scene()
+            SceneManager.push_scene(ChooseScene())
         from scene_manager import SceneManager
         from .story_scene import StorySceneIntro
         SceneManager.clear_scene()
