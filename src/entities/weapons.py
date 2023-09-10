@@ -96,7 +96,7 @@ class FireBossGun(BasicGun):
 
 
 class WindBossGun1(BasicGun):
-    shoot_cooldown = 1.2
+    shoot_cooldown = 0.5
     _bullet_speed = 800
 
     _bullet_info = BulletInfo()
@@ -128,9 +128,9 @@ class WindBossGun2(BasicGun):
         bullet1 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
         bullet2 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
         bullet3 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet1.position = self.position + Vector2(0, 30)
-        bullet2.position = self.position + Vector2(0, -90)
-        bullet3.position = self.position + Vector2(0, -150)
+        bullet1.position = self.position + Vector2(0, -30)
+        bullet2.position = self.position + Vector2(0, -180)
+        bullet3.position = self.position + Vector2(0, -240)
 
     def on_shoot(self):
         self._fire_bullet()
@@ -141,10 +141,10 @@ class PoorGun(BasicGun):
     # 잡몹이 들 기본 무기.
 
     shoot_cooldown = 0.7
-    _bullet_speed = 1200
+    _bullet_speed = 700
 
     _bullet_info = BulletInfo()
-    _bullet_info.damage = 50
+    _bullet_info.damage = 40
     _bullet_info.lifetime = 1000 / _bullet_speed
     _bullet_info.rect = Rect(0, 0, 20, 20)
     _bullet_info.sprite = "item/bullet.png"

@@ -97,8 +97,9 @@ class Enemy(CharacterBase):
     def _is_okay_to_go(self, axis: "float"):
         """이 앞 axis쪽 방향에 벽과 낭떠러지가 없는지 체크한다."""
         collides = self.physics.does_point_collide
-        base_distance = self._floor_check_distance
+        base_distance = self._floor_check_distance * int(abs(axis))
         rechecks = 1
+        axis = util.clamp(axis, -1, 1)
 
         if base_distance > 60:
             rechecks = base_distance // 60
@@ -345,6 +346,20 @@ class WindEnemy(Boss):
         self._weapon = self._weapon_tornado
         pattern_shoot(self, command)
 
+    def pattern_windsurf(self: "Boss", command: "MoveCommand"):
+        # 발악패턴은 체력 250 이하일때만
+        if self.hp > 250:
+            self.next_pattern()
+
+        # 좌우로 빠르게 움직인다
+        if not self._is_okay_to_go(self.direction.x * 2):
+            self._flip = not self._flip
+        command.move_axis = self.direction.x * 2
+    
+    def pattern_windsurf_surface(self: "Boss", super: "type[super]"):
+        surface = ResourceLoader.load_image_2x("enemy/wind_dash.png")
+        return surface
+
     patterns = [
         # 0
         BossPattern(
@@ -370,14 +385,18 @@ class WindEnemy(Boss):
         BossPattern(
             pattern_shoot_tornado,  # type:ignore
             timeout=5,
-            next=0,
         ),
-        # 여기서부터 특수패턴
         # 5
         BossPattern(
-            pattern_firedash,
-            timeout=10,
-            next=4,
+            pattern_shoot_wind,  # type:ignore
+            timeout=5,
+        ),
+        # 6
+        BossPattern(
+            pattern_windsurf,
+            surface=pattern_windsurf_surface,
+            timeout=5,
+            next=0,
         ),
     ]
 
@@ -387,22 +406,17 @@ class WindEnemy(Boss):
         self._sprite_name = "enemy/wind"
         self._max_hp = 1000
         self._damage_taking_delay = 1.0
-        self._move_speed = 500
+        self._move_speed = 700
         # self._jump_power = 500
         # self._max_jump_time = 0.2
         # self._max_damage_knockback = 3000
         # self._damage_knockback_y_multiplier = 1.5
         # self._x_velocity_dec_midair = 600
-        self._x_velocity_dec_floor = 1000
-        self._x_velocity_dec_moving_mul = 1.0
+        self._x_velocity_dec_floor = 6000
+        self._x_velocity_dec_moving_mul = 3.0
         self._weapon_blower = WindBossGun1(True)
         self._weapon_tornado = WindBossGun2(True)
         self._weapon = self._weapon_blower
         self._hp = self._max_hp
 
-        self._floor_check_distance = 120  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
-
-    def update(self):
-        super().update()
-        if self.hp <= 250:
-            self.set_pattern(4)
+        self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)

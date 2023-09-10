@@ -8,6 +8,7 @@ class Audio:
 
     _master_music_volume = 1.0
     _master_sfx_volume = 1.0
+    _current_music = ""
 
     @classmethod
     def get_master_music_volume(cls):
@@ -37,11 +38,16 @@ class Audio:
     @classmethod
     def music_set(cls, music_name: "(str | None)"):
         """현재 음악을 멈추고 지정된 음악을 재생한다. `music_name`이 빈 문자열이나 None이라면 현재 음악을 멈춘다."""
-        print("Current music -", music_name)
+        print("Current music ->", music_name)
 
         if not music_name:
             music_mixer.unload()
             return
+        
+        # 같은 음악은 끊지 않는다
+        if cls._current_music == music_name:
+            return
+        cls._current_music = music_name
 
         music_res = f"sounds/music/{music_name}.ogg"
         music_path = ResourceLoader.get_resource_path(music_res)
