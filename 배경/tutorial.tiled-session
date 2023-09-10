@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "2_BT02_Boss.tmj",
+    "activeFile": "1_FB85_fire.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -52,8 +52,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 584.75,
-                "y": 494.75
+                "x": 95.75,
+                "y": 206.75
             }
         },
         "1_FB85_Boss.tmx": {
@@ -68,8 +68,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 614.3333333333333,
-                "y": 703.6666666666667
+                "x": 603.6666666666666,
+                "y": 519
             }
         },
         "1_FB85_fire.tmx": {
@@ -84,8 +84,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 321.75,
-                "y": 254.75
+                "x": 689.75,
+                "y": 299.75
             }
         },
         "2_BT02_wind.tmj": {
@@ -108,8 +108,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 371.75,
-                "y": 164.75
+                "x": 746.25,
+                "y": 169.75
             }
         },
         "3_SN91_Boss.tmx": {
@@ -285,18 +285,19 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "2_BT02_Boss.tmj"
+        "2_BT02_Boss.tmj",
+        "1_FB85_fire.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
         "2_BT02_Boss.tmj",
-        "1_FB85_Boss.tmj",
         "1_FB85_fire.tmj",
+        "1_FB85_Boss.tmj",
+        "3_SN91_Boss.tmj",
         "2_BT02_wind.tmj",
         "4_SB87_Boss.tmj",
         "3_SN91_speed.tmj",
         "6_KS64_Boss.tmj",
-        "3_SN91_Boss.tmj",
         "0_tutorial.tmj",
         "6_KS64_navy.tmj",
         "4_SB87_grenade.tmj",
