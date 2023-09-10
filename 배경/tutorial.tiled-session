@@ -84,8 +84,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 807.25,
-                "y": 1347.75
+                "x": 223.25,
+                "y": 1993.25
             }
         },
         "2_BT02_wind.tmx": {
@@ -188,8 +188,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 896.5,
-                "y": 797.5
+                "x": 1170.5,
+                "y": 1017.5
             }
         },
         "5_VP33_Boss.tmj": {
@@ -284,8 +284,9 @@
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
-        "1_FB85_fire.tmj",
         "1_FB85_Boss.tmj",
+        "1_FB85_fire.tmj",
+        "2_BT02_wind.tmj",
         "0_tutorial.tmj",
         "4_SB87_grenade.tmj",
         "3_SN91_Boss.tmj",
@@ -294,8 +295,7 @@
         "6_KS64_navy.tmj",
         "5_VP33_Boss.tmj",
         "5_VP33_gas.tmj",
-        "4_SB87_Boss.tmj",
-        "2_BT02_wind.tmj"
+        "4_SB87_Boss.tmj"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
