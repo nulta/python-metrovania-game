@@ -3,6 +3,8 @@ from entities.enemy import Boss
 from typing import Optional, Dict, TYPE_CHECKING
 from pygame import Vector2, Surface, Rect
 from util import classproperty
+import game_globals
+from constants import GAME_WINDOW_SIZE
 
 if TYPE_CHECKING:
     from level import Level
@@ -77,9 +79,14 @@ class EntityManager():
         for entid in list(cls._ents):
             if not cls._ents[entid].valid:
                 del cls._ents[entid]
+        
+        camera_center = game_globals.camera_offset + Vector2(GAME_WINDOW_SIZE)/2
 
-        # 모든 개체를 업데이트
+        # 가까운 모든 개체를 업데이트
         for ent in list(cls._ents.values()):
+            # 너무 먼 개체는 스킵한다
+            if not ent.is_player and ent.position.distance_squared_to(camera_center) >= 840**2:
+                continue
             ent.update()
 
     @classmethod

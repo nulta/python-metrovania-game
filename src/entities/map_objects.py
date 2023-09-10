@@ -146,8 +146,8 @@ class BoostTile(StaticEntity):
         return Rect(0, 20, 60, 20).move(self.position)
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.velocity.x += self._boost * 100
-        phys.velocity.x = util.clamp(phys.velocity.x, -1000, 1000)
+        phys.velocity.x += self._boost * 6000 * game_globals.delta_time
+        phys.velocity.x = util.clamp(phys.velocity.x, -900, 900)
 
 
 class Door(StaticEntity):
