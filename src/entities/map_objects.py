@@ -163,7 +163,7 @@ class Fire(StaticEntity):
     _damage = 10
     def surface(self):
     # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = int((SceneManager.scene_time * 7) % 3)
+        chip_idx = int((SceneManager.scene_time * 7) % 2)
         image_path = f"item/fire_{chip_idx}.png"
 
         return ResourceLoader.load_image_2x(image_path).copy()
@@ -243,5 +243,30 @@ class Gun(StaticEntity):
     
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         if phys.owner.is_player:
-#캐릭터 surface바껴야함
+            player = phys.owner
+            assert isinstance(player, Player)
+            player._weapon = weapons.BasicGun(False)
             self.remove()
+
+class Fire_time1(StaticEntity):
+    _damage = 10
+    def surface(self):
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int((SceneManager.scene_time * 7) % 2+2)
+        image_path = f"item/fire_top_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+    
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
+class Fire_time2(StaticEntity):
+    _damage = 10
+    def surface(self):
+    # 가져와야 할 이미지의 이름을 조립한다
+        chip_idx = int((SceneManager.scene_time * 7) % 2)
+        image_path = f"item/fire_top_{chip_idx}.png"
+
+        return ResourceLoader.load_image_2x(image_path).copy()
+    
+    def on_physics_trigger(self, phys: "PhysicsComponent"):
+        phys.owner.call("take_damage", self._damage, self.hitbox.center)
