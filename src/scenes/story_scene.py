@@ -309,7 +309,7 @@ class Chapter_3(StoryScene):
 class Chapter_4(StoryScene):
     if game_globals.player_gender == GENDER_MALE:
         background_image = "male/stage_4_boss"
-        
+
     else:
         background_image = "female/stage_4_boss"
     music_name = ""
@@ -343,7 +343,7 @@ class Ending_2(StoryScene):
     ]
 class Ending_Choose(StoryScene):
     music_name = ""
-    background_image = "gun"
+    background_image = "find_gun"
     lines = [
      ("blank", "  "),
     ]
@@ -387,8 +387,8 @@ class Ending_Choose(StoryScene):
 
     def draw_choose(self,surface: pygame.Surface):
         # 선택지 그리기
-        font = 30
-        font_select= 40
+        font = 100
+        font_select= 150
         color = (0,0,0)
         color_select = (0, 103, 163)       
         if self._focus_index == 0:
@@ -445,5 +445,8 @@ class Ending_No_Shoot(StoryScene):
     music_name = ""
     background_image = "happy_ending"
     lines = [
-     ("blank", "나는 과거에 남아 그를 교화하기로 했다.\n 그에게 불교경전을 읽어주었고 그는 자비와 인에 대해 깨우치고 있는중이다.")]
+    ("blank", "나는 과거에 남아 그를 교화하기로 했다.\n 그에게 불교경전을 읽어주었고 그는 자비와 인에 대해 깨우치고 있는중이다."),
+    ("blank", "문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다."),
+
+     ]
     
