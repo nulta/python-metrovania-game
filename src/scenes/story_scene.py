@@ -266,7 +266,7 @@ class Before_gun(StoryScene):
 
 class Chapter_1(StoryScene):
     music_name = ""
-    background_image = "stage_1"
+    background_image = f"{game_globals.player_gender}/stage_1_boss"
     next_level = "1_fb85_boss"
 
     lines = [
@@ -278,7 +278,7 @@ class Chapter_1(StoryScene):
 
 class Chapter_2(StoryScene):
     music_name = ""
-    background_image = "stage_2"
+    background_image = f"{game_globals.player_gender}/stage_2_boss"
     next_level = "2_bt02_wind"
 
     lines = [
@@ -288,7 +288,7 @@ class Chapter_2(StoryScene):
 
 class Chapter_3(StoryScene):
     music_name = ""
-    background_image = "stage_3"
+    background_image = f"{game_globals.player_gender}/stage_3_boss"
     next_level = "3_sn91_speed"
 
     lines = [
@@ -298,23 +298,126 @@ class Chapter_3(StoryScene):
 
 class Chapter_4(StoryScene):
     music_name = ""
-    background_image = "stage_4"
+    background_image = f"{game_globals.player_gender}/stage_4_boss"
     next_level = "4_sb87_grenade"
 
     lines = [
     ("grenade", "용케 여기까지 왔군. . 하지만 나를 쓰러뜨리긴 어려울거다"),
     ("player","그동안은 적당히였던건가.. 꽤나 고전하겠는걸?")
     ]
-
 class Ending(StoryScene):
     music_name = ""
     background_image = "story_box"
+    story_scene = "Ending_Choose"
     lines = [
     ("player","당신이 퓨처리스트..?"),
     ("blank", "........."),
-    ("blank", "나는 그의 머리에 총을 겨눴다. 선택의 순간이었다.\n 인류의 최대악의 씨앗을 자를 것인가.\n 어린아이를 죽이는 비인도적인 일을 저지를것인가."),
-    ("blank", "인류의 적이 영영 사라지는 순간이었다."),
-    ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다.\n 문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다. "),
-    ("blank", "인류는 자유를 되찾게되었다."),
-    ("blank", "문명은 더없을 번영을 이루었고 사람들은 자유와 행복 속에서 살아가게되었다.")
+    ("blank", "인류의 적이 영영 사라지는 순간이었다.\n나는 그의 머리에 총을 겨눴다."),
+    ("blank"," 선택의 순간이었다.\n인류의 최대악의 씨앗을 자를 것인가.\n 어린아이를 죽이는 비인도적인 일을 저지를것인가."),
     ]
+class Ending_Choose(StoryScene):
+    music_name = ""
+    background_image = "story_box"
+    lines = [
+     ("blank", "  "),
+    ]
+    def __init__(self):
+        super().__init__()
+        self._focus_index = 0
+
+    def draw(self, surface: "Surface"):
+        self.draw_background(surface, self.background_image)
+        self.draw_box(surface)
+        self.draw_info(surface)
+        self.draw_line(surface)
+        self.draw_choose(surface)
+
+    def update(self):
+        # 메뉴 이동 처리 (키보드)
+        if InputManager.pressed(ACTION_UP):
+            Audio.common.select()
+            self._focus_index = 1
+
+        elif InputManager.pressed(ACTION_DOWN):
+            Audio.common.select()
+            self._focus_index = 2
+
+        # 메뉴 입력 처리 (키보드)
+        if InputManager.pressed(ACTION_CONFIRM):
+            Audio.common.confirm()
+            self.press_button(self._focus_index)
+        
+    def press_button(self, button_index):
+        if button_index == 1:
+            #쏜다
+            self.story_scene = "Ending_Shoot"
+            Audio.common.select()
+            self.next_scene()
+        elif button_index == 2:
+            #안 쏜다
+            self.story_scene = "Ending_No_Shoot"
+            Audio.common.select()
+            self.next_scene()
+
+    def draw_choose(self,surface: pygame.Surface):
+        # 선택지 그리기
+        font = 30
+        font_select= 40
+        color = (0,0,0)
+        color_select = (0, 103, 163)       
+        if self._focus_index == 0:
+            color_shoot=color
+            color_no_shoot=color
+            size_shoot = font
+            size_no_shoot =font
+
+        elif self._focus_index == 1:
+            color_shoot= color_select
+            color_no_shoot=color
+            size_shoot = font_select
+            size_no_shoot =font
+        else:
+            color_shoot=color
+            color_no_shoot=color_select
+            size_shoot = font
+            size_no_shoot =font_select
+
+        Fonts.get("bold").render_to(
+        surface,
+        (110, 400),
+        "쏜다",
+        color_shoot,
+        size_shoot
+        )
+        Fonts.get("bold").render_to(
+        surface,
+        (110, 450),
+        "안 쏜다",
+        color_no_shoot,
+        size_no_shoot,
+        )
+
+    def draw_info(self,surface: pygame.Surface):
+        # 안내문 그리기
+        Fonts.get("bold").render_to(
+            surface,
+            (350, 555),
+            "ENTER or Space를 눌러 선택합니다",
+            fgcolor=(255, 255, 255),
+            size=15,
+        )
+
+class Ending_Shoot(StoryScene):
+    music_name = ""
+    background_image = "story_box"
+    lines = [
+     ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다"),
+     ("blank", "문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다."),
+
+    ]
+class Ending_No_Shoot(StoryScene):
+    music_name = ""
+    background_image = "story_box"
+    lines = [
+     ("blank", "나는 과거에 남아 그를 교화하기로 했다.\n 그에게 불교경전을 읽어주었고 그는 자비와 인에 대해 깨우치고 있는중이다.")]
+    
