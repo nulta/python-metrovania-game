@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "4_SB87_grenade.tmj",
+    "activeFile": "2_BT02_wind.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -28,8 +28,8 @@
             "scale": 11,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 795.5,
-                "y": 555.5
+                "x": 795.409090909091,
+                "y": 555.4090909090909
             }
         },
         "0_tutorial.tmx": {
@@ -52,8 +52,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 584.75,
-                "y": 494.75
+                "x": 579.25,
+                "y": 489.25
             }
         },
         "1_FB85_Boss.tmx": {
@@ -68,8 +68,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 615,
-                "y": 704.3333333333333
+                "x": 607,
+                "y": 697
             }
         },
         "1_FB85_fire.tmx": {
@@ -84,8 +84,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 223.25,
-                "y": 1993.25
+                "x": 331.25,
+                "y": 766.25
             }
         },
         "2_BT02_wind.tmx": {
@@ -188,8 +188,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1170.5,
-                "y": 1017.5
+                "x": 1169.5,
+                "y": 1016.5
             }
         },
         "5_VP33_Boss.tmj": {
@@ -264,7 +264,7 @@
             "scaleInDock": 3
         },
         "tileset.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
@@ -277,16 +277,13 @@
     "map.tileHeight": 30,
     "map.tileWidth": 30,
     "openFiles": [
-        "1_FB85_fire.tmj",
-        "1_FB85_Boss.tmj",
-        "0_tutorial.tmj",
-        "4_SB87_grenade.tmj"
+        "2_BT02_wind.tmj"
     ],
     "project": "tutorial.tiled-project",
     "recentFiles": [
-        "1_FB85_Boss.tmj",
-        "1_FB85_fire.tmj",
         "2_BT02_wind.tmj",
+        "1_FB85_fire.tmj",
+        "1_FB85_Boss.tmj",
         "0_tutorial.tmj",
         "4_SB87_grenade.tmj",
         "3_SN91_Boss.tmj",

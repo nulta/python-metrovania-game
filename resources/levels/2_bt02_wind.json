@@ -101,7 +101,7 @@
         ["Wind",8,57],
         ["Wind",9,57],
         ["BasicEnemy",11,57],
-        ["MovingBoard",10,62],
+        ["MovingBoard",9,62],
         ["HpAdd",4,67],
         ["BasicEnemy",4,76],
         ["Player",5,86]
