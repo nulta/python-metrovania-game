@@ -201,7 +201,7 @@ class StoryScene(Scene):
 
 
 class StorySceneIntro(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "boom"
     story_scene = "StorySceneIntro_1"
     lines = [
@@ -212,7 +212,7 @@ class StorySceneIntro(StoryScene):
 
 
 class StorySceneIntro_1(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "intro"
     story_scene = "Eye_Down"
 
@@ -222,7 +222,7 @@ class StorySceneIntro_1(StoryScene):
     ]
 
 class Eye_Down(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "eye1"
     story_scene = "Eye_Up"
     lines = [
@@ -231,7 +231,7 @@ class Eye_Down(StoryScene):
     ]
 
 class Eye_Up(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "eye2"
     story_scene = "Black"
 
@@ -239,7 +239,7 @@ class Eye_Up(StoryScene):
     ("blank","나의 목표는 그것뿐이다")
     ]
 class Black(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "black"
     story_scene = "Before_gun"
 
@@ -250,7 +250,7 @@ class Black(StoryScene):
     ]
 
 class Before_gun(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "parksan"
     next_level = "0_tutorial"
 
@@ -265,7 +265,7 @@ class Before_gun(StoryScene):
     ]
 
 class Chapter_1(StoryScene):
-    music_name = ""
+    music_name = "electron_energy"
     if game_globals.player_gender == GENDER_MALE:
         background_image = "male/stage_1_boss"
     else:
@@ -280,7 +280,7 @@ class Chapter_1(StoryScene):
 
 
 class Chapter_2(StoryScene):
-    music_name = ""
+    music_name = "asogotachino"
     if game_globals.player_gender == GENDER_MALE:
         background_image = "male/stage_2_boss"
     else:
@@ -298,7 +298,7 @@ class Chapter_3(StoryScene):
     else:
         background_image = "female/stage_3_boss"
 
-    music_name = ""
+    music_name = "surviving_cyber"
     next_level = "3_sn91_speed"
 
     lines = [
@@ -320,21 +320,21 @@ class Chapter_4(StoryScene):
     ("player","마지막이라... 꽤나 강하겠군")
     ]
 class Ending(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "find"
     story_scene = "Ending_1"
     lines = [
     ("player","당신이 퓨처리스트..?"),
     ]
 class Ending_1(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "find_question"
     story_scene = "Ending_2"
     lines = [
     ("blank", "........."),
     ]
 class Ending_2(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "find_gun"
     story_scene = "Ending_Choose"
     lines = [
@@ -342,7 +342,7 @@ class Ending_2(StoryScene):
     ("blank"," 선택의 순간이었다.\n인류의 최대악의 씨앗을 자를 것인가.\n 어린아이를 죽이는 비인도적인 일을 저지를것인가."),
     ]
 class Ending_Choose(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "find_gun"
     lines = [
      ("blank", "  "),
@@ -434,7 +434,7 @@ class Ending_Choose(StoryScene):
         )
 
 class Ending_Shoot(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "story_box"
     lines = [
      ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다"),
@@ -442,7 +442,7 @@ class Ending_Shoot(StoryScene):
 
     ]
 class Ending_No_Shoot(StoryScene):
-    music_name = ""
+    music_name = "tsuki"
     background_image = "happy_ending"
     lines = [
     ("blank", "나는 과거에 남아 그를 교화하기로 했다.\n 그에게 불교경전을 읽어주었고 그는 자비와 인에 대해 깨우치고 있는중이다."),

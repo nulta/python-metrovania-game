@@ -76,7 +76,9 @@ class PhysicsComponent:
         주의: 이 엔티티의 근처에 있는 (반경 3타일 가량) 경우에만 제대로 판단할 수 있다.
         엔티티와 멀리 떨어져 있는 좌표점에 대해서 판단할 경우에는 항상 False를 반환한다.
         """
-        assert self.owner.position.distance_squared_to(point) <= PHYSICS_RESOLUTION_RADIUS**2
+        if not self.owner.position.distance_squared_to(point) <= PHYSICS_RESOLUTION_RADIUS**2:
+            return False
+
         if DEBUG_DRAW_HITBOX:
             debug.draw_point(point, color=(255,0,0), on_map=True)
         

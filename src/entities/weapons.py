@@ -177,7 +177,7 @@ class GrenadeBossGun(BasicGun):
 class PoorGun(BasicGun):
     # 잡몹이 들 기본 무기.
 
-    shoot_cooldown = 0.7
+    shoot_cooldown = 1.0
     _bullet_speed = 700
 
     _bullet_info = BulletInfo()
