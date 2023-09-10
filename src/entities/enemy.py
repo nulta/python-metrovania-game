@@ -351,57 +351,71 @@ class WindEnemy(Boss):
         self._weapon = self._weapon_tornado
         pattern_shoot(self, command)
 
+    def pattern_shoot_random(self: "WindEnemy", command: "MoveCommand"):
+        # 발악패턴1은 체력 550 이하일때만
+        if self.hp > 550:
+            self.next_pattern()
+            self.wait_for(1.0)
+
+        self._weapon = self._weapon_all
+        pattern_shoot(self, command)
+
     def pattern_windsurf(self: "Boss", command: "MoveCommand"):
-        # 발악패턴은 체력 250 이하일때만
-        if self.hp > 250:
+        # 발악패턴2는 체력 300 이하일때만
+        if self.hp > 300:
             self.next_pattern()
 
         # 좌우로 빠르게 움직인다
-        if not self._is_okay_to_go(self.direction.x * 2):
+        if not self._is_okay_to_go(self.direction.x * 1.5):
             self._flip = not self._flip
-        command.move_axis = self.direction.x * 2
+        command.move_axis = self.direction.x * 1.5
     
     def pattern_windsurf_surface(self: "Boss", super: "type[super]"):
         surface = ResourceLoader.load_image_2x("enemy/wind_dash.png")
         return surface
 
     patterns = [
-        # 0
         BossPattern(
             pattern_move_right,
             timeout=10,
         ),
-        # 1
         BossPattern(
             pattern_shoot_wind,  # type:ignore
-            timeout=5,
+            timeout=5.5,
         ),
-        # 2
+        BossPattern(
+            pattern_shoot_random,  # type:ignore
+            timeout=6,
+        ),
         BossPattern(
             pattern_shoot_tornado,  # type:ignore
             timeout=5,
         ),
-        # 3
-        BossPattern(
-            pattern_move_left,
-            timeout=10,
-        ),
-        # 4
-        BossPattern(
-            pattern_shoot_tornado,  # type:ignore
-            timeout=5,
-        ),
-        # 5
-        BossPattern(
-            pattern_shoot_wind,  # type:ignore
-            timeout=5,
-        ),
-        # 6
         BossPattern(
             pattern_windsurf,
             surface=pattern_windsurf_surface,
             timeout=5,
-            next=0,
+        ),
+        BossPattern(
+            pattern_move_left,
+            timeout=10,
+        ),
+        BossPattern(
+            pattern_shoot_tornado,  # type:ignore
+            timeout=5,
+        ),
+        BossPattern(
+            pattern_shoot_random,  # type:ignore
+            timeout=6,
+        ),
+        BossPattern(
+            pattern_shoot_wind,  # type:ignore
+            timeout=5,
+        ),
+        BossPattern(
+            pattern_windsurf,
+            surface=pattern_windsurf_surface,
+            timeout=5,
         ),
     ]
 
@@ -410,7 +424,7 @@ class WindEnemy(Boss):
 
         self._sprite_name = "enemy/wind"
         self._max_hp = 1000
-        self._damage_taking_delay = 1.0
+        self._damage_taking_delay = 0.8
         self._move_speed = 700
         # self._jump_power = 500
         # self._max_jump_time = 0.2
@@ -421,11 +435,17 @@ class WindEnemy(Boss):
         self._x_velocity_dec_moving_mul = 3.0
         self._weapon_blower = WindBossGun1(True)
         self._weapon_tornado = WindBossGun2(True)
+        self._weapon_all = WindBossGun3(True)
         self._weapon = self._weapon_blower
         self._hp = self._max_hp
 
         self._floor_check_distance = 60  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
 
+    def update(self):
+        super().update()
+        if self.hp == 250:
+            self.hp = 240
+            self.set_pattern(4)
 
 class SpeedEnemy(Boss):
 

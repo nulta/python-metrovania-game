@@ -8,6 +8,7 @@ from constants import *
 from fonts import Fonts
 from level import Level
 from audio import Audio
+from input_manager import InputManager
 
 class GameScene(Scene):
     """GameScene은 인게임 씬이다."""
@@ -35,6 +36,9 @@ class GameScene(Scene):
 
     def update(self):
         EntityManager.update()
+        if InputManager.pressed(ACTION_RELOAD_MAP):
+            Audio.common.confirm()
+            self.initialize_level()
 
     def draw(self, surface: pygame.Surface):
         camera_pos = game_globals.camera_offset
@@ -53,6 +57,7 @@ class GameScene(Scene):
 
         # UI
         self.draw_hp(surface)
+        self.draw_boss_hp(surface)
 
     def draw_hp(self,surface: pygame.Surface):
         from entity_manager import EntityManager
@@ -74,6 +79,27 @@ class GameScene(Scene):
             size=font_size,
         )
 
+    def draw_boss_hp(self,surface: pygame.Surface):
+        from entity_manager import EntityManager
+        boss = EntityManager.get_boss()
+        if not boss: return  
+        hp = boss.hp
+        mhp = boss._max_hp
+
+        base_offset = 600
+        pygame.draw.rect(surface, (0, 0, 0),[base_offset,35,210,34])
+        pygame.draw.rect(surface, (7, 28, 168),[base_offset+5,39,hp * (200 / mhp),26])
+        text = f"hp:{hp}"
+        font_size = 20
+        color = (255, 255, 255)
+
+        Fonts.get("bold").render_to(
+            surface,
+            (base_offset+10,43),
+            text,
+            fgcolor=color,
+            size=font_size,
+        )
 
     def on_destroy(self):
         pass

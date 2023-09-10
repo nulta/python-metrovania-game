@@ -28,7 +28,7 @@ class GameOverScene(Scene):
 
     def update(self):
         # Enter 키
-        if InputManager.pressed(ACTION_CONFIRM):
+        if InputManager.pressed(ACTION_CONFIRM) or InputManager.pressed(ACTION_RELOAD_MAP):
             Audio.common.confirm()
             self.retry()
         
@@ -40,15 +40,15 @@ class GameOverScene(Scene):
         Fonts.get("bold").render_to(
             surface,
             (100, 160),
-            "YOU DIED",
-            fgcolor=(230, 230, 230),
+            "X_X",
+            fgcolor=(255, 255, 255),
             size=50
         )
 
         Fonts.get("bold").render_to(
             surface,
-            (100, 260),
-            "Press Enter",
+            (100, 220),
+            "R 키를 눌러 재시작",
             fgcolor=(200, 200, 200),
             size=20,
         )

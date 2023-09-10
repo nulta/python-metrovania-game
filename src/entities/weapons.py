@@ -97,8 +97,8 @@ class FireBossGun(BasicGun):
 
 
 class WindBossGun1(BasicGun):
-    shoot_cooldown = 0.5
-    _bullet_speed = 800
+    shoot_cooldown = 0.8
+    _bullet_speed = 600
 
     _bullet_info = BulletInfo()
     _bullet_info.damage = 0
@@ -107,8 +107,10 @@ class WindBossGun1(BasicGun):
     _bullet_info.sprite = "item/smoke_0.png"
 
     def _fire_bullet(self):
-        bullet = WindBullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet.position = self.position
+        bullet1 = WindBullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet2 = WindBullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet1.position = self.position + self.direction * 60
+        bullet2.position = self.position
 
     def on_shoot(self):
         self._fire_bullet()
@@ -116,11 +118,11 @@ class WindBossGun1(BasicGun):
 
 
 class WindBossGun2(BasicGun):
-    shoot_cooldown = 3
+    shoot_cooldown = 2
     _bullet_speed = 400
 
     _bullet_info = BulletInfo()
-    _bullet_info.damage = 50
+    _bullet_info.damage = 40
     _bullet_info.lifetime = 1000 / _bullet_speed
     _bullet_info.rect = Rect(0, 0, 60, 60)
     _bullet_info.sprite = "item/poison_smoke_1.png"
@@ -129,13 +131,33 @@ class WindBossGun2(BasicGun):
         bullet1 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
         bullet2 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
         bullet3 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
-        bullet1.position = self.position + Vector2(0, -30)
-        bullet2.position = self.position + Vector2(0, -180)
-        bullet3.position = self.position + Vector2(0, -240)
+        bullet4 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        
+        offset = random.choice([0, -60])
+        bullet1.position = self.position + Vector2(0, offset)
+        bullet2.position = self.position + Vector2(0, -220 + offset)
+        bullet3.position = self.position + Vector2(0, -280 + offset)
+        bullet4.position = self.position + Vector2(0, (-340 + offset) % -400)
 
     def on_shoot(self):
         self._fire_bullet()
         Audio.play("wind_2")
+
+class WindBossGun3(BasicGun):
+    """난사 패턴!"""
+    shoot_cooldown = 1
+
+    def on_shoot(self):
+        gun = None
+        if random.randint(0,1) == 0:
+            gun = WindBossGun1(self._is_enemy)
+        else:
+            gun = WindBossGun2(self._is_enemy)
+
+        gun.position = self.position
+        gun.direction = self.direction
+        gun.shoot()
+
 
 class GrenadeBossGun(BasicGun):
     shoot_cooldown = 3

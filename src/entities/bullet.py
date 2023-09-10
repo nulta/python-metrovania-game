@@ -78,7 +78,7 @@ class WindBullet(Bullet):
         phys: "PhysicsComponent | None" = ent.get("physics")
         if phys:
             phys.velocity.x += self.physics.velocity.x
-            phys.velocity.y = -50
+            phys.velocity.y = -100
 
 
 class GrenadeEntity(Entity):
