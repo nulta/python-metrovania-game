@@ -179,7 +179,18 @@ class HpAdd(StaticEntity):
 class Fire(StaticEntity):
     _damage = 10
 
+    def __init__(self):
+        super().__init__()
+        self._active = True
+
+    def update(self):
+        super().update()
+        self._active = SceneManager.scene_time % 4 < 1.25
+
     def surface(self):
+        if not self._active:
+            return pygame.Surface((0,0))
+
         # 가져와야 할 이미지의 이름을 조립한다
         chip_idx = int((SceneManager.scene_time * 7) % 2)
         image_path = f"item/fire_{chip_idx}.png"
@@ -187,7 +198,8 @@ class Fire(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.owner.call("take_damage", self._damage, self.hitbox.center)
+        if self._active:
+            phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
 
 class Wind(StaticEntity):
@@ -199,7 +211,8 @@ class Wind(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.velocity.y -= 10 * game_globals.delta_time
+        phys.velocity.y -= 1300 * game_globals.delta_time
+        phys.velocity.y = util.clamp(phys.velocity.y, -600, 0)
 
 
 class Smoke(StaticEntity):
@@ -263,7 +276,7 @@ class Electric_box(StaticEntity):
 class MovingBoard(StaticEntity):
     @property
     def hitbox(self):
-        return Rect(self.position, (60, 20))
+        return Rect(self.position + Vector2(0, 20), (60, 32))
 
     def surface(self):
         image_path = f"item/moving_side.png"
