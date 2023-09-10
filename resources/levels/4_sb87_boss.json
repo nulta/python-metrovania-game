@@ -2,7 +2,8 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
-    "next_scene": "Chapter_5",
+    "foreground_img": "",
+    "next_scene": "5_vp33_gas",
     "entities": [
         ["Player",8,7],
         ["GrenadeEnemy",20,7]

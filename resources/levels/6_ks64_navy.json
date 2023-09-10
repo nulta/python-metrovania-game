@@ -2,6 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "foreground_img": "",
     "next_scene": "6_ks64_boss",
     "entities": [
         ["BossDoor",94,2],

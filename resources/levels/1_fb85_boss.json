@@ -2,6 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "foreground_img": "",
     "next_scene": "Chapter_2",
     "entities": [
         ["Player",4,6],

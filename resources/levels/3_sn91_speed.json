@@ -2,6 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
+    "foreground_img": "",
     "next_scene": "3_sn91_boss",
     "entities": [
         ["Portal_7",156,8],
