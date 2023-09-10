@@ -1,5 +1,5 @@
 from audio import Audio
-from .bullet import Bullet, BulletInfo
+from .bullet import Bullet, WindBullet, BulletInfo
 from pygame import Vector2
 from pygame import Rect
 from constants import *
@@ -93,6 +93,49 @@ class FireBossGun(BasicGun):
     def on_shoot(self):
         self._fire_bullet()
         Audio.play("gun_1")
+
+
+class WindBossGun1(BasicGun):
+    shoot_cooldown = 1.2
+    _bullet_speed = 800
+
+    _bullet_info = BulletInfo()
+    _bullet_info.damage = 0
+    _bullet_info.lifetime = 1000 / _bullet_speed
+    _bullet_info.rect = Rect(0, 0, 60, 60)
+    _bullet_info.sprite = "item/smoke_0.png"
+
+    def _fire_bullet(self):
+        bullet = WindBullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet.position = self.position
+
+    def on_shoot(self):
+        self._fire_bullet()
+        Audio.play("gun_1")
+
+
+class WindBossGun2(BasicGun):
+    shoot_cooldown = 3
+    _bullet_speed = 400
+
+    _bullet_info = BulletInfo()
+    _bullet_info.damage = 50
+    _bullet_info.lifetime = 1000 / _bullet_speed
+    _bullet_info.rect = Rect(0, 0, 60, 60)
+    _bullet_info.sprite = "item/poison_smoke_1.png"
+
+    def _fire_bullet(self):
+        bullet1 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet2 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet3 = Bullet(self._bullet_info, self.direction * self._bullet_speed, self._is_enemy)
+        bullet1.position = self.position + Vector2(0, 30)
+        bullet2.position = self.position + Vector2(0, -90)
+        bullet3.position = self.position + Vector2(0, -150)
+
+    def on_shoot(self):
+        self._fire_bullet()
+        Audio.play("gun_1")
+
 
 class PoorGun(BasicGun):
     # 잡몹이 들 기본 무기.

@@ -213,6 +213,9 @@ class CharacterBase(Entity):
     def take_damage(self, damage: "int", origin: "Vector2 | None" = None) -> bool:
         """지정된 양만큼의 데미지를 입는다. 데미지를 입었다면 True를 반환한다."""
 
+        if damage <= 0:
+            return False
+
         # 무적 상태일 때는 데미지를 받지 않는다.
         if self._invincible_timer:
             return False
