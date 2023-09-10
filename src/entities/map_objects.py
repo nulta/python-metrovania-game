@@ -134,6 +134,8 @@ class BoostTile(StaticEntity):
         self._boost = boost
 
 class Door(StaticEntity):
+    
+
     def __init__(self):
         super().__init__()
 
@@ -207,6 +209,11 @@ class PoisonSmoke(StaticEntity):
 
 class Electric_ball(StaticEntity):
     _damage=50
+
+    @property
+    def hitbox(self):
+        return Rect(self.position, (40, 40))
+
     def surface(self):
     # 가져와야 할 이미지의 이름을 조립한다
         chip_idx = int((SceneManager.scene_time * 5) % 2)
@@ -228,7 +235,7 @@ class Electric_box(StaticEntity):
 class MovingBoard(StaticEntity):
     @property
     def hitbox(self):
-        return Rect(self.position, (120, 20))
+        return Rect(self.position, (60, 20))
 
     def surface(self):
         image_path = f"item/moving_side.png"
