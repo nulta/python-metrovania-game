@@ -18,12 +18,24 @@ resources/sounds/music/title.ogg
     사용조건: 상용 이용·개인 이용에 관계없이 BGM으로 사용 가능.
     사용조건 원문: https://dova-s.jp/_contents/agreement/ 참조 (2023-09-09)
 
-resources/fonts/galmuri9.ttf
-    출처: https://github.com/quiple/galmuri
-    저작자: Minseo Lee (itoupluk427@gmail.com)
-    사용조건: OFL (Open Font License)에 따라 자유롭게 사용 가능.
-
 resources/fonts/ibmplexsanskr.ttf
     출처: https://github.com/ibm/plex
     저작자: IBM Corp.
     사용조건: OFL (Open Font License)에 따라 자유롭게 사용 가능.
+
+
+~ 곡 출처 ~
+< Reo / youtube.com/@ReoMusicCH >
+Desert Canyon - Reo
+Instability - Reo
+
+< DOVA-SYNDROME / dova-s.jp >
+月 - スエノブ
+Trick Style - まんぼう二等兵
+Control Station - まんぼう二等兵
+アンゴラたちの踊り - まんぼう二等兵
+Electron Energy - FLASH☆BEAT
+May not - Khaim
+ラピッドダンス - roku
+Releasing to Infinity - ISAo
+Surviving Cyber - Make a field Music
