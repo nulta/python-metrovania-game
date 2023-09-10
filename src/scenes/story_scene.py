@@ -21,7 +21,9 @@ class StoryScene(Scene):
     storyboard_image = ""
     next_level = ""
 
-    
+    name_table ={
+        "blank":"","player": "지안","fanboy":"서큘레이터","gas":"B.W","hotman":"파에톤","navylady":"안티라이트","parksan":"박사","speed":"제트네스"
+    }
 
     def __init__(self):
         super().__init__()
@@ -112,6 +114,7 @@ class StoryScene(Scene):
         color = (0, 0, 0)
         y_offset = 6
         line_changes = text.split('\n')
+
         if self.lines[self.line_count][0]=="blank":
             self.position_x = 110
             self.storyboard_path = ResourceLoader.load_image("story_board/blank.png")
@@ -129,7 +132,16 @@ class StoryScene(Scene):
             self.storyboard_path = ResourceLoader.load_image(f"story_board/{self.lines[self.line_count][0]}.png")
         surface.blit(self.storyboard_path, (0, 0))
 
-            
+        name_text = self.name_table[self.lines[self.line_count][0]]
+        name_font_size = 20
+        Fonts.get("bold").render_to(
+            surface,
+            (310, 343),
+            name_text,
+            fgcolor=color,
+            size=name_font_size,
+        )
+
 
         if not line_changes:
             Fonts.get("default").render_to(
@@ -189,8 +201,26 @@ class StorySceneIntro(StoryScene):
     ("player","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
     ("player","나의 목표는 그것뿐이다"),
     ]
+
+class Before_gun(StoryScene):
+    music_name = ""
+    background_image = "war2"
+    storyboard_image = ""
+    next_level = "0_tutorial"
+
+    lines = [
+    ("blank","20xx년.\n세상은 한 사람에 의해 멸망했다."),
+    ("blank","이름도 알려지지 않은 그 사람은 어디에서도 보지 못한\n최첨단 무기와 생체 병기들을 이용해서 인간 문명을 공격."),
+    ("blank","그 결과 인류는 20%도 채 남지 않게 되었다."),
+    ("player","나는 그 사건 이후로 태어났다."),
+    ("player","인간으로서 기본적으로 누려야 할\n인권, 행복, 가족 따위는 없었다."),
+    ("player","나는 그래서 이 사건의 근원인 그 사람을 없애고 싶다."),
+    ("player","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
+    ("player","나의 목표는 그것뿐이다"),
+    ]
     
-    
-    
+#제네시스: 네놈은 누구지?
+#지안: 퓨처리스트의 수하인가?  네 수장을 죽이러 왔다.
+#제네시스: 그렇게는 못두지. 결투다..!
     
  
