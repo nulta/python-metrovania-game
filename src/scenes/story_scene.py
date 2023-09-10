@@ -252,13 +252,21 @@ class Black(StoryScene):
 class Before_gun(StoryScene):
     music_name = "tsuki"
     background_image = "parksan"
-    next_level = "0_tutorial"
+    next_level = "Gun"
 
     lines = [
     ("parksan","내가 도움을 주마"),
     ("player","?"),
     ("parksan","내게 타임머신이 있다.\n이걸타고 과거로 가 놈을 해치우도록 해라"),
     ("parksan","나도 놈에게 가족을 잃었다.\n비록 이 타임머신을 개발하느라 늙어서 싸울 순 없지만..\n 이렇게라도 힘이 되고 싶구나.   "),
+    ]
+
+class Gun(StoryScene):
+    music_name = "tsuki"
+    background_image = "gun"
+    next_level = "0_tutorial"
+
+    lines = [
     ("parksan","이것도 가지고 가도록해라."),
      ("player","감사합니다"),
 
@@ -435,7 +443,7 @@ class Ending_Choose(StoryScene):
 
 class Ending_Shoot(StoryScene):
     music_name = "tsuki"
-    background_image = "story_box"
+    background_image = "shoot"
     lines = [
      ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다"),
      ("blank", "문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다."),
