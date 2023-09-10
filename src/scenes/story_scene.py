@@ -25,7 +25,7 @@ class StoryScene(Scene):
     name_table ={
         "blank":"","player": "지안","fanboy":"서큘레이터",
         "grenade":"B.W","hotman":"파에톤","navylady":"안티라이트",
-        "parksan":"박사","speed":"제트네스","futurelist":""
+        "parksan":"박사","speed":"제트네스"
     }
 
     def __init__(self):
@@ -276,16 +276,14 @@ class Chapter_4(StoryScene):
 class Ending(StoryScene):
     music_name = ""
     background_image = "story_box"
-    next_level = ""
+    story_scene = "CreditsScene"
 
     lines = [
     ("player","당신이 퓨처리스트..?"),
-    ("futurrlist", "........."),
+    ("blank", "........."),
     ("blank", "나는 그의 머리에 총을 겨눴다. 선택의 순간이었다.\n 인류의 최대악의 씨앗을 자를 것인가.\n 어린아이를 죽이는 비인도적인 일을 저지를것인가."),
     ("blank", "인류의 적이 영영 사라지는 순간이었다."),
     ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다.\n 문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다. "),
     ("blank", "인류는 자유를 되찾게되었다."),
     ("blank", "문명은 더없을 번영을 이루었고 사람들은 자유와 행복 속에서 살아가게되었다.")
-
-
     ]

@@ -168,7 +168,7 @@ class HpAdd(StaticEntity):
     AddHp = 50
 
     def surface(self):
-        return ResourceLoader.load_image("item/life.png")
+        return ResourceLoader.load_image_2x("item/life.png")
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         if phys.owner.is_player:
@@ -179,26 +179,12 @@ class HpAdd(StaticEntity):
 class Fire(StaticEntity):
     _damage = 10
 
-    def __init__(self):
-        super().__init__()
-        self._active = True
-
-    def update(self):
-        super().update()
-        self._active = SceneManager.scene_time % 4 < 1.25
-
     def surface(self):
-        if not self._active:
-            return pygame.Surface((0,0))
-
         # 가져와야 할 이미지의 이름을 조립한다
         chip_idx = int((SceneManager.scene_time * 7) % 2)
         image_path = f"item/fire_{chip_idx}.png"
-
         return ResourceLoader.load_image_2x(image_path).copy()
-
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        if self._active:
             phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
 
@@ -213,33 +199,6 @@ class Wind(StaticEntity):
     def on_physics_trigger(self, phys: "PhysicsComponent"):
         phys.velocity.y -= 1300 * game_globals.delta_time
         phys.velocity.y = util.clamp(phys.velocity.y, -600, 0)
-
-
-class Smoke(StaticEntity):
-    def surface(self):
-        # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = int((SceneManager.scene_time * 5) % 2)
-        image_path = f"item/smoke_{chip_idx}.png"
-
-        return ResourceLoader.load_image_2x(image_path).copy()
-
-
-class PoisonSmoke(StaticEntity):
-    _damage = 10
-    _slower = 10
-
-    def surface(self):
-        # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = int((SceneManager.scene_time * 5) % 2)
-        image_path = f"item/poison_smoke_{chip_idx}.png"
-
-        return ResourceLoader.load_image_2x(image_path).copy()
-
-    def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.owner.call("take_damage", self._damage, self.hitbox.center)
-        if phys.owner.is_player:
-            phys.owner.call("slow_speed", self._slower)
-        phys.velocity.x -= 10 * game_globals.delta_time
 
 
 class Electric_ball(StaticEntity):
@@ -283,9 +242,9 @@ class MovingBoard(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def update(self):
-        if game_globals.game_time % 10 >= 5:
+        if game_globals.game_time % 10 < 5:
             self.position.x -= 55 * game_globals.delta_time
-        elif game_globals.game_time % 10 <= 5:
+        elif game_globals.game_time % 10 >= 5:
             self.position.x += 55 * game_globals.delta_time
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
@@ -296,36 +255,46 @@ class MovingBoard(StaticEntity):
         return self.hitbox.collidepoint(point)
 
 
-class Gun(StaticEntity):
-    def surface(self):
-        return ResourceLoader.load_image("item/gun.png")
-
-    def on_physics_trigger(self, phys: "PhysicsComponent"):
-        if phys.owner.is_player:
-            player = phys.owner
-            assert isinstance(player, Player)
-            player._weapon = weapons.BasicGun(False)
-            self.remove()
-
-
 class Fire_time1(StaticEntity):
     _damage = 10
 
+    def __init__(self):
+        super().__init__()
+        self._active = True
+
+    def update(self):
+        super().update()
+        self._active = SceneManager.scene_time % 4 < 1.25
+
     def surface(self):
+        if not self._active:
+            return pygame.Surface((0,0))
+
         # 가져와야 할 이미지의 이름을 조립한다
-        chip_idx = int((SceneManager.scene_time * 7) % 2 + 2)
+        chip_idx = int((SceneManager.scene_time * 7) % 2+2)
         image_path = f"item/fire_top_{chip_idx}.png"
 
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.owner.call("take_damage", self._damage, self.hitbox.center)
-
+        if self._active:
+            phys.owner.call("take_damage", self._damage, self.hitbox.center)
 
 class Fire_time2(StaticEntity):
     _damage = 10
 
+    def __init__(self):
+        super().__init__()
+        self._active = True
+
+    def update(self):
+        super().update()
+        self._active = SceneManager.scene_time % 4 >= 1.25
+
     def surface(self):
+        if not self._active:
+            return pygame.Surface((0,0))
+
         # 가져와야 할 이미지의 이름을 조립한다
         chip_idx = int((SceneManager.scene_time * 7) % 2)
         image_path = f"item/fire_top_{chip_idx}.png"
@@ -333,4 +302,5 @@ class Fire_time2(StaticEntity):
         return ResourceLoader.load_image_2x(image_path).copy()
 
     def on_physics_trigger(self, phys: "PhysicsComponent"):
-        phys.owner.call("take_damage", self._damage, self.hitbox.center)
+        if self._active:
+            phys.owner.call("take_damage", self._damage, self.hitbox.center)

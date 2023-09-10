@@ -5,7 +5,6 @@
     "foreground_img": "",
     "next_scene": "4_sb87_boss",
     "entities": [
-        ["BossDoor",10,2],
         ["BasicEnemy",5,3],
         ["BasicEnemy",14,3],
         ["BasicEnemy",5,7],
