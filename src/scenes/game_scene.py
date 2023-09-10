@@ -58,9 +58,10 @@ class GameScene(Scene):
         from entity_manager import EntityManager
         player = EntityManager.get_player()
         if not player: return  
-        hp = player._hp
+        hp = player.hp
+        mhp = player._max_hp
         pygame.draw.rect(surface, (0, 0, 0),[35,35,210,34])
-        pygame.draw.rect(surface, (168, 28, 7),[40,39,hp,26])
+        pygame.draw.rect(surface, (168, 28, 7),[40,39,hp * (200 / mhp),26])
         text = f"hp:{hp}"
         font_size = 20
         color = (255, 255, 255)

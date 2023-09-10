@@ -92,8 +92,11 @@ class ChooseScene(Scene):
 
     def draw_background(self, surface: pygame.Surface):
         # 배경 그리기
-        scence_path = ResourceLoader.load_image("background/intro/sky.png")
-        surface.blit(scence_path, (0, 0))
+        cloud_offset = math.sin(self.scene_time / 3) * 30
+
+        surface.blit(ResourceLoader.load_image("background/intro/sky.png"), (0, 0))
+        surface.blit(ResourceLoader.load_image("background/intro/stardust.png"), (0, 0))
+        surface.blit(ResourceLoader.load_image("background/intro/cloud.png"), (0, cloud_offset))
 
     def draw_character(self, surface: pygame.Surface):
         # 사람 그리기

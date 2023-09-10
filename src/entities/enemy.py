@@ -29,7 +29,7 @@ class Enemy(CharacterBase):
         # self._x_velocity_dec_moving_mul = 3.0       # 이동 키를 누르고 있을 때, 초당 x방향 속력 감소량의 배수
         self._weapon = BasicGun(True)
         self._hp = self._max_hp
-        
+
         self._floor_check_distance = 30  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
         self._ai_ignore_distance = 500   # 플레이어가 이 거리보다 멀다면 보지 못한다
         self._ai_minimum_distance = 200   # 플레이어가 이 거리보다 가깝다면 뒤로 뺀다
@@ -54,7 +54,7 @@ class Enemy(CharacterBase):
         # 좀 뒤로 이동해야 하는가?
         if player_dist <= self._ai_minimum_distance:
             command.move_axis = -to_player_axis
-        
+
         # 이동할 방향이 안전한가?
         if not self._is_okay_to_go(command.move_axis):
             command.move_axis = 0.0
@@ -76,7 +76,7 @@ class Enemy(CharacterBase):
             return float("inf")
         else:
             return self.position.distance_to(player.position)
-        
+
     def _get_axis_to_player(self):
         """플레이어 쪽으로 향하는 axis를 받아온다. 플레이어가 없거나 위치가 일치한다면 0을 반환한다."""
         from entity_manager import EntityManager
@@ -112,3 +112,84 @@ class BasicEnemy(Enemy):
     def update(self):
         super().update()
 
+
+class FireEnemy(Enemy):
+    is_boss = True
+
+    def __init__(self):
+        super().__init__()
+
+        self._sprite_name = "enemy/fire"
+        self._max_hp = 750
+        self._damage_taking_delay = 1.0
+        self._move_speed = 500
+        # self._jump_power = 500
+        # self._max_jump_time = 0.2
+        # self._max_damage_knockback = 3000
+        # self._damage_knockback_y_multiplier = 1.5
+        # self._x_velocity_dec_midair = 600
+        self._x_velocity_dec_floor = 1000
+        self._x_velocity_dec_moving_mul = 1.0
+        self._weapon = FireBossGun(True)
+        self._hp = self._max_hp
+
+        self._pattern = 0  # 0~3
+        self._pattern_timer = 0
+        self._pattern_times = [10, 10, 10, 10, 1000]
+
+    def update(self):
+        super().update()
+        self._pattern_timer -= game_globals.delta_time
+
+        if self._pattern_timer <= 0:
+            next_pattern = (self._pattern + 1) % 5
+            self._switch_pattern(next_pattern)
+
+        if self.hp <= 250:
+            self._switch_pattern(4)
+
+
+    def _switch_pattern(self, idx):
+        self._pattern = idx
+        self._pattern_timer = self._pattern_times[idx]
+    
+    def _update_command(self):
+        command = self._move_command
+        command.reset()
+        to_player_axis = self._get_axis_to_player()
+        
+        if self._pattern == 0:
+            # <- 접근
+            if self._is_okay_to_go(-1):
+                command.move_axis = -1
+            else:
+                self._switch_pattern(1)
+                return
+        elif self._pattern == 1 or self._pattern == 3:
+            # -> 접근
+            if self._is_okay_to_go(1):
+                command.move_axis = 1
+            else:
+                self._switch_pattern(self._pattern + 1)
+                return
+        elif self._pattern == 2:
+            # -> 화염방사
+            if self.direction.x == -1:
+                command.move_axis = 0.01
+            command.shoot = True
+        elif self._pattern == 4:
+            # -> 화염방사
+            if self.direction.x == 1:
+                command.move_axis = -0.01
+            command.shoot = True
+        else:
+            # 강력 접근
+            if self._is_okay_to_go(self.direction.x):
+                self._flip = not self._flip
+            command.move_axis = self.direction.x
+
+    def _on_die(self):
+        from entity_manager import EntityManager
+        super()._on_die()
+        scene = EntityManager.game_scene
+        if scene: scene.victory()

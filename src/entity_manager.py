@@ -36,6 +36,14 @@ class EntityManager():
         return None
     
     @classmethod
+    def get_boss(cls) -> "Optional[Enemy]":
+        """Player 개체를 반환한다."""
+        for ent in cls._ents.values():
+            if isinstance(ent, Enemy) and ent.get("is_boss", False):
+                return ent
+        return None
+    
+    @classmethod
     def get_static_entities(cls) -> "list[Entity]":
         return list(filter(lambda ent: ent.is_static, cls._ents.values()))
     
