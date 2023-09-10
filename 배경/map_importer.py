@@ -37,6 +37,7 @@ for filename in tmj_files:
 
         next = ""
         background = ""
+        foreground = ""
         music = ""
 
         for prop in properties:
@@ -49,11 +50,14 @@ for filename in tmj_files:
                     next = next.lower()
             if name == "background":
                 background = value
+            if name == "foreground":
+                foreground = value
             if name == "music":
                 music = value
 
         print("next =", next)
         print("background =", background)
+        print("foreground =", foreground)
         print("music =", music)
 
         map_data: "list[list[int]]" = [([0] * width) for _ in range(height)]
@@ -62,6 +66,7 @@ for filename in tmj_files:
             "tileset_name": "generic_0",
             "music": music,
             "background_img": background,
+            "foreground_img": foreground,
             "next_scene": next,
             "entities": ent_data,
             "map_data": map_data,

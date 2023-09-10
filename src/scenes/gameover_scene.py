@@ -24,8 +24,7 @@ class GameOverScene(Scene):
         assert prev_scene
         self._prev_scene = prev_scene
 
-        # 음악을 재생한다.
-        pygame.mixer.music.set_volume(0.5)
+        Audio.music_set_volume(0.5)
 
     def update(self):
         # Enter 키
@@ -60,7 +59,7 @@ class GameOverScene(Scene):
         )
 
     def on_destroy(self):
-        pygame.mixer.music.set_volume(1.0)
+        Audio.music_set_volume(1.0)
 
     def retry(self):
         self.remove()

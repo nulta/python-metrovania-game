@@ -51,7 +51,10 @@ class ResourceLoader():
 
         # 같은 리소스를 두 번 로딩하지 않는다
         cache = cls._get_cache(resource_name)
-        if cache: return cache
+        if cache:
+            if cache.get_alpha() != 255:
+                cache.set_alpha(255)
+            return cache
 
         resource_path = cls.get_resource_path(resource_name)
         surface = pygame.image.load(resource_path)
@@ -143,6 +146,7 @@ class ResourceLoader():
             "entities",
             "music",
             "background_img",
+            "foreground_img",
             "next_scene",
         ]
         for k in keys:

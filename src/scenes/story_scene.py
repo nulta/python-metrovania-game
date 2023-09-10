@@ -25,19 +25,11 @@ class StoryScene(Scene):
     
 
     def __init__(self):
-       # assert self.__class__.next_scene != StoryScene.next_scene, (
-        #    "The method 'next_scene()' should must be overriden."
-        #)
-
         super().__init__()
         self.line_count=0
 
         # 음악을 재생한다.
-        if self.music_name:
-            music = f"sounds/music/{self.music_name}.ogg"
-            music_path = ResourceLoader.get_resource_path(music)
-            pygame.mixer.music.load(music_path)
-            pygame.mixer.music.play(-1)
+        Audio.music_set(self.music_name)
 
 
     def update(self):
@@ -178,7 +170,8 @@ class StoryScene(Scene):
         )
 
     def on_destroy(self):
-        pygame.mixer.music.unload()
+        # Audio.music_set("")
+        pass
 
 
 class StorySceneIntro(StoryScene):

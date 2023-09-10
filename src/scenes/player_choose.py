@@ -16,21 +16,12 @@ from typing import *
 class ChooseScene(Scene):
     """Player 선택 창이다"""
 
-    music_name = ""
     character_image = ""
     player_name = ""
     color = (128,128,128)
     select_color = (255, 255, 255)
     def __init__(self):
         super().__init__()
-
-        # 음악을 재생한다.
-        if self.music_name:
-            music = f"sounds/music/{self.music_name}.ogg"
-            music_path = ResourceLoader.get_resource_path(music)
-            pygame.mixer.music.load(music_path)
-            pygame.mixer.music.play(-1)
-
         self._focus_index = 0
 
     def update(self):
@@ -145,4 +136,5 @@ class ChooseScene(Scene):
         )
 
     def on_destroy(self):
-        pygame.mixer.music.unload()
+        # Audio.music_set("")
+        pass

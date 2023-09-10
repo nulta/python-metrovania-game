@@ -33,7 +33,8 @@ class InputManager():
         ACTION_JUMP: {K_SPACE},
         ACTION_SHOOT: {K_k,K_r},
         ACTION_CONFIRM: {K_SPACE, K_RETURN},
-        ACTION_CANCEL: {K_ESCAPE}       
+        ACTION_CANCEL: {K_ESCAPE},
+        ACTION_DEBUG_RESTART: {K_F5},
     }
 
     # 마지막 프레임에서 눌려있었던 액션들의 집합.
@@ -65,6 +66,16 @@ class InputManager():
 
         # 클래스 내부 상태를 업데이트한다.
         cls._last_held_actions = current_held_actions
+
+        if DEBUG_MODE:
+            if cls.pressed(ACTION_DEBUG_RESTART):
+                import game_globals
+                from scene_manager import SceneManager
+                from scenes import TitleScene
+                print("DEBUG/RESTARTED!!!")
+                game_globals.game_time = 0
+                SceneManager.clear_scene()
+                SceneManager.push_scene(TitleScene())
     
     @classmethod
     def _get_action_status(cls, then, now):

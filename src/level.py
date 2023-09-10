@@ -34,8 +34,9 @@ class LevelData:
         # 음악 파일 이름
         self.music: "str | None" = None
 
-        # 배경 이미지 이름
+        # 배경/근경 이미지 이름
         self.background_img: "str | None" = None
+        self.foreground_img: "str | None" = None
 
         # 다음 씬 또는 다음 맵의 이름
         self.next_scene: "str | None" = None
@@ -56,12 +57,19 @@ class Level:
         self._next_scene = level_data.next_scene
 
         if level_data.background_img:
-            image_path = "background/" + level_data.background_img
+            image_path = "background/" + level_data.background_img + ".png"
             self._background = ResourceLoader.load_image(image_path)
         else:
             self._background = pygame.Surface(GAME_WINDOW_SIZE)
             self._background.fill((255, 255, 255))
-    
+
+        if level_data.foreground_img:
+            image_path = "foreground/" + level_data.foreground_img + ".png"
+            self._foreground = ResourceLoader.load_image(image_path)
+        else:
+            self._foreground = pygame.Surface((0,0))
+
+
     def get_collision_map(self) -> "Sequence[Sequence[pygame.Rect | None]]":
         """
         이 레벨의 충돌 맵을 받아온다.
@@ -127,10 +135,7 @@ class Level:
 
     @property
     def music(self):
-        if self._music:
-            return "sounds/music/" + self._music + ".ogg"
-        else:
-            return None
+        return self._music or None
     
     @property
     def next_scene_name(self):
