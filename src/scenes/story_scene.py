@@ -259,18 +259,20 @@ class Before_gun(StoryScene):
     ("player","?"),
     ("parksan","내게 타임머신이 있다.\n이걸타고 과거로 가 놈을 해치우도록 해라"),
     ("parksan","나도 놈에게 가족을 잃었다.\n비록 이 타임머신을 개발하느라 늙어서 싸울 순 없지만..\n 이렇게라도 힘이 되고 싶구나.   "),
+    ("parksan","이것도 가지고 가도록해라."),
+    ("player","이게 뭐죠?"),
+    ("parksan","너의 전용무기가 되어줄 총이란다.\n이 무기를 이용하여 그들과 싸우거라"),
+    ("player","감사합니다"),
     ]
-
 class Gun(StoryScene):
     music_name = "tsuki"
     background_image = "gun"
     next_level = "0_tutorial"
-
     lines = [
-    ("parksan","이것도 가지고 가도록해라."),
-     ("player","감사합니다"),
-
+    ("blank","(이게 타임머신인가..?)"),
+    ("blank","타고 과거로 가자"),
     ]
+
 
 class Chapter_1(StoryScene):
     music_name = "electron_energy"
@@ -447,14 +449,16 @@ class Ending_Shoot(StoryScene):
     lines = [
      ("blank", "퓨처리스트의 존재는 영영 사라졌고 인류는 자유를 되찾았다"),
      ("blank", "문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다."),
+     ("blank", "그렇지만 목적을 잃어버린 나는 어쩐지 허전한 기분이 들었다...."),
+
 
     ]
 class Ending_No_Shoot(StoryScene):
     music_name = "tsuki"
     background_image = "happy_ending"
     lines = [
-    ("blank", "나는 과거에 남아 그를 교화하기로 했다.\n 그에게 불교경전을 읽어주었고 그는 자비와 인에 대해 깨우치고 있는중이다."),
-    ("blank", "문명은 더없을 번영을 이루었고 자유와 행복과 함께 언제까지나 살아가게되었다."),
+    ("blank", "나는 과거에 남아 어린 그와 친구가 되기로 했다.\n 그가 미래에 퓨처리스트가 되지 않도록 옆에서 사랑과 우정을 알려주었다."),
+    ("blank", "문명은 더없을 번영을 이루었고 자유와 행복과 그리고 이젠 퓨처리스트가 아니게된 나의 동생과 함께 언제까지나 살아가게되었다."),
 
      ]
     

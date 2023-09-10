@@ -28,7 +28,7 @@ class CreditsScene(Scene):
                       t: "float", to_end=False, y_offset=0.0):
         image = ResourceLoader.load_image(image_name)
 
-        initial_offset = -Vector2(0, 1490 - 600)
+        initial_offset = -Vector2(0, 4300 - 600)
         offset = initial_offset - Vector2(0, t * initial_offset.y * parallax_mul)
         offset += Vector2(0, y_offset)
         if to_end:
@@ -39,10 +39,10 @@ class CreditsScene(Scene):
     def draw(self, surface: pygame.Surface):
         t = util.on_keyframes(self.scene_time, {
             0.0: 1,
-            8.0: 0,
+            10.0: 0,
         }, easein=False, easeout=False)
 
-        self.draw_parallax(surface, "background/intro/sky.png", 1.0, t)
+        self.draw_parallax(surface, "background/credit.png", 1.0, t)
 
     def on_destroy(self):
         # 음악은 다음 씬과 이어진다.

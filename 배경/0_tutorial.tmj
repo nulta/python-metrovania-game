@@ -57,6 +57,16 @@
  "orientation":"orthogonal",
  "properties":[
         {
+         "name":"background",
+         "type":"string",
+         "value":"tutorial_1"
+        }, 
+        {
+         "name":"foreground",
+         "type":"string",
+         "value":"tutorial"
+        }, 
+        {
          "name":"music",
          "type":"string",
          "value":"tsuki"

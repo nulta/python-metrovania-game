@@ -1,8 +1,8 @@
 {
     "tileset_name": "generic_0",
     "music": "tsuki",
-    "background_img": "",
-    "foreground_img": "",
+    "background_img": "tutorial_1",
+    "foreground_img": "tutorial",
     "next_scene": "1_fb85_fire",
     "entities": [
         ["BasicEnemy",48,4],
