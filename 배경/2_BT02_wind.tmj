@@ -111,7 +111,12 @@
          "name":"next",
          "type":"string",
          "value":"Chapter_3"
-        }],
+        },
+        {
+       "name":"background",
+         "type":"string",
+         "value":"stage2"      
+       }],
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
  "tileheight":30,

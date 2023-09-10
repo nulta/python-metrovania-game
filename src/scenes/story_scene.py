@@ -220,7 +220,7 @@ class StorySceneIntro_1(StoryScene):
 
 class Before_gun(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "story_box"
     next_level = "1_fb85_fire"
 
     lines = [
@@ -233,7 +233,7 @@ class Before_gun(StoryScene):
 
 class Chapter_1(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "stage1"
     next_level = "1_fb85_boss"
 
     lines = [
@@ -245,7 +245,7 @@ class Chapter_1(StoryScene):
 
 class Chapter_2(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "stage2"
     next_level = "2_bt02_wind"
 
     lines = [
@@ -255,7 +255,7 @@ class Chapter_2(StoryScene):
 
 class Chapter_3(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "story_box"
     next_level = "3_sn91_speed"
 
     lines = [
@@ -265,7 +265,7 @@ class Chapter_3(StoryScene):
 
 class Chapter_4(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "story_box"
     next_level = "4_sb87_grenade"
 
     lines = [
@@ -276,7 +276,7 @@ class Chapter_4(StoryScene):
 
 class Chapter_5(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "story_box"
     next_level = "6_ks64_navy"
 
     lines = [
@@ -286,7 +286,7 @@ class Chapter_5(StoryScene):
 
 class Ending(StoryScene):
     music_name = ""
-    background_image = ""
+    background_image = "story_box"
     next_level = ""
 
     lines = [

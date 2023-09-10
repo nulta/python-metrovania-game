@@ -232,9 +232,10 @@ class MovingBoard(StaticEntity):
     
     def update(self):
         if game_globals.delta_time%4<2:
-            self.position.x += 50* game_globals.delta_time
+            self.position.x += 20* game_globals.delta_time
         elif game_globals.delta_time%12 >=2:
-            self.position.x -= 50* game_globals.delta_time
+            self.position.x -= 20* game_globals.delta_time
+
 class Gun(StaticEntity):
     def surface(self):
         return ResourceLoader.load_image("item/gun.png")

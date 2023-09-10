@@ -3,7 +3,7 @@
     "music": "",
     "background_img": "",
     "foreground_img": "",
-    "next_scene": "Chapter4",
+    "next_scene": "Chapter_4",
     "entities": [
         ["Player",19,7],
         ["SpeedEnemy",3,8]

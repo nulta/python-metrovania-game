@@ -3,7 +3,7 @@
     "music": "",
     "background_img": "",
     "foreground_img": "",
-    "next_scene": "6_sn91_boss",
+    "next_scene": "6_ks64_boss",
     "entities": [
         ["Player",3,7],
         ["NavyEnemy",19,7],

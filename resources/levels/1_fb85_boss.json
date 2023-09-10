@@ -1,7 +1,7 @@
 {
     "tileset_name": "generic_0",
     "music": "",
-    "background_img": "",
+    "background_img": "stage1",
     "foreground_img": "",
     "next_scene": "Chapter_2",
     "entities": [
