@@ -14,7 +14,7 @@ GAME_MAX_DELTA_TIME = 1/20
 
 # 개발자 설정
 DEBUG_MODE = True
-DEBUG_DRAW_HITBOX = True  # Entity들의 히트박스를 화면에 표시한다.
+DEBUG_DRAW_HITBOX = False  # Entity들의 히트박스를 화면에 표시한다.
 
 # GENDER 값
 GENDER_MALE   = 0
@@ -39,6 +39,7 @@ ACTION_CHANGE_RIGHT = 6  # 무기 바꾸기
 ACTION_CHANGE_LEFT = 7  # 무기 바꾸기
 ACTION_CONFIRM = 8 # 확인 키 (메뉴 화면에서)
 ACTION_CANCEL = 9  # 취소 키 (메뉴 화면에서)
+ACTION_DEBUG_RESTART = 10  # 디버그용 게임 리스타트 키
 
 # AXIS 상수
 AXIS_HORIZONTAL = 0

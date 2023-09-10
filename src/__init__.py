@@ -9,6 +9,7 @@ from constants import *
 from input_manager import InputManager
 from scene_manager import SceneManager
 from scenes import TitleScene
+from audio import Audio
 
 class Game():
     """메인 게임 클래스. 메인 루프를 관리한다."""
@@ -93,7 +94,7 @@ class Game():
         """게임을 종료하기 전, 화면을 페이드아웃한다."""
         # 음악을 페이드 아웃한다
         if pygame.mixer.music.get_busy():
-            pygame.mixer.music.fadeout(200)
+            pygame.mixer.music.fadeout(300)
 
         # 화면을 가릴 Surface
         fader = pygame.Surface(GAME_WINDOW_SIZE)

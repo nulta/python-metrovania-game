@@ -7,6 +7,7 @@ from entities import Player
 from constants import *
 from fonts import Fonts
 from level import Level
+from audio import Audio
 
 class GameScene(Scene):
     """GameScene은 인게임 씬이다."""
@@ -15,15 +16,11 @@ class GameScene(Scene):
         super().__init__()
         self._level = level
         self._background = self._level._background
+        self._foreground = self._level._foreground
         self._tilemap_surface = level.get_tilemap_surface()
 
         # 음악 재생
-        if self._level.music:
-            music_path = ResourceLoader.get_resource_path(self._level.music)
-            print(music_path)
-            pygame.mixer.music.load(music_path)
-            pygame.mixer.music.play(-1)
-            pygame.mixer.music.set_volume(1.0)
+        Audio.music_set(level.music)
 
         self.initialize_level()
     
@@ -47,9 +44,15 @@ class GameScene(Scene):
 
         # Tilemap
         surface.blit(self._tilemap_surface, -camera_pos)
-        self.draw_hp(surface)
 
+        # Entity
         EntityManager.draw(surface, camera_pos)
+
+        # Foreground
+        surface.blit(self._foreground, (0, 0))
+
+        # UI
+        self.draw_hp(surface)
 
     def draw_hp(self,surface: pygame.Surface):
         from entity_manager import EntityManager

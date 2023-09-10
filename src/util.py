@@ -138,9 +138,9 @@ def on_keyframes(t: float, frames: "dict[float, float]", easein=False, easeout=F
             break
     
     if small_k is None:
-        return large_k or 0.0
+        return large_k in frames and frames[large_k] or 0.0
     if large_k is None:
-        return small_k or 0.0
+        return small_k in frames and frames[small_k] or 0.0
 
     t = remap(t, (small_k, large_k), (0, 1))
     small_v = frames[small_k]
