@@ -2,7 +2,7 @@
     "tileset_name": "generic_0",
     "music": "",
     "background_img": "",
-    "next_scene": "1_fb85_boss",
+    "next_scene": "Chapter_1",
     "entities": [
         ["Fire",2,8],
         ["Fire",3,8],
