@@ -6,12 +6,12 @@ TO_DIR = "../resources/levels/"
 ENTITIES = [
     "Player","FireEnemy","WindEnemy","SpeedEnemy","NavyEnemy",
     "GasEnemy","GrenadeEnemy","Fire","Wind","HpAdd",
-    "Electric_ball","Smoke","MovingBoard","Electric_box","Portal_1",
-    "PoisonSmoke","Portal_2","Portal_3","Portal_4","Portal_5",
-    "Portal_6","ShortCut","Door","BasicEnemy","BlinkBox",
-    "Portal_7","Portal_8","Portal_9","Portal_10","ShootingBall",
-    "Line","Elevator","Gun","Line","Line",
-    "","Fire_time1","Fire_time2","frie","BossDoor"
+    "Electric_ball","","MovingBoard","Electric_box","",
+    "","","","","",
+    "","ShortCut","Door","BasicEnemy","BlinkBox",
+    "","","","","ShootingBall",
+    "Line","Elevator","","Line","Line",
+    "","Fire_time1","Fire_time2","frie",
 ]
 ENTITIES_FIRST_GID = 76
 
