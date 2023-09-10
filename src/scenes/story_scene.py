@@ -252,7 +252,7 @@ class Black(StoryScene):
 class Before_gun(StoryScene):
     music_name = "tsuki"
     background_image = "parksan"
-    next_level = "Gun"
+    story_scene = "Gun"
 
     lines = [
     ("parksan","내가 도움을 주마"),
