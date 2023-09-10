@@ -214,14 +214,29 @@ class StorySceneIntro(StoryScene):
 class StorySceneIntro_1(StoryScene):
     music_name = ""
     background_image = "intro"
-    story_scene = "Black"
+    story_scene = "Eye_Down"
 
     lines = [
     ("player","나는 그 사건 이후로 태어났다."),
     ("player","인간으로서 기본적으로 누려야 할\n인권, 행복, 가족 따위는 없었다."),
-    ("player","나는 그래서 이 사건의 근원인 그 사람을 없애고 싶다."),
-    ("player","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
-    ("player","나의 목표는 그것뿐이다")
+    ]
+
+class Eye_Down(StoryScene):
+    music_name = ""
+    background_image = "eye1"
+    story_scene = "Eye_Up"
+    lines = [
+    ("blank","나는 그래서 이 사건의 근원인 그 사람을 없애고 싶다."),
+    ("blank","그들이 타고 온 타임머신을 빼앗아서 \n과거로 간다.\n그리고 어린아이였을 그 사람의 씨앗을 없애버린다..."),
+    ]
+
+class Eye_Up(StoryScene):
+    music_name = ""
+    background_image = "eye2"
+    story_scene = "Black"
+
+    lines = [   
+    ("blank","나의 목표는 그것뿐이다")
     ]
 class Black(StoryScene):
     music_name = ""
