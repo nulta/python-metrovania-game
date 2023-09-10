@@ -91,10 +91,18 @@ class InputManager():
 
         if cls.pressed(ACTION_DEBUG_WIN):
             from scene_manager import SceneManager
-            from scenes import GameScene
+            from scenes import GameScene, TitleScene
+            from scenes.story_scene import StoryScene
+            from scenes.player_choose import ChooseScene
             scene = SceneManager.current_scene
             if isinstance(scene, GameScene):
                 scene.victory()
+            elif isinstance(scene, StoryScene):
+                scene.next_scene()
+            elif isinstance(scene, TitleScene):
+                scene.press_button(0)
+            elif isinstance(scene, ChooseScene):
+                scene.press_charcter(2)
     
     @classmethod
     def _get_action_status(cls, then, now):

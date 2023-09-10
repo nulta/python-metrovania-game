@@ -248,6 +248,20 @@ class FireEnemy(Boss):
             self._flip = not self._flip
         command.move_axis = self.direction.x
 
+    def pattern_firedash_surface(self: "Boss", super: "type[super]"):
+        from entity_manager import EntityManager
+        time = EntityManager.game_scene and EntityManager.game_scene.scene_time or 0
+
+        original = super().surface()
+        canvas = Surface(original.get_size())
+
+        flame = ResourceLoader.load_image_2x("item/firebullet.png")
+        flame.set_alpha(int(math.sin(time * 2) * 127 + 32))
+        canvas.blit(flame, (0,0))
+        canvas.blit(original, (0,0))
+
+        return canvas
+
 
     patterns = [
         # 0
@@ -312,3 +326,92 @@ class FireEnemy(Boss):
         if self.hp <= 250:
             self.set_pattern(4)
 
+class WindEnemy(Boss):
+
+    def pattern_move_left(self: "Boss", command: "MoveCommand"):
+        if self._is_okay_to_go(-1):
+            command.move_axis = -1
+        elif not self._is_falling():
+            self.next_pattern()
+            return
+
+    def pattern_move_right(self: "Boss", command: "MoveCommand"):
+        if self._is_okay_to_go(1):
+            command.move_axis = 1
+        elif not self._is_falling():
+            self.next_pattern()
+            return
+
+    def pattern_shoot(self: "Boss", command: "MoveCommand"):
+        to_player_axis = self._get_axis_to_player()
+        self.direction = Vector2(to_player_axis, 0)
+        command.shoot = True
+
+    def pattern_firedash(self: "Boss", command: "MoveCommand"):
+        if not self._is_okay_to_go(self.direction.x):
+            self._flip = not self._flip
+        command.move_axis = self.direction.x
+
+
+    patterns = [
+        # 0
+        BossPattern(
+            pattern_move_left,
+            timeout=10,
+            next=1,
+        ),
+
+        # 1
+        BossPattern(
+            pattern_shoot,
+            timeout=10,
+            next=2,
+        ),
+
+        # 2
+        BossPattern(
+            pattern_move_right,
+            timeout=10,
+            next=3,
+        ),
+
+        # 3
+        BossPattern(
+            pattern_shoot,
+            timeout=10,
+            next=0,
+        ),
+
+        # 여기서부터 특수패턴
+        # 4
+        BossPattern(
+            pattern_firedash,
+            timeout=10,
+            next=4,
+        ),
+    ]
+
+
+    def __init__(self):
+        super().__init__()
+
+        self._sprite_name = "enemy/fire"
+        self._max_hp = 750
+        self._damage_taking_delay = 1.0
+        self._move_speed = 500
+        # self._jump_power = 500
+        # self._max_jump_time = 0.2
+        # self._max_damage_knockback = 3000
+        # self._damage_knockback_y_multiplier = 1.5
+        # self._x_velocity_dec_midair = 600
+        self._x_velocity_dec_floor = 1000
+        self._x_velocity_dec_moving_mul = 1.0
+        self._weapon = FireBossGun(True)
+        self._hp = self._max_hp
+
+        self._floor_check_distance = 120  # 앞에 바닥이 있는지 확인할 때, 확인지점의 거리(px)
+
+    def update(self):
+        super().update()
+        if self.hp <= 250:
+            self.set_pattern(4)
