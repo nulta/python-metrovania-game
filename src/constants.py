@@ -4,7 +4,7 @@
 
 
 # 설정 값
-GAME_WINDOW_NAME = "게임 이름"
+GAME_WINDOW_NAME = "Futurist"
 RESOURCE_PATH = "./resources"
 TILE_SIZE = 30 * 2
 
@@ -13,7 +13,7 @@ GAME_MAX_FPS = 144
 GAME_MAX_DELTA_TIME = 1/20
 
 # 개발자 설정
-DEBUG_MODE = True
+DEBUG_MODE = False
 DEBUG_DRAW_HITBOX = False  # Entity들의 히트박스를 화면에 표시한다.
 
 # GENDER 값

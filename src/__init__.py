@@ -75,17 +75,17 @@ class Game():
         # Scene을 그린다.
         SceneManager.draw(self.screen)
 
-        if DEBUG_MODE:
-            # FPS 카운터를 그린다.
-            Fonts.get("debug").render_to(
-                self.screen,
-                (4, 4),
-                f"FPS: {int(game_globals.frames_per_second)}",
-                fgcolor=(255, 255, 255),
-            )
+        # if DEBUG_MODE:
+        #     # FPS 카운터를 그린다.
+        #     Fonts.get("debug").render_to(
+        #         self.screen,
+        #         (4, 4),
+        #         f"FPS: {int(game_globals.frames_per_second)}",
+        #         fgcolor=(255, 255, 255),
+        #     )
 
-            # debug draw를 한다
-            debug.draw_debug_elements(self.screen)
+        #     # debug draw를 한다
+        #     debug.draw_debug_elements(self.screen)
 
         # 화면에 띄운다.
         pygame.display.flip()
